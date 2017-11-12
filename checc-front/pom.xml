@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.checc</groupId>
+	<artifactId>checc-front</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>checc-front Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>com.checc</groupId>
+			<artifactId>checc-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		
+	</dependencies>
+
+	<build>
+		<finalName>checc-front</finalName>
+	</build>
+
+</project>
