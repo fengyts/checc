@@ -15,7 +15,7 @@
 
 		<dependency>
 			<groupId>com.checc</groupId>
-			<artifactId>checc-core</artifactId>
+			<artifactId>checc-web</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
