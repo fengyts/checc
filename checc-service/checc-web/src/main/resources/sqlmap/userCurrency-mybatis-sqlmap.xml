@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.UserCurrencyMapper">
+
+	<resultMap type="com.checc.domain.UserCurrencyDO" id="UserCurrencyDOResultMap">
+		<id column="user_id" property="userId" />
+        <result column="total_currency" property="totalCurrency"/>
+        <result column="freeze" property="freeze"/>
+        <result column="refund" property="refund"/>
+	</resultMap>
+
+	<sql id="MybatisUserCurrencyDAO_all_column_fields">
+	      user_id,total_currency,freeze,refund
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisUserCurrencyDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
+			<if test="freeze != null "> AND freeze=#{freeze} </if>
+			<if test="refund != null "> AND refund=#{refund} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisUserCurrencyDAO_selectById" parameterType="long" resultMap="UserCurrencyDOResultMap">
+	SELECT
+		<include refid="MybatisUserCurrencyDAO_all_column_fields" />
+	FROM
+		user_currency
+	WHERE
+		 user_id = #{userId}
+	</select>
+
+    <insert id="MybatisUserCurrencyDAO_insert" parameterType="com.checc.domain.UserCurrencyDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="userId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS user_id
+        </selectKey>
+        INSERT INTO user_currency(
+				user_id,
+				total_currency,
+				freeze,
+				refund
+		)values(
+				#{userId},
+				#{totalCurrency},
+				#{freeze},
+				#{refund}
+		)
+    </insert>
+
+	<update id="MybatisUserCurrencyDAO_updateById" parameterType="com.checc.domain.UserCurrencyDO">
+		UPDATE user_currency
+		SET
+					total_currency = #{totalCurrency},
+					freeze = #{freeze},
+					refund = #{refund}
+		WHERE
+			user_id = #{userId}
+	</update>
+
+	<delete id="MybatisUserCurrencyDAO_deleteById" parameterType="long">
+		DELETE FROM user_currency WHERE user_id = #{userId}
+	</delete>
+
+	<update id="MybatisUserCurrencyDAO_update_dynamic" parameterType="com.checc.domain.UserCurrencyDO">
+		UPDATE user_currency
+		<set>
+					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
+					<if test="freeze != null ">freeze=#{freeze},</if>
+					<if test="refund != null ">refund=#{refund},</if>
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+
+ 	<select id="MybatisUserCurrencyDAO_select_dynamic" resultMap="UserCurrencyDOResultMap" parameterType="com.checc.domain.UserCurrencyDO">
+	     SELECT
+	     	<include refid="MybatisUserCurrencyDAO_all_column_fields" />
+		 FROM
+		 	user_currency
+			<include refid="MybatisUserCurrencyDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisUserCurrencyDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.UserCurrencyDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	user_currency
+	 	<include refid="MybatisUserCurrencyDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisUserCurrencyDAO_select_dynamic_page_query" resultMap="UserCurrencyDOResultMap" parameterType="com.checc.domain.UserCurrencyDO">
+	     SELECT
+	     	<include refid="MybatisUserCurrencyDAO_all_column_fields" />
+		 FROM
+		 	user_currency
+	 	<include refid="MybatisUserCurrencyDAO_dynamic_where_fields" />
+	 	ORDER BY user_currency.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

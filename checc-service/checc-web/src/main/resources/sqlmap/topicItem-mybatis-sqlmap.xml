@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.TopicItemMapper">
+
+	<resultMap type="com.checc.domain.TopicItemDO" id="TopicItemDOResultMap">
+		<id column="id" property="id" />
+        <result column="topic_id" property="topicId"/>
+        <result column="item_id" property="itemId"/>
+        <result column="item_title" property="itemTitle"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="inventory" property="inventory"/>
+        <result column="excharte_amount" property="excharteAmount"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisTopicItemDAO_all_column_fields">
+	      id,topic_id,item_id,item_title,start_time,end_time,inventory,excharte_amount,create_user_id,create_time,modify_user_id,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisTopicItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="topicId != null "> AND topic_id=#{topicId} </if>
+			<if test="itemId != null "> AND item_id=#{itemId} </if>
+			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
+			<if test="inventory != null "> AND inventory=#{inventory} </if>
+			<if test="excharteAmount != null "> AND excharte_amount=#{excharteAmount} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisTopicItemDAO_selectById" parameterType="long" resultMap="TopicItemDOResultMap">
+	SELECT
+		<include refid="MybatisTopicItemDAO_all_column_fields" />
+	FROM
+		topic_item
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisTopicItemDAO_insert" parameterType="com.checc.domain.TopicItemDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO topic_item(
+				id,
+				topic_id,
+				item_id,
+				item_title,
+				start_time,
+				end_time,
+				inventory,
+				excharte_amount,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time
+		)values(
+				#{id},
+				#{topicId},
+				#{itemId},
+				#{itemTitle},
+				#{startTime},
+				#{endTime},
+				#{inventory},
+				#{excharteAmount},
+				#{createUserId},
+				#{createTime},
+				#{modifyUserId},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisTopicItemDAO_updateById" parameterType="com.checc.domain.TopicItemDO">
+		UPDATE topic_item
+		SET
+					topic_id = #{topicId},
+					item_id = #{itemId},
+					item_title = #{itemTitle},
+					start_time = #{startTime},
+					end_time = #{endTime},
+					inventory = #{inventory},
+					excharte_amount = #{excharteAmount},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisTopicItemDAO_deleteById" parameterType="long">
+		DELETE FROM topic_item WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisTopicItemDAO_update_dynamic" parameterType="com.checc.domain.TopicItemDO">
+		UPDATE topic_item
+		<set>
+					<if test="topicId != null ">topic_id=#{topicId},</if>
+					<if test="itemId != null ">item_id=#{itemId},</if>
+					<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
+					<if test="startTime != null ">start_time=#{startTime},</if>
+					<if test="endTime != null ">end_time=#{endTime},</if>
+					<if test="inventory != null ">inventory=#{inventory},</if>
+					<if test="excharteAmount != null ">excharte_amount=#{excharteAmount},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisTopicItemDAO_select_dynamic" resultMap="TopicItemDOResultMap" parameterType="com.checc.domain.TopicItemDO">
+	     SELECT
+	     	<include refid="MybatisTopicItemDAO_all_column_fields" />
+		 FROM
+		 	topic_item
+			<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisTopicItemDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.TopicItemDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	topic_item
+	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisTopicItemDAO_select_dynamic_page_query" resultMap="TopicItemDOResultMap" parameterType="com.checc.domain.TopicItemDO">
+	     SELECT
+	     	<include refid="MybatisTopicItemDAO_all_column_fields" />
+		 FROM
+		 	topic_item
+	 	<include refid="MybatisTopicItemDAO_dynamic_where_fields" />
+	 	ORDER BY topic_item.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

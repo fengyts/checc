@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.SysRoleMapper">
+
+	<resultMap type="com.checc.domain.SysRoleDO" id="SysRoleDOResultMap">
+		<id column="id" property="id" />
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisSysRoleDAO_all_column_fields">
+	      id,role_name,role_code,create_user_id,create_time,modify_user_id,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSysRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="roleName != null  and roleName != '' "> AND role_name=#{roleName} </if>
+			<if test="roleCode != null  and roleCode != '' "> AND role_code=#{roleCode} </if>
+			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSysRoleDAO_selectById" parameterType="long" resultMap="SysRoleDOResultMap">
+	SELECT
+		<include refid="MybatisSysRoleDAO_all_column_fields" />
+	FROM
+		sys_role
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSysRoleDAO_insert" parameterType="com.checc.domain.SysRoleDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO sys_role(
+				id,
+				role_name,
+				role_code,
+				create_user_id,
+				create_time,
+				modify_user_id,
+				modify_time
+		)values(
+				#{id},
+				#{roleName},
+				#{roleCode},
+				#{createUserId},
+				#{createTime},
+				#{modifyUserId},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisSysRoleDAO_updateById" parameterType="com.checc.domain.SysRoleDO">
+		UPDATE sys_role
+		SET
+					role_name = #{roleName},
+					role_code = #{roleCode},
+					create_user_id = #{createUserId},
+					modify_user_id = #{modifyUserId},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSysRoleDAO_deleteById" parameterType="long">
+		DELETE FROM sys_role WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSysRoleDAO_update_dynamic" parameterType="com.checc.domain.SysRoleDO">
+		UPDATE sys_role
+		<set>
+					<if test="roleName != null  and roleName != '' ">role_name=#{roleName},</if>
+					<if test="roleCode != null  and roleCode != '' ">role_code=#{roleCode},</if>
+					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
+					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic" resultMap="SysRoleDOResultMap" parameterType="com.checc.domain.SysRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	sys_role
+			<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.SysRoleDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	sys_role
+	 	<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleDAO_select_dynamic_page_query" resultMap="SysRoleDOResultMap" parameterType="com.checc.domain.SysRoleDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	sys_role
+	 	<include refid="MybatisSysRoleDAO_dynamic_where_fields" />
+	 	ORDER BY sys_role.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

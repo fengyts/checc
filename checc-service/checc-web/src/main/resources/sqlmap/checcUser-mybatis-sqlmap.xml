@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.CheccUserMapper">
+
+	<resultMap type="com.checc.domain.CheccUserDO" id="CheccUserDOResultMap">
+		<id column="id" property="id" />
+        <result column="nickname" property="nickname"/>
+        <result column="mobile" property="mobile"/>
+        <result column="password" property="password"/>
+        <result column="create_time" property="createTime"/>
+	</resultMap>
+
+	<sql id="MybatisCheccUserDAO_all_column_fields">
+	      id,nickname,mobile,password,create_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisCheccUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="nickname != null  and nickname != '' "> AND nickname=#{nickname} </if>
+			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
+			<if test="password != null  and password != '' "> AND password=#{password} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisCheccUserDAO_selectById" parameterType="long" resultMap="CheccUserDOResultMap">
+	SELECT
+		<include refid="MybatisCheccUserDAO_all_column_fields" />
+	FROM
+		checc_user
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisCheccUserDAO_insert" parameterType="com.checc.domain.CheccUserDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO checc_user(
+				id,
+				nickname,
+				mobile,
+				password,
+				create_time
+		)values(
+				#{id},
+				#{nickname},
+				#{mobile},
+				#{password},
+				#{createTime}
+		)
+    </insert>
+
+	<update id="MybatisCheccUserDAO_updateById" parameterType="com.checc.domain.CheccUserDO">
+		UPDATE checc_user
+		SET
+					nickname = #{nickname},
+					mobile = #{mobile},
+					password = #{password},
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisCheccUserDAO_deleteById" parameterType="long">
+		DELETE FROM checc_user WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisCheccUserDAO_update_dynamic" parameterType="com.checc.domain.CheccUserDO">
+		UPDATE checc_user
+		<set>
+					<if test="nickname != null  and nickname != '' ">nickname=#{nickname},</if>
+					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
+					<if test="password != null  and password != '' ">password=#{password},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisCheccUserDAO_select_dynamic" resultMap="CheccUserDOResultMap" parameterType="com.checc.domain.CheccUserDO">
+	     SELECT
+	     	<include refid="MybatisCheccUserDAO_all_column_fields" />
+		 FROM
+		 	checc_user
+			<include refid="MybatisCheccUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccUserDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.CheccUserDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	checc_user
+	 	<include refid="MybatisCheccUserDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccUserDAO_select_dynamic_page_query" resultMap="CheccUserDOResultMap" parameterType="com.checc.domain.CheccUserDO">
+	     SELECT
+	     	<include refid="MybatisCheccUserDAO_all_column_fields" />
+		 FROM
+		 	checc_user
+	 	<include refid="MybatisCheccUserDAO_dynamic_where_fields" />
+	 	ORDER BY checc_user.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

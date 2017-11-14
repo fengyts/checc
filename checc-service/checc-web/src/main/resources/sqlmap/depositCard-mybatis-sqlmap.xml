@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.DepositCardMapper">
+
+	<resultMap type="com.checc.domain.DepositCardDO" id="DepositCardDOResultMap">
+		<id column="card_no" property="cardNo" />
+        <result column="amount" property="amount"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="is_selled" property="isSelled"/>
+        <result column="is_used" property="isUsed"/>
+        <result column="create_time" property="createTime"/>
+	</resultMap>
+
+	<sql id="MybatisDepositCardDAO_all_column_fields">
+	      card_no,amount,expire_time,is_selled,is_used,create_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisDepositCardDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="amount != null "> AND amount=#{amount} </if>
+			<if test="isSelled != null "> AND is_selled=#{isSelled} </if>
+			<if test="isUsed != null "> AND is_used=#{isUsed} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisDepositCardDAO_selectById" parameterType="long" resultMap="DepositCardDOResultMap">
+	SELECT
+		<include refid="MybatisDepositCardDAO_all_column_fields" />
+	FROM
+		deposit_card
+	WHERE
+		 card_no = #{cardNo}
+	</select>
+
+    <insert id="MybatisDepositCardDAO_insert" parameterType="com.checc.domain.DepositCardDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="cardNo" order="AFTER">
+            SELECT LAST_INSERT_ID() AS card_no
+        </selectKey>
+        INSERT INTO deposit_card(
+				card_no,
+				amount,
+				expire_time,
+				is_selled,
+				is_used,
+				create_time
+		)values(
+				#{cardNo},
+				#{amount},
+				#{expireTime},
+				#{isSelled},
+				#{isUsed},
+				#{createTime}
+		)
+    </insert>
+
+	<update id="MybatisDepositCardDAO_updateById" parameterType="com.checc.domain.DepositCardDO">
+		UPDATE deposit_card
+		SET
+					amount = #{amount},
+					expire_time = #{expireTime},
+					is_selled = #{isSelled},
+					is_used = #{isUsed},
+		WHERE
+			card_no = #{cardNo}
+	</update>
+
+	<delete id="MybatisDepositCardDAO_deleteById" parameterType="long">
+		DELETE FROM deposit_card WHERE card_no = #{cardNo}
+	</delete>
+
+	<update id="MybatisDepositCardDAO_update_dynamic" parameterType="com.checc.domain.DepositCardDO">
+		UPDATE deposit_card
+		<set>
+					<if test="amount != null ">amount=#{amount},</if>
+					<if test="expireTime != null ">expire_time=#{expireTime},</if>
+					<if test="isSelled != null ">is_selled=#{isSelled},</if>
+					<if test="isUsed != null ">is_used=#{isUsed},</if>
+		</set>
+		WHERE card_no = #{cardNo}
+	</update>
+
+ 	<select id="MybatisDepositCardDAO_select_dynamic" resultMap="DepositCardDOResultMap" parameterType="com.checc.domain.DepositCardDO">
+	     SELECT
+	     	<include refid="MybatisDepositCardDAO_all_column_fields" />
+		 FROM
+		 	deposit_card
+			<include refid="MybatisDepositCardDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisDepositCardDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.DepositCardDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	deposit_card
+	 	<include refid="MybatisDepositCardDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisDepositCardDAO_select_dynamic_page_query" resultMap="DepositCardDOResultMap" parameterType="com.checc.domain.DepositCardDO">
+	     SELECT
+	     	<include refid="MybatisDepositCardDAO_all_column_fields" />
+		 FROM
+		 	deposit_card
+	 	<include refid="MybatisDepositCardDAO_dynamic_where_fields" />
+	 	ORDER BY deposit_card.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

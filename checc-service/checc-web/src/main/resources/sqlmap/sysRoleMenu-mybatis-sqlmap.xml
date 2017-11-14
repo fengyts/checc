@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.SysRoleMenuMapper">
+
+	<resultMap type="com.checc.domain.SysRoleMenuDO" id="SysRoleMenuDOResultMap">
+		<id column="menu_id" property="menuId" />
+        <result column="role_id" property="roleId"/>
+	</resultMap>
+
+	<sql id="MybatisSysRoleMenuDAO_all_column_fields">
+	      menu_id,role_id
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSysRoleMenuDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="roleId != null "> AND role_id=#{roleId} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSysRoleMenuDAO_selectById" parameterType="long" resultMap="SysRoleMenuDOResultMap">
+	SELECT
+		<include refid="MybatisSysRoleMenuDAO_all_column_fields" />
+	FROM
+		sys_role_menu
+	WHERE
+		 menu_id = #{menuId}
+	</select>
+
+    <insert id="MybatisSysRoleMenuDAO_insert" parameterType="com.checc.domain.SysRoleMenuDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="menuId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS menu_id
+        </selectKey>
+        INSERT INTO sys_role_menu(
+				menu_id,
+				role_id
+		)values(
+				#{menuId},
+				#{roleId}
+		)
+    </insert>
+
+	<update id="MybatisSysRoleMenuDAO_updateById" parameterType="com.checc.domain.SysRoleMenuDO">
+		UPDATE sys_role_menu
+		SET
+					role_id = #{roleId}
+		WHERE
+			menu_id = #{menuId}
+	</update>
+
+	<delete id="MybatisSysRoleMenuDAO_deleteById" parameterType="long">
+		DELETE FROM sys_role_menu WHERE menu_id = #{menuId}
+	</delete>
+
+	<update id="MybatisSysRoleMenuDAO_update_dynamic" parameterType="com.checc.domain.SysRoleMenuDO">
+		UPDATE sys_role_menu
+		<set>
+					<if test="roleId != null ">role_id=#{roleId},</if>
+		</set>
+		WHERE menu_id = #{menuId}
+	</update>
+
+ 	<select id="MybatisSysRoleMenuDAO_select_dynamic" resultMap="SysRoleMenuDOResultMap" parameterType="com.checc.domain.SysRoleMenuDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleMenuDAO_all_column_fields" />
+		 FROM
+		 	sys_role_menu
+			<include refid="MybatisSysRoleMenuDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleMenuDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.SysRoleMenuDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	sys_role_menu
+	 	<include refid="MybatisSysRoleMenuDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSysRoleMenuDAO_select_dynamic_page_query" resultMap="SysRoleMenuDOResultMap" parameterType="com.checc.domain.SysRoleMenuDO">
+	     SELECT
+	     	<include refid="MybatisSysRoleMenuDAO_all_column_fields" />
+		 FROM
+		 	sys_role_menu
+	 	<include refid="MybatisSysRoleMenuDAO_dynamic_where_fields" />
+	 	ORDER BY sys_role_menu.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

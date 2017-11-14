@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.SmsRecordMapper">
+
+	<resultMap type="com.checc.domain.SmsRecordDO" id="SmsRecordDOResultMap">
+		<id column="id" property="id" />
+        <result column="sms_type" property="smsType"/>
+        <result column="mobile" property="mobile"/>
+        <result column="content" property="content"/>
+        <result column="sms_id" property="smsId"/>
+        <result column="sp_code" property="spCode"/>
+        <result column="sms_status" property="smsStatus"/>
+        <result column="create_time" property="createTime"/>
+	</resultMap>
+
+	<sql id="MybatisSmsRecordDAO_all_column_fields">
+	      id,sms_type,mobile,content,sms_id,sp_code,sms_status,create_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisSmsRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="smsType != null  and smsType != '' "> AND sms_type=#{smsType} </if>
+			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
+			<if test="content != null  and content != '' "> AND content=#{content} </if>
+			<if test="smsId != null "> AND sms_id=#{smsId} </if>
+			<if test="spCode != null  and spCode != '' "> AND sp_code=#{spCode} </if>
+			<if test="smsStatus != null  and smsStatus != '' "> AND sms_status=#{smsStatus} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisSmsRecordDAO_selectById" parameterType="long" resultMap="SmsRecordDOResultMap">
+	SELECT
+		<include refid="MybatisSmsRecordDAO_all_column_fields" />
+	FROM
+		sms_record
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisSmsRecordDAO_insert" parameterType="com.checc.domain.SmsRecordDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO sms_record(
+				id,
+				sms_type,
+				mobile,
+				content,
+				sms_id,
+				sp_code,
+				sms_status,
+				create_time
+		)values(
+				#{id},
+				#{smsType},
+				#{mobile},
+				#{content},
+				#{smsId},
+				#{spCode},
+				#{smsStatus},
+				#{createTime}
+		)
+    </insert>
+
+	<update id="MybatisSmsRecordDAO_updateById" parameterType="com.checc.domain.SmsRecordDO">
+		UPDATE sms_record
+		SET
+					sms_type = #{smsType},
+					mobile = #{mobile},
+					content = #{content},
+					sms_id = #{smsId},
+					sp_code = #{spCode},
+					sms_status = #{smsStatus},
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisSmsRecordDAO_deleteById" parameterType="long">
+		DELETE FROM sms_record WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisSmsRecordDAO_update_dynamic" parameterType="com.checc.domain.SmsRecordDO">
+		UPDATE sms_record
+		<set>
+					<if test="smsType != null  and smsType != '' ">sms_type=#{smsType},</if>
+					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
+					<if test="content != null  and content != '' ">content=#{content},</if>
+					<if test="smsId != null ">sms_id=#{smsId},</if>
+					<if test="spCode != null  and spCode != '' ">sp_code=#{spCode},</if>
+					<if test="smsStatus != null  and smsStatus != '' ">sms_status=#{smsStatus},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisSmsRecordDAO_select_dynamic" resultMap="SmsRecordDOResultMap" parameterType="com.checc.domain.SmsRecordDO">
+	     SELECT
+	     	<include refid="MybatisSmsRecordDAO_all_column_fields" />
+		 FROM
+		 	sms_record
+			<include refid="MybatisSmsRecordDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSmsRecordDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.SmsRecordDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	sms_record
+	 	<include refid="MybatisSmsRecordDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisSmsRecordDAO_select_dynamic_page_query" resultMap="SmsRecordDOResultMap" parameterType="com.checc.domain.SmsRecordDO">
+	     SELECT
+	     	<include refid="MybatisSmsRecordDAO_all_column_fields" />
+		 FROM
+		 	sms_record
+	 	<include refid="MybatisSmsRecordDAO_dynamic_where_fields" />
+	 	ORDER BY sms_record.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

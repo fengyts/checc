@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.ItemMapper">
+
+	<resultMap type="com.checc.domain.ItemDO" id="ItemDOResultMap">
+		<id column="id" property="id" />
+        <result column="item_title" property="itemTitle"/>
+        <result column="catetory_id" property="catetoryId"/>
+        <result column="item_type" property="itemType"/>
+        <result column="picture" property="picture"/>
+        <result column="description" property="description"/>
+        <result column="rules" property="rules"/>
+        <result column="status" property="status"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisItemDAO_all_column_fields">
+	      id,item_title,catetory_id,item_type,picture,description,rules,status,market_price,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
+			<if test="catetoryId != null "> AND catetory_id=#{catetoryId} </if>
+			<if test="itemType != null  and itemType != '' "> AND item_type=#{itemType} </if>
+			<if test="picture != null  and picture != '' "> AND picture=#{picture} </if>
+			<if test="description != null  and description != '' "> AND description=#{description} </if>
+			<if test="rules != null  and rules != '' "> AND rules=#{rules} </if>
+			<if test="status != null  and status != '' "> AND status=#{status} </if>
+			<if test="marketPrice != null "> AND market_price=#{marketPrice} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisItemDAO_selectById" parameterType="long" resultMap="ItemDOResultMap">
+	SELECT
+		<include refid="MybatisItemDAO_all_column_fields" />
+	FROM
+		item
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisItemDAO_insert" parameterType="com.checc.domain.ItemDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO item(
+				id,
+				item_title,
+				catetory_id,
+				item_type,
+				picture,
+				description,
+				rules,
+				status,
+				market_price,
+				create_time,
+				modify_time
+		)values(
+				#{id},
+				#{itemTitle},
+				#{catetoryId},
+				#{itemType},
+				#{picture},
+				#{description},
+				#{rules},
+				#{status},
+				#{marketPrice},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisItemDAO_updateById" parameterType="com.checc.domain.ItemDO">
+		UPDATE item
+		SET
+					item_title = #{itemTitle},
+					catetory_id = #{catetoryId},
+					item_type = #{itemType},
+					picture = #{picture},
+					description = #{description},
+					rules = #{rules},
+					status = #{status},
+					market_price = #{marketPrice},
+					modify_time = #{modifyTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisItemDAO_deleteById" parameterType="long">
+		DELETE FROM item WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisItemDAO_update_dynamic" parameterType="com.checc.domain.ItemDO">
+		UPDATE item
+		<set>
+					<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
+					<if test="catetoryId != null ">catetory_id=#{catetoryId},</if>
+					<if test="itemType != null  and itemType != '' ">item_type=#{itemType},</if>
+					<if test="picture != null  and picture != '' ">picture=#{picture},</if>
+					<if test="description != null  and description != '' ">description=#{description},</if>
+					<if test="rules != null  and rules != '' ">rules=#{rules},</if>
+					<if test="status != null  and status != '' ">status=#{status},</if>
+					<if test="marketPrice != null ">market_price=#{marketPrice},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisItemDAO_select_dynamic" resultMap="ItemDOResultMap" parameterType="com.checc.domain.ItemDO">
+	     SELECT
+	     	<include refid="MybatisItemDAO_all_column_fields" />
+		 FROM
+		 	item
+			<include refid="MybatisItemDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisItemDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.ItemDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	item
+	 	<include refid="MybatisItemDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisItemDAO_select_dynamic_page_query" resultMap="ItemDOResultMap" parameterType="com.checc.domain.ItemDO">
+	     SELECT
+	     	<include refid="MybatisItemDAO_all_column_fields" />
+		 FROM
+		 	item
+	 	<include refid="MybatisItemDAO_dynamic_where_fields" />
+	 	ORDER BY item.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

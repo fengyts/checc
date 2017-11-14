@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--typeAliases> <typeAlias alias="addressDO" type="com.sina.domain.AddressDO" 
+		/> </typeAliases -->
+	<mappers>
+		<!-- sqlmap xml path config -->
+		<mapper resource="sqlmap/auctionRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysRole-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/userCurrency-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/topic-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysUserRole-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysRoleMenu-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/checcUser-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysMenu-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/topicItem-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/item-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/exchargeRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysUser-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositCard-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/smsRecord-mybatis-sqlmap.xml" />
+	</mappers>
+</configuration>
