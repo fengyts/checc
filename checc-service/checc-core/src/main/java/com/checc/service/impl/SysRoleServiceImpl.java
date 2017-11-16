@@ -1,14 +1,21 @@
 package com.checc.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.checc.dao.SysRoleDAO;
 import com.checc.domain.SysRoleDO;
+import com.checc.service.SysRoleMenuService;
 import com.checc.service.SysRoleService;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
@@ -21,6 +28,8 @@ public class SysRoleServiceImpl  implements SysRoleService{
 
 	@Autowired
 	private SysRoleDAO sysRoleDAO;
+	@Autowired
+	private SysRoleMenuService sysMenuRoleService;
 
 	@Override
 	public Long insert(SysRoleDO sysRoleDO) throws CommonServiceException {
@@ -143,6 +152,51 @@ public class SysRoleServiceImpl  implements SysRoleService{
 			return this.queryPageListDynamic(sysRoleDO);
 		}
 		return new Page<SysRoleDO>();
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void insertSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO, List<Long> menuIds) throws CommonServiceException {
+		Long id = this.insert(sysRoleDO);
+		if (CollectionUtils.isEmpty(menuIds)) {
+			return;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("roleId", id);
+		map.put("menuIds", menuIds);
+
+		sysMenuRoleService.insertBatch(map);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateSysRoleAndRoleMenuRelation(SysRoleDO sysRoleDO, Long roleId, List<Long> menuIds) throws CommonServiceException {
+		if (CollectionUtils.isEmpty(menuIds)) {
+			update(sysRoleDO, false);
+			return;
+		}
+		sysMenuRoleService.deleteByRoleId(roleId);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("roleId", roleId);
+		map.put("menuIds", menuIds);
+		sysMenuRoleService.insertBatch(map);
+		update(sysRoleDO, false);
+	}
+
+	@Override
+	public List<SysRoleDO> selectByIds(List<Long> ids) {
+		if (CollectionUtils.isEmpty(ids)) {
+			return null;
+		}
+		List<SysRoleDO> list = new ArrayList<SysRoleDO>();
+		try {
+			list = sysRoleDAO.selectByIds(ids);
+			return list;
+		} catch (CommonDAOException e) {
+			logger.error("", e);
+		}
+		return list;
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.checc.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -143,6 +144,25 @@ public class SysUserRoleServiceImpl  implements SysUserRoleService{
 			return this.queryPageListDynamic(sysUserRoleDO);
 		}
 		return new Page<SysUserRoleDO>();
+	}
+	
+	@Override
+	public void insertBatch(List<SysUserRoleDO> list) throws CommonServiceException {
+		if(CollectionUtils.isEmpty(list)){return;}
+		try {
+			sysUserRoleDAO.insertBatch(list);
+		} catch (CommonDAOException e) {
+			logger.error("", e);
+		}
+	}
+
+	@Override
+	public List<SysUserRoleDO> selectByUserIds(List<Long> userIds) {
+		if(CollectionUtils.isEmpty(userIds)){
+			return null;
+		}
+		List<SysUserRoleDO> list = sysUserRoleDAO.selectByUserIds(userIds);
+		return list;
 	}
 	
 	

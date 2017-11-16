@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 后台系统用户
-* @author fengyts Tue Nov 14 10:46:30 CST 2017
+* @author fengyts Thu Nov 16 14:54:40 CST 2017
 */
 
 public class SysUserDO extends BaseDO {

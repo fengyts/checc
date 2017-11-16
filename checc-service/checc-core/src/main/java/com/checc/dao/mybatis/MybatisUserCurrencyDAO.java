@@ -4,18 +4,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 import com.checc.dao.UserCurrencyDAO;
+import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.UserCurrencyDO;
 import ng.bayue.exception.CommonDAOException;
 
-@Component(value = "userCurrencyDAO")
+@Component(value="userCurrencyDAO")
 public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurrencyDAO {
-
+	
 	private static final String NAMESPACE = "com.checc.domain.UserCurrencyMapper.MybatisUserCurrencyDAO_";
-
-	private static String getStatement(String operation) {
+	
+	private static String getStatement (String operation){
 		return NAMESPACE + operation;
 	}
-
+	
 	public Long insert(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
 		int i = getSqlSession().insert(getStatement("insert"), userCurrencyDO);
 		if (i > 0) {

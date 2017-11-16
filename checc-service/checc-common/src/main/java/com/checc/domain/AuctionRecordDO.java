@@ -1,13 +1,12 @@
 package com.checc.domain;
 
+import ng.bayue.common.BaseDO;
 
 import java.util.Date;
 
-import ng.bayue.common.BaseDO;
-
 /**
 * 竞拍记录
-* @author fengyts Tue Nov 14 10:46:30 CST 2017
+* @author fengyts Thu Nov 16 14:54:40 CST 2017
 */
 
 public class AuctionRecordDO extends BaseDO {

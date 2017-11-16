@@ -1,8 +1,10 @@
 package com.checc.dao.mybatis;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 import com.checc.dao.SysRoleDAO;
+import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.SysRoleDO;
 import ng.bayue.exception.CommonDAOException;
 

@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
-	
-	
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
 	<display-name>Archetype Created Web Application</display-name>
 	
 	<welcome-file-list>
 		<!-- <welcome-file>index.jsp</welcome-file> -->
 		<welcome-file>/view/index/index.ftl</welcome-file>
 	</welcome-file-list>
-	
-	<context-param>
-        <param-name>appName</param-name>
-        <param-value>checc-backend</param-value>
-    </context-param>
-	
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring/spring-beans.xml</param-value>
+		<param-value>,classpath*:spring/spring-context.xml</param-value>
 	</context-param>
 	
 	<listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
-	<!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
+    <!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
@@ -46,7 +39,8 @@
 <!--         <url-pattern>/*</url-pattern> -->
 <!--         <dispatcher>REQUEST</dispatcher> -->
 <!--     </filter-mapping> -->
-    
+	
+	
 	<!-- springMVC前端控制器配置开始 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -72,6 +66,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!-- springMVC前端控制器配置结束 -->
+	
+	
 	
 	<!-- url过滤器配置 -->
 	<filter>
@@ -114,6 +110,7 @@
 		<error-code>404</error-code>
 		<location>/error.htm</location>
 	</error-page> -->
-
 	
+	
+
 </web-app>

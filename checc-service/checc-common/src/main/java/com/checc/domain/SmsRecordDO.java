@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 发送短信记录
-* @author fengyts Tue Nov 14 10:46:30 CST 2017
+* @author fengyts Thu Nov 16 14:54:40 CST 2017
 */
 
 public class SmsRecordDO extends BaseDO {

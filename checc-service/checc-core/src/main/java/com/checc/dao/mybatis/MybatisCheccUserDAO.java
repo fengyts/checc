@@ -1,8 +1,10 @@
 package com.checc.dao.mybatis;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 import com.checc.dao.CheccUserDAO;
+import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.CheccUserDO;
 import ng.bayue.exception.CommonDAOException;
 
