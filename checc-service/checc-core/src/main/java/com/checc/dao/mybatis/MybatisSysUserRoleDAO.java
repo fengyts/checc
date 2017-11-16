@@ -2,11 +2,13 @@ package com.checc.dao.mybatis;
 
 import java.util.List;
 
+import ng.bayue.exception.CommonDAOException;
+
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.SysUserRoleDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.SysUserRoleDO;
-import ng.bayue.exception.CommonDAOException;
 
 @Component(value="sysUserRoleDAO")
 public class MybatisSysUserRoleDAO extends MybatisBaseDAO implements SysUserRoleDAO {
@@ -59,5 +61,16 @@ public class MybatisSysUserRoleDAO extends MybatisBaseDAO implements SysUserRole
 	public List<SysUserRoleDO> selectDynamicPageQuery(SysUserRoleDO sysUserRoleDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), sysUserRoleDO);
 	}
+	
+	@Override
+	public void insertBatch(List<SysUserRoleDO> list) throws CommonDAOException {
+		getSqlSession().insert("ng.bayue.backend.domain.SysUserRoleMapper.MybatisSysUserRoleDAO_insert_batch", list);
+	}
+
+	@Override
+	public List<SysUserRoleDO> selectByUserIds(List<Long> userIds) {
+		return getSqlSession().selectList("ng.bayue.backend.domain.SysUserRoleMapper.MybatisSysUserRoleDAO_selectBy_userIds", userIds);
+	}
+	
 
 }

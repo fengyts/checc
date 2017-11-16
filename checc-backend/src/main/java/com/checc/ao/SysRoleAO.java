@@ -87,8 +87,8 @@ public class SysRoleAO {
 		SysRoleDO sysRoleDOValid = new SysRoleDO();
 		Long roleId = sysRoleDO.getId();
 		sysRoleDOValid.setId(roleId);
-		sysRoleDOValid.setName(sysRoleDO.getName());
-		sysRoleDOValid.setCode(sysRoleDO.getCode());
+		sysRoleDOValid.setRoleName(sysRoleDO.getRoleName());
+		sysRoleDOValid.setRoleCode(sysRoleDO.getRoleCode());
 		
 //		if(isExist(sysRoleDOValid)){
 //			return ResultMessage.validIsExist();

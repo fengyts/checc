@@ -1,12 +1,15 @@
 package com.checc.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
+
+import ng.bayue.exception.CommonDAOException;
 
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.SysRoleMenuDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.SysRoleMenuDO;
-import ng.bayue.exception.CommonDAOException;
 
 @Component(value="sysRoleMenuDAO")
 public class MybatisSysRoleMenuDAO extends MybatisBaseDAO implements SysRoleMenuDAO {
@@ -58,6 +61,21 @@ public class MybatisSysRoleMenuDAO extends MybatisBaseDAO implements SysRoleMenu
 	@Override
 	public List<SysRoleMenuDO> selectDynamicPageQuery(SysRoleMenuDO sysRoleMenuDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), sysRoleMenuDO);
+	}
+	
+	@Override
+	public Integer deleteByRoleId(Long roleId) throws CommonDAOException {
+		return getSqlSession().delete("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_deleteByRoleId", roleId);
+	}
+
+	@Override
+	public List<SysRoleMenuDO> selectByRoleId(Long roleId) throws CommonDAOException {
+		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_selectByRoleId", roleId);
+	}
+
+	@Override
+	public void insertBatch(Map<String,Object> map) throws CommonDAOException {
+		getSqlSession().insert("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_insert_batch", map);
 	}
 
 }

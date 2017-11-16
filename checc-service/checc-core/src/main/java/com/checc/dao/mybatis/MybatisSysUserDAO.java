@@ -2,11 +2,14 @@ package com.checc.dao.mybatis;
 
 import java.util.List;
 
+import ng.bayue.exception.CommonDAOException;
+
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.SysUserDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.SysUserDO;
-import ng.bayue.exception.CommonDAOException;
+import com.checc.vo.SysUserVO;
 
 @Component(value="sysUserDAO")
 public class MybatisSysUserDAO extends MybatisBaseDAO implements SysUserDAO {
@@ -60,4 +63,15 @@ public class MybatisSysUserDAO extends MybatisBaseDAO implements SysUserDAO {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), sysUserDO);
 	}
 
+	@Override
+	public SysUserVO nestedList(String param){
+		return getSqlSession().selectOne("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_sysUser_vo", param);
+	}
+
+	@Override
+	public SysUserDO findByLoginNameOrEmailOrMobile(String param) {
+		return getSqlSession().selectOne("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_by_loginNameOrMobileOrEmail", param);
+	}
+	
+	
 }

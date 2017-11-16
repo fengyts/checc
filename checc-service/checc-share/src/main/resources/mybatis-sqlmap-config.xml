@@ -6,20 +6,20 @@
 	</typeAliases-->
 	<mappers>
 		<!-- sqlmap xml path config -->
-			<mapper resource="com/checc/mybatis/sqlmap/auctionRecord-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/sysRole-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/userCurrency-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/topic-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/sysUserRole-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/sysRoleMenu-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/checcUser-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/depositRecord-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/sysMenu-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/topicItem-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/item-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/exchargeRecord-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/sysUser-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/depositCard-mybatis-sqlmap.xml" />
-		<mapper resource="com/checc/mybatis/sqlmap/smsRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/auctionRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysRole-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/userCurrency-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/topic-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysUserRole-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysRoleMenu-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/checcUser-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysMenu-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/topicItem-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/item-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/exchargeRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/sysUser-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositCard-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/smsRecord-mybatis-sqlmap.xml" />
 	</mappers>
 </configuration>

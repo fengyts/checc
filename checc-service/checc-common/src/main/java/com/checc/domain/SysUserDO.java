@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 后台系统用户
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Thu Nov 16 21:33:33 CST 2017
 */
 
 public class SysUserDO extends BaseDO {
@@ -19,6 +19,9 @@ private String loginName;
 
 /** 密码 */
 private String password;
+
+/** 登陆盐 */
+private String salt;
 
 /** 手机号 */
 private String mobile;
@@ -58,6 +61,13 @@ private Long modifyUserId;
 */
 	public void setPassword(String password) {
 	this.password = password;
+}
+/**
+* 设置 登陆盐
+* @param salt
+*/
+	public void setSalt(String salt) {
+	this.salt = salt;
 }
 /**
 * 设置 手机号
@@ -121,6 +131,13 @@ private Long modifyUserId;
 */
 	public String getPassword() {
 	return password;
+}
+/**
+* 获取 登陆盐
+* @return salt
+*/
+	public String getSalt() {
+	return salt;
 }
 /**
 * 获取 手机号

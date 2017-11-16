@@ -3,6 +3,11 @@ package com.checc.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import ng.bayue.common.Page;
+import ng.bayue.exception.CommonDAOException;
+import ng.bayue.exception.CommonServiceException;
+import ng.bayue.util.SecurityUtil;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -18,12 +23,6 @@ import com.checc.domain.SysUserDO;
 import com.checc.domain.SysUserRoleDO;
 import com.checc.service.SysUserService;
 import com.checc.vo.SysUserVO;
-
-import ng.bayue.common.Page;
-import ng.bayue.exception.CommonDAOException;
-import ng.bayue.exception.CommonServiceException;
-import ng.bayue.exception.ServiceException;
-import ng.bayue.util.SecurityUtil;
 
 @Service(value="sysUserService")
 public class SysUserServiceImpl  implements SysUserService{

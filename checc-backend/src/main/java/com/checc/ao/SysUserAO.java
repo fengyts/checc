@@ -83,7 +83,7 @@ public class SysUserAO {
 				for (SysRoleDO sr : listRoles) {
 					long roleId2 = sr.getId();
 					if (roleId == roleId2) {
-						strRoleName += sr.getName() + ",";
+						strRoleName += sr.getRoleName() + ",";
 					}
 				}
 			}
@@ -119,12 +119,12 @@ public class SysUserAO {
 
 	public boolean validIsExists(SysUserDO valid) {
 		String loginName = valid.getLoginName();
-		String email = valid.getEmail();
+//		String email = valid.getEmail();
 		String mobile = valid.getMobile();
 		SysUserDO sysUserDO = new SysUserDO();
 		sysUserDO.setLoginName(loginName);
 		sysUserDO.setMobile(mobile);
-		sysUserDO.setEmail(email);
+//		sysUserDO.setEmail(email);
 		List<SysUserDO> list = sysUserService.selectDynamic(sysUserDO);
 		return CollectionUtils.isEmpty(list) ? false : true;
 	}

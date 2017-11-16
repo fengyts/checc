@@ -86,4 +86,23 @@
 	 	Limit #{start},#{pageSize}
  	</select>
 
+	<insert id="MybatisSysUserRoleDAO_insert_batch" parameterType="list">
+ 		INSERT sys_user_role(
+ 				user_id,
+				role_id
+		)VALUES
+			<foreach collection="list" index="index" item="item" open="" separator="," close="">
+				(#{item.userId},#{item.roleId})
+			</foreach>
+ 	</insert>
+ 	
+ 	<select id="MybatisSysUserRoleDAO_selectBy_userIds" parameterType="list" resultMap="SysUserRoleDOResultMap">
+ 		SELECT 
+ 			user_id,role_id 
+ 		FROM 
+ 			sys_user_role
+ 		WHERE user_id IN
+ 			<foreach collection="list" item="userId" index="index" open="(" separator="," close=")">#{userId}</foreach>
+ 	</select>
+
 </mapper>

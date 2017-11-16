@@ -111,5 +111,14 @@
 	 	ORDER BY sys_role.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisSysRoleDAO_select_by_ids" parameterType="list" resultMap="SysRoleDOResultMap">
+ 		SELECT
+ 			<include refid="MybatisSysRoleDAO_all_column_fields" />
+		 FROM
+		 	sys_role
+		 WHERE id IN
+		 <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+ 	</select>
 
 </mapper>

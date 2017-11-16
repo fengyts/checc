@@ -141,5 +141,76 @@
 	 	ORDER BY sys_menu.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="findParentMenu" resultMap="SysMenuDOResultMap">
+		SELECT
+			<include refid="MybatisSysMenuDAO_all_column_fields" />
+		FROM
+			sys_menu
+		WHERE
+			 parent_id is null
+	</select>
+	
+ 	<select id="findListByParentIds" parameterType="com.checc.domain.SysMenuDO" resultMap="SysMenuDOResultMap">
+		SELECT
+			<include refid="MybatisSysMenuDAO_all_column_fields" />
+		FROM
+			sys_menu
+		WHERE
+			 parent_id in
+		<foreach collection="list" item="sysMenu" index="index"
+            open="(" close=")" separator=",">
+            #{sysMenu.id}
+        </foreach>
+	</select>
+	
+ 	<select id="findListByIds" parameterType="Long" resultMap="SysMenuDOResultMap">
+		SELECT
+			<include refid="MybatisSysMenuDAO_all_column_fields" />
+		FROM
+			sys_menu
+		WHERE
+			 id in
+		<foreach collection="list" item="sysMenuId" index="index"
+            open="(" close=")" separator=",">
+            #{sysMenuId}
+        </foreach>
+	</select>
+	
+	<select id="selectByIds" parameterType="long" resultMap="SysMenuDOResultMap">
+		SELECT
+			<include refid="MybatisSysMenuDAO_all_column_fields" />
+		FROM
+			sys_menu
+		WHERE
+			 id in
+		<foreach collection="list" item="menuId" index="index"
+            open="(" close=")" separator=",">
+            #{menuId}
+        </foreach>
+	</select>
+
+
+	<sql id="MybatisSysMenuDAO_dynamic_where_fields_url_is_null"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="parentId != null"> AND parent_id=#{parentId} </if>
+			<if test="code != null"> AND code=#{code} </if>
+			<if test="name != null  and name != '' "> AND name=#{name} </if>
+			AND (url is null or url = '')
+			<if test="category != null  and category != '' "> AND category=#{category} </if>
+			<if test="createUserId != null"> AND create_user_id=#{createUserId} </if>
+			<if test="modifyUserId != null"> AND modify_user_id=#{modifyUserId} </if>
+			<if test="status != null"> AND status=#{status} </if>
+		</where>
+ 	</sql>
+ 	
+
+	<select id="MybatisSysMenuDAO_select_dynamic_url_is_null" resultMap="SysMenuDOResultMap" parameterType="com.checc.domain.SysMenuDO">
+	     SELECT
+	     	<include refid="MybatisSysMenuDAO_all_column_fields" />
+		 FROM
+		 	sys_menu
+			<include refid="MybatisSysMenuDAO_dynamic_where_fields_url_is_null" />
+ 	</select>
 
 </mapper>
