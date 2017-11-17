@@ -5,7 +5,9 @@
 
 	<resultMap type="com.checc.domain.SysUserDO" id="SysUserDOResultMap">
 		<id column="id" property="id" />
+        <result column="user_name" property="userName"/>
         <result column="login_name" property="loginName"/>
+        <result column="email" property="email"/>
         <result column="password" property="password"/>
         <result column="salt" property="salt"/>
         <result column="mobile" property="mobile"/>
@@ -15,7 +17,7 @@
         <result column="modify_time" property="modifyTime"/>
         <result column="modify_user_id" property="modifyUserId"/>
 	</resultMap>
-	
+
 	<resultMap type="com.checc.vo.SysUserVO" id="SysUserVOResultMap" extends="SysUserDOResultMap">
 <!-- 	通过继承来实现下面的映射：extends="SysUserDOResultMap"-->
 <!-- 
@@ -37,8 +39,8 @@
  -->        
  		<collection property="sysRoles" javaType="list" ofType="com.checc.domain.SysRoleDO">
  			<id column="rid" property="id" />
-	        <result column="rname" property="name"/>
-	        <result column="rcode" property="code"/>
+	        <result column="rname" property="roleName"/>
+	        <result column="rcode" property="roleCode"/>
 	        <result column="rtype" property="type"/>
 	        <result column="rstatus" property="status"/>
 	        <result column="rremark" property="remark"/>
@@ -52,7 +54,6 @@
 	        <result column="mparent_id" property="parentId"/>
 	        <result column="mname" property="name"/>
 	        <result column="murl" property="url"/>
-	        <result column="mcategory" property="category"/>
 	        <result column="mmenu_type" property="menuType"/>
 	        <result column="msort" property="sort"/>
 	        <result column="mcreate_user_id" property="createUserId"/>
@@ -62,14 +63,16 @@
 	        <result column="mstatus" property="status"/>
         </collection>
 	</resultMap>
-
+	
 	<sql id="MybatisSysUserDAO_all_column_fields">
-	      id,login_name,password,salt,mobile,status,create_time,create_user_id,modify_time,modify_user_id
+	      id,user_name,login_name,email,password,salt,mobile,status,create_time,create_user_id,modify_time,modify_user_id
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisSysUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
+			<if test="userName != null  and userName != '' "> AND user_name=#{userName} </if>
 			<if test="loginName != null  and loginName != '' "> AND login_name=#{loginName} </if>
+			<if test="email != null  and email != '' "> AND email=#{email} </if>
 			<if test="password != null  and password != '' "> AND password=#{password} </if>
 			<if test="salt != null  and salt != '' "> AND salt=#{salt} </if>
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
@@ -94,7 +97,9 @@
         </selectKey>
         INSERT INTO sys_user(
 				id,
+				user_name,
 				login_name,
+				email,
 				password,
 				salt,
 				mobile,
@@ -105,7 +110,9 @@
 				modify_user_id
 		)values(
 				#{id},
+				#{userName},
 				#{loginName},
+				#{email},
 				#{password},
 				#{salt},
 				#{mobile},
@@ -120,7 +127,9 @@
 	<update id="MybatisSysUserDAO_updateById" parameterType="com.checc.domain.SysUserDO">
 		UPDATE sys_user
 		SET
+					user_name = #{userName},
 					login_name = #{loginName},
+					email = #{email},
 					password = #{password},
 					salt = #{salt},
 					mobile = #{mobile},
@@ -139,7 +148,9 @@
 	<update id="MybatisSysUserDAO_update_dynamic" parameterType="com.checc.domain.SysUserDO">
 		UPDATE sys_user
 		<set>
+					<if test="userName != null  and userName != '' ">user_name=#{userName},</if>
 					<if test="loginName != null  and loginName != '' ">login_name=#{loginName},</if>
+					<if test="email != null  and email != '' ">email=#{email},</if>
 					<if test="password != null  and password != '' ">password=#{password},</if>
 					<if test="salt != null  and salt != '' ">salt=#{salt},</if>
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
@@ -176,30 +187,30 @@
 	 	ORDER BY sys_user.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+	
  	
  	<sql id="allRoles">
- 		sr.id rid,sr.name rname,sr.code rcode,sr.type rtype,sr.status rstatus,sr.remark rremark,
+ 		sr.id rid,sr.role_name rname,sr.role_code rcode,sr.status rstatus,
  		sr.create_user_id rcreate_user_id,sr.create_time rcreate_time,sr.modify_time rmodify_time
  	</sql>
  	<sql id="allMenus">
- 		sm.id mid,sm.code mcode,sm.parent_id mparent_id,sm.name mname,sm.url murl,sm.category mcategory,sm.menu_type mmenu_type,sm.sort msort,
+ 		sm.id mid,sm.code mcode,sm.parent_id mparent_id,sm.name mname,sm.url murl,sm.menu_type mmenu_type,sm.sort msort,
  		sm.create_user_id mcreate_user_id,sm.modify_user_id mmodify_user_id,sm.create_time mcreate_time,sm.modify_time mmodify_time,sm.status mstatus
  	</sql>
  	<sql id="MybatisSysUserDAO_all_column_fields_alias">
 	      su.id,su.login_name,su.user_name,su.password,su.salt,su.email,su.mobile,
-	      su.create_user_id,su.create_time,su.modify_user_id,su.modify_time,
-	      su.last_login_time,su.last_login_ip,su.status,su.user_detail
+	      su.create_user_id,su.create_time,su.modify_user_id,su.modify_time,su.status
  	</sql>
  	<select id="MybatisSysUserDAO_select_sysUser_vo" resultMap="SysUserVOResultMap" parameterType="string">
  		SELECT 
  			<include refid="MybatisSysUserDAO_all_column_fields_alias"/>,
 			<include refid="allRoles"/>,
 			<include refid="allMenus"/>
-		FROM be_sys_user su
-		LEFT JOIN be_sys_user_role sur ON sur.user_id = su.id
-		LEFT JOIN be_sys_role sr ON sr.id = sur.role_id
-		LEFT JOIN be_sys_menu_role smr ON smr.role_id = sur.role_id
-		LEFT JOIN be_sys_menu sm ON sm.id = smr.menu_id
+		FROM sys_user su
+		LEFT JOIN sys_user_role sur ON sur.user_id = su.id
+		LEFT JOIN sys_role sr ON sr.id = sur.role_id
+		LEFT JOIN sys_role_menu smr ON smr.role_id = sur.role_id
+		LEFT JOIN sys_menu sm ON sm.id = smr.menu_id
 		WHERE
 			sm.status = '1' 
 		AND (
@@ -214,7 +225,7 @@
  		SELECT
  			<include refid="MybatisSysUserDAO_all_column_fields" />
  		FROM 
- 			be_sys_user
+ 			sys_user
  		WHERE
  			login_name = #{parameter}
  			OR email = #{parameter}

@@ -6,7 +6,8 @@
    <link rel="stylesheet" href="${domain}/statics/common/common-css/common.css">
    <link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">
    <#--<script type="text/javascript" src="${domain}/statics/common/common-js/jquery-1.9.1.min.js"></script>-->
-   <script src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
+   <#--<script src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>-->
+   <script src="${domain}/statics/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
    <script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>	
    <script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>
    <script>var domain = "${domain}";</script>

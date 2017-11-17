@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="${domain}/statics/themes/base.css">
   <link rel="stylesheet" href="${domain}/statics/themes/layout.css">
-  <link rel="stylesheet" href="${domain}/statics/plugin/layer/skin/layer.css">
+  <link rel="stylesheet" href="${domain}/statics/plugins/layer/layui-v2.2.1/layui/css/layui.css">
   
   <!--和iframe内部相同的样式 start-->
   <link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">
@@ -13,17 +13,16 @@
   <link rel="stylesheet" href="${domain}/statics/common/common-css/style.css">
   <!--和iframe内部同样式引用end-->
   
-  <#--<script src="${domain}/statics/common/common-js/jquery-1.9.1.min.js"></script>-->
-  <script src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
-  <#--<script src="${domain}/statics/common/common-js/jquery.form.min.js"></script>-->
-  <script src="${domain}/statics/plugin/jquery/jquery.form.2.2.7.js"></script>
+  <script src="${domain}/statics/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+  
+  <#--
+  <script src="${domain}/statics/plugins/jquery/jquery.form.2.2.7.js"></script>
   <script src="${domain}/statics/common/common-js/jquery.SuperSlide.js"></script>
-  <script src="${domain}/statics/plugin/layer/layer.min.js"></script>
-  <script src="${domain}/statics/plugin/layer/extend/layer.ext.js"></script>
-  <#--<script src="${domain}/statics/supplier/js/supplier_layer.js"></script>-->
-  <script src="${domain}/statics/plugin/jquery/jqueryui/js/jquery-ui-1.9.2.custom.min.js"></script>
-  <script src="${domain}/statics/plugin/jquery/jqueryui/i18n/jquery.ui.datepicker-zh-CN.js"></script>
-  <#--<script type="text/javascript" charset="utf-8" src="${domain}/statics/supplier/component/date/WdatePicker.js"></script>-->
+  <script src="${domain}/statics/plugins/layer/layer.min.js"></script>
+  <script src="${domain}/statics/plugins/layer/extend/layer.ext.js"></script>
+  <script src="${domain}/statics/plugins/jquery/jqueryui/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="${domain}/statics/plugins/jquery/jqueryui/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+  -->	
 
   <script src="${domain}/statics/themes/layout.js"></script>
   <script>var domain = "${domain}";</script>

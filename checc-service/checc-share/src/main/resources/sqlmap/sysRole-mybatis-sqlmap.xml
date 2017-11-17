@@ -7,6 +7,7 @@
 		<id column="id" property="id" />
         <result column="role_name" property="roleName"/>
         <result column="role_code" property="roleCode"/>
+        <result column="status" property="status"/>
         <result column="create_user_id" property="createUserId"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_user_id" property="modifyUserId"/>
@@ -14,13 +15,14 @@
 	</resultMap>
 
 	<sql id="MybatisSysRoleDAO_all_column_fields">
-	      id,role_name,role_code,create_user_id,create_time,modify_user_id,modify_time
+	      id,role_name,role_code,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisSysRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="roleName != null  and roleName != '' "> AND role_name=#{roleName} </if>
 			<if test="roleCode != null  and roleCode != '' "> AND role_code=#{roleCode} </if>
+			<if test="status != null "> AND status=#{status} </if>
 			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
@@ -43,6 +45,7 @@
 				id,
 				role_name,
 				role_code,
+				status,
 				create_user_id,
 				create_time,
 				modify_user_id,
@@ -51,6 +54,7 @@
 				#{id},
 				#{roleName},
 				#{roleCode},
+				#{status},
 				#{createUserId},
 				#{createTime},
 				#{modifyUserId},
@@ -63,6 +67,7 @@
 		SET
 					role_name = #{roleName},
 					role_code = #{roleCode},
+					status = #{status},
 					create_user_id = #{createUserId},
 					modify_user_id = #{modifyUserId},
 					modify_time = #{modifyTime}
@@ -79,6 +84,7 @@
 		<set>
 					<if test="roleName != null  and roleName != '' ">role_name=#{roleName},</if>
 					<if test="roleCode != null  and roleCode != '' ">role_code=#{roleCode},</if>
+					<if test="status != null ">status=#{status},</if>
 					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
 					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
 					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>

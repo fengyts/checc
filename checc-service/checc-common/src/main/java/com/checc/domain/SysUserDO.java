@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 后台系统用户
-* @author fengyts Thu Nov 16 21:33:33 CST 2017
+* @author fengyts Fri Nov 17 16:08:38 CST 2017
 */
 
 public class SysUserDO extends BaseDO {
@@ -14,13 +14,19 @@ public class SysUserDO extends BaseDO {
 /** 主键 */
 private Long id;
 
+/** 用户名称 */
+private String userName;
+
 /** 用户登录名 */
 private String loginName;
+
+/** E_mail */
+private String email;
 
 /** 密码 */
 private String password;
 
-/** 登陆盐 */
+/** 登录盐 */
 private String salt;
 
 /** 手机号 */
@@ -49,11 +55,25 @@ private Long modifyUserId;
 	this.id = id;
 }
 /**
+* 设置 用户名称
+* @param userName
+*/
+	public void setUserName(String userName) {
+	this.userName = userName;
+}
+/**
 * 设置 用户登录名
 * @param loginName
 */
 	public void setLoginName(String loginName) {
 	this.loginName = loginName;
+}
+/**
+* 设置 E_mail
+* @param email
+*/
+	public void setEmail(String email) {
+	this.email = email;
 }
 /**
 * 设置 密码
@@ -63,7 +83,7 @@ private Long modifyUserId;
 	this.password = password;
 }
 /**
-* 设置 登陆盐
+* 设置 登录盐
 * @param salt
 */
 	public void setSalt(String salt) {
@@ -119,11 +139,25 @@ private Long modifyUserId;
 	return id;
 }
 /**
+* 获取 用户名称
+* @return userName
+*/
+	public String getUserName() {
+	return userName;
+}
+/**
 * 获取 用户登录名
 * @return loginName
 */
 	public String getLoginName() {
 	return loginName;
+}
+/**
+* 获取 E_mail
+* @return email
+*/
+	public String getEmail() {
+	return email;
 }
 /**
 * 获取 密码
@@ -133,7 +167,7 @@ private Long modifyUserId;
 	return password;
 }
 /**
-* 获取 登陆盐
+* 获取 登录盐
 * @return salt
 */
 	public String getSalt() {

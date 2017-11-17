@@ -14,9 +14,10 @@
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	-->
-
-	<script type="text/javascript" src="${domain}/statics/plugins/jquery/jquery-1.9.1/jquery.min.js"></script>
+	
+	<script src="${domain}/statics/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
 	<#--
+	<script type="text/javascript" src="${domain}/statics/plugins/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${domain}/statics/plugins/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${domain}/statics/plugins/other/colResizable-1.3.min.js"></script>
 	-->

@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 系统用户角色
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Fri Nov 17 16:58:31 CST 2017
 */
 
 public class SysRoleDO extends BaseDO {
@@ -19,6 +19,9 @@ private String roleName;
 
 /** 角色代码 */
 private String roleCode;
+
+/** 角色状态，是否可用：1-可用；0-不可用 */
+private Boolean status;
 
 /** 创建人 */
 private Long createUserId;
@@ -52,6 +55,13 @@ private Date modifyTime;
 */
 	public void setRoleCode(String roleCode) {
 	this.roleCode = roleCode;
+}
+/**
+* 设置 角色状态，是否可用：1-可用；0-不可用
+* @param status
+*/
+	public void setStatus(Boolean status) {
+	this.status = status;
 }
 /**
 * 设置 创建人
@@ -101,6 +111,13 @@ private Date modifyTime;
 */
 	public String getRoleCode() {
 	return roleCode;
+}
+/**
+* 获取 角色状态，是否可用：1-可用；0-不可用
+* @return status
+*/
+	public Boolean getStatus() {
+	return status;
 }
 /**
 * 获取 创建人

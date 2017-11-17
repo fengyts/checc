@@ -6,18 +6,18 @@
 <head>
 	<title>盘蛇后台管理系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/font-awesome-4.7.0/css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/font-awesome-4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/themes/login_style.css" />
 	<#--
 	-->
 	<script>
 		var domain = "${domain}";
 	</script>
-	<script type="text/javascript" src="${domain}/statics/plugin/jquery/jquery-1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="${domain}/statics/plugin/bootstrap/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${domain}/statics/plugin/other/supersized.3.2.7.min.js"></script>
-	<script type="text/javascript" src="${domain}/statics/plugin/other/supersized-init.js"></script>
+	<script type="text/javascript" src="${domain}/statics/plugins/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${domain}/statics/plugins/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${domain}/statics/plugins/supersized/supersized.3.2.7.min.js"></script>
+	<script type="text/javascript" src="${domain}/statics/plugins/supersized/supersized-init.js"></script>
 </head>
 <style type="text/css">
 	.form-group {

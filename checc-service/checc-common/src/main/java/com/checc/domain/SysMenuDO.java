@@ -10,6 +10,9 @@ import java.util.Date;
 */
 
 public class SysMenuDO extends BaseDO {
+	
+	public static Integer MENU_TYPE_1 = 1;
+	public static Integer MENU_TYPE_2 = 2;
 
 /** 主键 */
 private Long id;
@@ -47,6 +50,17 @@ private Long modifyUserId;
 /** 修改时间 */
 private Date modifyTime;
 
+/**  */
+private Long location;
+
+
+
+public Long getLocation() {
+	return location;
+}
+public void setLocation(Long location) {
+	this.location = location;
+}
 /**
 * 设置 主键
 * @param id

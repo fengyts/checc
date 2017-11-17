@@ -65,12 +65,12 @@ public class MybatisSysUserDAO extends MybatisBaseDAO implements SysUserDAO {
 
 	@Override
 	public SysUserVO nestedList(String param){
-		return getSqlSession().selectOne("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_sysUser_vo", param);
+		return getSqlSession().selectOne(getStatement("select_sysUser_vo"), param);
 	}
 
 	@Override
 	public SysUserDO findByLoginNameOrEmailOrMobile(String param) {
-		return getSqlSession().selectOne("ng.bayue.backend.domain.SysUserMapper.MybatisSysUserDAO_select_by_loginNameOrMobileOrEmail", param);
+		return getSqlSession().selectOne(getStatement("select_by_loginNameOrMobileOrEmail"), param);
 	}
 	
 	
