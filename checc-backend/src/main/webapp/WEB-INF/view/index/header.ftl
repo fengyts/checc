@@ -83,6 +83,7 @@ $(function(){
 
 	$('.updatePassword').on('click',function(){
 		loadUpdatePassword();
+		/**
          tabi = $.layer({
 		        type:1,
 		        offset: ['50px', ''],
@@ -93,10 +94,24 @@ $(function(){
 		        move: '.tabmove',
 		        closeBtn: false,
 		        page: {dom: '.updatePassword-tab'}
-		    });    
+		    });
+		  */
+		  tabi = layer.open({
+		  		type : 2,
+				title : '修改用户密码',
+				// shadeClose : true,
+				shade : 0.3,
+				maxmin : true,
+				fix : false,
+				scrollbar : false,
+				area : [ '550px', '350px' ],
+				//content:$(".updatePassword-tab")
+				content : domain + '/sys/sysUser/modifyPwd.htm',
+		  });      
 	}); 
 	
 	$('.updateUserInfo').on('click',function(){
+		/**
 		loadUpdateUserInfo();
          tabi = $.layer({
 		        type:1,
@@ -109,6 +124,8 @@ $(function(){
 		        closeBtn: false,
 		        page: {dom: '.updateUserInfo-tab'}
 		    });    
+		   */
+		   tabi = layer.alert("亲，功能尚未上线！"); 
         
 	}); 
 	

@@ -1,4 +1,4 @@
-package com.checc.ao;
+package com.checc.ao.sys;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -119,12 +119,12 @@ public class SysUserAO {
 
 	public boolean validIsExists(SysUserDO valid) {
 		String loginName = valid.getLoginName();
-//		String email = valid.getEmail();
+		String email = valid.getEmail();
 		String mobile = valid.getMobile();
 		SysUserDO sysUserDO = new SysUserDO();
 		sysUserDO.setLoginName(loginName);
 		sysUserDO.setMobile(mobile);
-//		sysUserDO.setEmail(email);
+		sysUserDO.setEmail(email);
 		List<SysUserDO> list = sysUserService.selectDynamic(sysUserDO);
 		return CollectionUtils.isEmpty(list) ? false : true;
 	}
@@ -205,7 +205,7 @@ public class SysUserAO {
 		sysUser.setSalt(null);
 		sysUserService.updatePassword(sysUser.getId(), passwordNew, null);
 		subject.logout();//修改成功后需要退出重新登陆
-		return new ResultMessage();
+		return new ResultMessage(ResultMessage.Success,"操作成功,请重新登陆");
 	}
 
 }

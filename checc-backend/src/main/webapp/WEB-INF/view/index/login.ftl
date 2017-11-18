@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<title>盘蛇后台管理系统</title>
+	<title>车西西后台管理系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/font-awesome-4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="${domain}/statics/plugins/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
 <body>
 <div class="dr-login-page">
 	<form id="loginForm" action="${domain}/doLogin" method="post">
-		<h3 class="form-signin-heading">盘蛇后台管理系统</h3>
+		<h3 class="form-signin-heading">车西西后台管理系统</h3>
 		<div class="form-group">
 			<span style="color:red;" id="message">${message}</span>
 		</div>

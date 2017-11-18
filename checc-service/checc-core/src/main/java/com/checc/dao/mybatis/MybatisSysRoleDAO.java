@@ -64,6 +64,6 @@ public class MybatisSysRoleDAO extends MybatisBaseDAO implements SysRoleDAO {
 
 	@Override
 	public List<SysRoleDO> selectByIds(List<Long> ids) throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysRoleMapper.MybatisSysRoleDAO_select_by_ids",ids);
+		return getSqlSession().selectList(getStatement("select_by_ids"),ids);
 	}
 }

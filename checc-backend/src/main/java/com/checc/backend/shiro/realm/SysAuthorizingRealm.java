@@ -13,7 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.checc.ao.SysUserAO;
+import com.checc.ao.sys.SysUserAO;
 import com.checc.vo.SysUserVO;
 
 public class SysAuthorizingRealm extends AuthorizingRealm {

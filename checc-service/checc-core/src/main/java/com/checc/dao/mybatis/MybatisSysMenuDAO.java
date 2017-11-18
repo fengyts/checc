@@ -64,27 +64,27 @@ public class MybatisSysMenuDAO extends MybatisBaseDAO implements SysMenuDAO {
 	
 	@Override
 	public List<SysMenuDO> findListByParentIds(List<SysMenuDO> sysMenuList) throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuMapper.findListByParentIds", sysMenuList);
+		return getSqlSession().selectList(getStatement("findListByParentIds"), sysMenuList);
 	}
 	
 	@Override
 	public List<SysMenuDO> findListByIds(List<Long> ids) throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuMapper.findListByIds", ids);
+		return getSqlSession().selectList(getStatement("findListByIds"), ids);
 	}
 	
 	@Override
 	public List<SysMenuDO> findParentMenu() throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuMapper.findParentMenu");
+		return getSqlSession().selectList(getStatement("findParentMenu"));
 	}
 
 	@Override
 	public List<SysMenuDO> selectByIds(List<Long> ids){
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuMapper.selectByIds", ids);
+		return getSqlSession().selectList(getStatement("selectByIds"), ids);
 	}
 	
 	@Override
 	public List<SysMenuDO> selectDynamicForUrlIsNull(SysMenuDO sysMenuDO) throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuMapper.MybatisSysMenuDAO_select_dynamic_url_is_null", sysMenuDO);
+		return getSqlSession().selectList(getStatement("select_dynamic_url_is_null"), sysMenuDO);
 	}
 
 }

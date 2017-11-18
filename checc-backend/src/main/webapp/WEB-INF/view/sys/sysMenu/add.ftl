@@ -1,14 +1,11 @@
 <#include "/common/common.ftl"/>
 <@backend title="系统菜单增加" js=[
-'/statics/plugin/jquery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js',
-'/statics/plugin/select2/js/select2.js',
-'/statics/plugin/select2/js/select2Util.js',
-'/statics/plugin/select2/js/select2_locale_zh-CN.js',
-'/statics/plugin/layer/layer.min.js',
-'/statics/backend/index/sysMenu.js'
+'/statics/plugins/select2/js/select2.js',
+'/statics/plugins/select2/js/select2Util.js',
+'/statics/plugins/select2/js/select2_locale_zh-CN.js',
+'/statics/backend/sys/sysMenu.js'
 ] css=[
-'/statics/plugin/select2/css/select2.css',
-'/statics/plugin/jquery/jquery-ui-1.9.2.custom/css/base/jquery-ui-1.9.2.custom.css'
+'/statics/plugins/select2/css/select2.css'
 ]>
 
 	<div id="forms" class="mt10">

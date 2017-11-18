@@ -10,16 +10,14 @@ $(function(){
 	});
 	
 	$("#menuAddBtn").on('click',function(){
-		pageii=$.layer({
+		pageii=layer.open({
 			type : 2,
 			title : '菜单管理-->新增',
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
-			area: ['600px', 400],
-			iframe : {
-				src : domain + '/index/sysMenu/add.htm'
-			}
+			area : [ '600px', '450px' ],
+			content : domain + '/sys/sysMenu/add.htm'
 		});
 	});
 	
@@ -48,16 +46,14 @@ $(function(){
 	
 	$(".editSysMenu").on('click',function(){
 		var id = $(this).attr("param");
-		pageii=$.layer({
+		pageii=layer.open({
 			type : 2,
 			title : '菜单管理-->编辑',
 			shadeClose : true,
 			maxmin : true,
 			fix : false,
-			area: ['600px', 400],
-			iframe : {
-				src : domain + '/index/sysMenu/edit.htm?id='+id
-			}
+			area : [ '600px', '450px' ],
+			content : domain + '/sys/sysMenu/edit.htm?id='+id
 		});
 	});
 	

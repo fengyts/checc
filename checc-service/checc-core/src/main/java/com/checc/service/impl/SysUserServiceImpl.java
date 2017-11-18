@@ -37,10 +37,18 @@ public class SysUserServiceImpl  implements SysUserService{
 	@Override
 	public Long insert(SysUserDO sysUserDO) throws CommonServiceException {
 		try {
+			String salt = sysUserDO.getSalt();
+			if(StringUtils.isEmpty(salt)){//生成随机盐
+				salt = getSalt();
+				sysUserDO.setSalt(salt);
+			}
+			String password = sysUserDO.getPassword();
+			String passwdHash = SecurityUtil.hashToStr(password, salt, 2);
+			sysUserDO.setPassword(passwdHash);
 			return sysUserDAO.insert(sysUserDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 

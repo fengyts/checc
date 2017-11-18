@@ -1,17 +1,15 @@
 <#include "/common/common.ftl"/>
 <@backend title="菜单管理" 
 js=[
-'/statics/plugin/jquery/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js',
-'/statics/plugin/select2/js/select2.js',
-'/statics/plugin/select2/js/select2Util.js',
-'/statics/plugin/select2/js/select2_locale_zh-CN.js',
-'/statics/plugin/layer/layer.min.js',
+'/statics/plugins/select2/js/select2.js',
+'/statics/plugins/select2/js/select2Util.js',
+'/statics/plugins/select2/js/select2_locale_zh-CN.js',
 '/statics/common/common-js/form.js',
-'/statics/backend/index/sysMenu.js'
+'/statics/backend/sys/sysMenu.js'
 ] css=[
 ]>
 
-<form class="jqtransform" method="post" id="sysMenuForm" action="${domain}/index/sysMenu/listHome.htm">
+<form class="jqtransform" method="post" id="sysMenuForm" action="${domain}/sys/sysMenu/list.htm">
 	<div id="search_bar" class="mt10">
 		<div class="box">
 		
@@ -79,6 +77,8 @@ js=[
 		            			<#if sysMenuDO.menuType != '0'>
 				            		<a href="javascript:void(0)" class="editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
 				            		<a href="javascript:void(0)" class="journalReview" param="${sysMenuDO.id}">[日志]</a>
+			            		<#else>
+			            			不可编辑
 			            		</#if>
 		            		</td>
 	            		</tr>

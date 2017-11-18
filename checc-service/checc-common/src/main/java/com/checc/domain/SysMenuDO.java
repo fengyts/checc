@@ -11,8 +11,8 @@ import java.util.Date;
 
 public class SysMenuDO extends BaseDO {
 	
-	public static Integer MENU_TYPE_1 = 1;
-	public static Integer MENU_TYPE_2 = 2;
+	public static final int MENU_TYPE_1 = 1;
+	public static final int MENU_TYPE_2 = 2;
 
 /** 主键 */
 private Long id;
@@ -30,7 +30,7 @@ private String name;
 private String url;
 
 /** 菜单类型（0:根菜单，1 :主导航,2：菜单,3：按钮 */
-private String menuType;
+private Integer menuType;
 
 /** 菜单排序值 */
 private Integer sort;
@@ -100,7 +100,7 @@ public void setLocation(Long location) {
 * 设置 菜单类型（0:根菜单，1 :主导航,2：菜单,3：按钮
 * @param menuType
 */
-	public void setMenuType(String menuType) {
+	public void setMenuType(Integer menuType) {
 	this.menuType = menuType;
 }
 /**
@@ -184,7 +184,7 @@ public void setLocation(Long location) {
 * 获取 菜单类型（0:根菜单，1 :主导航,2：菜单,3：按钮
 * @return menuType
 */
-	public String getMenuType() {
+	public Integer getMenuType() {
 	return menuType;
 }
 /**

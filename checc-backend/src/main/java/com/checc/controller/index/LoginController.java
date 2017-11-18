@@ -1,14 +1,11 @@
 package com.checc.controller.index;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -39,7 +36,7 @@ public class LoginController {
 		if (StringUtils.isNotEmpty(kickout) && "1".equals(kickout)) {
 			model.addAttribute("message", "被踢出登录");
 		}
-		return "/index/sysUser/login";
+		return "/index/login";
 	}
 
 	/**
@@ -103,7 +100,7 @@ public class LoginController {
 		// 此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
 		// 登陆失败还到login页面
 		model.addAttribute("kaptchaFlag", kaptchaFlag);
-		return "/index/sysUser/login";
+		return "/index/login";
 	}
 
 }

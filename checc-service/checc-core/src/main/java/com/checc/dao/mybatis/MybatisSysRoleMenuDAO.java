@@ -65,17 +65,17 @@ public class MybatisSysRoleMenuDAO extends MybatisBaseDAO implements SysRoleMenu
 	
 	@Override
 	public Integer deleteByRoleId(Long roleId) throws CommonDAOException {
-		return getSqlSession().delete("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_deleteByRoleId", roleId);
+		return getSqlSession().delete(getStatement("deleteByRoleId"), roleId);
 	}
 
 	@Override
 	public List<SysRoleMenuDO> selectByRoleId(Long roleId) throws CommonDAOException {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_selectByRoleId", roleId);
+		return getSqlSession().selectList(getStatement("selectByRoleId"), roleId);
 	}
 
 	@Override
 	public void insertBatch(Map<String,Object> map) throws CommonDAOException {
-		getSqlSession().insert("ng.bayue.backend.domain.SysMenuRoleMapper.MybatisSysMenuRoleDAO_insert_batch", map);
+		getSqlSession().insert(getStatement("insert_batch"), map);
 	}
 
 }

@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="${domain}/statics/themes/base.css">
   <link rel="stylesheet" href="${domain}/statics/themes/layout.css">
   <link rel="stylesheet" href="${domain}/statics/plugins/layer/layui-v2.2.1/layui/css/layui.css">
-  
+	
   <!--和iframe内部相同的样式 start-->
   <link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">
   <link rel="stylesheet" href="${domain}/statics/common/common-css/common.css">
@@ -14,6 +14,8 @@
   <!--和iframe内部同样式引用end-->
   
   <script src="${domain}/statics/plugins/jquery/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+  
+  <script type="text/javascript" src="${domain}/statics/plugins/layer/layui-v2.2.1/layui/layui.js"></script>
   
   <#--
   <script src="${domain}/statics/plugins/jquery/jquery.form.2.2.7.js"></script>
@@ -25,13 +27,24 @@
   -->	
 
   <script src="${domain}/statics/themes/layout.js"></script>
-  <script>var domain = "${domain}";</script>
+  <script>
+  	var domain = "${domain}";
+  	/** 使用新版layui,定义layer和form模块 */
+		//var layer = layui.layer, form = layui.form;
+		var layer, form;
+		layui.use([ 'layer', 'form' ], function() {
+			layer = layui.layer;
+			form = layui.form;
+		});
+  </script>
 
   
   <title>后台首页</title>
 </head>
 <body>
+
 <#include "/index/header.ftl">
+
 <div id="main">
 	<div id="east">
 		<div class="east-menu">

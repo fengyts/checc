@@ -98,6 +98,6 @@
     	<property name="securityManager" ref="securityManager"/>
 	</bean>
 	
-	<bean id="sysUserAO" class="com.checc.ao.SysUserAO"/>    
+<!-- 	<bean id="sysUserAO" class="com.checc.ao.sys.SysUserAO"/>     -->
     
 </beans>

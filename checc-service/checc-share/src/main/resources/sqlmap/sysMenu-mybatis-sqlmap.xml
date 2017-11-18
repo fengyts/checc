@@ -142,7 +142,7 @@
 	 	Limit #{start},#{pageSize}
  	</select>
  	
- 	<select id="findParentMenu" resultMap="SysMenuDOResultMap">
+ 	<select id="MybatisSysMenuDAO_findParentMenu" resultMap="SysMenuDOResultMap">
 		SELECT
 			<include refid="MybatisSysMenuDAO_all_column_fields" />
 		FROM
@@ -151,7 +151,7 @@
 			 parent_id is null
 	</select>
 	
- 	<select id="findListByParentIds" parameterType="com.checc.domain.SysMenuDO" resultMap="SysMenuDOResultMap">
+ 	<select id="MybatisSysMenuDAO_findListByParentIds" parameterType="com.checc.domain.SysMenuDO" resultMap="SysMenuDOResultMap">
 		SELECT
 			<include refid="MybatisSysMenuDAO_all_column_fields" />
 		FROM
@@ -164,7 +164,7 @@
         </foreach>
 	</select>
 	
- 	<select id="findListByIds" parameterType="Long" resultMap="SysMenuDOResultMap">
+ 	<select id="MybatisSysMenuDAO_findListByIds" parameterType="Long" resultMap="SysMenuDOResultMap">
 		SELECT
 			<include refid="MybatisSysMenuDAO_all_column_fields" />
 		FROM
@@ -177,7 +177,7 @@
         </foreach>
 	</select>
 	
-	<select id="selectByIds" parameterType="long" resultMap="SysMenuDOResultMap">
+	<select id="MybatisSysMenuDAO_selectByIds" parameterType="long" resultMap="SysMenuDOResultMap">
 		SELECT
 			<include refid="MybatisSysMenuDAO_all_column_fields" />
 		FROM

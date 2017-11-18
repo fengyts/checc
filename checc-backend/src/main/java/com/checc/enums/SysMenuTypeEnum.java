@@ -1,13 +1,16 @@
 package com.checc.enums;
 
 public enum SysMenuTypeEnum {
-	
-	ROOT(0,"根菜单"),NAVIGATION(1,"导航"),MENUBAR(2,"主菜单"),CHILDMENU(3,"按钮");
-	
+
+	ROOT(0, "根菜单"), // 根菜单
+	NAVIGATION(1, "导航"), // 导航,一级菜单
+	MENUBAR(2, "主菜单"), // 二级菜单,子菜单
+	CHILDMENU(3, "按钮");
+
 	private Integer code;
 	private String value;
-	
-	private SysMenuTypeEnum(Integer code,String value){
+
+	private SysMenuTypeEnum(Integer code, String value) {
 		this.code = code;
 		this.value = value;
 	}
@@ -27,17 +30,17 @@ public enum SysMenuTypeEnum {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
-	public static String getValueByCode(Integer code){
-		if(null == code){return null;}
-		for(SysMenuTypeEnum menuTypeEnum : SysMenuTypeEnum.values()){
-			if(code.intValue() == menuTypeEnum.code){
+
+	public static String getValueByCode(Integer code) {
+		if (null == code) {
+			return null;
+		}
+		for (SysMenuTypeEnum menuTypeEnum : SysMenuTypeEnum.values()) {
+			if (code.intValue() == menuTypeEnum.code) {
 				return menuTypeEnum.value;
 			}
 		}
 		return null;
 	}
-	
-	
 
 }

@@ -3,35 +3,35 @@
 
 <mapper namespace="com.checc.domain.SysRoleMenuMapper">
 
- 	<resultMap type="com.checc.domain.SysRoleMenuDO" id="SysMenuRoleDOResultMap">
+ 	<resultMap type="com.checc.domain.SysRoleMenuDO" id="SysRoleMenuDOResultMap">
 		<id column="role_id" property="roleId" />
         <result column="menu_id" property="menuId"/>
 	</resultMap>
 
-	<sql id="MybatisSysMenuRoleDAO_all_column_fields">
+	<sql id="MybatisSysRoleMenuDAO_all_column_fields">
 	      role_id,menu_id
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
-	<sql id="MybatisSysMenuRoleDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+	<sql id="MybatisSysRoleMenuDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="menuId != null "> AND menu_id=#{menuId} </if>
 		</where>
  	</sql>
 
-	<select id="MybatisSysMenuRoleDAO_selectByRoleId" parameterType="long" resultMap="SysMenuRoleDOResultMap">
+	<select id="MybatisSysRoleMenuDAO_selectByRoleId" parameterType="long" resultMap="SysRoleMenuDOResultMap">
 	SELECT
-		<include refid="MybatisSysMenuRoleDAO_all_column_fields" />
+		<include refid="MybatisSysRoleMenuDAO_all_column_fields" />
 	FROM
-		be_sys_menu_role
+		sys_role_menu
 	WHERE
 		 role_id = #{roleId}
 	</select>
 
-    <insert id="MybatisSysMenuRoleDAO_insert" parameterType="com.checc.domain.SysRoleMenuDO" useGeneratedKeys="true">
+    <insert id="MybatisSysRoleMenuDAO_insert" parameterType="com.checc.domain.SysRoleMenuDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="roleId" order="AFTER">
             SELECT LAST_INSERT_ID() AS role_id
         </selectKey>
-        INSERT INTO be_sys_menu_role(
+        INSERT INTO sys_role_menu(
 				role_id,
 				menu_id
 		)values(
@@ -40,8 +40,8 @@
 		)
     </insert>
 
-	<update id="MybatisSysMenuRoleDAO_updateByRoleId" parameterType="com.checc.domain.SysRoleMenuDO">
-		UPDATE be_sys_menu_role
+	<update id="MybatisSysRoleMenuDAO_updateByRoleId" parameterType="com.checc.domain.SysRoleMenuDO">
+		UPDATE sys_role_menu
 		SET
 					menu_id = #{menuId}
 		WHERE
@@ -49,11 +49,11 @@
 	</update>
 
  	
- 	<delete id="MybatisSysMenuRoleDAO_deleteByRoleId" parameterType="long">
+ 	<delete id="MybatisSysRoleMenuDAO_deleteByRoleId" parameterType="long">
 		DELETE FROM sys_role_menu WHERE role_id = #{roleId}
 	</delete>
 
-	<update id="MybatisSysMenuRoleDAO_update_dynamic" parameterType="com.checc.domain.SysRoleMenuDO">
+	<update id="MybatisSysRoleMenuDAO_update_dynamic" parameterType="com.checc.domain.SysRoleMenuDO">
 		UPDATE sys_role_menu
 		<set>
 					<if test="menuId != null ">menu_id=#{menuId},</if>
@@ -61,15 +61,15 @@
 		WHERE role_id = #{roleId}
 	</update>
 
- 	<select id="MybatisSysMenuRoleDAO_select_dynamic" resultMap="SysMenuRoleDOResultMap" parameterType="com.checc.domain.SysRoleMenuDO">
+ 	<select id="MybatisSysRoleMenuDAO_select_dynamic" resultMap="SysRoleMenuDOResultMap" parameterType="com.checc.domain.SysRoleMenuDO">
 	     SELECT
-	     	<include refid="MybatisSysMenuRoleDAO_all_column_fields" />
+	     	<include refid="MybatisSysRoleMenuDAO_all_column_fields" />
 		 FROM
 		 	sys_role_menu
-			<include refid="MybatisSysMenuRoleDAO_dynamic_where_fields" />
+			<include refid="MybatisSysRoleMenuDAO_dynamic_where_fields" />
  	</select>
 
- 	<insert id="MybatisSysMenuRoleDAO_insert_batch" parameterType="map">
+ 	<insert id="MybatisSysRoleMenuDAO_insert_batch" parameterType="map">
  		INSERT 
  			sys_role_menu (role_id, menu_id)
  		VALUES

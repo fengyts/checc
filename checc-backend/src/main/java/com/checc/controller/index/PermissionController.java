@@ -40,7 +40,7 @@ public class PermissionController {
 
         if (null != sm && !sm.isEmpty()) {
             for (SysMenuDO sysMenuDO : sm) {
-            	if(null == sysMenuDO.getParentId()){continue;}//所有菜单的最顶级菜单root
+            	if(null == sysMenuDO.getParentId() || 0 == sysMenuDO.getParentId().intValue()){continue;}//所有菜单的最顶级菜单root
                 if (SysMenuTypeEnum.NAVIGATION.getCode().longValue() == sysMenuDO.getParentId().longValue()) { // 获取导航菜单
                     JSONObject first = new JSONObject();
                     first.put("id", sysMenuDO.getId());
@@ -70,12 +70,14 @@ public class PermissionController {
         JSONArray children = new JSONArray();
         po.put("children", children);
         for (SysMenuDO permission : permissions) {
-            if (null != permission.getParentId() && permission.getParentId().equals(parent.getId()) && SysMenuDO.MENU_TYPE_2.equals(permission.getMenuType())) {
-                JSONObject node = new JSONObject();
-                node.put("id", permission.getId());
-                node.put("text", permission.getName());
-                node.put("url", permission.getUrl());
-                node.put("location", null != parent.getLocation() ? parent.getLocation() : 1);
+            if (null != permission.getParentId() 
+            		&& permission.getParentId().longValue() == parent.getId().longValue()
+            		&& SysMenuTypeEnum.MENUBAR.getCode().intValue() == permission.getMenuType().intValue()) {
+            	JSONObject node = new JSONObject();
+        		node.put("id", permission.getId());
+        		node.put("text", permission.getName());
+        		node.put("url", permission.getUrl());
+        		node.put("location", null != parent.getLocation() ? parent.getLocation() : 1);
 
                 this.buildRights(node, permission, permissions);
                 children.add(node);

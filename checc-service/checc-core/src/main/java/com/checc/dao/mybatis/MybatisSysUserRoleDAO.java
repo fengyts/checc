@@ -64,12 +64,12 @@ public class MybatisSysUserRoleDAO extends MybatisBaseDAO implements SysUserRole
 	
 	@Override
 	public void insertBatch(List<SysUserRoleDO> list) throws CommonDAOException {
-		getSqlSession().insert("ng.bayue.backend.domain.SysUserRoleMapper.MybatisSysUserRoleDAO_insert_batch", list);
+		getSqlSession().insert(getStatement("insert_batch"), list);
 	}
 
 	@Override
 	public List<SysUserRoleDO> selectByUserIds(List<Long> userIds) {
-		return getSqlSession().selectList("ng.bayue.backend.domain.SysUserRoleMapper.MybatisSysUserRoleDAO_selectBy_userIds", userIds);
+		return getSqlSession().selectList(getStatement("selectBy_userIds"), userIds);
 	}
 	
 
