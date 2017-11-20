@@ -11,7 +11,8 @@ html, body {
 .clear{clear: both;}
 .oh{overflow: hidden;}
 a{text-decoration: none;}
-a:link {text-decoration:none;color:blue;}
+/* a:link {text-decoration:none;color:blue;} */
+a.editcatabtn{text-decoration:none;color:blue;}
 img{border:none;}
 input,img,select{border-style: none;vertical-align: middle;}
 select{*vertical-align: top;}

@@ -22,6 +22,8 @@
 	<script type="text/javascript" src="${domain}/statics/common/common-js/common.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/util.js"></script>
 	<script type="text/javascript" src="${domain}/statics/common/common-js/favrite.js"></script>
+	<script type="text/javascript" src="${domain}/statics/common/common-js/tab.js"></script>
+	
 		
 	<script>
 		var domain = "${domain}";

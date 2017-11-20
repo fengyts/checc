@@ -94,12 +94,12 @@ function dataReset(formId) {
 }
 
 /***
- * 取消按钮
+ * 取消按钮 关闭当前弹窗
  * @param $
  * @returns {Function}
  */
-function cancelButton(pageii){
-	window.parent.layer.close(pageii);
+function cancelButton(){
+	window.parent.layer.close(parent.pageii);
 }
 
 /**

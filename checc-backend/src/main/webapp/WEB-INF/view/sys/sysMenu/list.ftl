@@ -75,8 +75,8 @@ js=[
 		            		<td width="80">${(sysMenuDO.status!true)?string("有效","无效")}</td>
 		            		<td width="100">
 		            			<#if sysMenuDO.menuType != '0'>
-				            		<a href="javascript:void(0)" class="editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
-				            		<a href="javascript:void(0)" class="journalReview" param="${sysMenuDO.id}">[日志]</a>
+				            		<a href="javascript:void(0)" class="editcatabtn editSysMenu" param="${sysMenuDO.id}">[编辑]</a>&nbsp;
+				            		<a href="javascript:void(0)" class="editcatabtn journalReview" param="${sysMenuDO.id}">[日志]</a>
 			            		<#else>
 			            			不可编辑
 			            		</#if>

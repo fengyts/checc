@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 商品
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Mon Nov 20 16:27:35 CST 2017
 */
 
 public class ItemDO extends BaseDO {
@@ -26,17 +26,14 @@ private String itemType;
 /** 商品图片地址 */
 private String picture;
 
-/** 商品描述 */
-private String description;
-
-/** 规则说明 */
-private String rules;
-
 /** 商品状态(是否上架)：01-未上架；02-已上架；03-作废 */
 private String status;
 
 /** 市场价 */
 private Double marketPrice;
+
+/** 备注 */
+private String remark;
 
 /** 添加日期 */
 private Date createTime;
@@ -80,20 +77,6 @@ private Date modifyTime;
 	this.picture = picture;
 }
 /**
-* 设置 商品描述
-* @param description
-*/
-	public void setDescription(String description) {
-	this.description = description;
-}
-/**
-* 设置 规则说明
-* @param rules
-*/
-	public void setRules(String rules) {
-	this.rules = rules;
-}
-/**
 * 设置 商品状态(是否上架)：01-未上架；02-已上架；03-作废
 * @param status
 */
@@ -106,6 +89,13 @@ private Date modifyTime;
 */
 	public void setMarketPrice(Double marketPrice) {
 	this.marketPrice = marketPrice;
+}
+/**
+* 设置 备注
+* @param remark
+*/
+	public void setRemark(String remark) {
+	this.remark = remark;
 }
 /**
 * 设置 添加日期
@@ -157,20 +147,6 @@ private Date modifyTime;
 	return picture;
 }
 /**
-* 获取 商品描述
-* @return description
-*/
-	public String getDescription() {
-	return description;
-}
-/**
-* 获取 规则说明
-* @return rules
-*/
-	public String getRules() {
-	return rules;
-}
-/**
 * 获取 商品状态(是否上架)：01-未上架；02-已上架；03-作废
 * @return status
 */
@@ -183,6 +159,13 @@ private Date modifyTime;
 */
 	public Double getMarketPrice() {
 	return marketPrice;
+}
+/**
+* 获取 备注
+* @return remark
+*/
+	public String getRemark() {
+	return remark;
 }
 /**
 * 获取 添加日期

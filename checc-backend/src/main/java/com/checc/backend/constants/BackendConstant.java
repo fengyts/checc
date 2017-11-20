@@ -13,7 +13,8 @@ package com.checc.backend.constants;
   */
 public interface BackendConstant {
 	
-	public static final String BACKEND_SPACE = "/backend";
+	/** 视图根路径 */
+	public static final String BACKEND_VIEW_PATH = "/backend/";
 	
 	public interface SessionKey{
 		String USER = "user";
