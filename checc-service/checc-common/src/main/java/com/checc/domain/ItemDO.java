@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 商品
-* @author fengyts Mon Nov 20 16:27:35 CST 2017
+* @author fengyts Tue Nov 21 13:31:45 CST 2017
 */
 
 public class ItemDO extends BaseDO {
@@ -22,9 +22,6 @@ private Long catetoryId;
 
 /** 商品类型：01-竞拍商品；02-兑换商品 */
 private String itemType;
-
-/** 商品图片地址 */
-private String picture;
 
 /** 商品状态(是否上架)：01-未上架；02-已上架；03-作废 */
 private String status;
@@ -68,13 +65,6 @@ private Date modifyTime;
 */
 	public void setItemType(String itemType) {
 	this.itemType = itemType;
-}
-/**
-* 设置 商品图片地址
-* @param picture
-*/
-	public void setPicture(String picture) {
-	this.picture = picture;
 }
 /**
 * 设置 商品状态(是否上架)：01-未上架；02-已上架；03-作废
@@ -138,13 +128,6 @@ private Date modifyTime;
 */
 	public String getItemType() {
 	return itemType;
-}
-/**
-* 获取 商品图片地址
-* @return picture
-*/
-	public String getPicture() {
-	return picture;
 }
 /**
 * 获取 商品状态(是否上架)：01-未上架；02-已上架；03-作废

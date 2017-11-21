@@ -145,6 +145,7 @@
             chunked: false,
             chunkSize: 512 * 1024,
 			server:domain+'/uploadImg/img/item.htm',
+//			server:domain+'/item/saveItem.htm',
             // runtimeOrder: 'flash',
 
              accept: {
@@ -587,6 +588,7 @@
 			var picUrls = $("#picUrlsInput").val();
 			picUrls += res.path + ",";
 			$("#picUrlsInput").val(picUrls);
+			$("#imgReturnUrls").append("<input type='hidden' name='listPicUrls' value='" + res.path + "'>");
 		});
 
         $upload.on('click', function() {
@@ -604,11 +606,15 @@
         });
 
         $info.on( 'click', '.retry', function() {
+//        	var files = uploader.getFiles('error');
+//        	if(null == files || files.length == 0){
+//        		alert("请选择文件");
+//        		return;
+//        	}
             uploader.retry();
         } );
 
         $info.on( 'click', '.ignore', function() {
-//            alert( 'todo' );
         	$(".filelist").find(".state-error").each(function(i){
         		var files = uploader.getFiles("error");
         		$.each(files,function(i,n){

@@ -2,6 +2,7 @@
 
 <@backend title="商品新增spu" 
 js=[
+'/statics/common/common-js/jquery-1.9.1.min.js',
 '/statics/plugins/My97DatePicker/WdatePicker.js',
 '/statics/plugins/editor/kindeditor-all-min.js',
 '/statics/common/common-js/editorUtil.js',
@@ -19,7 +20,8 @@ css=[
 
 
 <div class="panel-body box_border">
-<form id="itemInfoAddForm" action="" class="form-horizontal dr-form-bordered" enctype="multipart/form-data">
+<input type="hidden" id="listIframeName" value="${listIframeName}">
+<form id="itemInfoAddForm" action="" class="form-horizontal dr-form-bordered">
 	<div style="display:none;">
 		<#if itemDO.id?exists>
 			<input type="hidden" id="id" name="id" value="${itemDO.id}" />

@@ -8,7 +8,6 @@
         <result column="item_title" property="itemTitle"/>
         <result column="catetory_id" property="catetoryId"/>
         <result column="item_type" property="itemType"/>
-        <result column="picture" property="picture"/>
         <result column="status" property="status"/>
         <result column="market_price" property="marketPrice"/>
         <result column="remark" property="remark"/>
@@ -17,7 +16,7 @@
 	</resultMap>
 
 	<sql id="MybatisItemDAO_all_column_fields">
-	      id,item_title,catetory_id,item_type,picture,status,market_price,remark,create_time,modify_time
+	      id,item_title,catetory_id,item_type,status,market_price,remark,create_time,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -25,7 +24,6 @@
 			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
 			<if test="catetoryId != null "> AND catetory_id=#{catetoryId} </if>
 			<if test="itemType != null  and itemType != '' "> AND item_type=#{itemType} </if>
-			<if test="picture != null  and picture != '' "> AND picture=#{picture} </if>
 			<if test="status != null  and status != '' "> AND status=#{status} </if>
 			<if test="marketPrice != null "> AND market_price=#{marketPrice} </if>
 			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
@@ -50,7 +48,6 @@
 				item_title,
 				catetory_id,
 				item_type,
-				picture,
 				status,
 				market_price,
 				remark,
@@ -61,7 +58,6 @@
 				#{itemTitle},
 				#{catetoryId},
 				#{itemType},
-				#{picture},
 				#{status},
 				#{marketPrice},
 				#{remark},
@@ -76,7 +72,6 @@
 					item_title = #{itemTitle},
 					catetory_id = #{catetoryId},
 					item_type = #{itemType},
-					picture = #{picture},
 					status = #{status},
 					market_price = #{marketPrice},
 					remark = #{remark},
@@ -95,7 +90,6 @@
 					<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
 					<if test="catetoryId != null ">catetory_id=#{catetoryId},</if>
 					<if test="itemType != null  and itemType != '' ">item_type=#{itemType},</if>
-					<if test="picture != null  and picture != '' ">picture=#{picture},</if>
 					<if test="status != null  and status != '' ">status=#{status},</if>
 					<if test="marketPrice != null ">market_price=#{marketPrice},</if>
 					<if test="remark != null  and remark != '' ">remark=#{remark},</if>

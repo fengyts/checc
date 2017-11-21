@@ -1,18 +1,31 @@
 package com.checc.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.checc.dao.ItemDAO;
+import com.checc.dao.ItemDescDAO;
+import com.checc.dao.ItemPictureDAO;
 import com.checc.domain.ItemDO;
+import com.checc.domain.ItemDescDO;
+import com.checc.domain.ItemPictureDO;
+import com.checc.dto.ItemDTO;
+import com.checc.dto.enums.ItemPictureTypeEnum;
 import com.checc.service.ItemService;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.common.Page;
+import ng.bayue.constant.CommonConstant;
 
 @Service(value="itemService")
 public class ItemServiceImpl  implements ItemService{
@@ -21,6 +34,10 @@ public class ItemServiceImpl  implements ItemService{
 
 	@Autowired
 	private ItemDAO itemDAO;
+	@Autowired
+	private ItemDescDAO itemDescDAO;
+	@Autowired
+	private ItemPictureDAO pictureDAO;
 
 	@Override
 	public Long insert(ItemDO itemDO) throws CommonServiceException {
@@ -143,6 +160,61 @@ public class ItemServiceImpl  implements ItemService{
 			return this.queryPageListDynamic(itemDO);
 		}
 		return new Page<ItemDO>();
+	}
+
+	@Override
+	@Transactional
+	public int saveItem(ItemDTO itemDTO) throws CommonServiceException {
+		ItemDO itemDO = new ItemDO();
+		Date date = new Date();
+		Long userId = itemDTO.getCreateUserId();
+		try {
+			BeanUtils.copyProperties(itemDO, itemDTO);
+			itemDO.setCreateTime(date);
+			itemDO.setModifyTime(date);
+
+			this.insert(itemDO);
+			Long itemId = itemDO.getId();
+
+			String description = itemDTO.getDescription();
+			if (StringUtils.isNotBlank(description)) {
+				ItemDescDO descDO = new ItemDescDO();
+				descDO.setItemId(itemId);
+				descDO.setDescription(description);
+				descDO.setCreateUserId(userId);
+				descDO.setCreateTime(date);
+				descDO.setModifyUserId(userId);
+				descDO.setModifyTime(date);
+				itemDescDAO.insert(descDO);
+			}
+
+			List<String> listPicUrls = itemDTO.getListPicUrls();
+			if (CollectionUtils.isNotEmpty(listPicUrls)) {
+				int count = 0;
+				for (String picture : listPicUrls) {
+					ItemPictureDO pictureDO = new ItemPictureDO();
+					pictureDO.setItemId(itemId);
+					pictureDO.setPicture(picture);
+					pictureDO.setSort(count);
+					pictureDO.setStatus(CommonConstant.STATUS.TRUE);
+					pictureDO.setType(ItemPictureTypeEnum.PIC_PRIMARY.getCode());
+
+					pictureDO.setCreateTime(date);
+					pictureDO.setCreateUserId(userId);
+					pictureDO.setModifyTime(date);
+					pictureDO.setModifyUserId(userId);
+					
+					pictureDAO.insert(pictureDO);
+
+					count++;
+				}
+
+			}
+
+		} catch (IllegalAccessException | InvocationTargetException | CommonDAOException e) {
+			logger.info("插入商品异常", e);
+		}
+		return 0;
 	}
 	
 	

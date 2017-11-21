@@ -10,6 +10,8 @@
 	        	<div id="dndArea">
 	        		<div id="filePicker"></div>
 	        	</div>
+	        	<div id="temFileIds" style="display:none;">
+	        	</div>
 	        	<#-- 编辑图片时图片回显 -->
 	        	<#if picUrlList?default([])?size!=0>
 	        		<ul class="filelist">

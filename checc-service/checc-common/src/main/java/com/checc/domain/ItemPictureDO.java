@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 商品图片
-* @author fengyts Mon Nov 20 16:27:35 CST 2017
+* @author fengyts Tue Nov 21 13:31:45 CST 2017
 */
 
 public class ItemPictureDO extends BaseDO {
@@ -33,7 +33,7 @@ private Boolean status;
 private Long createUserId;
 
 /** 创建时间 */
-private Date craeteTime;
+private Date createTime;
 
 /** 修改人 */
 private Long modifyUserId;
@@ -92,10 +92,10 @@ private Date modifyTime;
 }
 /**
 * 设置 创建时间
-* @param craeteTime
+* @param createTime
 */
-	public void setCraeteTime(Date craeteTime) {
-	this.craeteTime = craeteTime;
+	public void setCreateTime(Date createTime) {
+	this.createTime = createTime;
 }
 /**
 * 设置 修改人
@@ -162,10 +162,10 @@ private Date modifyTime;
 }
 /**
 * 获取 创建时间
-* @return craeteTime
+* @return createTime
 */
-	public Date getCraeteTime() {
-	return craeteTime;
+	public Date getCreateTime() {
+	return createTime;
 }
 /**
 * 获取 修改人

@@ -15,19 +15,35 @@ $(function() {
 		parent.window.closeTab("item_add");
 	});
 	
+	
 	$("#saveBtn").on('click', function(){
 		var params = {};
 		getData(params);
 		var fileIds = new Array();
-		$.ajaxFileUpload({
+		$("#temFileIds :input").each(function(i,v){
+			console.log(v);
+			var _id = $(v).attr("id");
+			fileIds.push(_id);
+		});
+		var _data = $("#itemInfoAddForm").serialize();
+		$.ajax({
 			url:'saveItem',
 			type: 'POST',
 			secureuri: false,
-			fileElementId: fileIds,
-			dataType: 'json',
-			data: params,
+			dataType: 'text',
+			data: _data,
 			success: function(res) {
-				console.log();
+				var data = JSON.parse(res);
+				if (1 == data.result) {// 成功
+					layer.alert(data.message, {icon:1}, function() {
+						//'mainIframe_tabli_14'
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						parent.window.closeTab("item_add");
+					});
+				} else {// 失败
+					layer.alert(data.message, 8);
+				}
 			}
 		});
 	});
