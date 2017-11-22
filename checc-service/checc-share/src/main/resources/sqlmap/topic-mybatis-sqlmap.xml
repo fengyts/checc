@@ -9,6 +9,9 @@
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
         <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="description" property="description"/>
+        <result column="remark" property="remark"/>
         <result column="create_user_id" property="createUserId"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_user_id" property="modifyUserId"/>
@@ -16,13 +19,16 @@
 	</resultMap>
 
 	<sql id="MybatisTopicDAO_all_column_fields">
-	      id,topic_type,start_time,end_time,status,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_type,start_time,end_time,status,sort,description,remark,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="topicType != null  and topicType != '' "> AND topic_type=#{topicType} </if>
 			<if test="status != null  and status != '' "> AND status=#{status} </if>
+			<if test="sort != null "> AND sort=#{sort} </if>
+			<if test="description != null  and description != '' "> AND description=#{description} </if>
+			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
 			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
@@ -47,6 +53,9 @@
 				start_time,
 				end_time,
 				status,
+				sort,
+				description,
+				remark,
 				create_user_id,
 				create_time,
 				modify_user_id,
@@ -57,6 +66,9 @@
 				#{startTime},
 				#{endTime},
 				#{status},
+				#{sort},
+				#{description},
+				#{remark},
 				#{createUserId},
 				#{createTime},
 				#{modifyUserId},
@@ -71,6 +83,9 @@
 					start_time = #{startTime},
 					end_time = #{endTime},
 					status = #{status},
+					sort = #{sort},
+					description = #{description},
+					remark = #{remark},
 					create_user_id = #{createUserId},
 					modify_user_id = #{modifyUserId},
 					modify_time = #{modifyTime}
@@ -89,6 +104,9 @@
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
 					<if test="status != null  and status != '' ">status=#{status},</if>
+					<if test="sort != null ">sort=#{sort},</if>
+					<if test="description != null  and description != '' ">description=#{description},</if>
+					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
 					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
 					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
 					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>

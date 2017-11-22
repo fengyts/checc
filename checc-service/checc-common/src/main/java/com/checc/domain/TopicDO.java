@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题
-* @author fengyts Thu Nov 16 14:54:39 CST 2017
+* @author fengyts Wed Nov 22 15:44:29 CST 2017
 */
 
 public class TopicDO extends BaseDO {
@@ -25,6 +25,15 @@ private Date endTime;
 
 /** 状态(以开始和结束时间为第一条件)：01-未开始；02-进行中；03-已结束 */
 private String status;
+
+/** 排序值 */
+private Integer sort;
+
+/** 专题描述 */
+private String description;
+
+/** 备注 */
+private String remark;
 
 /** 创建人 */
 private Long createUserId;
@@ -72,6 +81,27 @@ private Date modifyTime;
 */
 	public void setStatus(String status) {
 	this.status = status;
+}
+/**
+* 设置 排序值
+* @param sort
+*/
+	public void setSort(Integer sort) {
+	this.sort = sort;
+}
+/**
+* 设置 专题描述
+* @param description
+*/
+	public void setDescription(String description) {
+	this.description = description;
+}
+/**
+* 设置 备注
+* @param remark
+*/
+	public void setRemark(String remark) {
+	this.remark = remark;
 }
 /**
 * 设置 创建人
@@ -135,6 +165,27 @@ private Date modifyTime;
 */
 	public String getStatus() {
 	return status;
+}
+/**
+* 获取 排序值
+* @return sort
+*/
+	public Integer getSort() {
+	return sort;
+}
+/**
+* 获取 专题描述
+* @return description
+*/
+	public String getDescription() {
+	return description;
+}
+/**
+* 获取 备注
+* @return remark
+*/
+	public String getRemark() {
+	return remark;
 }
 /**
 * 获取 创建人

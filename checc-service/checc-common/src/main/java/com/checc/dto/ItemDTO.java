@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.checc.domain.ItemPictureDO;
 
@@ -19,7 +16,7 @@ public class ItemDTO implements Serializable {
 	private Long id;
 
 	/** 商品名称 */
-	@NotBlank(message = "商品名称不能为空")
+//	@NotBlank(message = "商品名称不能为空")
 	private String itemTitle;
 
 	/** 商品类型：01-竞拍商品；02-兑换商品 */
@@ -29,7 +26,7 @@ public class ItemDTO implements Serializable {
 	private Integer status;
 
 	/** 市场价 */
-	@NotNull(message = "市场价不能为空")
+//	@NotNull(message = "市场价不能为空")
 	private Double marketPrice;
 
 	/** 备注 */
@@ -47,7 +44,7 @@ public class ItemDTO implements Serializable {
 	private List<ItemPictureDO> listPictures;
 
 	/** 商品详情描述信息 */
-	@NotBlank(message = "商品描述不能为空")
+//	@NotBlank(message = "商品描述不能为空")
 	private String description;
 
 	private Long createUserId;

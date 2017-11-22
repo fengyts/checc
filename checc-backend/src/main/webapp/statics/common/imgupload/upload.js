@@ -547,7 +547,8 @@
         //当某个文件上传到服务端响应后，会派送此事件来询问服务端响应是否有效。如果此事件handler返回值为false, 则此文件将派送server类型的uploadError事件。
         //及判断是否上传成功
         uploader.on("uploadAccept", function( file, data){ 
-        	var res = JSON.parse(data);
+//        	var res = JSON.parse(data);
+        	var res = data;
         	if(res.success == 0){
         		return false;
         	}
@@ -579,7 +580,8 @@
 				return false;
 			}
 //			$('#' + file.id).find('.progress').fadeOut(); // 隐藏上传进度条
-			var res = JSON.parse(response);
+//			var res = JSON.parse(response);
+			var res = response;
 			/*
 			var pics = $("#imgReturnUrls").text();
 			pics += res.path + ",";

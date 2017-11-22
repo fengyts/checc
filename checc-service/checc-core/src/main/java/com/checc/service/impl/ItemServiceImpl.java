@@ -210,12 +210,57 @@ public class ItemServiceImpl  implements ItemService{
 				}
 
 			}
-
+			
+			return 1;
 		} catch (IllegalAccessException | InvocationTargetException | CommonDAOException e) {
 			logger.info("插入商品异常", e);
 		}
 		return 0;
 	}
 	
+	@Override
+	@Transactional
+	public int updateItem(ItemDTO itemDTO) throws CommonServiceException {
+		Date date = new Date();
+		Long userId = itemDTO.getCreateUserId();
+		Long itemId = itemDTO.getId();
+		try {
+			ItemDO itemDO = new ItemDO();
+			itemDO.setItemTitle(itemDTO.getItemTitle());
+			itemDO.setId(itemId);
+			itemDO.setMarketPrice(itemDTO.getMarketPrice());
+			itemDO.setItemType(itemDTO.getItemType());
+			itemDO.setStatus(itemDTO.getStatus());
+			itemDO.setRemark(itemDTO.getRemark());
+			itemDO.setModifyTime(date);
+			itemDO.setModifyUserId(userId);
+			
+			this.update(itemDO, false);
+			
+			String description = itemDTO.getDescription();
+			if(StringUtils.isNotBlank(description)){
+				ItemDescDO descDO = new ItemDescDO();
+				descDO.setDescription(description);
+				descDO.setItemId(itemId);
+				descDO.setModifyTime(date);
+				descDO.setModifyUserId(userId);
+				
+				itemDescDAO.updateByItemId(descDO);
+			}
+			
+			// 修改图片功能待定
+			List<String> listPicUrls = itemDTO.getListPicUrls();
+			if (CollectionUtils.isNotEmpty(listPicUrls)) {
+				for (String picture : listPicUrls) {
+				}
+
+			}
+			
+			return 1;
+		} catch (CommonDAOException | CommonServiceException e) {
+			logger.info("插入商品异常", e);
+		}
+		return 0;
+	}
 	
 }

@@ -62,4 +62,10 @@ public class MybatisItemDescDAO extends MybatisBaseDAO implements ItemDescDAO {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), itemDescDO);
 	}
 
+	@Override
+	public int updateByItemId(ItemDescDO itemDescDO) throws CommonDAOException {
+		return getSqlSession().update(getStatement("update_by_itemId"), itemDescDO);
+	}
+
+	
 }

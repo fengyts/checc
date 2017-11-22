@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 商品
-* @author fengyts Tue Nov 21 13:31:45 CST 2017
+* @author fengyts Wed Nov 22 11:23:24 CST 2017
 */
 
 public class ItemDO extends BaseDO {
@@ -23,8 +23,8 @@ private Long catetoryId;
 /** 商品类型：01-竞拍商品；02-兑换商品 */
 private String itemType;
 
-/** 商品状态(是否上架)：01-未上架；02-已上架；03-作废 */
-private String status;
+/** 商品状态(是否上架)：0-未上架；1-已上架；2-作废 */
+private Integer status;
 
 /** 市场价 */
 private Double marketPrice;
@@ -32,8 +32,14 @@ private Double marketPrice;
 /** 备注 */
 private String remark;
 
+/** 添加人 */
+private Long createUserId;
+
 /** 添加日期 */
 private Date createTime;
+
+/** 修改人 */
+private Long modifyUserId;
 
 /** 修改日期 */
 private Date modifyTime;
@@ -67,10 +73,10 @@ private Date modifyTime;
 	this.itemType = itemType;
 }
 /**
-* 设置 商品状态(是否上架)：01-未上架；02-已上架；03-作废
+* 设置 商品状态(是否上架)：0-未上架；1-已上架；2-作废
 * @param status
 */
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 	this.status = status;
 }
 /**
@@ -88,11 +94,25 @@ private Date modifyTime;
 	this.remark = remark;
 }
 /**
+* 设置 添加人
+* @param createUserId
+*/
+	public void setCreateUserId(Long createUserId) {
+	this.createUserId = createUserId;
+}
+/**
 * 设置 添加日期
 * @param createTime
 */
 	public void setCreateTime(Date createTime) {
 	this.createTime = createTime;
+}
+/**
+* 设置 修改人
+* @param modifyUserId
+*/
+	public void setModifyUserId(Long modifyUserId) {
+	this.modifyUserId = modifyUserId;
 }
 /**
 * 设置 修改日期
@@ -130,10 +150,10 @@ private Date modifyTime;
 	return itemType;
 }
 /**
-* 获取 商品状态(是否上架)：01-未上架；02-已上架；03-作废
+* 获取 商品状态(是否上架)：0-未上架；1-已上架；2-作废
 * @return status
 */
-	public String getStatus() {
+	public Integer getStatus() {
 	return status;
 }
 /**
@@ -151,11 +171,25 @@ private Date modifyTime;
 	return remark;
 }
 /**
+* 获取 添加人
+* @return createUserId
+*/
+	public Long getCreateUserId() {
+	return createUserId;
+}
+/**
 * 获取 添加日期
 * @return createTime
 */
 	public Date getCreateTime() {
 	return createTime;
+}
+/**
+* 获取 修改人
+* @return modifyUserId
+*/
+	public Long getModifyUserId() {
+	return modifyUserId;
 }
 /**
 * 获取 修改日期

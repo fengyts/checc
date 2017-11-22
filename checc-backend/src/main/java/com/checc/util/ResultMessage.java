@@ -2,7 +2,7 @@ package com.checc.util;
 
 import java.io.Serializable;
 
-public class ResultMessage implements Serializable{
+public class ResultMessage implements Serializable {
 
 	private static final long serialVersionUID = -4866444202460607383L;
 
@@ -11,8 +11,8 @@ public class ResultMessage implements Serializable{
 
 	/** 失败 */
 	public static final int Failure = 0;
-	
-	/** 默认操作结果  */
+
+	/** 默认操作结果 */
 	public static final String Message = Messages.HandleSuccess;
 
 	private int result = Success;
@@ -20,24 +20,25 @@ public class ResultMessage implements Serializable{
 	private String message = Message;
 
 	private Object data;
-	
-	public ResultMessage(){}
-	
-//	public ResultMessage(int result) {
-//		this.result = result;
-//	}
-	
+
+	public ResultMessage() {
+	}
+
+	// public ResultMessage(int result) {
+	// this.result = result;
+	// }
+
 	public ResultMessage(Object data) {
 		this.data = data;
 	}
 
 	public ResultMessage(int result, String message) {
-//		this.result = result;
-//		this.message = message;
-		this(result,message,null);
+		// this.result = result;
+		// this.message = message;
+		this(result, message, null);
 	}
-	
-	public ResultMessage(String message, Object data){
+
+	public ResultMessage(String message, Object data) {
 		this.message = message;
 		this.data = data;
 	}
@@ -71,7 +72,7 @@ public class ResultMessage implements Serializable{
 	public void setData(Object data) {
 		this.data = data;
 	}
-	
+
 	/**
 	 * <pre>
 	 * 校验入参为空时返回值
@@ -79,10 +80,10 @@ public class ResultMessage implements Serializable{
 	 *
 	 * @return
 	 */
-	public static ResultMessage validParamResult(){
-		return new ResultMessage(Failure,Messages.ParameterNull);
+	public static ResultMessage validParamResult() {
+		return new ResultMessage(Failure, Messages.ParameterNull);
 	}
-	
+
 	/**
 	 * <pre>
 	 * 校验数据已经存在时返回值
@@ -90,10 +91,10 @@ public class ResultMessage implements Serializable{
 	 *
 	 * @return
 	 */
-	public static ResultMessage validIsExist(){
-		return new ResultMessage(Failure,Messages.IsExist);
+	public static ResultMessage validIsExist() {
+		return new ResultMessage(Failure, Messages.IsExist);
 	}
-	
+
 	/**
 	 * <pre>
 	 * 校验数据正在使用
@@ -101,10 +102,10 @@ public class ResultMessage implements Serializable{
 	 *
 	 * @return
 	 */
-	public static ResultMessage validIsUsed(){
-		return new ResultMessage(Failure,Messages.IsUsed);
+	public static ResultMessage validIsUsed() {
+		return new ResultMessage(Failure, Messages.IsUsed);
 	}
-	
+
 	/**
 	 * <pre>
 	 * 校验必填参数项为空时返回值
@@ -113,13 +114,13 @@ public class ResultMessage implements Serializable{
 	 * @param parameters
 	 * @return
 	 */
-	public static ResultMessage validParameterNull(String... parameters){
-		if(null == parameters){
+	public static ResultMessage validParameterNull(String... parameters) {
+		if (null == parameters) {
 			return new ResultMessage(Failure, Messages.ParameterNull);
 		}
-		return new ResultMessage(Failure,Messages.parameterErrMsgs(parameters));
+		return new ResultMessage(Failure, Messages.parameterErrMsgs(parameters));
 	}
-	
+
 	/**
 	 * <pre>
 	 * 服务器内部异常
@@ -127,8 +128,12 @@ public class ResultMessage implements Serializable{
 	 *
 	 * @return
 	 */
-	public static ResultMessage serverInnerError(){
-		return new ResultMessage(Failure,Messages.ServerInnerError);
+	public static ResultMessage serverInnerError() {
+		return new ResultMessage(Failure, Messages.ServerInnerError);
+	}
+
+	public static ResultMessage success() {
+		return new ResultMessage(Success, Messages.HandleSuccess);
 	}
 
 }

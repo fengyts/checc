@@ -1,6 +1,8 @@
 package com.checc.dao;
 
 import com.checc.domain.ItemDescDO;
+
+import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.common.GeneralDAO;
 
  /**
@@ -9,5 +11,7 @@ import ng.bayue.service.common.GeneralDAO;
  * @author fengyts 2017-11-20 16:27:35
  */
 public interface ItemDescDAO extends GeneralDAO<ItemDescDO> {
-
+	
+	int updateByItemId(ItemDescDO itemDescDO) throws CommonDAOException;
+	
 }

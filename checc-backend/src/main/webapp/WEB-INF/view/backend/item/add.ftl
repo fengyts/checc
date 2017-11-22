@@ -3,7 +3,6 @@
 <@backend title="商品新增spu" 
 js=[
 '/statics/common/common-js/jquery-1.9.1.min.js',
-'/statics/plugins/My97DatePicker/WdatePicker.js',
 '/statics/plugins/editor/kindeditor-all-min.js',
 '/statics/common/common-js/editorUtil.js',
 '/statics/plugins/baidu_webuploader/webuploader.min.js',
@@ -39,7 +38,7 @@ css=[
 		</div>
 		<label class="col-md-2 control-label">市场价<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="marketPrice" name="marketPrice" value="${itemDO.marketPrice}"/>
+			<input type="text" class="form-control" id="marketPrice" name="marketPrice" value="${itemDO.marketPrice!0.00}"/>
 		</div>
 	</div>
 	
@@ -65,7 +64,7 @@ css=[
 	<div class="form-group">
 		<label class="control-label col-md-2">备注</label>
 		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="remark" name="remark" value="${itemDO.remark}"></textarea>
+			<textarea class="form-control" rows="2" id="remark" name="remark"></textarea>
 		</div>
 	</div>
 	
@@ -88,7 +87,7 @@ css=[
 	<hr/>
 	<div>
 		<div class="col-sm-12 panel-toolbar text-left dr-slash-text" id="operateBtn">
-			<a href="javascript:void(0);" class="btn btn-primary"  id="cancelTabBtn">取消</a>
+			<a href="javascript:void(0);" class="btn btn-primary" id="cancelAddTabBtn">取消</a>
 			<a href="javascript:void(0);" class="btn btn-success" id="saveBtn">保存</a>
 		</div>
 	</div>

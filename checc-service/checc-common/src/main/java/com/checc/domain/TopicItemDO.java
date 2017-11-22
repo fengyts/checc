@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题商品
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Wed Nov 22 15:44:29 CST 2017
 */
 
 public class TopicItemDO extends BaseDO {
@@ -34,6 +34,9 @@ private Integer inventory;
 
 /** 兑换商品价格 */
 private Integer excharteAmount;
+
+/** 商品在该专题排序值 */
+private Integer sort;
 
 /** 专题商品创建人 */
 private Long createUserId;
@@ -102,6 +105,13 @@ private Date modifyTime;
 */
 	public void setExcharteAmount(Integer excharteAmount) {
 	this.excharteAmount = excharteAmount;
+}
+/**
+* 设置 商品在该专题排序值
+* @param sort
+*/
+	public void setSort(Integer sort) {
+	this.sort = sort;
 }
 /**
 * 设置 专题商品创建人
@@ -186,6 +196,13 @@ private Date modifyTime;
 */
 	public Integer getExcharteAmount() {
 	return excharteAmount;
+}
+/**
+* 获取 商品在该专题排序值
+* @return sort
+*/
+	public Integer getSort() {
+	return sort;
 }
 /**
 * 获取 专题商品创建人

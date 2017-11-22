@@ -13,4 +13,6 @@ public interface ItemService extends GeneralService<ItemDO, ItemDO> {
 	
 	int saveItem(ItemDTO itemDTO) throws CommonServiceException;
 	
+	int updateItem(ItemDTO itemDTO) throws CommonServiceException;
+	
 }
