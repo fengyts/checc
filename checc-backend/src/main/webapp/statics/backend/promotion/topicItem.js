@@ -1,11 +1,6 @@
 var pageii;
 $(function() {
 	
-//	$("#queryTopicItemListBtn").on('click', function(){
-//		var _url = domain + "/topic/topicItemList?topicId=" + $("#topicId").val();
-//		$("#topicItemListForm").attr('action', _url).submit();
-//	});
-	
 	// 专题关联商品
 	$("#associateTopicItem").on('click', function() {
 		var _topicId = $("#topicId").val();
