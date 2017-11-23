@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.checc.ao.item.ItemAO;
 import com.checc.ao.item.TopicItemAO;
 import com.checc.backend.constants.BackendConstant;
 import com.checc.domain.ItemDO;
