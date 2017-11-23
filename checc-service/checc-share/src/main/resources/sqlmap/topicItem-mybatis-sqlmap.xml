@@ -10,9 +10,12 @@
         <result column="item_title" property="itemTitle"/>
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
+        <result column="is_topic_status" property="isTopicStatus"/>
         <result column="inventory" property="inventory"/>
-        <result column="excharte_amount" property="excharteAmount"/>
+        <result column="excharge_amount" property="exchargeAmount"/>
+        <result column="residue" property="residue"/>
         <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
         <result column="create_user_id" property="createUserId"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_user_id" property="modifyUserId"/>
@@ -20,7 +23,7 @@
 	</resultMap>
 
 	<sql id="MybatisTopicItemDAO_all_column_fields">
-	      id,topic_id,item_id,item_title,start_time,end_time,inventory,excharte_amount,sort,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_id,item_id,item_title,start_time,end_time,is_topic_status,inventory,excharge_amount,residue,sort,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -28,9 +31,12 @@
 			<if test="topicId != null "> AND topic_id=#{topicId} </if>
 			<if test="itemId != null "> AND item_id=#{itemId} </if>
 			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
+			<if test="isTopicStatus != null "> AND is_topic_status=#{isTopicStatus} </if>
 			<if test="inventory != null "> AND inventory=#{inventory} </if>
-			<if test="excharteAmount != null "> AND excharte_amount=#{excharteAmount} </if>
+			<if test="exchargeAmount != null "> AND excharge_amount=#{exchargeAmount} </if>
+			<if test="residue != null "> AND residue=#{residue} </if>
 			<if test="sort != null "> AND sort=#{sort} </if>
+			<if test="status != null "> AND status=#{status} </if>
 			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
@@ -56,9 +62,12 @@
 				item_title,
 				start_time,
 				end_time,
+				is_topic_status,
 				inventory,
-				excharte_amount,
+				excharge_amount,
+				residue,
 				sort,
+				status,
 				create_user_id,
 				create_time,
 				modify_user_id,
@@ -70,9 +79,12 @@
 				#{itemTitle},
 				#{startTime},
 				#{endTime},
+				#{isTopicStatus},
 				#{inventory},
-				#{excharteAmount},
+				#{exchargeAmount},
+				#{residue},
 				#{sort},
+				#{status},
 				#{createUserId},
 				#{createTime},
 				#{modifyUserId},
@@ -88,9 +100,12 @@
 					item_title = #{itemTitle},
 					start_time = #{startTime},
 					end_time = #{endTime},
+					is_topic_status = #{isTopicStatus},
 					inventory = #{inventory},
-					excharte_amount = #{excharteAmount},
+					excharge_amount = #{exchargeAmount},
+					residue = #{residue},
 					sort = #{sort},
+					status = #{status},
 					create_user_id = #{createUserId},
 					modify_user_id = #{modifyUserId},
 					modify_time = #{modifyTime}
@@ -110,9 +125,12 @@
 					<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
+					<if test="isTopicStatus != null ">is_topic_status=#{isTopicStatus},</if>
 					<if test="inventory != null ">inventory=#{inventory},</if>
-					<if test="excharteAmount != null ">excharte_amount=#{excharteAmount},</if>
+					<if test="exchargeAmount != null ">excharge_amount=#{exchargeAmount},</if>
+					<if test="residue != null ">residue=#{residue},</if>
 					<if test="sort != null ">sort=#{sort},</if>
+					<if test="status != null ">status=#{status},</if>
 					<if test="createUserId != null ">create_user_id=#{createUserId},</if>
 					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
 					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>

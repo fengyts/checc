@@ -14,7 +14,7 @@ css=[
 <input type="hidden" id="listIframeName" value="${listIframeName}">
 <form id="topicAddForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	<div style="display:none;">
-		<input type="hidden" id="id" name="id" value="${detailDO.id}" />
+		<input type="hidden" id="id" name="id" value="${topicDO.id}" />
 	</div>
 	<div class="form-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -57,7 +57,7 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">专题排序值</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control id="sort" name="sort" value="${topicDO.sort!0}" />
+			<input type="text" class="form-control" id="sort" name="sort" value="${topicDO.sort!0}" />
 		</div>
 	</div>
 	<div class="form-group">

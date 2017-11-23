@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题商品
-* @author fengyts Wed Nov 22 15:44:29 CST 2017
+* @author fengyts Thu Nov 23 14:55:00 CST 2017
 */
 
 public class TopicItemDO extends BaseDO {
@@ -29,14 +29,23 @@ private Date startTime;
 /** 商品在专题结束时间，该时间必须在专题时间范围内 */
 private Date endTime;
 
+/** 是否和专题状态一致：1-一致；0-不一致 */
+private Boolean isTopicStatus;
+
 /** 兑换商品在本专题的库存数量 */
 private Integer inventory;
 
 /** 兑换商品价格 */
-private Integer excharteAmount;
+private Double exchargeAmount;
+
+/** 兑换剩余数量 */
+private Integer residue;
 
 /** 商品在该专题排序值 */
 private Integer sort;
+
+/** 专题商品状态：1-有效；0-无效 */
+private Boolean status;
 
 /** 专题商品创建人 */
 private Long createUserId;
@@ -93,6 +102,13 @@ private Date modifyTime;
 	this.endTime = endTime;
 }
 /**
+* 设置 是否和专题状态一致：1-一致；0-不一致
+* @param isTopicStatus
+*/
+	public void setIsTopicStatus(Boolean isTopicStatus) {
+	this.isTopicStatus = isTopicStatus;
+}
+/**
 * 设置 兑换商品在本专题的库存数量
 * @param inventory
 */
@@ -103,8 +119,15 @@ private Date modifyTime;
 * 设置 兑换商品价格
 * @param excharteAmount
 */
-	public void setExcharteAmount(Integer excharteAmount) {
-	this.excharteAmount = excharteAmount;
+	public void setExchargeAmount(Double exchargeAmount) {
+	this.exchargeAmount = exchargeAmount;
+}
+/**
+* 设置 兑换剩余数量
+* @param residue
+*/
+	public void setResidue(Integer residue) {
+	this.residue = residue;
 }
 /**
 * 设置 商品在该专题排序值
@@ -112,6 +135,13 @@ private Date modifyTime;
 */
 	public void setSort(Integer sort) {
 	this.sort = sort;
+}
+/**
+* 设置 专题商品状态：1-有效；0-无效
+* @param status
+*/
+	public void setStatus(Boolean status) {
+	this.status = status;
 }
 /**
 * 设置 专题商品创建人
@@ -184,6 +214,13 @@ private Date modifyTime;
 	return endTime;
 }
 /**
+* 获取 是否和专题状态一致：1-一致；0-不一致
+* @return isTopicStatus
+*/
+	public Boolean getIsTopicStatus() {
+	return isTopicStatus;
+}
+/**
 * 获取 兑换商品在本专题的库存数量
 * @return inventory
 */
@@ -194,8 +231,15 @@ private Date modifyTime;
 * 获取 兑换商品价格
 * @return excharteAmount
 */
-	public Integer getExcharteAmount() {
-	return excharteAmount;
+	public Double getExchargeAmount() {
+	return exchargeAmount;
+}
+/**
+* 获取 兑换剩余数量
+* @return residue
+*/
+	public Integer getResidue() {
+	return residue;
 }
 /**
 * 获取 商品在该专题排序值
@@ -203,6 +247,13 @@ private Date modifyTime;
 */
 	public Integer getSort() {
 	return sort;
+}
+/**
+* 获取 专题商品状态：1-有效；0-无效
+* @return status
+*/
+	public Boolean getStatus() {
+	return status;
 }
 /**
 * 获取 专题商品创建人

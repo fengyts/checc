@@ -57,7 +57,7 @@ $(function(){
 	$(".associateItemBtn").on('click', function(){
 		var topicId = $(this).attr("param"), 
 		    name = $(this).attr("param1");
-		addTab("topic_associateItem", "专题关联商品" , "/topicItem/list?topicId=" + topicId 
+		addTab("topic_associateItem", "专题商品列表" , "/topicItem/list?topicId=" + topicId 
 				+ "&name=" + name + "&iframeName=" + window.name);
 	});
 	

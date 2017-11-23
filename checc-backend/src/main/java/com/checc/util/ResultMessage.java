@@ -135,5 +135,13 @@ public class ResultMessage implements Serializable {
 	public static ResultMessage success() {
 		return new ResultMessage(Success, Messages.HandleSuccess);
 	}
+	
+	public static ResultMessage failure(){
+		return new ResultMessage(Failure, Messages.HandleFailure);
+	}
+	
+	public static ResultMessage failure(String message){
+		return new ResultMessage(Failure, message);
+	}
 
 }

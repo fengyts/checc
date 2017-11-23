@@ -3,7 +3,7 @@
 <@backend title="编辑新增" 
 js=[
 '/statics/plugins/My97DatePicker/WdatePicker.js',
-'/statics/backend/promotion/topic.js'
+'/statics/backend/promotion/topicItem.js'
 ]
 css=[
 '/statics/plugins/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css'
@@ -12,9 +12,10 @@ css=[
 
 <div class="panel-body box_border">
 <input type="hidden" id="listIframeName" value="${listIframeName}">
-<form id="topicEditForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
+<form id="topicItemEditForm" action="" class="form-horizontal dr-form-bordered" method="post" enctype="multipart/form-data">
 	<div style="display:none;">
-		<input type="hidden" id="id" name="id" value="${topicDO.id}" />
+		<input type="hidden" id="id" name="id" value="${topicItemDO.id}" />
+		<input type="hidden" id="topicId" name="topicId" value="${topicItemDO.topicId}" />
 	</div>
 	<div class="form-group">
 		<div class="col-md-4" style="padding-left:50px;color:red;">注：标注*为必填项</div>
@@ -25,51 +26,51 @@ css=[
 	</div>
 	
 	<div class="form-group">
-		<label class="col-md-2 control-label">专题类型<span class="dr-asterisk requiredField">*</span></label>
+		<label class="col-md-2 control-label">商品名称<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
-			<select class="form-control" id="topicType" name="topicType">
-				<#list topicTypes as type>
-					<option value='${type.code}'>${type.desc}</option>
-				</#list>
-			</select>
+			<div class="input-group">
+				<input type="text" class="form-control" readonly="readonly" id="itemTitle" name="itemTitle" placeholder="请选择商品" value="${topicItemDO.itemTitle}">
+				<input type="hidden" id="itemId" name="itemId" value="${topicItemDO.itemId}"/>
+				<span class="btn btn-default btn-sm input-group-addon" id="selectItem">
+					<span class="glyphicon glyphicon-plus"></span>
+					选择商品
+				</span>
+			</div>
 		</div>
-		<label class="col-md-2 control-label">专题状态<span class="dr-asterisk requiredField">*</span></label>
+		<label class="col-md-2 control-label">商品排序值(默认为0)</label>
 		<div class="col-md-4">
-			<select class="form-control" id="status" name="status">
-				<#list topicStatus as status>
-					<option value='${status.code}'>${status.desc}</option>
-				</#list>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-md-2 control-label">专题开始时间<span class="dr-asterisk requiredField">*</span></label>
-		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="startTime" name="startTime" value="${topicDO.startTime?datetime}" 
-        		onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',minDate:'${.now?datetime}',maxDate:'#F{$dp.$D(\'endTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
-		</div>
-		<label class="col-md-2 control-label">专题结束时间<span class="dr-asterisk requiredField">*</span></label>
-		<div class="col-md-4">
-			<input type="text" class="form-control Wdate" id="endTime" name="endTime" value="${topicDO.endTime?datetime}" 
-    			onFocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startTime\')}',readOnly: true});$(this).css('background-color','#ffffff');"/>
+			<input type="text" class="form-control" id="sort" name="sort" value="${topicItemDO.sort!0}" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">专题排序值</label>
+		<label class="col-md-2 control-label">兑换商品数量</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control id="sort" name="sort" value="${topicDO.sort!0}" />
+			<input type="text" class="form-control" id="inventory" name="inventory" value="${topicItemDO.inventory}" />
+		</div>
+		<label class="col-md-2 control-label">兑换商品价格</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="exchargeAmount" name="exchargeAmount" value="${topicItemDO.exchargeAmount}" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">专题描述</label>
-		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="description" name="description" value="${topicDO.description}"></textarea>
+		<label class="col-md-2 control-label">商品状态</label>
+		<div class="radio">
+			<label>
+				<input type="radio" name="status" id="status" value="1" <#if topicItemDO.status == 'true'>checked</#if> >有效
+			</label>
+			<label>
+				<input type="radio" name="status" id="status" value="0" <#if topicItemDO.status != 'true'>checked</#if>>无效
+			</label>
 		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-md-2 control-label">备注</label>
-		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="remark" name="remark" value="${topicDO.remark}"></textarea>
+		
+		<label class="col-md-2 control-label" style="display:none;">是否和专题状态一致</label>
+		<div class="radio" style="display:none;">
+			<label>
+				<input type="radio" name="isTopicStatus" id="isTopicStatus" value="1" checked>是
+			</label>
+			<label>
+				<input type="radio" name="isTopicStatus" id="stisTopicStatustus" value="0">否
+			</label>
 		</div>
 	</div>
 	
@@ -92,7 +93,7 @@ css=[
 			<div class="col-md-4"></div>
 			<div>
 				<a href="javascript:void(0);" class="btn btn-info" param="edit" id="cancelTabBtn" onclick='cancelButton();'>取消</a>
-				<a href="javascript:void(0);" class="btn btn-primary" id="updateTopicBtn">保存</a>
+				<a href="javascript:void(0);" class="btn btn-primary" id="updateTopicItemBtn">保存</a>
 			</div>
 		</div>
 	</div>

@@ -42,8 +42,8 @@ public class UploadController {
 //	@Autowired
 //	private DfsAO dfsAO;
 	
-//	@Autowired
-//	private ImageUrlUtil imageUrlUtil;
+	@Autowired
+	private ImageUrlUtil imageUrlUtil;
 	
 	private String filePathTest = "http://pic.58pic.com/58pic/12/01/93/79w58PICF4p.jpg";
 	
@@ -115,9 +115,6 @@ public class UploadController {
 			obj.put("msg", "服务器错误,上传失败!");
 			logger.error("服务器错误,上传失败!");
 		}else{
-//			String wholePath = "http://"+host.substring(0, host.indexOf(":"))+"/"+dfsPath;
-//			String wholePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg";
-//			obj.put("path", wholePath);
 			obj.put("path", dfsPath);
 //			obj.put("path", imageUrlUtil.getFileFullUrl(dfsPath));
 			obj.put("key",dfsPath);
