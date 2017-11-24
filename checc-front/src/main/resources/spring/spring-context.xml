@@ -13,6 +13,8 @@
 	<context:component-scan base-package="com.checc.ao.*">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
+	
+	<import resource="classpath*:spring/spring-context-checcshare.xml"/>
 
 
 </beans>
