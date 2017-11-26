@@ -1,6 +1,6 @@
 <#include "/common/common.ftl" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,6 +14,7 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	<link rel="stylesheet" type="text/css" href="${css}/login.css" />
+	<link rel="stylesheet" type="text/css" href="${css}/my.css" />
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>
@@ -61,7 +62,7 @@
 		})
 	</script>
 
-<div class="gloginBg" style="min-height: 470px; padding: 30px 0 50px 0;">
+<div class="gloginBg" style="min-height: 500px; padding: 30px 0 50px 0;">
 <div id="main" class="cle">
 <div class="g_box">
 
@@ -77,36 +78,40 @@
 		<div class="register_infor">
 			<input type="hidden" id="sendtype">
 			<ul>
-				<li class="input_box"><span class="t_text">手机号</span> 
-					<input type="text" name="mobile" id="mobile" onblur="is_registered(this.value);" onkeyup="is_registered(this.value);"> 
+				<li class="input_box">
+					<span class="t_text">手机号</span> 
+					<input type="text" name="mobile" id="mobile"> 
 					<span class="error_icon"></span>
 				</li>
 				<li class="error_box" id="mobile_notice"><em></em></li>
-				<li class="input_box">
-					<span class="t_text">email</span> 
-					<input type="text" name="smscode" id="smscode" onblur="checkSmscode(this.value);" onkeyup="checkSmscode(this.value);"> 
-					<span class="error_icon"></span>
+				<li class="smscode input_box">
+					<span class="t_text">短信验证码</span>
+					<input type="text" name="smscode" id="smscode"> 
+					<span class="error_icon"></span> 
+					<a class="mybtn" name="sendSmsCode" id="sendSmsCode">获取验证码</a>
 				</li>
 				<li class="error_box" id="smscode_notice"><em></em></li>
-				<li class="input_box"><span class="t_text">密码</span> 
-					<input type="password" name="password" id="password1" onblur="check_password(this.value);" onkeyup="check_password(this.value);checkIntensity(this.value);">
+				<li class="input_box">
+					<span class="t_text">密码必须至少6位且包含大小写字母和数字</span> 
+					<input type="password" name="password" id="password">
 					<span class="error_icon"></span>
 				</li>
 				<li class="error_box" id="password_notice"><em></em></li>
-				<li class="input_box"><span class="t_text">确认密码</span> 
-					<input type="password" name="password1" id="password1" onblur="check_conform_password(this.value);" onkeyup="check_conform_password(this.value);"> 
+				<li class="input_box">
+					<span class="t_text">确认密码</span> 
+					<input type="password" name="password1" id="password1"> 
 					<span class="error_icon"></span>
 				</li>
-				<li class="error_box" id="conform_password_notice"><em></em>
+				<li class="error_box" id="password1_notice"><em></em>
 				</li>
 				<li class="security_code input_box">
 					<span class="t_text">验证码</span>
-					<input type="text" class="code_input" name="captcha" maxlength="6"> 
+					<input type="text" class="code_input" name="captcha" id="captcha" maxlength="6"> 
 					<span class="error_icon"></span> 
 					<img src="${domain}/user/captcha.htm" alt="captcha" style="vertical-align: middle; cursor: pointer;" 
 						onclick="this.src='${domain}/user/captcha?'+Math.random()" />
 				</li>
-				<li class="error_box"><em></em></li>
+				<li class="error_box" id="captcha_notice"><em></em></li>
 				<li class="lizi_law">
 					<label> 
 					<input name="agreement" type="checkbox" value="1" checked="checked" tabindex="5" class="remember-me" /> 
@@ -160,11 +165,12 @@
 </body>
 <script type="text/javascript">
 	var process_request = "正在处理您的请求...";
-	var username_empty = "用户名不能为空。";
-	var username_shorter = "用户名长度不能少于 3 个字符。";
-	var username_invalid = "用户名只能是由字母数字以及下划线组成。";
-	var password_empty = "登录密码不能为空。";
-	var password_shorter = "登录密码不能少于 6 个字符。";
+	var username_empty = "用户名不能为空";
+	var username_shorter = "用户名长度不能少于 3 个字符";
+	var username_invalid = "用户名只能是由字母数字以及下划线组成";
+	var password_empty = "密码不能为空";
+	var passwd_balnk = "- 密码中不能包含空格";
+	var password_invalid = "密码必须至少6位且包含大小写字母和数字";
 	var confirm_password_invalid = "两次输入密码不一致";
 	var email_empty = "Email 为空";
 	var email_invalid = "Email 不是合法的地址";
@@ -186,8 +192,8 @@
 	var msg_email_format = "邮件地址不合法";
 	var msg_blank = "不能为空";
 	var no_select_question = "您没有完成密码提示问题的操作";
-	var passwd_balnk = "- 密码中不能包含空格";
 	var username_exist = "用户名 %s 已经存在";
 	var smscode_empty = "短信验证码不能为空";
+	var captcha_empty = "验证码不能为空";
 </script>
 </html>

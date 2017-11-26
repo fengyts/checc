@@ -984,7 +984,6 @@ canvas {
 }
 .register_infor ul li.input_box input {
 	border:0;
-	border:0;
 	padding:4px 6px;
 	width:265px;
 	height:18px;
@@ -995,11 +994,25 @@ canvas {
 	color:#333;
 	margin-left:2px
 }
+
+.register_infor ul li.smscode {
+	width:180px;
+}
+.register_infor ul li.smscode input {
+	width:auto;
+}
+.register_infor ul li.smscode .sendsms {
+	position:absolute;
+	top:0;
+	right:-130px;
+	width:110px;
+	height:40px
+}
 .register_infor ul li.security_code {
-	width:100px
+	width:180px;
 }
 .register_infor ul li.security_code input {
-	width:80px
+	width:auto;
 }
 .register_infor ul li.security_code img {
 	position:absolute;
@@ -1161,7 +1174,7 @@ canvas {
 	display: block
 }
 .side-bar a.qr i {
-	background-image: url(images/weixin.png)
+	background-image: url(../images/weixin.png)
 }
 .side-bar a.qr:hover s {
 	height: 33px;
@@ -1223,5 +1236,5 @@ canvas {
 .gloginBg {
     background-image: url("../images/loginBg1.jpg");
     background-position: 50% 0;
-    background-repeat: no-repeat;
+    background-repeat: round;
 }

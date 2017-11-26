@@ -1,10 +1,84 @@
-/**
- * 产品名称: Ecshop生鲜蔬菜商城模板 
- * 使用版本：Ecshop v2.7.3版
- * 出品单位: O菜龙工作室出品
- * 设计者网址：http://www.ocailong.com/
- * 设计者QQ：763191200（o菜龙）
- */
+$(document).ready(function() {
+	var submit_disabled = false; // 数据是否验证通过,表单是否可提交,默认可提交
+	
+	$("#mobile").on('blur', function() {
+		var _this = $(this);
+		var _mobile = _this.val();
+		if(Utils.isEmpty(_mobile)) {
+			submit_disabled = true;
+			$("#mobile_notice").html(mobile_empty);
+		} else if (Utils.isMobile(_mobile)) {
+			submit_disabled = false;
+			$("#mobile_notice").empty();
+			_this.parent().removeClass("params_error").addClass("params_success");
+		} else {
+			submit_disabled = true;
+			_this.parent().removeClass("params_success").addClass("params_error");
+			$("#mobile_notice").html(mobile_invalid);
+		}
+	});
+	
+	$("#smscode").on('blur', function() {
+		var _this = $(this);
+		if(Utils.isEmpty(_this.val())) {
+			submit_disabled = true;
+			$("#smscode_notice").html(smscode_empty);
+		} else {
+			submit_disabled = false;
+			$("#smscode_notice").empty();
+		}
+	});
+	
+	$("#password").on('blur', function() {
+		var _this = $(this);
+		var _pwd = $.trim(_this.val());
+		if(Utils.isEmpty(_pwd)) {
+			submit_disabled = true;
+			$("#password_notice").html(password_empty);
+		}
+		if(Utils.isSecurityPassword(_pwd)) {
+			submit_disabled = false;
+			$("#password_notice").empty();
+			_this.parent().removeClass("params_error").addClass("params_success");
+		} else {
+			submit_disabled = true;
+			$("#password_notice").parent().removeClass("params_success").addClass("params_error");
+			$("#password_notice").html(password_invalid);
+		}
+	});
+	$("#password1").on('blur', function() {
+		var _this = $(this);
+		var _pwd = $("#password").val();
+		var _pwd1 = $.trim(_this.val());
+		if(_pwd == _pwd1) {
+			submit_disabled = false;
+			$("#password1_notice").empty();
+			_this.parent().removeClass("params_error").addClass("params_success");
+		} else {
+			submit_disabled = true;
+			$("#password_notice").parent().removeClass("params_success").addClass("params_error");
+			$("#password1_notice").html(confirm_password_invalid);
+			
+		}
+	});
+	
+	$("#captcha").on('blur', function() {
+		var _this = $(this);
+		if(Utils.isEmpty(_this.val())) {
+			submit_disabled = true;
+			$("#captcha_notice").html(captcha_empty);
+		} else {
+			submit_disabled = false;
+			$("#captcha_notice").empty();
+		}
+	});
+	
+	
+});
+
+
+
+
 /*******************************************************************************
  * 修改会员信息
  */
@@ -77,34 +151,6 @@ function editPassword() {
 		if (new_password != password1) {
 			msg += both_password_error + '\n';
 		}
-	}
-
-	if (msg.length > 0) {
-		alert(msg);
-		return false;
-	} else {
-		return true;
-	}
-}
-
-/*******************************************************************************
- * 对会员的留言输入作处理
- */
-function submitMsg() {
-	var frm = document.forms['formMsg'];
-	var msg_title = frm.elements['msg_title'].value;
-	var msg_content = frm.elements['msg_content'].value;
-	var msg = '';
-
-	if (msg_title.length == 0) {
-		msg += msg_title_empty + '\n';
-	}
-	if (msg_content.length == 0) {
-		msg += msg_content_empty + '\n'
-	}
-
-	if (msg_title.length > 200) {
-		msg += msg_title_limit + '\n';
 	}
 
 	if (msg.length > 0) {
@@ -213,7 +259,7 @@ function check_password(password) {
 		$("#password1").parent().removeClass("params_success");
 		$("#password1").parent().addClass("params_error");
 
-		document.getElementById('password_notice').innerHTML = password_shorter;
+		document.getElementById('password_notice').innerHTML = password_invalid;
 	} else {
 		$("#password1").parent().removeClass("params_error");
 		$("#password1").parent().addClass("params_success");
@@ -229,7 +275,7 @@ function check_conform_password(password1) {
 		$("#password1").parent().removeClass("params_success");
 		$("#password1").parent().addClass("params_error");
 
-		document.getElementById('conform_password_notice').innerHTML = password_shorter;
+		document.getElementById('conform_password_notice').innerHTML = password_invalid;
 		return false;
 	}
 	if (password1 != password) {
@@ -245,24 +291,33 @@ function check_conform_password(password1) {
 	}
 }
 
-function is_registered(mobile) {
-	var submit_disabled = false;
+//function is_registered(mobile) {
+//	var submit_disabled = false;
+//	if(Utils.isEmpty(mobile)){
+//		document.getElementById('mobile_notice').innerHTML = mobile_empty;
+//		var submit_disabled = true;
+//		return;
+//	}
+//	if(Utils.isMobile(mobile)){
+//		console.log(123);
+//		document.getElementById('mobile_notice').innerHTML = mobile_phone_invalid;
+//		var submit_disabled = true;
+//	}
+//	if (submit_disabled) {
+//		document.forms['formUser'].elements['Submit'].disabled = 'disabled';
+//		return false;
+//	}
+////	Ajax.call('${domain}/user/checkMobile', 'mobile=' + mobile,
+////			registed_callback, 'POST', 'TEXT', true, true);
+//}
+
+$("#mobile").on('blur',function(){
+	var _mobile = $(this).val();
+	console.log(123);
 	if(Utils.isEmpty(mobile)){
-		document.getElementById('mobile_notice').innerHTML = mobile_empty;
-		var submit_disabled = true;
-		return;
+		$("#mobile_notice").html(mobile_phone_invalid);
 	}
-	if(!Utils.isMobile(mobile)){
-		document.getElementById('mobile_notice').innerHTML = mobile_phone_invalid;
-		var submit_disabled = true;
-	}
-	if (submit_disabled) {
-		document.forms['formUser'].elements['Submit'].disabled = 'disabled';
-		return false;
-	}
-//	Ajax.call('${domain}/user/checkMobile', 'mobile=' + mobile,
-//			registed_callback, 'POST', 'TEXT', true, true);
-}
+});
 
 function registed_callback(result) {
 	if (result == "true") {

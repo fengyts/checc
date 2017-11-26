@@ -71,6 +71,11 @@ Utils.isMobile = function(mobile) {
 	return reg.test(mobile);
 }
 
+Utils.isSecurityPassword = function(password){
+	var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+	return reg.test(password);
+}
+
 Utils.fixEvent = function(e) {
 	var evt = (typeof e == "undefined") ? window.event : e;
 	return evt;
