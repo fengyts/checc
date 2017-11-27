@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 发送短信记录
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Mon Nov 27 12:40:43 CST 2017
 */
 
 public class SmsRecordDO extends BaseDO {
@@ -24,7 +24,7 @@ private String mobile;
 private String content;
 
 /** 短信id，短信供应商返回 */
-private Long smsId;
+private String smsId;
 
 /** 短信服务商代号 */
 private String spCode;
@@ -67,7 +67,7 @@ private Date createTime;
 * 设置 短信id，短信供应商返回
 * @param smsId
 */
-	public void setSmsId(Long smsId) {
+	public void setSmsId(String smsId) {
 	this.smsId = smsId;
 }
 /**
@@ -123,7 +123,7 @@ private Date createTime;
 * 获取 短信id，短信供应商返回
 * @return smsId
 */
-	public Long getSmsId() {
+	public String getSmsId() {
 	return smsId;
 }
 /**

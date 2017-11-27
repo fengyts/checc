@@ -8,11 +8,14 @@
         <result column="nickname" property="nickname"/>
         <result column="mobile" property="mobile"/>
         <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
         <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="last_login_time" property="lastLoginTime"/>
 	</resultMap>
 
 	<sql id="MybatisCheccUserDAO_all_column_fields">
-	      id,nickname,mobile,password,create_time
+	      id,nickname,mobile,password,salt,create_time,modify_time,last_login_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisCheccUserDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -20,6 +23,7 @@
 			<if test="nickname != null  and nickname != '' "> AND nickname=#{nickname} </if>
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
 			<if test="password != null  and password != '' "> AND password=#{password} </if>
+			<if test="salt != null  and salt != '' "> AND salt=#{salt} </if>
 		</where>
  	</sql>
 
@@ -41,13 +45,19 @@
 				nickname,
 				mobile,
 				password,
-				create_time
+				salt,
+				create_time,
+				modify_time,
+				last_login_time
 		)values(
 				#{id},
 				#{nickname},
 				#{mobile},
 				#{password},
-				#{createTime}
+				#{salt},
+				#{createTime},
+				#{modifyTime},
+				#{lastLoginTime}
 		)
     </insert>
 
@@ -57,6 +67,9 @@
 					nickname = #{nickname},
 					mobile = #{mobile},
 					password = #{password},
+					salt = #{salt},
+					modify_time = #{modifyTime},
+					last_login_time = #{lastLoginTime}
 		WHERE
 			id = #{id}
 	</update>
@@ -71,6 +84,9 @@
 					<if test="nickname != null  and nickname != '' ">nickname=#{nickname},</if>
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
 					<if test="password != null  and password != '' ">password=#{password},</if>
+					<if test="salt != null  and salt != '' ">salt=#{salt},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+					<if test="lastLoginTime != null ">last_login_time=#{lastLoginTime},</if>
 		</set>
 		WHERE id = #{id}
 	</update>

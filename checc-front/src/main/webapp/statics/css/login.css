@@ -996,7 +996,7 @@ canvas {
 }
 
 .register_infor ul li.smscode {
-	width:180px;
+	width:178px;
 }
 .register_infor ul li.smscode input {
 	width:auto;
@@ -1009,7 +1009,7 @@ canvas {
 	height:40px
 }
 .register_infor ul li.security_code {
-	width:180px;
+	width:178px;
 }
 .register_infor ul li.security_code input {
 	width:auto;

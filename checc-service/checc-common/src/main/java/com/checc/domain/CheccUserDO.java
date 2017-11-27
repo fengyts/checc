@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 车西西用户
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Mon Nov 27 12:40:43 CST 2017
 */
 
 public class CheccUserDO extends BaseDO {
@@ -23,8 +23,17 @@ private String mobile;
 /** 密码 */
 private String password;
 
-/** 创建时间 */
+/** 登录盐 */
+private String salt;
+
+/** 注册时间 */
 private Date createTime;
+
+/** 修改时间 */
+private Date modifyTime;
+
+/** 最后一次登录时间 */
+private Date lastLoginTime;
 
 /**
 * 设置 主键
@@ -55,11 +64,32 @@ private Date createTime;
 	this.password = password;
 }
 /**
-* 设置 创建时间
+* 设置 登录盐
+* @param salt
+*/
+	public void setSalt(String salt) {
+	this.salt = salt;
+}
+/**
+* 设置 注册时间
 * @param createTime
 */
 	public void setCreateTime(Date createTime) {
 	this.createTime = createTime;
+}
+/**
+* 设置 修改时间
+* @param modifyTime
+*/
+	public void setModifyTime(Date modifyTime) {
+	this.modifyTime = modifyTime;
+}
+/**
+* 设置 最后一次登录时间
+* @param lastLoginTime
+*/
+	public void setLastLoginTime(Date lastLoginTime) {
+	this.lastLoginTime = lastLoginTime;
 }
 /**
 * 获取 主键
@@ -90,11 +120,32 @@ private Date createTime;
 	return password;
 }
 /**
-* 获取 创建时间
+* 获取 登录盐
+* @return salt
+*/
+	public String getSalt() {
+	return salt;
+}
+/**
+* 获取 注册时间
 * @return createTime
 */
 	public Date getCreateTime() {
 	return createTime;
+}
+/**
+* 获取 修改时间
+* @return modifyTime
+*/
+	public Date getModifyTime() {
+	return modifyTime;
+}
+/**
+* 获取 最后一次登录时间
+* @return lastLoginTime
+*/
+	public Date getLastLoginTime() {
+	return lastLoginTime;
 }
 
 }

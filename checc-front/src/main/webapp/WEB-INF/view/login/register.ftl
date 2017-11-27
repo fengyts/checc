@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="${css}/my.css" />
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>
 	<script type="text/javascript" src="${js}/login/user.js"></script>
 	<#--
@@ -25,8 +26,13 @@
 	<script type="text/javascript" src="${static}/common/jquery.SuperSlide.js"></script>
 	<script type="text/javascript" src="${static}/common/lizi_common.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
-	
 	-->
+	<script type="text/javascript">
+		var layer;
+		layui.use('layer', function(){
+	  		layer = layui.layer;
+		}); 
+	</script>
 </header>
 
 <body>

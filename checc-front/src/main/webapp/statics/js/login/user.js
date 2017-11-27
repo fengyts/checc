@@ -74,7 +74,65 @@ $(document).ready(function() {
 	});
 	
 	
+	// sendSmsCode
+	var wait = 120, _w = wait; // 2分钟重发
+	var _smsFlag = true;
+	$("#sendSmsCode").on('click', function(){
+		var _this = $(this);
+		if(_smsFlag){
+			countDown(this, _w);
+			sendSms("13564088616");
+			
+		}
+		
+	});
+	
+	function countDown(o, _w) {
+		if (wait == 0) {
+			o.removeAttribute("href");
+			//o.setAttribute("href", "javascript:void(0);");
+		    o.removeAttribute("onclick");
+		    _smsFlag = true;
+			o.text = "获取验证码";
+			wait = _w;
+		} else {
+			// o.setAttribute("href", "#");
+			_smsFlag = false;
+			o.text = "重新发送(" + wait + "s)";
+			wait--;
+			setTimeout(function() {
+				countDown(o);
+			}, 1000);
+		}
+
+	}
+	
 });
+
+function sendSms(mobile){
+	$.ajax({
+		url : 'sendSms',
+		dataType : 'text',
+		data : {"mobile" : mobile},
+		type : "POST",
+		cache : false,
+		error : function(request) {
+			alert("Server Connection Failure...");
+		},
+		success : function(res) {
+			var data = JSON.parse(res);
+			console.log(data);
+			if (1 == data.result) {// 成功
+				var index = layer.alert(data.message, {icon : 1}, function() {
+					parent.layer.close(index); // 再执行关闭
+				});
+			} else {// 失败
+				layer.alert(data.message, {icon : 8});
+			}
+		}
+	});
+}
+
 
 
 

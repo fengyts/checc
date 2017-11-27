@@ -3,20 +3,24 @@ package com.checc.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ng.bayue.util.CaptchaGenerator;
+import com.checc.ao.CheccUserAO;
+
+import ng.bayue.common.CommonResultMessage;
 
 @Controller
 @RequestMapping({ "/user" })
 public class LoginController {
+	
+	@Autowired
+	private CheccUserAO userAO;
 
 	@RequestMapping({ "/login" })
 	public String loginIndex() {
@@ -30,10 +34,9 @@ public class LoginController {
 
 	@RequestMapping({ "/captcha" })
 	public void captcha(HttpServletResponse response) {
-		CaptchaGenerator cg = new CaptchaGenerator();
-		String captcha = cg.generateCaptcha();
-		String captcha64 = cg.toImageBase64(captcha);
-		// return "data:image/jpg;base64," + captcha64;
+//		String captcha64 = userAO.getCaptcha();
+		String captcha64 = "";
+//		String captcha64 = cg.toImageBase64(captcha);
 
 		response.setContentType("image/*"); // 设置返回的文件类型
 		try {
@@ -52,6 +55,13 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping({"/sendSms"})
+	@ResponseBody
+	public CommonResultMessage sendSms(String mobile){
+		CommonResultMessage msg = userAO.sendSmsCode(mobile);
+		return msg;
 	}
 
 }

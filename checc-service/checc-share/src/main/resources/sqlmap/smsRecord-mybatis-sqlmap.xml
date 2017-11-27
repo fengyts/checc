@@ -23,7 +23,7 @@
 			<if test="smsType != null  and smsType != '' "> AND sms_type=#{smsType} </if>
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
 			<if test="content != null  and content != '' "> AND content=#{content} </if>
-			<if test="smsId != null "> AND sms_id=#{smsId} </if>
+			<if test="smsId != null  and smsId != '' "> AND sms_id=#{smsId} </if>
 			<if test="spCode != null  and spCode != '' "> AND sp_code=#{spCode} </if>
 			<if test="smsStatus != null  and smsStatus != '' "> AND sms_status=#{smsStatus} </if>
 		</where>
@@ -86,7 +86,7 @@
 					<if test="smsType != null  and smsType != '' ">sms_type=#{smsType},</if>
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
 					<if test="content != null  and content != '' ">content=#{content},</if>
-					<if test="smsId != null ">sms_id=#{smsId},</if>
+					<if test="smsId != null  and smsId != '' ">sms_id=#{smsId},</if>
 					<if test="spCode != null  and spCode != '' ">sp_code=#{spCode},</if>
 					<if test="smsStatus != null  and smsStatus != '' ">sms_status=#{smsStatus},</if>
 		</set>

@@ -1,7 +1,9 @@
 package com.checc.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import com.checc.domain.CheccUserDO;
 import com.checc.service.CheccUserService;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
+import ng.bayue.util.SecurityUtil;
 import ng.bayue.common.Page;
 
 @Service(value="checcUserService")
@@ -31,16 +34,6 @@ public class CheccUserServiceImpl  implements CheccUserService{
             throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateById(CheccUserDO checcUserDO) throws CommonServiceException {
-//		try {
-//			return (Integer) checcUserDAO.updateById(checcUserDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public int update(CheccUserDO checcUserDO,boolean isAllField) throws CommonServiceException {
@@ -65,16 +58,6 @@ public class CheccUserServiceImpl  implements CheccUserService{
             throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(CheccUserDO checcUserDO) throws CommonServiceException {
-//		try {
-//			return (Integer) checcUserDAO.updateDynamic(checcUserDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public CheccUserDO selectById(Long id) throws CommonServiceException {
@@ -143,6 +126,36 @@ public class CheccUserServiceImpl  implements CheccUserService{
 			return this.queryPageListDynamic(checcUserDO);
 		}
 		return new Page<CheccUserDO>();
+	}
+
+	@Override
+	public int register(CheccUserDO checcUserDO) {
+		String password = checcUserDO.getPassword();
+//		String mobile = checcUserDO.getMobile();
+		if(StringUtils.isEmpty(password)){
+			return -1;
+		}
+		
+		String salt = SecurityUtil.encode(SecurityUtil.Salt.provideSalt());
+		String passwdHash = SecurityUtil.hashToStr(password, salt, 2);
+		checcUserDO.setPassword(passwdHash);
+		checcUserDO.setSalt(salt);
+		
+		Date date = new Date();
+		checcUserDO.setCreateTime(date);
+		checcUserDO.setModifyTime(date);
+		checcUserDO.setLastLoginTime(date);
+		
+		return this.insert(checcUserDO).intValue();
+	}
+
+	@Override
+	public int login(String mobile, String password) {
+		if(StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)){
+			return -1;
+		}
+		
+		return 0;
 	}
 	
 	

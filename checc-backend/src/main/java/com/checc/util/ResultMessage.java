@@ -1,25 +1,10 @@
 package com.checc.util;
 
-import java.io.Serializable;
+import ng.bayue.common.CommonResultMessage;
 
-public class ResultMessage implements Serializable {
+public class ResultMessage extends CommonResultMessage {
 
-	private static final long serialVersionUID = -4866444202460607383L;
-
-	/** 成功 */
-	public static final int Success = 1;
-
-	/** 失败 */
-	public static final int Failure = 0;
-
-	/** 默认操作结果 */
-	public static final String Message = Messages.HandleSuccess;
-
-	private int result = Success;
-
-	private String message = Message;
-
-	private Object data;
+	private static final long serialVersionUID = -5485919363820147146L;
 
 	public ResultMessage() {
 	}
@@ -29,49 +14,30 @@ public class ResultMessage implements Serializable {
 	// }
 
 	public ResultMessage(Object data) {
-		this.data = data;
+//		this.data = data;
+		super(data);
 	}
 
 	public ResultMessage(int result, String message) {
 		// this.result = result;
 		// this.message = message;
-		this(result, message, null);
+//		this(result, message, null);
+		super(result, message, null);
 	}
 
 	public ResultMessage(String message, Object data) {
-		this.message = message;
-		this.data = data;
+//		this.message = message;
+//		this.data = data;
+		super(message, data);
 	}
 
 	public ResultMessage(int result, String message, Object data) {
-		this.result = result;
-		this.message = message;
-		this.data = data;
+//		this.result = result;
+//		this.message = message;
+//		this.data = data;
+		super(result, message, data);
 	}
 
-	public int getResult() {
-		return result;
-	}
-
-	public void setResult(int result) {
-		this.result = result;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public Object getData() {
-		return data;
-	}
-
-	public void setData(Object data) {
-		this.data = data;
-	}
 
 	/**
 	 * <pre>

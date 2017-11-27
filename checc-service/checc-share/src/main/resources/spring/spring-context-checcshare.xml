@@ -17,10 +17,14 @@
 	
 	<context:property-placeholder location="classpath*:config/jdbc.properties" order="0" ignore-unresolvable="true" />
 	<context:property-placeholder location="classpath*:config/share.properties" order="1" />
+	<util:properties id="meta" location="classpath:config/share.properties" />
 <!-- 	<util:properties id="meda" location="classpath*:config/jdbc.properties"></util:properties> -->
+
+	<bean id="frequencyService" class="ng.bayue.service.impl.FrequencyServiceImpl" />
 	
 	<import resource="classpath*:spring/spring-dao.xml" />
 	<import resource="classpath*:spring/spring-dfs.xml" />
+	<import resource="classpath*:spring/spring-redis.xml" />
 	
 
 </beans>

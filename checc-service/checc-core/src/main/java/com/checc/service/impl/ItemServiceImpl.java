@@ -25,7 +25,7 @@ import com.checc.service.ItemService;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.common.Page;
-import ng.bayue.constant.CommonConstant;
+import ng.bayue.constants.CommonConstant;
 
 @Service(value="itemService")
 public class ItemServiceImpl  implements ItemService{
