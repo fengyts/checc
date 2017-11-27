@@ -5,6 +5,10 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import ng.bayue.common.CommonResultMessage;
+
+import com.checc.model.SmsCodeRedisModel;
+
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.CheccUserAO;
-
-import ng.bayue.common.CommonResultMessage;
+import com.checc.dto.enums.SmsTypeEnum;
 
 @Controller
 @RequestMapping({ "/user" })
@@ -60,7 +63,13 @@ public class LoginController {
 	@RequestMapping({"/sendSms"})
 	@ResponseBody
 	public CommonResultMessage sendSms(String mobile){
-		CommonResultMessage msg = userAO.sendSmsCode(mobile);
+		if(userAO.frequencyValid(mobile)){
+			return CommonResultMessage.failure("短信发送过于频繁");
+		}
+		SmsCodeRedisModel model = new SmsCodeRedisModel();
+		model.setMobile(mobile);
+		model.setSmsType(SmsTypeEnum.Sms_Register.getCode());
+		CommonResultMessage msg = userAO.sendSmsCode(model);
 		return msg;
 	}
 

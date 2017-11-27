@@ -1,6 +1,8 @@
 package com.checc.service.generate;
 
-public interface SendSms {
+import com.checc.model.SmsSendResult;
+
+public interface JuHeSmsSendService {
 	
 	/**
 	 * <pre>
@@ -23,6 +25,6 @@ public interface SendSms {
 	 * @param content
 	 * @return
 	 */
-	String sentSms(Integer templateId,String mobile, String smsCode);
+	SmsSendResult sendSms(Integer templateId,String mobile, String smsCode);
 
 }

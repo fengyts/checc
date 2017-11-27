@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.checc.model.SmsCodeRedisModel;
 import com.checc.service.generate.SmsCodeRedisService;
 
+import ng.bayue.constants.RedisCacheTimeConstant;
 import ng.bayue.enums.RedisModelStatusEnum;
 import ng.bayue.service.RedisCacheService;
 import ng.bayue.util.StringUtils;
@@ -15,7 +16,7 @@ import ng.bayue.util.StringUtils;
 public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 
 	public static final String KEY_SMS_CODE = "SMS_CODE_";
-	public int LIVE_TIME = 60 * 2; // (单位秒)缓存时间2分钟
+	public int LIVE_TIME = RedisCacheTimeConstant.HALF_HOUR; // (单位秒)缓存时间30分钟
 
 	@Resource(name = "redisCacheService1")
 	RedisCacheService redisCacheService1;
@@ -25,9 +26,9 @@ public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 		if (null != model.getLiveTime()) {
 			LIVE_TIME = model.getLiveTime();
 		}
-		String smsCode = String.valueOf(StringUtils.getRandomNum(4));
-		model.setSmsCode(smsCode);
-		redisCacheService1.setRedisCache(generateKey(model), model, LIVE_TIME);
+//		String smsCode = String.valueOf(StringUtils.getRandomNum(4));
+//		model.setSmsCode(smsCode);
+		redisCacheService1.setRedisCache(generateKey(model), model.getSmsCode(), LIVE_TIME);
 	}
 
 	@Override

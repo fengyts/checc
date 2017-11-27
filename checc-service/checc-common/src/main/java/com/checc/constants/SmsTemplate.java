@@ -16,7 +16,7 @@ public interface SmsTemplate {
 	
 
 	public enum ContentTemplate {
-		Register(52513, "注册"), Forgot_password(52516, "找回密码");
+		Register(52513, "注册"), Forgot_Password(52516, "找回密码");
 
 		private Integer contentId; // 短信模板id, 聚合官网配置生成
 		private String desc;

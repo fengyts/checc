@@ -12,13 +12,17 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+import ng.bayue.util.StringUtils;
+
 import org.springframework.stereotype.Service;
 
 import com.checc.constants.SmsTemplate;
-import com.checc.service.generate.SendSms;
+import com.checc.model.SmsSendResult;
+import com.checc.service.generate.JuHeSmsSendService;
 
 @Service
-public class SendSmsImpl implements SendSms {
+public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
 
 	public static final String DEF_CHATSET = "UTF-8";
 	public static final int DEF_CONN_TIMEOUT = 30000;
@@ -30,12 +34,11 @@ public class SendSmsImpl implements SendSms {
 
 	@Override
 	public String checkContent(String appkey, String content) {
-
 		return null;
 	}
 
 	@Override
-	public String sentSms(Integer templateId, String mobile, String smsCode) {
+	public SmsSendResult sendSms(Integer templateId, String mobile, String smsCode) {
 		String result = null;
 		Map<String, Object> params = new HashMap<String, Object>();// 请求参数
 		params.put("mobile", mobile);// 接收短信的手机号码
@@ -47,12 +50,18 @@ public class SendSmsImpl implements SendSms {
 		params.put("tpl_value", value); // 变量名和变量值对。如果你的变量名或者变量值中带有#&=中的任意一个特殊符号，请先分别进行urlEncode编码后再传递，<a
 										// href="http://www.juhe.cn/news/index/id/50"
 										// target="_blank">详细说明></a>
+		SmsSendResult ssr = new SmsSendResult(SmsSendResult.FAILURE, "发送短信异常");
 		try {
-			System.out.println(123);
 			result = doRequest(sendUrl, params, "GET");
+			if(StringUtils.isBlank(result)){
+				return new SmsSendResult(SmsSendResult.FAILURE, "发送短信异常,聚合返回为空");
+			}
+			JSONObject obj = JSONObject.fromObject(result);
+			ssr = (SmsSendResult) JSONObject.toBean(obj, SmsSendResult.class);
 		} catch (Exception e) {
+			return new SmsSendResult(SmsSendResult.FAILURE, "发送短信异常,网络错误|聚合返回值解析异常");
 		}
-		return result;
+		return ssr;
 	}
 
 	/**
