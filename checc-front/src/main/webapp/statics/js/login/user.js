@@ -1,31 +1,53 @@
+var wait = 5, _w = wait; // 2分钟重发
+var _smsFlag = true; // smscode 发送按钮开关,默认打开
 $(document).ready(function() {
-	var submit_disabled = false; // 数据是否验证通过,表单是否可提交,默认可提交
+	var _v_mobile = false,// 手机号是否验证通过
+		_v_smscode = false,
+		_v_password = false,
+		_v_password1 = false,
+		_v_captcah = false,
+		_v_agreement = true; 
+	
+	function checkFormParam(){
+		return true;
+		if (_v_mobile && _v_smscode && _v_password
+				&& _v_password1 && _v_captcah && _v_agreement) {
+			$("#registerBtn").removeClass("btn-disable").addClass("btn");
+		} else {
+			$("#registerBtn").removeClass("btn").addClass("btn-disable");
+		}
+	}
 	
 	$("#mobile").on('blur', function() {
 		var _this = $(this);
 		var _mobile = _this.val();
 		if(Utils.isEmpty(_mobile)) {
-			submit_disabled = true;
+			_v_mobile = false;
 			$("#mobile_notice").html(mobile_empty);
+			checkFormParam();
 		} else if (Utils.isMobile(_mobile)) {
-			submit_disabled = false;
+			_v_mobile = true;
 			$("#mobile_notice").empty();
 			_this.parent().removeClass("params_error").addClass("params_success");
+			checkFormParam();
 		} else {
-			submit_disabled = true;
+			_v_mobile = false;
 			_this.parent().removeClass("params_success").addClass("params_error");
 			$("#mobile_notice").html(mobile_invalid);
+			checkFormParam();
 		}
 	});
 	
 	$("#smscode").on('blur', function() {
 		var _this = $(this);
 		if(Utils.isEmpty(_this.val())) {
-			submit_disabled = true;
+			_v_smscode = false;
 			$("#smscode_notice").html(smscode_empty);
+			checkFormParam();
 		} else {
-			submit_disabled = false;
+			_v_smscode = true;
 			$("#smscode_notice").empty();
+			checkFormParam();
 		}
 	});
 	
@@ -33,61 +55,86 @@ $(document).ready(function() {
 		var _this = $(this);
 		var _pwd = $.trim(_this.val());
 		if(Utils.isEmpty(_pwd)) {
-			submit_disabled = true;
+			_v_password = false;
 			$("#password_notice").html(password_empty);
-		}
-		if(Utils.isSecurityPassword(_pwd)) {
-			submit_disabled = false;
+			checkFormParam();
+		} else if(Utils.isSecurityPassword(_pwd)) {
+			_v_password = true;
 			$("#password_notice").empty();
 			_this.parent().removeClass("params_error").addClass("params_success");
+			checkFormParam();
 		} else {
-			submit_disabled = true;
+			_v_password = false;
 			$("#password_notice").parent().removeClass("params_success").addClass("params_error");
 			$("#password_notice").html(password_invalid);
+			checkFormParam();
 		}
 	});
 	$("#password1").on('blur', function() {
 		var _this = $(this);
 		var _pwd = $("#password").val();
 		var _pwd1 = $.trim(_this.val());
-		if(_pwd == _pwd1) {
-			submit_disabled = false;
+		if(Utils.isEmpty(_pwd)){
+			_v_password1 = false;
+			$("#password1_notice").html(password_empty);
+			checkFormParam();
+		}else if(_pwd == _pwd1) {
+			_v_password1 = true;
 			$("#password1_notice").empty();
 			_this.parent().removeClass("params_error").addClass("params_success");
+			checkFormParam();
 		} else {
-			submit_disabled = true;
-			$("#password_notice").parent().removeClass("params_success").addClass("params_error");
+			_v_password1 = false;
+			$("#password1_notice").parent().removeClass("params_success").addClass("params_error");
 			$("#password1_notice").html(confirm_password_invalid);
-			
+			checkFormParam();
 		}
 	});
 	
 	$("#captcha").on('blur', function() {
 		var _this = $(this);
 		if(Utils.isEmpty(_this.val())) {
-			submit_disabled = true;
+			_v_captcah = false;
 			$("#captcha_notice").html(captcha_empty);
+			checkFormParam();
 		} else {
-			submit_disabled = false;
+			_v_captcah = true;
 			$("#captcha_notice").empty();
+			checkFormParam();
+		}
+	});
+	
+	$("#agreement").on('click', function(){
+		if($(this).is(":checked")){
+			_v_agreement = true;
+			$("#agreement_notice").empty();
+			checkFormParam();
+		}else {
+			_v_agreement = false;
+			$("#agreement_notice").html(agreement);
+			checkFormParam();
 		}
 	});
 	
 	
 	// sendSmsCode
-	var wait = 120, _w = wait; // 2分钟重发
-	var _smsFlag = true;
+//	var wait = 120, _w = wait; // 2分钟重发
+//	var _smsFlag = true;
 	$("#sendSmsCode").on('click', function(){
 		var _this = $(this);
 		if(_smsFlag){
-			countDown(this, _w);
-			sendSms("13564088616");
-			
+			var _mobile = $("#mobile").val();
+			if(Utils.isEmpty(_mobile)){
+//				layer.alert("请输入手机号");
+				$("#mobile_notice").html(mobile_empty);
+				return;
+			}
+			sendSms(_mobile, this);
 		}
 		
 	});
 	
-	function countDown(o, _w) {
+	/*function countDown1(o, _w) {
 		if (wait == 0) {
 			o.removeAttribute("href");
 			//o.setAttribute("href", "javascript:void(0);");
@@ -104,12 +151,29 @@ $(document).ready(function() {
 				countDown(o);
 			}, 1000);
 		}
-
-	}
+	}*/
 	
 });
 
-function sendSms(mobile){
+
+function countDown(o) {
+	if (wait == 0) {
+		o.removeAttribute("href");
+	    o.removeAttribute("onclick");
+	    _smsFlag = true;
+		o.text = "获取验证码";
+		wait = _w;
+	} else {
+		_smsFlag = false;
+		o.text = "重新发送(" + wait + "s)";
+		wait--;
+		setTimeout(function() {
+			countDown(o);
+		}, 1000);
+	}
+}
+
+function sendSms(mobile, o){
 	$.ajax({
 		url : 'sendSms',
 		dataType : 'text',
@@ -123,11 +187,13 @@ function sendSms(mobile){
 			var data = JSON.parse(res);
 			console.log(data);
 			if (1 == data.result) {// 成功
-				var index = layer.alert(data.message, {icon : 1}, function() {
-					parent.layer.close(index); // 再执行关闭
-				});
+				/*layer.alert(data.message, function() {
+					layer.close(layer.index); // 再执行关闭
+				});*/
+				countDown(o);
 			} else {// 失败
-				layer.alert(data.message, {icon : 8});
+				countDown(o);
+				layer.alert(data.message);
 			}
 		}
 	});

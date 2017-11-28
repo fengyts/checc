@@ -502,6 +502,21 @@ canvas {
 .btn img,.btn-css3 img {
 	vertical-align:middle
 }
+.btn-disable{
+	display:inline-block;
+	padding:5px 12px;
+	height:16px;
+	line-height:16px;
+	_line-height:18px;
+	border:1px solid #09c762;
+	border-radius:3px;
+	font-size:100%;
+	color:#fff;
+	background-color:#bcb4b1;
+	overflow:hidden;
+	vertical-align:middle;
+	cursor: not-allowed;
+}
 .graybtn {
 	display:inline-block;
 	padding:5px 12px;

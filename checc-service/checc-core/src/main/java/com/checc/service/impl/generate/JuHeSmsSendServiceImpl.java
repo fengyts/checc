@@ -12,14 +12,15 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
 import ng.bayue.util.StringUtils;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.checc.constants.SmsTemplate;
 import com.checc.model.SmsSendResult;
 import com.checc.service.generate.JuHeSmsSendService;
+
 
 @Service
 public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
@@ -46,7 +47,12 @@ public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
 		params.put("key", SmsTemplate.APP_KEY);// 应用APPKEY(应用详细页查询)
 		params.put("dtype", "json");// 返回数据的格式,xml或json，默认json
 		
-		String value = "#code#=" + smsCode;
+		String value = "#app#=车西西&#code#=" + smsCode;
+		try {
+			value = URLEncoder.encode(value, DEF_CHATSET);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		params.put("tpl_value", value); // 变量名和变量值对。如果你的变量名或者变量值中带有#&=中的任意一个特殊符号，请先分别进行urlEncode编码后再传递，<a
 										// href="http://www.juhe.cn/news/index/id/50"
 										// target="_blank">详细说明></a>
@@ -56,8 +62,9 @@ public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
 			if(StringUtils.isBlank(result)){
 				return new SmsSendResult(SmsSendResult.FAILURE, "发送短信异常,聚合返回为空");
 			}
-			JSONObject obj = JSONObject.fromObject(result);
-			ssr = (SmsSendResult) JSONObject.toBean(obj, SmsSendResult.class);
+			// net.sf.JSONObject Integer 转 String 会有警告,此处使用fastjson
+			JSONObject obj = JSONObject.parseObject(result);
+			ssr = JSONObject.toJavaObject(obj, SmsSendResult.class);
 		} catch (Exception e) {
 			return new SmsSendResult(SmsSendResult.FAILURE, "发送短信异常,网络错误|聚合返回值解析异常");
 		}
@@ -135,6 +142,19 @@ public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+//		JuHeSmsSendServiceImpl ssi = new JuHeSmsSendServiceImpl();
+//		String mobile = "13564088616";
+//		SmsSendResult ssr = ssi.sendSms(SmsTemplate.ContentTemplate.Register.getContentId(), mobile, "0000");
+//		System.out.println(ssr.getReason());
+		
+		String res = "{\"reason\":\"操作成功\",\"result\":{\"sid\":\"201711281005055578386260\",\"fee\":1,\"count\":1},\"error_code\":0}";
+		SmsSendResult ssr = null;
+		JSONObject obj = JSONObject.parseObject(res);
+		ssr = JSONObject.toJavaObject(obj, SmsSendResult.class);
+		System.out.println(ssr);
 	}
 	
 

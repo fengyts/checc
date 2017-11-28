@@ -11,11 +11,13 @@
         <result column="sms_id" property="smsId"/>
         <result column="sp_code" property="spCode"/>
         <result column="sms_status" property="smsStatus"/>
+        <result column="status_code" property="statusCode"/>
+        <result column="reason" property="reason"/>
         <result column="create_time" property="createTime"/>
 	</resultMap>
 
 	<sql id="MybatisSmsRecordDAO_all_column_fields">
-	      id,sms_type,mobile,content,sms_id,sp_code,sms_status,create_time
+	      id,sms_type,mobile,content,sms_id,sp_code,sms_status,status_code,reason,create_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisSmsRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -26,6 +28,8 @@
 			<if test="smsId != null  and smsId != '' "> AND sms_id=#{smsId} </if>
 			<if test="spCode != null  and spCode != '' "> AND sp_code=#{spCode} </if>
 			<if test="smsStatus != null  and smsStatus != '' "> AND sms_status=#{smsStatus} </if>
+			<if test="statusCode != null  and statusCode != '' "> AND status_code=#{statusCode} </if>
+			<if test="reason != null  and reason != '' "> AND reason=#{reason} </if>
 		</where>
  	</sql>
 
@@ -50,6 +54,8 @@
 				sms_id,
 				sp_code,
 				sms_status,
+				status_code,
+				reason,
 				create_time
 		)values(
 				#{id},
@@ -59,6 +65,8 @@
 				#{smsId},
 				#{spCode},
 				#{smsStatus},
+				#{statusCode},
+				#{reason},
 				#{createTime}
 		)
     </insert>
@@ -72,6 +80,8 @@
 					sms_id = #{smsId},
 					sp_code = #{spCode},
 					sms_status = #{smsStatus},
+					status_code = #{statusCode},
+					reason = #{reason},
 		WHERE
 			id = #{id}
 	</update>
@@ -89,6 +99,8 @@
 					<if test="smsId != null  and smsId != '' ">sms_id=#{smsId},</if>
 					<if test="spCode != null  and spCode != '' ">sp_code=#{spCode},</if>
 					<if test="smsStatus != null  and smsStatus != '' ">sms_status=#{smsStatus},</if>
+					<if test="statusCode != null  and statusCode != '' ">status_code=#{statusCode},</if>
+					<if test="reason != null  and reason != '' ">reason=#{reason},</if>
 		</set>
 		WHERE id = #{id}
 	</update>

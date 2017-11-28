@@ -26,18 +26,28 @@ public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 		if (null != model.getLiveTime()) {
 			LIVE_TIME = model.getLiveTime();
 		}
-//		String smsCode = String.valueOf(StringUtils.getRandomNum(4));
-//		model.setSmsCode(smsCode);
-		redisCacheService1.setRedisCache(generateKey(model), model.getSmsCode(), LIVE_TIME);
+		redisCacheService1.setRedisCacheString(generateKey(model), model.getSmsCode(), LIVE_TIME);
 	}
 
 	@Override
 	public RedisModelStatusEnum check(SmsCodeRedisModel model) {
-		return null;
+		String smsCode = model.getSmsCode();
+		if (StringUtils.isEmpty(smsCode)) {
+			return RedisModelStatusEnum.OVERDUE;
+		}
+		String smsCodeCache = redisCacheService1.getRedisCacheString(generateKey(model));
+		if (smsCode.equals(smsCodeCache)) {
+			return RedisModelStatusEnum.CORRECT;
+		}
+		return RedisModelStatusEnum.ERROR;
 	}
 
 	@Override
 	public void remove(SmsCodeRedisModel model) {
+		String mobile = model.getMobile();
+		if (StringUtils.isNotBlank(mobile)) {
+			redisCacheService1.deleteRedisCache(generateKey(model));
+		}
 	}
 
 	private String generateKey(SmsCodeRedisModel model) {

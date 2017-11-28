@@ -31,7 +31,7 @@ public class SmsSendResult implements Serializable {
 		this.result = result;
 	}
 
-	public class Result implements Serializable {
+	public static class Result implements Serializable {
 
 		private static final long serialVersionUID = -5013006669768268496L;
 
@@ -68,11 +68,11 @@ public class SmsSendResult implements Serializable {
 
 	}
 
-	public Integer getErrorCode() {
+	public Integer getError_code() {
 		return error_code;
 	}
 
-	public void setErrorCode(Integer error_code) {
+	public void setError_code(Integer error_code) {
 		this.error_code = error_code;
 	}
 

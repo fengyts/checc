@@ -1,89 +1,98 @@
 package com.checc.ao;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.checc.constants.SmsTemplate;
-import com.checc.domain.SmsRecordDO;
+import com.checc.dto.enums.SmsTypeEnum;
+import com.checc.model.CaptchaRedisModel;
 import com.checc.model.SmsCodeRedisModel;
 import com.checc.service.CheccUserService;
-import com.checc.service.SmsRecordService;
 import com.checc.service.generate.CaptchaRedisService;
 import com.checc.service.generate.SmsCodeRedisService;
-import com.checc.service.generate.JuHeSmsSendService;
+import com.checc.service.generate.SmsSendService;
 
-import net.sf.json.JSONObject;
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.common.FrequencyModel;
 import ng.bayue.constants.RedisCacheTimeConstant;
 import ng.bayue.service.FrequencyService;
 import ng.bayue.util.CaptchaGenerator;
 import ng.bayue.util.StringUtils;
+import ng.bayue.validate.ValidatorDefault;
 
 @Service
 public class CheccUserAO {
 
 	private static Logger logger = LoggerFactory.getLogger(CheccUserAO.class);
 
-	@Autowired
-	private CaptchaRedisService captchaRedisService;
-	@Autowired
-	private SmsCodeRedisService smsCodeRedisService;
+	@Value(value = "#{metaf['sms.switch']}")
+	private String smsSwitch;
+	@Value(value = "#{metaf['sms.defaultCode']}")
+	private String smsCodeDefault;
+
 	@Autowired
 	private FrequencyService frequencyService;
 	@Autowired
-	private JuHeSmsSendService smsSendService;
+	private CaptchaRedisService captchaRedisService;
+	@Autowired
+	private SmsSendService smsSendService;
+	@Autowired
+	private SmsCodeRedisService smsCodeRedisService;
 
 	@Autowired
 	private CheccUserService userService;
-	@Autowired
-	private SmsRecordService smsRecordService;
 
-	public String getCaptcha() {
+	public String getCaptcha(HttpServletRequest request) {
 		CaptchaGenerator cg = new CaptchaGenerator();
 		String captcha = cg.generateCaptcha();
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("captcha", captcha);
+		
+		//CaptchaRedisModel model = new CaptchaRedisModel();
+		//model.setCaptcha(captcha);
+		//captchaRedisService.create(model);
 
 		return cg.toImageBase64(captcha);
 	}
 
 	public CommonResultMessage sendSmsCode(SmsCodeRedisModel model) {
-		String smsCode = String.valueOf(StringUtils.getRandomNum(4));
+		String smsCode = smsCodeDefault;
 		String mobile = model.getMobile();
-		String result = smsSendService.sendSms(SmsTemplate.ContentTemplate.Register.getContentId(),
-				mobile, smsCode);
+		if (StringUtils.isBlank(mobile)) {
+			return CommonResultMessage.validParameterNull("手机号不能为空");
+		}
+		if(!new ValidatorDefault(mobile).isMobile()){
+			return CommonResultMessage.validParameterNull("手机号格式不对");
+		}
 
-		if (StringUtils.isBlank(result)) {
-			logger.info("sms code send failure : submit failure");
-			return CommonResultMessage.failure("短信验证码发送失败");
+		boolean smsRedisFlag = true;
+		if ("on".equals(smsSwitch)) { // 短信开关打开
+			smsCode = String.valueOf(StringUtils.getRandomNum(4));
+			try {
+				int res = smsSendService.sendSms(SmsTypeEnum.Sms_Register.getCode(),
+						SmsTemplate.ContentTemplate.Register.getContentId(), mobile, smsCode);
+				if (0 != res) {
+					smsRedisFlag = false;
+				}
+			} catch (Exception e) {
+				logger.info("3.sms code send failure : submit failure");
+				return CommonResultMessage.failure("短信验证码发送失败");
+			}
 		}
-		JSONObject obj = JSONObject.fromObject(result);
-		Object errorCode = obj.get("error_code");
-		Object reason = obj.get("reason");
-		if (obj.getInt("error_code") == 0) { // 发送成功
-			String sid = (String) JSONObject.fromObject(obj.get("result")).get("sid");
-			SmsRecordDO sr = new SmsRecordDO();
-			sr.setContent(null);
-			sr.setCreateTime(new Date());
-			sr.setMobile(mobile);
-			sr.setSmsId(sid);
-			sr.setSmsStatus("01");
-			sr.setSpCode(SmsTemplate.SMS_SP_CODE);
-			
-			smsRecordService.insert(sr);
-		} else {
-			logger.info("error_code:" + errorCode + "; reason:" + reason);
-			return CommonResultMessage.failure("短信验证码发送失败");
+
+		if (smsRedisFlag) {
+			model.setSmsCode(smsCode);
+			smsCodeRedisService.create(model);
 		}
-		
-		model.setSmsCode(smsCode);
-		
-		smsCodeRedisService.create(model);
-		
-		return CommonResultMessage.success();
+
+		return new CommonResultMessage(CommonResultMessage.Success,"短信验证码发送成功,请注意查收");
 	}
 
 	public boolean frequencyValid(String mobile) {
@@ -94,7 +103,7 @@ public class CheccUserAO {
 		fm.setTimes(2);
 		boolean fqOne = frequencyService.overLoad(fm);
 		if (!fqOne) {
-			logger.info("sms code send is high frequency: one minutes more than two times !");
+			logger.info("11.sms code send is high frequency: one minutes more than two times !");
 			return true;
 		}
 		fm.setBinuessType("SMS_CODE_HALF_HOUR");// 30 分钟内做多发送3次
@@ -102,7 +111,7 @@ public class CheccUserAO {
 		fm.setTimes(3);
 		boolean fqHalfHour = frequencyService.overLoad(fm);
 		if (!fqHalfHour) {
-			logger.info("sms code send is high frequency: half hours more than three times !");
+			logger.info("12.sms code send is high frequency: half hours more than three times !");
 			return true;
 		}
 		return false;

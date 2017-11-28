@@ -73,7 +73,7 @@
 <div class="g_box">
 
 	<div id="register_box">
-	<form action="user.php" method="post" name="formUser" onsubmit="return register();">
+	<form action="${domain}/user/doRegister" method="post" name="formUser">
 		<input type="hidden" value="C4E1AB9A7DE79D7C750E8916875E7DBE" id="validate">
 		<h2>
 			注册
@@ -82,7 +82,6 @@
 			</div>
 		</h2>
 		<div class="register_infor">
-			<input type="hidden" id="sendtype">
 			<ul>
 				<li class="input_box">
 					<span class="t_text">手机号</span> 
@@ -120,17 +119,18 @@
 				<li class="error_box" id="captcha_notice"><em></em></li>
 				<li class="lizi_law">
 					<label> 
-					<input name="agreement" type="checkbox" value="1" checked="checked" tabindex="5" class="remember-me" /> 
+					<input id="agreement" name="agreement" type="checkbox" value="1" checked="checked" tabindex="5" class="remember-me" /> 
 						我已看过并接受《
 							<a href="article.php?cat_id=-1" style="color: blue" target="_blank">用户协议</a>
 						》
 					</label>
 				</li>
-				<li class="error_box"><em></em></li>
+				<li class="error_box" id="agreement_notice"><em></em></li>
 				<li class="go2register">
-					<input name="act" type="hidden" value="act_register"> 
-					<input type="hidden" name="back_act" value="" /> 
-					<input name="Submit" type="submit" value="同意协议并注册" class="btn submit_btn">
+					<input class="btn" id="registerBtn" name="registerBtn" type="button" value="同意协议并注册">
+					<#--					
+					<a class="btndisable" id="registerBtn" name="registerBtn" type="button" value="同意协议并注册" disabled='disabled'>同意协议并注册</a>
+					-->
 				</li>
 			</ul>
 		</div>

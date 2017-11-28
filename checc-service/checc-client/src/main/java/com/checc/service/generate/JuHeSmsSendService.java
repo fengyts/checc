@@ -25,6 +25,6 @@ public interface JuHeSmsSendService {
 	 * @param content
 	 * @return
 	 */
-	SmsSendResult sendSms(Integer templateId,String mobile, String smsCode);
+	SmsSendResult sendSms(Integer templateId, String mobile, String smsCode);
 
 }

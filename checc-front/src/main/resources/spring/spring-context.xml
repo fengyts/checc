@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<context:property-placeholder location="classpath:config/metainfo.properties" order="10"  />
-	<!-- <util:properties id="meta" location="classpath:config/metainfo.properties" /> -->
+	<util:properties id="metaf" location="classpath:config/metainfo.properties" />
 
 	<context:component-scan base-package="com.checc.ao">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
