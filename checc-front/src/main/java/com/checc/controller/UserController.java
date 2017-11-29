@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +21,16 @@ import com.checc.model.SmsCodeRedisModel;
 
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.util.StringUtils;
+import ng.bayue.util.crypto.AESUtils;
+import ng.bayue.validate.Validator;
 import ng.bayue.validate.ValidatorDefault;
 
 @Controller
 @RequestMapping({ "/user" })
-public class LoginController {
-
+public class UserController {
+	
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private CheccUserAO userAO;
 
@@ -56,7 +62,7 @@ public class LoginController {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.info("get captcha exception:", e);
 		}
 	}
 
@@ -66,7 +72,7 @@ public class LoginController {
 		if (StringUtils.isBlank(mobile)) {
 			return CommonResultMessage.validParameterNull("请输入手机号");
 		}
-		if(!new ValidatorDefault(mobile).isMobile()){
+		if(!Validator.isMobile(mobile)){
 			return CommonResultMessage.validParameterNull("手机号格式不对");
 		}
 		if (userAO.frequencyValid(mobile)) {
@@ -74,46 +80,22 @@ public class LoginController {
 		}
 		SmsCodeRedisModel model = new SmsCodeRedisModel();
 		model.setMobile(mobile);
-		model.setSmsType(SmsTypeEnum.Sms_Register.getCode());
+		model.setSmsType(SmsTypeEnum.Sms_Register);
 		CommonResultMessage msg = userAO.sendSmsCode(model);
 		return msg;
+	}
+	
+	@RequestMapping({ "/validateMobile" })
+	@ResponseBody
+	public boolean validateMobile (String mobile){
+		return userAO.isExistMobile(mobile);
 	}
 
 	@RequestMapping({ "/doRegister" })
 	@ResponseBody
-	public CommonResultMessage doLogin(HttpServletRequest request, RegisterDTO dto) {
-		String mobile = dto.getMobile();
-		String smsCode = dto.getSmsCode();
-		String password = dto.getPassword();
-		String password1 = dto.getPassword1();
-		String captcha = dto.getCaptcha();
-
-		if (StringUtils.isBlank(mobile)) {
-			return CommonResultMessage.validParameterNull("手机号不能为空");
-		}
-		if(!new ValidatorDefault(mobile).isMobile()){
-			return CommonResultMessage.validParameterNull("手机号格式不对");
-		}
-		if (StringUtils.isBlank(smsCode)) {
-			return CommonResultMessage.validParameterNull("短信验证码不能为空");
-		}
-		if (StringUtils.isBlank(password)) {
-			return CommonResultMessage.validParameterNull("密码不能为空");
-		}
-		if (StringUtils.isBlank(password1)) {
-			return CommonResultMessage.validParameterNull("确认密码不能为空");
-		}
-		if (StringUtils.isBlank(captcha)) {
-			return CommonResultMessage.validParameterNull("验证码不能为空");
-		}
-		
-		if(!password.equals(password1)){
-			return CommonResultMessage.validParameterNull("两次密码不一样");
-		}
-		
-		
-		
-		return CommonResultMessage.success();
+	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response, RegisterDTO dto) {
+		CommonResultMessage crm = userAO.register(request, dto);
+		return crm;
 	}
 
 }

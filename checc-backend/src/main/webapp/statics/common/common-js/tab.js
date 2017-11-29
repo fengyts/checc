@@ -22,6 +22,7 @@ function addTab(id, text, tabUrl) {
 	}
 }
 
+/** 打开新标签页 */
 function showTab(id, text, url) {
 	var date = new Date();
 	var tv = {

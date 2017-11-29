@@ -32,10 +32,10 @@ public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 	@Override
 	public RedisModelStatusEnum check(SmsCodeRedisModel model) {
 		String smsCode = model.getSmsCode();
-		if (StringUtils.isEmpty(smsCode)) {
+		String smsCodeCache = redisCacheService1.getRedisCacheString(generateKey(model));
+		if (StringUtils.isEmpty(smsCodeCache)) {
 			return RedisModelStatusEnum.OVERDUE;
 		}
-		String smsCodeCache = redisCacheService1.getRedisCacheString(generateKey(model));
 		if (smsCode.equals(smsCodeCache)) {
 			return RedisModelStatusEnum.CORRECT;
 		}

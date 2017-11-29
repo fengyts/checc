@@ -1,5 +1,7 @@
 package com.checc.model;
 
+import com.checc.dto.enums.SmsTypeEnum;
+
 import ng.bayue.common.BaseRedisModel;
 
 public class SmsCodeRedisModel extends BaseRedisModel {
@@ -8,7 +10,7 @@ public class SmsCodeRedisModel extends BaseRedisModel {
 
 	private String mobile;
 	/** 短信类型 */
-	private String smsType;
+	private SmsTypeEnum smsType;
 	/** 短信验证码 */
 	private String smsCode;
 	/** 存活时间 */
@@ -22,11 +24,11 @@ public class SmsCodeRedisModel extends BaseRedisModel {
 		this.mobile = mobile;
 	}
 
-	public String getSmsType() {
+	public SmsTypeEnum getSmsType() {
 		return smsType;
 	}
 
-	public void setSmsType(String smsType) {
+	public void setSmsType(SmsTypeEnum smsType) {
 		this.smsType = smsType;
 	}
 

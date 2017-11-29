@@ -1,22 +1,7 @@
 var wait = 5, _w = wait; // 2分钟重发
 var _smsFlag = true; // smscode 发送按钮开关,默认打开
+
 $(document).ready(function() {
-	var _v_mobile = false,// 手机号是否验证通过
-		_v_smscode = false,
-		_v_password = false,
-		_v_password1 = false,
-		_v_captcah = false,
-		_v_agreement = true; 
-	
-	function checkFormParam(){
-		return true;
-		if (_v_mobile && _v_smscode && _v_password
-				&& _v_password1 && _v_captcah && _v_agreement) {
-			$("#registerBtn").removeClass("btn-disable").addClass("btn");
-		} else {
-			$("#registerBtn").removeClass("btn").addClass("btn-disable");
-		}
-	}
 	
 	$("#mobile").on('blur', function() {
 		var _this = $(this);
@@ -37,8 +22,7 @@ $(document).ready(function() {
 			checkFormParam();
 		}
 	});
-	
-	$("#smscode").on('blur', function() {
+	$("#smsCode").on('blur', function() {
 		var _this = $(this);
 		if(Utils.isEmpty(_this.val())) {
 			_v_smscode = false;
@@ -50,7 +34,6 @@ $(document).ready(function() {
 			checkFormParam();
 		}
 	});
-	
 	$("#password").on('blur', function() {
 		var _this = $(this);
 		var _pwd = $.trim(_this.val());
@@ -90,7 +73,6 @@ $(document).ready(function() {
 			checkFormParam();
 		}
 	});
-	
 	$("#captcha").on('blur', function() {
 		var _this = $(this);
 		if(Utils.isEmpty(_this.val())) {
@@ -103,7 +85,6 @@ $(document).ready(function() {
 			checkFormParam();
 		}
 	});
-	
 	$("#agreement").on('click', function(){
 		if($(this).is(":checked")){
 			_v_agreement = true;
@@ -116,16 +97,13 @@ $(document).ready(function() {
 		}
 	});
 	
-	
 	// sendSmsCode
-//	var wait = 120, _w = wait; // 2分钟重发
-//	var _smsFlag = true;
 	$("#sendSmsCode").on('click', function(){
 		var _this = $(this);
 		if(_smsFlag){
 			var _mobile = $("#mobile").val();
 			if(Utils.isEmpty(_mobile)){
-//				layer.alert("请输入手机号");
+				//layer.alert("请输入手机号");
 				$("#mobile_notice").html(mobile_empty);
 				return;
 			}
@@ -134,28 +112,18 @@ $(document).ready(function() {
 		
 	});
 	
-	/*function countDown1(o, _w) {
-		if (wait == 0) {
-			o.removeAttribute("href");
-			//o.setAttribute("href", "javascript:void(0);");
-		    o.removeAttribute("onclick");
-		    _smsFlag = true;
-			o.text = "获取验证码";
-			wait = _w;
-		} else {
-			// o.setAttribute("href", "#");
-			_smsFlag = false;
-			o.text = "重新发送(" + wait + "s)";
-			wait--;
-			setTimeout(function() {
-				countDown(o);
-			}, 1000);
-		}
-	}*/
+	// 用户注册点击事件
+	$("#registerBtn").on('click',function(){
+		register();
+	});
 	
 });
 
 
+/**
+ * 倒计时
+ * @param o
+ */
 function countDown(o) {
 	if (wait == 0) {
 		o.removeAttribute("href");
@@ -185,7 +153,6 @@ function sendSms(mobile, o){
 		},
 		success : function(res) {
 			var data = JSON.parse(res);
-			console.log(data);
 			if (1 == data.result) {// 成功
 				/*layer.alert(data.message, function() {
 					layer.close(layer.index); // 再执行关闭
@@ -197,6 +164,66 @@ function sendSms(mobile, o){
 			}
 		}
 	});
+}
+
+var _v_mobile = false,// 手机号是否验证通过
+	_v_smscode = false,
+	_v_password = false,
+	_v_password1 = false,
+	_v_captcah = false,
+	_v_agreement = true; 
+
+function checkFormParam(){
+	if (_v_mobile && _v_smscode && _v_password
+			&& _v_password1 && _v_captcah && _v_agreement) {
+		return true;
+		//$("#registerBtn").removeClass("btn-disable").addClass("btn");
+	} else {
+		//$("#registerBtn").removeClass("btn").addClass("btn-disable");
+		return false;
+	}
+}
+
+/**
+ * 用户注册
+ */
+function register(){
+	if(!_v_mobile){ $("#mobile_notice").html(mobile_invalid); return; }
+	if(!_v_smscode){ $("#smscode_notice").html(smscode_empty); return; }
+	if(!_v_password){ $("#password_notice").html(password_invalid); return; }
+	if(!_v_password1){ $("#password1_notice").html(confirm_password_invalid); return; }
+	if(!_v_captcah){ $("#password_notice").html(captcha_empty); return; }
+	if(!_v_agreement){ $("#password_notice").html(agreement); return; }
+	
+	var _params = {};
+	_params.mobile = $("#mobile").val();
+	_params.smsCode = $("#smsCode").val();
+	_params.password = Crypto.encryptAES($("#password").val());
+	_params.password1 = Crypto.encryptAES($("#password1").val());
+	_params.captcha = $("#captcha").val();
+	
+	var _data = $("#registerForm").serialize();
+	$.ajax({
+		url: 'doRegister',
+		type: 'POST',
+		data: _params,
+		dataType: 'json',
+		async: false,
+		cache : false,
+		success : function(res) {
+			var data = res;
+			if (1 == data.result) {// 成功
+				layer.msg("注册成功,请登录", {icon: 1, time:3000}, function() {
+					parent.window.location.href= 'login';
+					layer.close(layer.index); // 再执行关闭
+				});
+			} else {// 失败
+				$("#captchaImg").trigger('click');
+				layer.alert(data.message);
+			}
+		}
+	});
+	
 }
 
 
@@ -435,13 +462,6 @@ function check_conform_password(password1) {
 ////			registed_callback, 'POST', 'TEXT', true, true);
 //}
 
-$("#mobile").on('blur',function(){
-	var _mobile = $(this).val();
-	console.log(123);
-	if(Utils.isEmpty(mobile)){
-		$("#mobile_notice").html(mobile_phone_invalid);
-	}
-});
 
 function registed_callback(result) {
 	if (result == "true") {
@@ -507,6 +527,7 @@ function check_email_callback(result) {
 /*******************************************************************************
  * 处理注册用户
  */
+/*
 function register() {
 	var frm = document.forms['formUser'];
 //	var username = Utils.trim(frm.elements['username'].value);
@@ -622,7 +643,7 @@ function register() {
 	} else {
 		return true;
 	}
-}
+}*/
 
 /*******************************************************************************
  * 用户中心订单保存地址信息

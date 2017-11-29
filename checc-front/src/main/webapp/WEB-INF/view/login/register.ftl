@@ -18,6 +18,8 @@
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
+	<script type="text/javascript" src="${plugins}/crypto-js/rollups/aes.js"></script>
+	<script type="text/javascript" src="${static}/common/crypto.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>
 	<script type="text/javascript" src="${js}/login/user.js"></script>
 	<#--
@@ -73,7 +75,7 @@
 <div class="g_box">
 
 	<div id="register_box">
-	<form action="${domain}/user/doRegister" method="post" name="formUser">
+	<form id="registerForm" name="registerForm" action="" method="post">
 		<input type="hidden" value="C4E1AB9A7DE79D7C750E8916875E7DBE" id="validate">
 		<h2>
 			注册
@@ -91,7 +93,7 @@
 				<li class="error_box" id="mobile_notice"><em></em></li>
 				<li class="smscode input_box">
 					<span class="t_text">短信验证码</span>
-					<input type="text" name="smscode" id="smscode"> 
+					<input type="text" name="smsCode" id="smsCode"> 
 					<span class="error_icon"></span> 
 					<a class="mybtn" name="sendSmsCode" id="sendSmsCode">获取验证码</a>
 				</li>
@@ -113,7 +115,7 @@
 					<span class="t_text">验证码</span>
 					<input type="text" class="code_input" name="captcha" id="captcha" maxlength="6"> 
 					<span class="error_icon"></span> 
-					<img src="${domain}/user/captcha.htm" alt="captcha" style="vertical-align: middle; cursor: pointer;" 
+					<img src="${domain}/user/captcha.htm" alt="captcha" style="vertical-align: middle; cursor: pointer;" id="captchaImg"
 						onclick="this.src='${domain}/user/captcha?'+Math.random()" />
 				</li>
 				<li class="error_box" id="captcha_notice"><em></em></li>

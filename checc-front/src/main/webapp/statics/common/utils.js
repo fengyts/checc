@@ -72,7 +72,7 @@ Utils.isMobile = function(mobile) {
 }
 
 Utils.isSecurityPassword = function(password){
-	var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+	var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,18}$/;
 	return reg.test(password);
 }
 
