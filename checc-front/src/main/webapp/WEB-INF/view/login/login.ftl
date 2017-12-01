@@ -80,7 +80,7 @@
 									</li>
 									<li class="login_param">
 										<p>
-											<a class="forget_psd" href="user.php?act=get_password">忘记密码?</a>
+											<a class="forget_psd" href="fgpwd">忘记密码?</a>
 											<label> <input type="checkbox" value="1"
 												name="remember" id="remember" class="remember-me">请保存我这次的登录信息。
 											</label>

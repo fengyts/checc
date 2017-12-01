@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.CheccUserAO;
@@ -23,7 +24,6 @@ import ng.bayue.common.CommonResultMessage;
 import ng.bayue.util.StringUtils;
 import ng.bayue.util.crypto.AESUtils;
 import ng.bayue.validate.Validator;
-import ng.bayue.validate.ValidatorDefault;
 
 @Controller
 @RequestMapping({ "/user" })
@@ -96,6 +96,11 @@ public class UserController {
 	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response, RegisterDTO dto) {
 		CommonResultMessage crm = userAO.register(request, dto);
 		return crm;
+	}
+	
+	@RequestMapping(value = {"/fgpwd"} , method = {RequestMethod.GET})
+	public String fgPwd (){
+		return "/login/fgpwd";
 	}
 
 }
