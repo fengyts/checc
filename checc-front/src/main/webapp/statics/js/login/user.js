@@ -1,4 +1,4 @@
-var wait = 5, _w = wait; // 2分钟重发
+var wait = 120, _w = wait; // 2分钟重发
 var _smsFlag = true; // smscode 发送按钮开关,默认打开
 
 $(document).ready(function() {
@@ -145,7 +145,7 @@ function sendSms(mobile, o){
 	$.ajax({
 		url : 'sendSms',
 		dataType : 'text',
-		data : {"mobile" : mobile},
+		data : {"mobile" : mobile, "type": "01"},
 		type : "POST",
 		cache : false,
 		error : function(request) {

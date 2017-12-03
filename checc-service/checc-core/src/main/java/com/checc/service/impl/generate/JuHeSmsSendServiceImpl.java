@@ -144,18 +144,5 @@ public class JuHeSmsSendServiceImpl implements JuHeSmsSendService {
 		return sb.toString();
 	}
 	
-	public static void main(String[] args) {
-//		JuHeSmsSendServiceImpl ssi = new JuHeSmsSendServiceImpl();
-//		String mobile = "13564088616";
-//		SmsSendResult ssr = ssi.sendSms(SmsTemplate.ContentTemplate.Register.getContentId(), mobile, "0000");
-//		System.out.println(ssr.getReason());
-		
-		String res = "{\"reason\":\"操作成功\",\"result\":{\"sid\":\"201711281005055578386260\",\"fee\":1,\"count\":1},\"error_code\":0}";
-		SmsSendResult ssr = null;
-		JSONObject obj = JSONObject.parseObject(res);
-		ssr = JSONObject.toJavaObject(obj, SmsSendResult.class);
-		System.out.println(ssr);
-	}
-	
 
 }

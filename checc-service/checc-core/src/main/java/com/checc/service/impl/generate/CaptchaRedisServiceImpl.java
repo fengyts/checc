@@ -1,7 +1,5 @@
 package com.checc.service.impl.generate;
 
-import java.util.UUID;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +22,7 @@ public class CaptchaRedisServiceImpl implements CaptchaRedisService {
 
 	@Override
 	public void create(CaptchaRedisModel model) {
-		String key = UUID.randomUUID().toString().replace("-", "");
+		String key = generateKey(model);
 		model.setCaptchaKey(key);
 
 		String captcha = model.getCaptcha();
@@ -40,6 +38,11 @@ public class CaptchaRedisServiceImpl implements CaptchaRedisService {
 
 	@Override
 	public void remove(CaptchaRedisModel model) {
+	}
+
+	@Override
+	public String generateKey(CaptchaRedisModel model) {
+		return model.getBaseKey();
 	}
 
 }

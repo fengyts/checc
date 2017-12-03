@@ -1,6 +1,7 @@
 var Crypto = {};
 
-var _iv = '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', _key = CryptoJS.enc.Utf8.parse('f5eXEMD8dhAX5pGJ');
+// old key:f5eXEMD8dhAX5pGJ
+const _iv = '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', _key = CryptoJS.enc.Utf8.parse('f5e_E&D8$hAX5pG%');
 
 var cfg = {
 	iv : CryptoJS.enc.Utf8.parse(_iv),

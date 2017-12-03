@@ -1,9 +1,20 @@
+<#include "/common/common.ftl" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link type="text/css" rel="stylesheet" href="${css}/checc_main.css">
+    <link type="text/css" rel="stylesheet" href="${css}/my.css">
+    
+    <script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
+    <script type="text/javascript">
+    	var layer;
+		layui.use('layer', function(){
+	  		layer = layui.layer;
+		}); 
+    </script>
 </head>
 <body>
 <div class="hd_m">
@@ -11,8 +22,8 @@
         <div class="checc_clg">
             <span class="checc_lgn_text"><a href="http://www.checc.cc">车西西</a></span>
             <span class="checc_lgn_link">
-                    <a href="http://www.checc.cc">www.checc.cc</a>
-                </span>
+                <a href="http://www.checc.cc">www.checc.cc</a>
+            </span>
         </div>
         <div class="checc_lg_t"><span class="checc_lg_ti">用极低的价格买到喜欢的车</span></div>
         <div class="checc_qrcode"></div>
@@ -22,11 +33,11 @@
     <div id="fg_step" class="fg_step">
         <ul>
             <li>
-                <div id="step1" class="round">
-                    <span class="step_num">1</span>
+                <div id="step1" class="round pass">
+                    <span class="step_num pass">1</span>
                 </div>
-                <div class="step_line"></div>
-                <div class="step_desc"><span>填写手机号</span></div>
+                <div class="step_line pass"></div>
+                <div class="step_desc"><span class="pass">填写手机号</span></div>
             </li>
             <li>
                 <div id="step2" class="round">
@@ -50,24 +61,18 @@
         </ul>
     </div>
 </div>
-<div class="footer">
-    <div class="about">
-        <a href="">关于我们</a>
-        <a href="">新手指南</a>
-        <a href="">售后服务</a>
-        <a href="">服务保障</a>
-        <a href="">支付与配送</a>
-        <a href="">联系我们</a>
-    </div>
-    <hr/>
-    <div class="copyright">
-        <p>
-            Copyright © 2016-2017 <a href="www.checc.cc">车西西</a>，All Rights Reserved 旗嘉科技版权所有 使用本网站即表示接受<a href="#">车西西用户协议</a>。
-        </p>
-        <p>
-            皖ICP备17017089-2号
-        </p>
-    </div>
+
+<div class="step_ifacafd" id="cnit">
 </div>
+<iframe id="fgpwd_ifa" style="padding:0px; width:100%; height:400px;" frameborder=0 scrolling=no src="${domain}/user/fgform">
+</iframe>
+
+<div id="notice">
+温馨提示：如果您之前注册的手机号不再使用，建议您使用新的手机号重新注册
+	        请在30分钟内完成所有步骤,否则会话将过期
+</div>
+
+<#include "/common/footer_both.ftl" />
+
 </body>
 </html>

@@ -11,26 +11,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.CheccUserAO;
+import com.checc.dto.FgPwdDTO;
 import com.checc.dto.RegisterDTO;
 import com.checc.dto.enums.SmsTypeEnum;
 import com.checc.model.SmsCodeRedisModel;
 
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.util.StringUtils;
-import ng.bayue.util.crypto.AESUtils;
 import ng.bayue.validate.Validator;
 
 @Controller
 @RequestMapping({ "/user" })
 public class UserController {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	private CheccUserAO userAO;
 
@@ -68,11 +69,11 @@ public class UserController {
 
 	@RequestMapping({ "/sendSms" })
 	@ResponseBody
-	public CommonResultMessage sendSms(String mobile) {
+	public CommonResultMessage sendSms(String mobile, String type) {
 		if (StringUtils.isBlank(mobile)) {
 			return CommonResultMessage.validParameterNull("请输入手机号");
 		}
-		if(!Validator.isMobile(mobile)){
+		if (!Validator.isMobile(mobile)) {
 			return CommonResultMessage.validParameterNull("手机号格式不对");
 		}
 		if (userAO.frequencyValid(mobile)) {
@@ -80,27 +81,116 @@ public class UserController {
 		}
 		SmsCodeRedisModel model = new SmsCodeRedisModel();
 		model.setMobile(mobile);
-		model.setSmsType(SmsTypeEnum.Sms_Register);
+		SmsTypeEnum st = SmsTypeEnum.Sms_Other;
+		if("01".equals(type)){
+			st = SmsTypeEnum.Sms_Register;
+		} else {
+			st = SmsTypeEnum.Sms_Forgot_Password;
+		}
+		model.setSmsType(st);
 		CommonResultMessage msg = userAO.sendSmsCode(model);
 		return msg;
 	}
-	
+
 	@RequestMapping({ "/validateMobile" })
 	@ResponseBody
-	public boolean validateMobile (String mobile){
+	public boolean validateMobile(String mobile) {
 		return userAO.isExistMobile(mobile);
 	}
 
 	@RequestMapping({ "/doRegister" })
 	@ResponseBody
-	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response, RegisterDTO dto) {
+	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response,
+			RegisterDTO dto) {
 		CommonResultMessage crm = userAO.register(request, dto);
 		return crm;
 	}
-	
-	@RequestMapping(value = {"/fgpwd"} , method = {RequestMethod.GET})
-	public String fgPwd (){
+
+	@RequestMapping(value = { "/fgpwd" }, method = { RequestMethod.GET })
+	public String fgPwd() {
 		return "/login/fgpwd";
+	}
+
+	@RequestMapping(value = { "/fgform" }, method = { RequestMethod.GET })
+	public String stepForm(HttpServletRequest request, Model model, FgPwdDTO dto) {
+		int stepNum = dto.getStepNum();
+		CommonResultMessage crm = userAO.recoveredPwd(request, model, dto);
+		if (FgPwdDTO.DEFAULT_STEP_NUM == stepNum) {
+			model.addAttribute("stepNum", stepNum + 1);
+			return "/login/fg_step1";
+		}
+		Object dataT = crm.getData();
+		if (null == dataT) {
+			dataT = -1;
+		}
+		int data = (int) dataT;
+		int result = crm.getResult();
+		
+		String mobile = dto.getMobile();
+		if (1 == stepNum) {
+			model.addAttribute("mobileRv", mobile);
+			if (CommonResultMessage.Success == result) {
+				model.addAttribute("mobileSecurity", StringUtils.toSecurityMobile(mobile));
+				return "/login/fg_step2";
+			} else {
+				if (-1 == data) {
+					return "/login/fg_invalid";
+				} else {
+					model.addAttribute("captchaRv", dto.getCaptcha());
+					model.addAttribute("errorCode", data);
+					model.addAttribute("errorMsg", crm.getMessage());
+					return "/login/fg_step1";
+				}
+			}
+		}
+		
+		if(2 == stepNum){
+			model.addAttribute("mobileRv", mobile);
+			if (CommonResultMessage.Success == result) {
+				return "/login/fg_step3";
+			} else {
+				if (-1 == data) {
+					return "/login/fg_invalid";
+				} else {
+					model.addAttribute("errorCode", data);
+					model.addAttribute("errorMsg", crm.getMessage());
+					return "/login/fg_step2";
+				}
+			}
+		}
+		
+		if(3 == stepNum){
+			model.addAttribute("mobileRv", mobile);
+			if (CommonResultMessage.Success == result) {
+				return "/login/fg_step4";
+			} else {
+				if (-1 == data) {
+					return "/login/fg_invalid";
+				} else {
+					model.addAttribute("password", dto.getPassword());
+					model.addAttribute("password1", dto.getPassword1());
+					model.addAttribute("errorMsg", crm.getMessage());
+					return "/login/fg_step3";
+				}
+			}
+		}
+
+		return "";
+	}
+
+	@RequestMapping(value = { "/stepStyleTest" }, method = { RequestMethod.GET })
+	public String stepStyleTest(Integer stepNum) {
+		if (null == stepNum) {
+			stepNum = 0;
+			return "/login/fgpwd";
+		}
+		if (1 == stepNum) {
+			return "/login/fg_step2";
+		}
+		if (2 == stepNum) {
+			return "/login/fg_step3";
+		}
+		return "/login/fg_step4";
 	}
 
 }

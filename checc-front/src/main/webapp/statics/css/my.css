@@ -21,7 +21,7 @@
 	text-align: center;
 	font-size: 14px;
 	border: none;
-	border-radius: 2px;
+	border-radius: 8px;
 	cursor: pointer;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -36,6 +36,37 @@
 }
 
 .mybtn:active {
+	opacity: 1;
+	filter: alpha(opacity = 100)
+}
+
+.mybtn_normal {
+	background-color: #1E9FFF;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 18px;
+	color: #fff;
+	white-space: nowrap;
+	text-align: center;
+	font-size: 14px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	text-decoration: none;
+	text-decoration-line: none;
+}
+
+.mybtn_normal:hover {
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	color: #fff;
+	text-decoration: none;
+}
+
+.mybtn_normal:active {
 	opacity: 1;
 	filter: alpha(opacity = 100)
 }

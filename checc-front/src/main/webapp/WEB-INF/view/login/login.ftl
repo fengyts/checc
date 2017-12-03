@@ -111,7 +111,7 @@
 	</div>
 </div>
  
-<#include "/index/footer.ftl" />
+<#include "/common/footer.ftl" />
 
 	<script>
 		$(function(){

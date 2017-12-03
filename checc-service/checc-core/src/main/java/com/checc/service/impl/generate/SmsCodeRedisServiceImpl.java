@@ -50,7 +50,8 @@ public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 		}
 	}
 
-	private String generateKey(SmsCodeRedisModel model) {
+	@Override
+	public String generateKey(SmsCodeRedisModel model) {
 		return KEY_SMS_CODE + model.getMobile();
 	}
 

@@ -2,7 +2,7 @@ package com.checc.model;
 
 import com.checc.dto.enums.SmsTypeEnum;
 
-import ng.bayue.common.BaseRedisModel;
+import ng.bayue.common.model.BaseRedisModel;
 
 public class SmsCodeRedisModel extends BaseRedisModel {
 

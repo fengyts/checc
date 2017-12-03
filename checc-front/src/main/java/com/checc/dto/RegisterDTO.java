@@ -1,9 +1,9 @@
 package com.checc.dto;
 
-public class RegisterDTO extends BaseDTO {
+public class RegisterDTO extends BaseDTO{
 
-	private static final long serialVersionUID = 3099817804455013529L;
-
+	private static final long serialVersionUID = 6401551661114457817L;
+	
 	private String mobile;
 	private String smsCode;
 	private String password;

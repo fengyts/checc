@@ -1,6 +1,6 @@
 package com.checc.model;
 
-import ng.bayue.common.BaseRedisModel;
+import ng.bayue.common.model.BaseRedisModel;
 
 public class CaptchaRedisModel extends BaseRedisModel {
 

@@ -21,6 +21,7 @@
 <!-- 	<util:properties id="meda" location="classpath*:config/jdbc.properties"></util:properties> -->
 
 	<bean id="frequencyService" class="ng.bayue.service.impl.FrequencyServiceImpl" />
+	<bean id="tokenService" class="ng.bayue.service.impl.TokenServiceImpl" />
 	
 	<import resource="classpath*:spring/spring-dao.xml" />
 	<import resource="classpath*:spring/spring-dfs.xml" />
