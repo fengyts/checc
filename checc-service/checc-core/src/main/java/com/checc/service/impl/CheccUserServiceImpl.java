@@ -150,12 +150,31 @@ public class CheccUserServiceImpl implements CheccUserService {
 	}
 
 	@Override
-	public int login(String mobile, String password) {
+	public CheccUserDO login(String mobile, String password) {
+		if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
+			return new CheccUserDO();
+		}
+
+		return checcUserDAO.selectByMobile(mobile);
+	}
+	
+	@Override
+	public int recoveredPwd(String mobile, String password) {
 		if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
 			return -1;
 		}
-
-		return 0;
+		
+		CheccUserDO checcUserDO = new CheccUserDO();
+		String salt = SecurityUtil.encode(SecurityUtil.Salt.provideSalt());
+		String passwdHash = SecurityUtil.hashToStr(password, salt, 2);
+		
+		checcUserDO.setMobile(mobile);
+		checcUserDO.setPassword(passwdHash);
+		checcUserDO.setSalt(salt);
+		checcUserDO.setModifyTime(new Date());
+		
+		return checcUserDAO.updateByMobile(checcUserDO);
+		
 	}
 
 }

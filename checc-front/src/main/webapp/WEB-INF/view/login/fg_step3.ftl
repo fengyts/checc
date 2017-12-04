@@ -5,9 +5,8 @@
 <style>
 	div{
 		max-width:500px;
-		max-height:400px;
+		max-height:450px;
 	}
-	
 	.error_info{
 		margin-top: 5px;
 		padding-left: 110px;
@@ -20,6 +19,8 @@
 
 <div class="step_ifa">
 <form id="step_form" class="checc_form checc_form_pane">
+	<input type="hidden" id="fgToken" name="fgToken" value="${fgToken}">
+	<input type="hidden" id="fgStepToken" name="fgStepToken" value="${fgStepToken}">
 	<input type="hidden" id="mobile" name="mobile" value="${mobileRv}">
 	<div class="checc_form_item">
 		<label class="checc_form_label">新密码</label>
@@ -59,6 +60,9 @@
   		layer = layui.layer;
 	}); 
 	
+	//步骤样式
+	window.parent.$("#step2 div,#step3 div").addClass("pass");
+	
 	// 父窗口弹出提示信息
 	function atmsg(){
 		var _errCode = $("#err_code").text();
@@ -76,14 +80,14 @@
 	
 	
 	var _v_p1 = false, _v_p2 = false;
-	$("#password").on('click', function(){
+	$("#password").on('blur', function(){
 		var _password = $("#password").val();
 		if (Utils.isEmpty(_password)) {
 			_v_p1 = false;
 			$("#password_notice").empty().text("新密码不能为空");
 			return false;
 		}
-		if(Utils.isSecurityPassword(_password)) {
+		if(!Utils.isSecurityPassword(_password)) {
 			_v_p1 = false;
 			$("#password_notice").empty().text("密码6~18位且必须包含大小写字母和数字");
 			return false;
@@ -91,7 +95,7 @@
 		_v_p1 = true;
 		$("#password_notice").empty();
 	});
-	$("#password1").on('click', function(){
+	$("#password1").on('blur', function(){
 		var _password1 = $("#password1").val();
 		if (Utils.isEmpty(_password1)) {
 			_v_p2 = false;
@@ -114,7 +118,7 @@
 		if(_v_p1 && _v_p2) {
 			$("#step_form").submit();
 		} else { // 表单验证不通过
-			return;
+			return false;
 		}
 	});
 </script>

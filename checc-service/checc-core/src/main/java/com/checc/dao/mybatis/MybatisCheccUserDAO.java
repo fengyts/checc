@@ -60,4 +60,14 @@ public class MybatisCheccUserDAO extends MybatisBaseDAO implements CheccUserDAO 
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), checcUserDO);
 	}
 
+	@Override
+	public CheccUserDO selectByMobile(String mobile) {
+		return getSqlSession().selectOne(getStatement("selectByMobile"), mobile);
+	}
+
+	@Override
+	public int updateByMobile(CheccUserDO checcUserDO) {
+		return getSqlSession().update(getStatement("updateByMobile"), checcUserDO);
+	}
+
 }

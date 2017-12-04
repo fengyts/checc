@@ -114,7 +114,13 @@ public class UserController {
 	@RequestMapping(value = { "/fgform" }, method = { RequestMethod.GET })
 	public String stepForm(HttpServletRequest request, Model model, FgPwdDTO dto) {
 		int stepNum = dto.getStepNum();
-		CommonResultMessage crm = userAO.recoveredPwd(request, model, dto);
+		CommonResultMessage crm = null;
+		try {
+			crm = userAO.recoveredPwd(request, model, dto);
+		} catch (Exception e) {
+			logger.info("fogot password exception, step-{}, exception: {}", stepNum, e);
+			return "/login/fg_invalid";
+		}
 		if (FgPwdDTO.DEFAULT_STEP_NUM == stepNum) {
 			model.addAttribute("stepNum", stepNum + 1);
 			return "/login/fg_step1";
@@ -178,19 +184,5 @@ public class UserController {
 		return "";
 	}
 
-	@RequestMapping(value = { "/stepStyleTest" }, method = { RequestMethod.GET })
-	public String stepStyleTest(Integer stepNum) {
-		if (null == stepNum) {
-			stepNum = 0;
-			return "/login/fgpwd";
-		}
-		if (1 == stepNum) {
-			return "/login/fg_step2";
-		}
-		if (2 == stepNum) {
-			return "/login/fg_step3";
-		}
-		return "/login/fg_step4";
-	}
 
 }

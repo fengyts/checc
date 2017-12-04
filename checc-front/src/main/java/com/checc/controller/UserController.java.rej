@@ -1,7 +1,0 @@
-diff a/checc-front/src/main/java/com/checc/controller/UserController.java b/checc-front/src/main/java/com/checc/controller/UserController.java	(rejected hunks)
-@@ -98,4 +98,5 @@
- 		return crm;
- 	}
- 	
-+	
- }

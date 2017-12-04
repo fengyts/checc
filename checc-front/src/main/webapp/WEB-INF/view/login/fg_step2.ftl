@@ -5,9 +5,8 @@
 <style>
 	div {
 		max-width:500px;
-		max-height:400px;
+		max-height:450px;
 	}
-	
 	.error_info {
 		margin-top: 5px;
 		padding-left: 110px;
@@ -23,7 +22,7 @@
 		text-align: center;
 		color: #999999;
 		line-height: 10px;
-		font-size: 15px;
+		font-size: 14px;
 		min-width: 600px;
 		margin-left: -50px;
 	}
@@ -40,12 +39,14 @@
 </style>
 
 <script>
-	var wait = 5, _w = wait; // 2分钟重发
+	var wait = 120, _w = wait; // 2分钟重发
 	var _smsFlag = false; // smscode 发送按钮开关,默认关闭
 </script>
 
 <div class="step_ifa">
 <form id="step_form" class="checc_form checc_form_pane">
+	<input type="hidden" id="fgToken" name="fgToken" value="${fgToken}">
+	<input type="hidden" id="fgStepToken" name="fgStepToken" value="${fgStepToken}">
 	<div class="checc_form_item">
 		<p class="p1">已向手机号<span>${mobileSecurity}</span>发送了一条验证码短信(30分钟内有效)，请注意查收！</p>
 		<p class="p2">如果未收到，可在2分钟后重新发送。</p>
@@ -84,6 +85,9 @@
 	layui.use('layer', function(){
   		layer = layui.layer;
 	}); 
+	
+	//步骤样式
+	window.parent.$("#step2 div").addClass("pass");
 	
 	// 父窗口弹出提示信息
 	function atmsg(){

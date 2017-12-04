@@ -65,8 +65,8 @@ body {
 }
 
 .checc_lg_t {
-	margin-left: 200px;
-	left: 260px;
+	margin-left: 150px !important;
+	/* 	left: 260px; */
 	padding-top: 18px !important;
 }
 
@@ -88,7 +88,7 @@ body {
 /* 步骤样式开始 */
 .fg_step {
 	margin-top: 30px;
-	margin-left: 12%;
+	margin-left: 20%;
 }
 
 .fg_step ul {

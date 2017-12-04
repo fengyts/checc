@@ -12,6 +12,17 @@ public interface CheccUserService extends GeneralService<CheccUserDO, CheccUserD
 	
 	int register(CheccUserDO checcUserDO);
 	
-	int login(String mobile, String password);
+	CheccUserDO login(String mobile, String password);
+	
+	/**
+	 * <pre>
+	 * 找回密码
+	 * </pre>
+	 *
+	 * @param mobile
+	 * @param password
+	 * @return
+	 */
+	int recoveredPwd(String mobile, String password);
 
 }

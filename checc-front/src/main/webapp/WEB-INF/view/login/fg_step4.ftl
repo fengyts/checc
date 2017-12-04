@@ -5,9 +5,8 @@
 <style>
 	div{
 		max-width:500px;
-		max-height:400px;
+		max-height:450px;
 	}
-	
 	p {
 		text-align: center;
 		color: #999999;
@@ -25,7 +24,7 @@
 	</div>
 	<div id="next_step_btn" class="next_step mybtn_normal">
 		<input type="hidden" id="stepNum" name="stepNum" value="4">
-		<a href="javascript:void(0);">立即登陆</a>
+		<a href="javascript:void(0);" onclick="login();">立即登陆</a>
 	</div>
 </form>
 </div>
@@ -44,7 +43,12 @@
 	layui.use('layer', function(){
   		layer = layui.layer;
 	}); 
+	
+	//步骤样式
+	window.parent.$("#step2 div,#step3 div,#step4 div").addClass("pass");
+	
+	function login(){
+		window.top.location.href="${domain}/user/login";
+	}
 </script>
 
-<script type="text/javascript" src="${static}/common/common.js"></script>
-<script type="text/javascript" src="${js}/login/fgpwd.js"></script>

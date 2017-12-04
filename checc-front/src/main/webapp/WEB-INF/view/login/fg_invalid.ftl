@@ -65,7 +65,7 @@
 
 <div class="step_ifa">
 	<p class="error_l1">密码找回失败</p>
-	<p class="error_l2">您的请求不合法,请按照正常的流程走</p>
+	<p class="error_l2">您的请求出现异常,请重试</p>
 	<div id="next_step_btn" class="next_step retry">
 		<a href="javascript:window.top.location.reload('${domain}/user/fgpwd')">返回重试</a>
 	</div>
