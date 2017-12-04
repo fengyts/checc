@@ -86,6 +86,11 @@
   		layer = layui.layer;
 	}); 
 	
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function() {
+		history.pushState(null, null, document.URL);
+	});
+	
 	//步骤样式
 	window.parent.$("#step2 div").addClass("pass");
 	

@@ -7,3 +7,12 @@ function validMobile(mobile, callback) {
 	}, callback);
 }
 
+/**
+ * 禁止页面后退
+ */
+function forbidBack() {
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function() {
+		history.pushState(null, null, document.URL);
+	});
+}
