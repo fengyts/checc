@@ -11,7 +11,7 @@
 	
 	<body>
 		<div class="wrap">
-			<div class="sorry">很抱歉！您访问的页面不存在......</div>
+			<div class="sorry">404很抱歉！您访问的页面不存在......</div>
 			<div class="lost"></div>
 			<div class="visit">
 				<div class="vst">您还可以访问：</div>
