@@ -341,34 +341,6 @@ function submitPwdInfo() {
 	return true;
 }
 
-/*******************************************************************************
- * 会员找回密码时，对输入作处理
- */
-function submitPwd() {
-	var frm = document.forms['getPassword2'];
-	var password = frm.elements['new_password'].value;
-	var password1 = frm.elements['password1'].value;
-
-	var errorMsg = '';
-	if (password.length == 0) {
-		errorMsg += new_password_empty + '\n';
-	}
-
-	if (password1.length == 0) {
-		errorMsg += confirm_password_empty + '\n';
-	}
-
-	if (password1 != password) {
-		errorMsg += both_password_error + '\n';
-	}
-
-	if (errorMsg.length > 0) {
-		alert(errorMsg);
-		return false;
-	} else {
-		return true;
-	}
-}
 
 
 /*******************************************************************************

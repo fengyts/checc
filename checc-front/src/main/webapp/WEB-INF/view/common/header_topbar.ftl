@@ -1,10 +1,10 @@
-<div class="toolbar">
+<div class="topbar">
     <div class="hd_bar">
         <ul class="login_bar">
             <li id="ECS_MEMBERZONE">
-                <a href="#" rel="nofollow">车西西首页</a><s>|</s>
-                <a href="#" rel="nofollow">请登录</a><s>|</s>
-                <a href="#" rel="nofollow">免费注册</a>
+                <a href="${domain}/index" rel="nofollow">车西西首页</a><s>|</s>
+                <a href="${domain}/user/login" rel="nofollow">请登录</a><s>|</s>
+                <a href="${domain}/user/register" rel="nofollow">免费注册</a>
             </li>
         </ul>
         <ul class="userinfo_bar">

@@ -292,6 +292,11 @@ public class CheccUserAO {
 				return new CommonResultMessage(CommonResultMessage.Failure, "手机号格式不对", 2);
 			}
 			
+			// 校验手机号是否注册
+			if(!isExistMobile(mobile)){
+				return new CommonResultMessage(CommonResultMessage.Failure, "手机号尚未注册", 2);
+			}
+			
 			// 创建分步token
 			tk = new TokenModel();
 			tk.setTokenType(TokenTypeConstant.FG_PWD_TK_STEP);

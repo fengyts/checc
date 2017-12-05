@@ -13,16 +13,15 @@
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	<link rel="stylesheet" type="text/css" href="${css}/index.css" />
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
-	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="feed.php" />
+	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="javascript:void(0);" />
 	
+	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<#include "/common/common-js.ftl" />
-	
 	
 	<script type="text/javascript" src="${static}/common.js"></script>
 	<script type="text/javascript" src="${static}/index.js"></script>
 </head>
 <body>
-	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	
 	<style>
 		.topimg {
@@ -39,7 +38,10 @@
 		}
 	</style>
 	
-	<#include "/common/header_topbar.ftl" />
+	<#include "/common/header.ftl" />
+	
+	<div class="content">
+	</div>
 
 	<#include "/common/footer_both.ftl" />
 </body>

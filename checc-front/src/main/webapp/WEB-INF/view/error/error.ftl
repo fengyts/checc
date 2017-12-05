@@ -1,4 +1,5 @@
 <#include "/common/common.ftl"/> 
+
 <@front title="积分规则管理/规则列表"
     js=[
 	]  

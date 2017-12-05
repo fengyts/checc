@@ -1,4 +1,5 @@
-<#include "/domain/domain.ftl">	
+<#include "/common/common.ftl">	
+
 <!DOCTYPE html>
 <html>
 	<head>

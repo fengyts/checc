@@ -7,17 +7,18 @@ $(function() {
 		if (Utils.isEmpty(_mobile)) {
 			_v_mobile = false;
 			$("#mobile_notice").empty().text("手机号不能为空");
-			return;
+			return false;
 		}
 		if (!Utils.isMobile(_mobile)) {
 			_v_mobile = false;
 			$("#mobile_notice").empty().text("手机号格式不对");
-			return;
+			return false;
 		}
 		validMobile(_mobile, function(res){
 			if(!res){
+				_v_mobile = false;
 				$("#mobile_notice").empty().text("手机号尚未注册");
-				return;
+				return false;
 			}
 		});
 		_v_mobile = true;
@@ -30,12 +31,12 @@ $(function() {
 		if (Utils.isEmpty(_captcha)) {
 			_v_captcha = false;
 			$("#captcha_notice").empty().text("验证码不能为空");
-			return;
+			return false;
 		}
 		if (Utils.trim(_captcha).length != 5) {
 			_v_captcha = false;
 			$("#captcha_notice").empty().text("验证码必须是5位");
-			return;
+			return false;
 		}
 		_v_captcha = true;
 		$("#captcha_notice").empty();

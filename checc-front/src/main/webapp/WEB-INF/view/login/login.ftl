@@ -65,8 +65,7 @@
 				<div class="form-bd">
 					<div class="form_box cle" id="login-nala">
 						<div class="login_box" id="login-nala-form">
-							<form name="formLogin" action="user.php" method="post"
-								onSubmit="return userLogin()">
+							<form name="formLogin" action="${domain}/index" method="get" onSubmit="return userLogin()">
 								<ul class="form">
 									<li class="text_input">
 										<span class="error_icon"></span> 
@@ -86,8 +85,9 @@
 											</label>
 										</p>
 									</li>
-									<li class="last"><input type="hidden" name="act" value="act_login" /> 
-										<input type="hidden" name="back_act" value="http://checc.cc/index.php" /> 
+									<li class="last">
+										<input type="hidden" name="act" value="act_login" /> 
+										<input type="hidden" name="back_act" value="${domain}/index" /> 
 										<input type="submit" name="submit" class="btn" value="登 录">
 									</li>
 								</ul>
@@ -100,10 +100,10 @@
 						<h5>使用第三方帐号登录</h5>
 					</li>
 					<li class="other-login">
-						<a href="user.php?act=oath&type=qq" class="qq"></a>
-						<a href="user.php?act=oath&type=weibo" class="sina"></a>
-						<a href="user.php?act=oath&type=alipay" class="alipay"></a>
-						<a href="user.php?act=oath&type=weixin" class="weixin"></a>
+						<a href="#" class="qq"></a>
+						<a href="#" class="sina"></a>
+						<a href="#" class="alipay"></a>
+						<a href="#" class="weixin"></a>
 					</li>
 				</ul>
 			</div>
