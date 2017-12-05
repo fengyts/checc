@@ -40,6 +40,7 @@
 	
 	<#include "/common/header.ftl" />
 	
+	<#include "/index/auction_flow.ftl" />
 	<div class="content">
 	</div>
 

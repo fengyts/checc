@@ -4,23 +4,24 @@
         <div class="flow">
             <ul>
                 <li>
-                    <img src="images/logo.gif" alt="第一步"/>
+                    <img src="${images}/logo.gif" alt="第一步"/>
                     <span class="flow_arrows"> >>> </span>
                 </li>
                 <li>
-                    <img src="images/logo.gif" alt="第二步"/>
+                    <img src="${images}/logo.gif" alt="第二步"/>
                     <span class="flow_arrows"> >>> </span>
                 </li>
                 <li>
-                    <img src="images/logo.gif" alt="第三步"/>
+                    <img src="${images}/logo.gif" alt="第三步"/>
                     <span class="flow_arrows"> >>> </span>
                 </li>
                 <li>
-                    <img src="images/logo.gif" alt="第四步"/>
+                    <img src="${images}/logo.gif" alt="第四步"/>
                     <span class="flow_arrows"> >>> </span>
                 </li>
                 <li>
-                    <img src="images/logo.gif" alt="第五步"/>
+                    <img src="${images}/logo.gif" alt="第五步"/>
+                    <span class="flow_arrows"> </span>
                 </li>
             </ul>
         </div>
