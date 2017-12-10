@@ -12,8 +12,8 @@ import com.checc.ao.item.TopicAO;
 import com.checc.backend.constants.BackendConstant;
 import com.checc.base.BaseController;
 import com.checc.domain.TopicDO;
-import com.checc.dto.enums.TopicStatusEnum;
-import com.checc.dto.enums.TopicTypeEnum;
+import com.checc.enums.TopicStatusEnum;
+import com.checc.enums.TopicTypeEnum;
 import com.checc.util.ResultMessage;
 
 import ng.bayue.common.Page;

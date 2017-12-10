@@ -48,10 +48,10 @@ css=[]
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th width="5%">ID</th>
+			    		<th>专题类型</th>
 			    		<th>专题状态</th>
-			    		<th>专题进度</th>
-			    		<th>开始时间</th>
-			    		<th>结束时间</th>
+			    		<th width="200px">开始时间</th>
+			    		<th width="200px">结束时间</th>
 			    		<th>商品名称</th>
 			    		<th>商品状态</th>
 			    		<th>兑换数量</th>
@@ -84,10 +84,14 @@ css=[]
 								<#if obj.itemStatus == 'true'>有效<#else>无效</#if>
 							</td>
 							<td class="td_center">${obj.inventory}</td>
-							<td class="td_center">${obj.exchargeAmount?string('##.00')}</td>
+							<td class="td_center">${obj.exchargeAmount!0?string('##.00')}</td>
 							<td class="td_center">${obj.residue}</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>
+			    				<#if obj.status == '01'>
+			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>
+			    				<#else>
+			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}" style="cursor:not-allowed;color:gray;" disabled='true'>[编辑]</a>
+			    				</#if>
 			    			</td>
 			    		</tr>
 			    	</#list>

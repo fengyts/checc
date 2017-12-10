@@ -1,6 +1,9 @@
 package com.checc.service;
 
+import java.util.List;
+
 import ng.bayue.service.common.GeneralService;
+
 import com.checc.domain.ItemPictureDO;
 
  /**
@@ -9,5 +12,6 @@ import com.checc.domain.ItemPictureDO;
  */
 public interface ItemPictureService extends GeneralService<ItemPictureDO, ItemPictureDO> {
 
-
+	List<ItemPictureDO> selectByItemIds(List<Long> itemIds);
+	
 }

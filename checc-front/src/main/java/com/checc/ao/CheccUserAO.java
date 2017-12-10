@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.checc.constants.SmsTemplate;
+import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
 import com.checc.dto.FgPwdDTO;
+import com.checc.dto.LoginDTO;
 import com.checc.dto.RegisterDTO;
-import com.checc.dto.enums.SmsTypeEnum;
+import com.checc.enums.SmsTypeEnum;
 import com.checc.model.SmsCodeRedisModel;
 import com.checc.service.CheccUserService;
 import com.checc.service.generate.SmsCodeRedisService;
@@ -32,6 +34,7 @@ import ng.bayue.enums.RedisModelStatusEnum;
 import ng.bayue.service.FrequencyService;
 import ng.bayue.service.TokenService;
 import ng.bayue.util.CaptchaGenerator;
+import ng.bayue.util.SecurityUtil;
 import ng.bayue.util.StringUtils;
 import ng.bayue.util.crypto.AESUtils;
 import ng.bayue.validate.Validator;
@@ -48,8 +51,8 @@ public class CheccUserAO {
 
 	@Autowired
 	private FrequencyService frequencyService;
-//	@Autowired
-//	private CaptchaRedisService captchaRedisService;
+	// @Autowired
+	// private CaptchaRedisService captchaRedisService;
 	@Autowired
 	private SmsSendService smsSendService;
 	@Autowired
@@ -186,11 +189,11 @@ public class CheccUserAO {
 		if (!password.equals(password1)) {
 			return CommonResultMessage.validParameterNull("两次密码不一样");
 		}
-		
+
 		if (isExistMobile(mobile)) {
 			return CommonResultMessage.failure("手机号已经存在");
 		}
-		
+
 		// 校验验证码
 		if (!validCaptcha(request, captcha)) {
 			return CommonResultMessage.failure("验证码不正确");
@@ -249,7 +252,8 @@ public class CheccUserAO {
 	 * @param dto
 	 * @return msg data值：-1-会话过期; 0-校验不通过; 1-校验通过; 2-参数校验错误
 	 */
-	public CommonResultMessage recoveredPwd(HttpServletRequest request, Model model, FgPwdDTO dto) throws Exception{
+	public CommonResultMessage recoveredPwd(HttpServletRequest request, Model model, FgPwdDTO dto)
+			throws Exception {
 		int stepNum = dto.getStepNum();
 		AESUtils aes = new AESUtils();
 		String mobile = dto.getMobile();
@@ -270,13 +274,13 @@ public class CheccUserAO {
 			String fgTokenDe = aes.decrypt(fgToken);
 			tk.setKey(fgTokenDe.substring(0, 32));
 			tk.setToken(fgTokenDe.substring(32));
-			if(!validToken(tk, false)){
+			if (!validToken(tk, false)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "链接已经失效", -1);
 			}
-			
+
 			model.addAttribute("fgToken", fgToken);
 			String captcha = dto.getCaptcha();
-			
+
 			if (StringUtils.isBlank(captcha)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "验证码不能为空", 2);
 			}
@@ -291,18 +295,18 @@ public class CheccUserAO {
 			if (!Validator.isMobile(mobile)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "手机号格式不对", 2);
 			}
-			
+
 			// 校验手机号是否注册
-			if(!isExistMobile(mobile)){
+			if (!isExistMobile(mobile)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "手机号尚未注册", 2);
 			}
-			
+
 			// 创建分步token
 			tk = new TokenModel();
 			tk.setTokenType(TokenTypeConstant.FG_PWD_TK_STEP);
 			tokenService.create(tk);
 			model.addAttribute("fgStepToken", aes.encrypt(tk.getKey() + tk.getToken()));
-			
+
 			// 发送短信验证码
 			if (frequencyValid(mobile)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "操作过于频繁", 0);
@@ -312,9 +316,10 @@ public class CheccUserAO {
 			smsModel.setSmsType(SmsTypeEnum.Sms_Forgot_Password);
 			CommonResultMessage crm = sendSmsCode(smsModel);
 			/*
-			 if(CommonResultMessage.Failure == crm.getResult()){
-				return new CommonResultMessage(CommonResultMessage.Failure, "短信发送失败,请稍后再试", 0); 
-			}*/
+			 * if(CommonResultMessage.Failure == crm.getResult()){ return new
+			 * CommonResultMessage(CommonResultMessage.Failure, "短信发送失败,请稍后再试",
+			 * 0); }
+			 */
 			return new CommonResultMessage(1);
 		} else if (2 == stepNum) {
 			final String fgToken = dto.getFgToken();
@@ -327,12 +332,12 @@ public class CheccUserAO {
 			String fgTokenDe = aes.decrypt(fgToken);
 			tk.setKey(fgTokenDe.substring(0, 32));
 			tk.setToken(fgTokenDe.substring(32));
-			if(!validToken(tk, false)){
+			if (!validToken(tk, false)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "链接已经失效", -1);
 			}
-			
+
 			model.addAttribute("fgToken", fgToken);
-			
+
 			// 校验分步 token
 			final String fgStepToken = dto.getFgStepToken();
 			tk = new TokenModel();
@@ -340,12 +345,12 @@ public class CheccUserAO {
 			String fgStepTokenDe = aes.decrypt(fgStepToken);
 			tk.setKey(fgStepTokenDe.substring(0, 32));
 			tk.setToken(fgStepTokenDe.substring(32));
-			if(!validToken(tk, true)){
+			if (!validToken(tk, true)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "链接已经失效", -1);
 			}
-			
+
 			model.addAttribute("fgStepToken", fgStepToken);
-			
+
 			if (StringUtils.isBlank(mobile)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "非法请求", 2);
 			}
@@ -356,7 +361,7 @@ public class CheccUserAO {
 			if (StringUtils.isBlank(smsCode)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "短信验证码不能为空", 2);
 			}
-			
+
 			// 校验短信验证码
 			SmsCodeRedisModel smsModel = new SmsCodeRedisModel();
 			smsModel.setMobile(mobile);
@@ -369,13 +374,13 @@ public class CheccUserAO {
 			if (RedisModelStatusEnum.ERROR == modelStatus) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "验证码不正确", 2);
 			}
-			
+
 			// 手机号验证通过，创建新的分步token
 			tk = new TokenModel();
 			tk.setTokenType(TokenTypeConstant.FG_PWD_TK_STEP);
 			tokenService.create(tk);
 			model.addAttribute("fgStepToken", aes.encrypt(tk.getKey() + tk.getToken()));
-			
+
 		} else if (3 == stepNum) {
 			final String fgToken = dto.getFgToken();
 			if (StringUtils.isBlank(fgToken)) {
@@ -387,12 +392,12 @@ public class CheccUserAO {
 			String fgTokenDe = aes.decrypt(fgToken);
 			tk.setKey(fgTokenDe.substring(0, 32));
 			tk.setToken(fgTokenDe.substring(32));
-			if(!validToken(tk, false)){
+			if (!validToken(tk, false)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "链接已经失效", -1);
 			}
-			
+
 			model.addAttribute("fgToken", fgToken);
-			
+
 			// 校验分步 token
 			final String fgStepToken = dto.getFgStepToken();
 			tk = new TokenModel();
@@ -400,31 +405,33 @@ public class CheccUserAO {
 			String fgStepTokenDe = aes.decrypt(fgStepToken);
 			tk.setKey(fgStepTokenDe.substring(0, 32));
 			tk.setToken(fgStepTokenDe.substring(32));
-			if(!validToken(tk, true)){
+			if (!validToken(tk, true)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "链接已经失效", -1);
 			}
-			
+
 			model.addAttribute("fgStepToken", fgStepToken);
-			
-			if(StringUtils.isBlank(mobile)){
+
+			if (StringUtils.isBlank(mobile)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "请求异常", -1);
 			}
-			
+
 			// 校验新密码
 			String password = dto.getPassword();
 			String password1 = dto.getPassword1();
-			
-			if(StringUtils.isBlank(password) || StringUtils.isBlank(password1)){
+
+			if (StringUtils.isBlank(password) || StringUtils.isBlank(password1)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "密码不能为空", 2);
 			}
-			if(Validator.isPasswordStrong(password)){
-				return new CommonResultMessage(CommonResultMessage.Failure, "密码6~18位且必须包含大小写字母和数字", 2);
+			if (Validator.isPasswordStrong(password)) {
+				return new CommonResultMessage(CommonResultMessage.Failure, "密码6~18位且必须包含大小写字母和数字",
+						2);
 			}
-			
-			//更新密码
+
+			// 更新密码
 			userService.recoveredPwd(mobile, password);
-			
-		} else {}
+
+		} else {
+		}
 
 		return CommonResultMessage.success();
 	}
@@ -453,7 +460,8 @@ public class CheccUserAO {
 	 * </pre>
 	 *
 	 * @param fgToken
-	 * @param isDel校验后是否删除，true-删除,false-不删除
+	 * @param isDel校验后是否删除
+	 *            ，true-删除,false-不删除
 	 * @return true-校验通过，false-校验不通过
 	 */
 	private boolean validToken(TokenModel tk, Boolean isDel) {
@@ -465,10 +473,28 @@ public class CheccUserAO {
 		if (RedisModelStatusEnum.ERROR == ckStatus || RedisModelStatusEnum.OVERDUE == ckStatus) {
 			return false;
 		}
-		if(isDel){
+		if (isDel) {
 			tokenService.remove(tk);
 		}
 		return true;
+	}
+
+	public CommonResultMessage login(HttpServletRequest request, LoginDTO dto) {
+		String mobile = dto.getMobile();
+		String password = dto.getPassword();
+		if (StringUtils.isBlank(mobile) || StringUtils.isBlank(password)) {
+			return CommonResultMessage.failure("用户名或密码错误");
+		}
+		CheccUserDO userDO = userService.selectByMobile(mobile);
+		String pwdReq = SecurityUtil.hashToStr(password, userDO.getSalt(), 2);
+		if (!pwdReq.equals(userDO.getPassword())) {
+			return CommonResultMessage.failure("用户名或密码错误");
+		}
+
+		HttpSession session = request.getSession();
+		session.setAttribute(UserConstants.USER_SESSION_KEY, userDO);
+
+		return CommonResultMessage.success();
 	}
 
 }

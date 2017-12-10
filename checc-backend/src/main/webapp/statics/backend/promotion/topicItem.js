@@ -17,6 +17,10 @@ $(function() {
 	});
 	
 	$(".editTopicItemBtn").on('click', function(){
+		var _disable = $(this).attr("disabled");
+		if(_disable){
+			return;
+		}
 		var _id = $(this).attr("param");
 		pageii = layer.open({
 			type : 2,

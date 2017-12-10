@@ -53,8 +53,8 @@ css=[]
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th width="5%">ID</th>
+			    		<th>专题类型</th>
 			    		<th>专题状态</th>
-			    		<th>专题进度</th>
 			    		<th>开始时间</th>
 			    		<th>结束时间</th>
 			    		<th>操作</th>
@@ -80,7 +80,9 @@ css=[]
 							<td class="td_center">${obj.startTime?datetime}</td>
 							<td class="td_center">${obj.endTime?datetime}</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
+			    				<#if obj.status == '01'>
+			    					<a href="javascript:void(0);" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
+			    				</#if>
 			    				<a href="javascript:void(0);" class="editcatabtn associateItemBtn" param="${obj.id}" param1="${obj.name}">[查看关联商品]</a>
 			    			</td>
 			    		</tr>

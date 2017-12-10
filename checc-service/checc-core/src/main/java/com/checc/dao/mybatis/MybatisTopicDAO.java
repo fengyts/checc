@@ -1,11 +1,14 @@
 package com.checc.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.TopicDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.TopicDO;
+
 import ng.bayue.exception.CommonDAOException;
 
 @Component(value="topicDAO")
@@ -58,6 +61,11 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 	@Override
 	public List<TopicDO> selectDynamicPageQuery(TopicDO topicDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), topicDO);
+	}
+
+	@Override
+	public List<TopicDO> selectAllDynamic(Map<String, Object> params) {
+		return getSqlSession().selectList(getStatement("select_all_byStatus"), params);
 	}
 
 }

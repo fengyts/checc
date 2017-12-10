@@ -1,4 +1,4 @@
-package com.checc.dto.enums;
+package com.checc.enums;
 
 public enum ItemTypeEnum {
 

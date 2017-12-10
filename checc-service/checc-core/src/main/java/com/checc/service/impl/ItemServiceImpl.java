@@ -20,8 +20,9 @@ import com.checc.domain.ItemDO;
 import com.checc.domain.ItemDescDO;
 import com.checc.domain.ItemPictureDO;
 import com.checc.dto.ItemDTO;
-import com.checc.dto.enums.ItemPictureTypeEnum;
+import com.checc.enums.ItemPictureTypeEnum;
 import com.checc.service.ItemService;
+
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.common.Page;

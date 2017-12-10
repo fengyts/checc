@@ -17,27 +17,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.CheccUserAO;
+import com.checc.constants.UserConstants;
 import com.checc.dto.FgPwdDTO;
+import com.checc.dto.LoginDTO;
 import com.checc.dto.RegisterDTO;
-import com.checc.dto.enums.SmsTypeEnum;
+import com.checc.enums.SmsTypeEnum;
 import com.checc.model.SmsCodeRedisModel;
+import com.checc.utils.CookieUtils;
 
 import ng.bayue.common.CommonResultMessage;
+import ng.bayue.common.model.TokenModel;
 import ng.bayue.util.StringUtils;
 import ng.bayue.validate.Validator;
 
+/**
+ * <pre>
+ * 用户通用控制器,不需要登陆
+ * </pre>
+ *
+ * @author fengyts
+ * @version $Id: UserCommonController.java, v 0.1 2017年12月9日 下午7:46:53 fengyts Exp $
+ */
 @Controller
 @RequestMapping({ "/user" })
-public class UserController {
+public class UserCommonController {
 
-	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static Logger logger = LoggerFactory.getLogger(UserCommonController.class);
 
 	@Autowired
 	private CheccUserAO userAO;
 
 	@RequestMapping({ "/login" })
-	public String loginIndex() {
+	public String loginIndex(HttpServletRequest request, HttpServletResponse response) {
+		CookieUtils cookieUtil = new CookieUtils();
+		TokenModel tk = new TokenModel();
+		String key = "checcUserLoginCkTk" + tk.getKey();
+		String value = tk.getBaseKey();
+		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
 		return "/login/login";
+	}
+	
+	@RequestMapping({"/logout"})
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().removeAttribute(UserConstants.USER_SESSION_KEY);
+		return "redirect:/index";
 	}
 
 	@RequestMapping({ "/register" })
@@ -100,17 +123,42 @@ public class UserController {
 
 	@RequestMapping({ "/doRegister" })
 	@ResponseBody
-	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response,
+	public CommonResultMessage doRegister(HttpServletRequest request, HttpServletResponse response,
 			RegisterDTO dto) {
 		CommonResultMessage crm = userAO.register(request, dto);
 		return crm;
 	}
+	
+	@RequestMapping({ "/doLogin" })
+	@ResponseBody
+	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response,
+			LoginDTO dto) {
+		CommonResultMessage crm = userAO.login(request, dto);
+		return crm;
+	}
 
+	/**
+	 * <pre>
+	 * 找回密码
+	 * </pre>
+	 *
+	 * @return
+	 */
 	@RequestMapping(value = { "/fgpwd" }, method = { RequestMethod.GET })
 	public String fgPwd() {
 		return "/login/fgpwd";
 	}
 
+	/**
+	 * <pre>
+	 * 找回密码form
+	 * </pre>
+	 *
+	 * @param request
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
 	@RequestMapping(value = { "/fgform" }, method = { RequestMethod.GET })
 	public String stepForm(HttpServletRequest request, Model model, FgPwdDTO dto) {
 		int stepNum = dto.getStepNum();

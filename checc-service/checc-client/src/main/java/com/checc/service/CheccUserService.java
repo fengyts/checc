@@ -24,5 +24,7 @@ public interface CheccUserService extends GeneralService<CheccUserDO, CheccUserD
 	 * @return
 	 */
 	int recoveredPwd(String mobile, String password);
+	
+	CheccUserDO selectByMobile(String mobile);
 
 }

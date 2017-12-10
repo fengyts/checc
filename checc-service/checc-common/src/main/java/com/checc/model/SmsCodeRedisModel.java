@@ -1,6 +1,6 @@
 package com.checc.model;
 
-import com.checc.dto.enums.SmsTypeEnum;
+import com.checc.enums.SmsTypeEnum;
 
 import ng.bayue.common.model.BaseRedisModel;
 

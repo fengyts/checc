@@ -16,6 +16,12 @@
 	<link rel="stylesheet" type="text/css" href="${css}/login.css" />
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${static}/common/utils.js"></script>
+	<script type="text/javascript" src="${js}/login/user.js"></script>
+	
+	<script type="text/javascript">
+		var domain = "${domain}";
+	</script>
 </header>
 
 <body>
@@ -65,17 +71,17 @@
 				<div class="form-bd">
 					<div class="form_box cle" id="login-nala">
 						<div class="login_box" id="login-nala-form">
-							<form name="formLogin" action="${domain}/index" method="get" onSubmit="return userLogin()">
+							<form name="formLogin" action="" method="get" onSubmit="">
 								<ul class="form">
 									<li class="text_input">
 										<span class="error_icon"></span> 
 										<span class="iconfont">Œ</span> 
-										<input name="username" type="text" class="text" placeholder="用户名" />
+										<input id="mobile" name="mobile" type="text" class="text" placeholder="用户名/手机号" />
 									</li>
 									<li class="text_input">
 										<span class="error_icon"></span> 
 										<span class="iconfont">÷</span> 
-										<input name="password" type="password" class="text" placeholder="密码" />
+										<input id="password" name="password" type="password" class="text" placeholder="密码" />
 									</li>
 									<li class="login_param">
 										<p>
@@ -88,7 +94,10 @@
 									<li class="last">
 										<input type="hidden" name="act" value="act_login" /> 
 										<input type="hidden" name="back_act" value="${domain}/index" /> 
-										<input type="submit" name="submit" class="btn" value="登 录">
+										<a href="#" class="btn" id="doLogin" >登 录</a>
+										<#--
+										<input type="submit" name="submit" class="btn" id="doLogin" value="登 录">
+										-->
 									</li>
 								</ul>
 							</form>

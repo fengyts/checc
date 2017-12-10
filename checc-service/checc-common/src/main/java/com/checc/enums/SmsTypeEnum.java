@@ -1,13 +1,13 @@
-package com.checc.dto.enums;
+package com.checc.enums;
 
-public enum TopicTypeEnum {
-	
-	TOPIC_AUCTION("01", "竞拍"), TOPIC_EXCHANGE("02", "兑换");
+public enum SmsTypeEnum {
+
+	Sms_Register("01", "注册"), Sms_Forgot_Password("02", "找回密码"), Sms_Other("03", "其他");
 
 	private String code;
 	private String desc;
 
-	private TopicTypeEnum(String code, String desc) {
+	private SmsTypeEnum(String code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -27,16 +27,18 @@ public enum TopicTypeEnum {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-
-	public static String getDescByCode(String code) {
+	
+	public String getDescByCode(String code) {
 		if (null == code) {
 			return null;
 		}
-		for (TopicTypeEnum menuTypeEnum : TopicTypeEnum.values()) {
-			if (code.equals(menuTypeEnum.code)) {
-				return menuTypeEnum.desc;
+		for (SmsTypeEnum pe : SmsTypeEnum.values()) {
+			if (code.equals(pe.code)) {
+				return pe.desc;
 			}
 		}
 		return null;
 	}
+	
+
 }

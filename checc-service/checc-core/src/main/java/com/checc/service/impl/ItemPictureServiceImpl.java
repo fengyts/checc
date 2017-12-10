@@ -1,7 +1,10 @@
 package com.checc.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.checc.dao.ItemPictureDAO;
 import com.checc.domain.ItemPictureDO;
 import com.checc.service.ItemPictureService;
+
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.common.Page;
@@ -143,6 +147,14 @@ public class ItemPictureServiceImpl  implements ItemPictureService{
 			return this.queryPageListDynamic(itemPictureDO);
 		}
 		return new Page<ItemPictureDO>();
+	}
+
+	@Override
+	public List<ItemPictureDO> selectByItemIds(List<Long> itemIds) {
+		if(CollectionUtils.isEmpty(itemIds)){
+			return new ArrayList<ItemPictureDO>();
+		}
+		return itemPictureDAO.selectByItemIds(itemIds);
 	}
 	
 	

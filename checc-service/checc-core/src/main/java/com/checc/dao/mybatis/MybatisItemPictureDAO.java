@@ -62,4 +62,9 @@ public class MybatisItemPictureDAO extends MybatisBaseDAO implements ItemPicture
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), itemPictureDO);
 	}
 
+	@Override
+	public List<ItemPictureDO> selectByItemIds(List<Long> itemIds) {
+		return getSqlSession().selectList(getStatement("select_by_itemIds"), itemIds);
+	}
+
 }

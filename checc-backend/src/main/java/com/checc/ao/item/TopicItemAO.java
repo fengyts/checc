@@ -12,7 +12,8 @@ import com.checc.domain.ItemDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.dto.TopicItemDTO;
-import com.checc.dto.enums.TopicTypeEnum;
+import com.checc.enums.TopicStatusEnum;
+import com.checc.enums.TopicTypeEnum;
 import com.checc.service.ItemService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
@@ -30,6 +31,19 @@ public class TopicItemAO {
 	private TopicService topicService;
 	@Autowired
 	private ItemService itemService;
+	
+	private void topicStatus(TopicDO topicDO) {
+		Date startTime = topicDO.getStartTime();
+		Date endTime = topicDO.getEndTime();
+		Date now = new Date();
+		String status = TopicStatusEnum.InProgress.getCode();
+		if (startTime.after(now)) {
+			status = TopicStatusEnum.NotStarted.getCode();
+		} else if (endTime.before(now)) {
+			status = TopicStatusEnum.End.getCode();
+		}
+		topicDO.setStatus(status);
+	}
 
 	public Page<TopicItemDTO> queryPageList(TopicItemDO topicItemDO, Integer pageNo, Integer pageSize) {
 		Page<TopicItemDTO> pageResult = new Page<TopicItemDTO>();
@@ -45,6 +59,7 @@ public class TopicItemAO {
 		
 		Long topicId = topicItemDO.getTopicId();
 		TopicDO topicDO = topicService.selectById(topicId);
+		topicStatus(topicDO);
 		List<TopicItemDTO> listResult = new ArrayList<TopicItemDTO>();
 		for(TopicItemDO item : list){
 			TopicItemDTO ti = new TopicItemDTO();

@@ -12,13 +12,16 @@
 	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<mvc:annotation-driven />
-	
-	<context:component-scan base-package="com.checc.*" >
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+
+	<context:component-scan base-package="com.checc.*">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
-	
+
 	<bean id="stringHttpMessageConverter"
 		class="org.springframework.http.converter.StringHttpMessageConverter" />
 	<bean
@@ -106,18 +109,36 @@
 	</bean>
 
 
-	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="i18n/messages" />
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource"
+		p:basename="i18n/messages" />
 	<!-- 静态资源路径 -->
 	<mvc:resources mapping="/statics/**" location="/statics/" />
 	<!-- 错误页面 -->
 	<mvc:resources mapping="/error/**" location="/WEB-INF/view/error/" />
-	
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">error/404</prop>
-            </props>
-        </property>
-    </bean>
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error/404</prop>
+			</props>
+		</property>
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean id="tokenInterceptor" class="com.checc.interceptor.TokenInterceptor">
+				<property name="enable" value="true" />
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/bis/**" />
+			<bean id="loginStatusInterceptor" class="com.checc.interceptor.LoginStatusInterceptor">
+				<property name="enable" value="true" />
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>

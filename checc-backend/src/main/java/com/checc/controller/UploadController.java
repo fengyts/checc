@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
+import com.checc.ao.common.DfsAO;
 
 import ng.bayue.fastdfs.ImageUrlUtil;
 
@@ -30,7 +31,7 @@ public class UploadController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	
-	@Value("${dfs.uploadTempPath}")
+	@Value("#{meta['dfs.uploadTempPath']}")
 	private String uploadTempPath;
 //	@Value("${item.picture.MaxSize}")
 	@Value("#{meta['item.picture.MaxSize']}")
@@ -39,13 +40,11 @@ public class UploadController {
 	@Value("${dfs.group1.host}")
 	private String host;
 	
-//	@Autowired
-//	private DfsAO dfsAO;
+	@Autowired
+	private DfsAO dfsAO;
 	
 	@Autowired
 	private ImageUrlUtil imageUrlUtil;
-	
-	private String filePathTest = "http://pic.58pic.com/58pic/12/01/93/79w58PICF4p.jpg";
 	
 	/**
 	 * <pre>
@@ -64,8 +63,9 @@ public class UploadController {
 			return null;
 		}
 		
-//		String dfsPath = null;
-		String dfsPath = filePathTest;
+		String dfsPath = null;
+//		private String filePathTest = "http://pic.58pic.com/58pic/12/01/93/79w58PICF4p.jpg";
+//		String dfsPath = filePathTest;
 		String fileName = null;
 		JSONObject obj = new JSONObject();
 		
@@ -97,7 +97,7 @@ public class UploadController {
 			}
 			try {
 				mf.transferTo(file);
-//				dfsPath =  dfsAO.uploadFile(file);
+				dfsPath =  dfsAO.uploadFile(file);
 			} catch (IllegalStateException | IOException e1) {
 				fileName = null;
 				logger.info("文件上传时保存出错:{}",e1);

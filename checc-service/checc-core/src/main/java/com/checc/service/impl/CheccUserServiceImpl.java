@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.checc.dao.CheccUserDAO;
 import com.checc.domain.CheccUserDO;
 import com.checc.service.CheccUserService;
+
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.util.SecurityUtil;
@@ -175,6 +176,14 @@ public class CheccUserServiceImpl implements CheccUserService {
 		
 		return checcUserDAO.updateByMobile(checcUserDO);
 		
+	}
+
+	@Override
+	public CheccUserDO selectByMobile(String mobile) {
+		if(StringUtils.isBlank(mobile)){
+			return null;
+		}
+		return checcUserDAO.selectByMobile(mobile);
 	}
 
 }

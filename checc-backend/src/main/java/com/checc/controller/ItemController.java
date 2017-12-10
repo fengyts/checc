@@ -15,8 +15,8 @@ import com.checc.backend.constants.BackendConstant;
 import com.checc.base.BaseController;
 import com.checc.domain.ItemDO;
 import com.checc.dto.ItemDTO;
-import com.checc.dto.enums.ItemStatusEnum;
-import com.checc.dto.enums.ItemTypeEnum;
+import com.checc.enums.ItemStatusEnum;
+import com.checc.enums.ItemTypeEnum;
 import com.checc.util.ResultMessage;
 
 import ng.bayue.common.Page;

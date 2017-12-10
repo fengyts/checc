@@ -129,5 +129,18 @@
 	 	ORDER BY item_picture.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisItemPictureDAO_select_by_itemIds"  resultMap="ItemPictureDOResultMap" parameterType="list">
+ 		SELECT
+ 			<include refid="MybatisItemPictureDAO_all_column_fields" />
+ 		FROM
+ 			item_picture
+ 		WHERE item_id IN
+ 			(
+	 		<foreach collection="list" index="index" item="itemId" separator=",">
+	 			#{itemId}
+	 		</foreach>
+ 			)
+ 	</select>
 
 </mapper>

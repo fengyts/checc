@@ -3,7 +3,7 @@
 html {
     /*color: #333;*/
     _background-attachment: fixed;
-    min-width: 1196px
+    min-width: 1396px
 }
 
 body, button, input, select, textarea {
@@ -174,17 +174,20 @@ ul, ol {
 页脚样式开始
 */
 .ft_box {
-    position: absolute;
+/* 	version:2017-12-09 */
+/*  position: absolute; */ 
     min-width: 1196px;
     bottom: 0;
     width: 100%;
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
+    margin-top: 80px;
 }
 
 .footer {
-	position: relative;
+/* 	version:2017-12-09 */
+/* 	position: relative; */
     min-height: 80px;
     max-height: 100px;
     overflow-wrap: normal;
@@ -233,12 +236,23 @@ ul, ol {
     white-space: nowrap;
 }
 
+/* 内容容器  */
+.content {
+/* 	version:2017-12-09 */
+/* 	position:absolute; */
+	height: 100%;
+	min-height:500px;
+/* 	width: 100%; */
+	min-width:900px;
+	margin-left:90px;
+}
+
 /*  竞拍流程图样式 */
 .flow_box {
     overflow-wrap: normal;
     white-space: nowrap;
     word-break: normal;
-    max-height: 180px;
+    max-height: 200px;
 }
 
 .flow_title {
@@ -246,7 +260,7 @@ ul, ol {
     color: #0099cc;
     max-height: 50px;
     /*margin-top: 10px;*/
-    margin-left: 50%;
+    margin-left: 45%;
     text-align: center;
     font-size: 26px;
     font-weight: 600;
@@ -258,7 +272,7 @@ ul, ol {
 .flow {
     margin: 0;
     padding: 0;
-    height: 175px;
+    height: 150px;
     overflow-wrap: normal;
     width: 100%;
     min-width: 1196px;
@@ -287,14 +301,182 @@ ul, ol {
 
 }
 
-.flow span{
+.flow span {
     max-width: 150px;
 }
-.flow img{
+.flow img {
     width: 100%;
     height: 100%;
 }
 
-.content {
-
+.flow_arrows {
+	vertical-align: middle;
 }
+
+/* 竞拍商品style start */
+
+.topic {
+/* 	margin-top:35px; */
+/* 	min-height: 110%; */
+}
+
+.topic_hd {
+	margin-top:35px;
+}
+
+.topic_tab a {
+	cursor: pointer;
+}
+
+.topic_tab a:hover {
+	cursor: pointer;
+	text-decoration:underline; 
+}
+
+.select_tab {
+	/* 
+	color: #0099cc !important;
+	text-decoration:underline; 
+	*/
+}
+
+.select_tab>a {
+	color: #0099cc !important;
+	text-decoration:underline;
+	cursor: pointer;
+}
+
+.topic_hd .topic_tab {
+	width:100%;
+	height:40px;
+	color: #0099cc;
+    max-height: 50px;
+    /*margin-top: 10px;*/
+/*     margin-left: 45%; */
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    white-space: nowrap;
+    word-break: normal;
+}
+
+.topic_hd .auction_time {
+	color: #666666;
+	width:100%;
+	max-height: 50px;
+	text-align: center;
+	font-size: 16px;
+    white-space: nowrap;
+    word-break: normal;
+}
+
+
+.topic_tab{
+	
+}
+
+.topic_items {
+	margin-top: 10px;
+}
+
+.items {
+	display: inline-block;
+	margin: 15px 0 0 18px;
+	width: 20%;
+	border: solid 1px #aaeeee;
+}
+
+.items:hover {
+	border: solid 1px #ff0000;
+}
+
+.item_img {
+	height: 200px;
+	max-height: 200px;
+	max-width: inherit;
+	cursor: pointer;
+	border-bottom: 1px solid #aaeeee;
+}
+
+.item_img img {
+	width:100%;
+	height:100%;
+}
+
+.item_info {
+/* 	text-align: center; */
+	font-size: 14px;
+/*     white-space: nowrap; */
+/*     word-break: normal; */
+    color: #666666;
+    margin-left: 5px;
+}
+
+.item_title {
+	margin: 10px 0 0 0;
+	font-size: 14px;
+	color: #333333;
+	min-height: 50px;
+	overflow-wrap: break-word;
+	word-break: normal;
+	word-wrap: normal;
+}
+
+.pr_box {
+	margin: 0;
+}
+
+.pr_box span {
+/* 	display: inline-block; */
+}
+
+.lbtitle {
+/* 	min-width:50px; */
+/* 	letter-spacing: 3px; */
+}
+
+.pr_box span>prc {
+	font-family: "Arial Negreta","Arial";
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.prc_curr {
+	color: #ff0000;
+}
+
+.auc_btn {
+	text-align: center;
+	vertical-align: middle;
+	margin: 10px 0 10px 27%;
+}
+
+.auc_btn>span {
+	background-color: #1E9FFF;
+    display: block;
+    height: 35px;
+    width: 120px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 230%;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.auc_btn>span:hover {
+	color: #fff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	color: #fff;
+	text-decoration: none;
+}
+
+.auc_btn a {
+	color: #eeeeee;
+}
+
+
+
+
+

@@ -117,6 +117,11 @@ $(document).ready(function() {
 		register();
 	});
 	
+	// 用户登陆
+	$("#doLogin").on('click', function (){
+		doLogin();
+	})
+	
 });
 
 
@@ -224,6 +229,42 @@ function register(){
 		}
 	});
 	
+}
+
+function doLogin(){
+	var _mobile = $("#mobile").val();
+	var _password = $("#password").val();
+	if(Utils.isEmpty(_mobile) || Utils.isEmpty(_password)){
+		layer.alert("用户名和密码不能为空");
+		return false;
+	}
+	
+	var _params = {};
+	_params.mobile = _mobile;
+	_params.password = _password;
+	
+	$.ajax({
+		url: 'doLogin',
+		type: 'POST',
+		data: _params,
+		dataType: 'json',
+		async: false,
+		cache : false,
+		success : function(res) {
+			var data = res;
+			console.log(data);
+			if (1 == data.result) {// 成功
+				top.window.location.href = domain + '/index';
+//				layer.msg("注册成功,请登录", {icon: 1, time:3000}, function() {
+//					parent.window.location.href= 'login';
+//					layer.close(layer.index); // 再执行关闭
+//				});
+			} else {// 失败
+				$("#captchaImg").trigger('click');
+				layer.alert(data.message);
+			}
+		}
+	});
 }
 
 

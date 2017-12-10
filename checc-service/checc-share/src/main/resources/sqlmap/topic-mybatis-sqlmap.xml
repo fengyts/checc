@@ -134,10 +134,34 @@
 	     SELECT
 	     	<include refid="MybatisTopicDAO_all_column_fields" />
 		 FROM
-		 	topic
+	 	 	topic
 	 	<include refid="MybatisTopicDAO_dynamic_where_fields" />
 	 	ORDER BY topic.id DESC
 	 	Limit #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisTopicDAO_select_all_byStatus" resultMap="TopicDOResultMap" parameterType="map">
+ 		SELECT
+ 			<include refid="MybatisTopicDAO_all_column_fields" />
+ 		FROM 
+ 			topic
+		<where>
+			<if test="topicType != null and topicType != '' "> AND topic_type=#{topicType} </if>
+			<if test="status != null and status != '' "> AND status=#{status} </if>
+			<if test="currentPeriods != null"> 
+				AND start_time &lt; #{currentTime}
+				AND end_time &gt; #{currentTime}
+			</if>
+			<if test="nextPeriods != null"> 
+				AND start_time &gt; #{currentTime}
+			</if>
+			<if test="exchangeStartTime != null and exchangeStartTime != '' "> 
+				AND start_time &gt;= #{exchangeStartTime}
+			</if>
+			<if test="exchangeEndTime != null and exchangeEndTime != '' "> 
+				AND end_time &lt;= #{exchangeEndTime}
+			</if>
+		</where>
  	</select>
 
 </mapper>

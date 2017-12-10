@@ -3,15 +3,22 @@
         <ul class="login_bar">
             <li id="ECS_MEMBERZONE">
                 <a href="${domain}/index" rel="nofollow">车西西首页</a><s>|</s>
-                <a href="${domain}/user/login" rel="nofollow">请登录</a><s>|</s>
-                <a href="${domain}/user/register" rel="nofollow">免费注册</a>
+                <#if checcUser??>
+                	<#assign mb=checcUser.mobile />
+                	${mb[0..2] + '****' + mb[7..]}
+                	<s>|</s>
+                	<a href="${domain}/user/logout" rel="nofollow">退出</a>
+                <#else>
+                	<a href="${domain}/user/login" rel="nofollow">请登录</a><s>|</s>
+                	<a href="${domain}/user/register" rel="nofollow">免费注册</a>
+                </#if>
             </li>
         </ul>
         <ul class="userinfo_bar">
             <li class="more-menu">
-                <a href="#"><i class="iconfont"></i>西币充值</a>
-                <a href="#"><i class="iconfont"></i>会员中心</a>
-                <a href="#"><i class="iconfont"></i>联系客服</a>
+                <a href="${domain}/user/bis/deposit"><i class="iconfont"></i>西币充值</a>
+                <a href="${domain}/user/bis/membercenter"><i class="iconfont"></i>会员中心</a>
+                <a href="${domain}/index/helper"><i class="iconfont"></i>帮助中心</a>
             </li>
             <li class="more-menu" style="display:none;">
                 <a href="#">会员中心</a>

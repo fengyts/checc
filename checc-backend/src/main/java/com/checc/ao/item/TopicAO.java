@@ -1,26 +1,44 @@
 package com.checc.ao.item;
 
 import java.util.Date;
+import java.util.List;
+
+import ng.bayue.common.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.checc.domain.TopicDO;
-import com.checc.dto.enums.TopicStatusEnum;
+import com.checc.enums.TopicStatusEnum;
 import com.checc.service.TopicService;
 import com.checc.util.ResultMessage;
 import com.checc.util.UserHandler;
-
-import ng.bayue.common.Page;
 
 @Service
 public class TopicAO {
 
 	@Autowired
 	private TopicService topicService;
+	
+	private void topicStatus(TopicDO topicDO) {
+		Date startTime = topicDO.getStartTime();
+		Date endTime = topicDO.getEndTime();
+		Date now = new Date();
+		String status = TopicStatusEnum.InProgress.getCode();
+		if (startTime.after(now)) {
+			status = TopicStatusEnum.NotStarted.getCode();
+		} else if (endTime.before(now)) {
+			status = TopicStatusEnum.End.getCode();
+		}
+		topicDO.setStatus(status);
+	}
 
 	public Page<TopicDO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize) {
 		Page<TopicDO> page = topicService.queryPageListDynamicAndStartPageSize(topicDO, pageNo, pageSize);
+		List<TopicDO> list = page.getList();
+		for(TopicDO t : list){
+			topicStatus(t);
+		}
 		return page;
 	}
 
@@ -29,6 +47,7 @@ public class TopicAO {
 			return new TopicDO();
 		}
 		TopicDO topicDO = topicService.selectById(id);
+		topicStatus(topicDO);
 		return topicDO;
 	}
 
@@ -45,6 +64,8 @@ public class TopicAO {
 		if(date.after(endTime) || startTime.before(date)){ // 开始|结束时间不能早于当前时间
 			return new ResultMessage(ResultMessage.Failure, "开始|结束时间不能早于当前时间");
 		}
+		
+		topicStatus(topicDO);
 		
 		Long userId = UserHandler.getUser().getId();
 		topicDO.setCreateUserId(userId);
@@ -73,6 +94,7 @@ public class TopicAO {
 		
 		topicDO.setModifyTime(new Date());
 		topicDO.setModifyUserId(UserHandler.getUser().getId());
+		topicStatus(topicDO);
 		topicService.update(topicDO, false);
 		
 		return ResultMessage.success();
