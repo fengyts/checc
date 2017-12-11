@@ -44,7 +44,6 @@
 	
 	<#-- 兑换商品 -->
 	<div class="topic_hd">
-		<hr style="width:95%; color:#aaeeee; margin-top:20px;"/>
 		<div class="topic_tab">
 			<span class="current_periods select_tab">西币兑换</span>
 		</div>

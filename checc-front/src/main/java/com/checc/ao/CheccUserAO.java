@@ -486,6 +486,11 @@ public class CheccUserAO {
 			return CommonResultMessage.failure("用户名或密码错误");
 		}
 		CheccUserDO userDO = userService.selectByMobile(mobile);
+		if(null == userDO){
+			return CommonResultMessage.failure("用户名或密码错误");
+		}
+		AESUtils aes = new AESUtils();
+		password = aes.decrypt(password);
 		String pwdReq = SecurityUtil.hashToStr(password, userDO.getSalt(), 2);
 		if (!pwdReq.equals(userDO.getPassword())) {
 			return CommonResultMessage.failure("用户名或密码错误");

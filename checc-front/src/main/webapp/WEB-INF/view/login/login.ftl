@@ -16,11 +16,18 @@
 	<link rel="stylesheet" type="text/css" href="${css}/login.css" />
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
+	<script type="text/javascript" src="${plugins}/crypto-js/rollups/aes.js"></script>
+	<script type="text/javascript" src="${static}/common/crypto.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>
 	<script type="text/javascript" src="${js}/login/user.js"></script>
 	
 	<script type="text/javascript">
 		var domain = "${domain}";
+		var layer;
+		layui.use('layer', function(){
+	  		layer = layui.layer;
+		});
 	</script>
 </header>
 
@@ -94,9 +101,9 @@
 									<li class="last">
 										<input type="hidden" name="act" value="act_login" /> 
 										<input type="hidden" name="back_act" value="${domain}/index" /> 
-										<a href="#" class="btn" id="doLogin" >登 录</a>
+										<input type="button" name="submit" class="btn" id="doLogin" value="登 录">
 										<#--
-										<input type="submit" name="submit" class="btn" id="doLogin" value="登 录">
+										<a href="#" class="btn" id="doLogin" >登 录</a>
 										-->
 									</li>
 								</ul>

@@ -241,7 +241,7 @@ function doLogin(){
 	
 	var _params = {};
 	_params.mobile = _mobile;
-	_params.password = _password;
+	_params.password = Crypto.encryptAES(_password);
 	
 	$.ajax({
 		url: 'doLogin',
@@ -254,7 +254,8 @@ function doLogin(){
 			var data = res;
 			console.log(data);
 			if (1 == data.result) {// 成功
-				top.window.location.href = domain + '/index';
+//				top.window.location.href = domain + '/index';
+				window.location.href = domain + "/";
 //				layer.msg("注册成功,请登录", {icon: 1, time:3000}, function() {
 //					parent.window.location.href= 'login';
 //					layer.close(layer.index); // 再执行关闭

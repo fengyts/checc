@@ -19,8 +19,6 @@
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<#include "/common/common-js.ftl" />
 	
-	<script type="text/javascript" src="${static}/common.js"></script>
-	<script type="text/javascript" src="${static}/index.js"></script>
 </head>
 <body>
 	
