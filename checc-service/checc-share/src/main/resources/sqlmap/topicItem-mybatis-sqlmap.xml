@@ -8,11 +8,12 @@
         <result column="topic_id" property="topicId"/>
         <result column="item_id" property="itemId"/>
         <result column="item_title" property="itemTitle"/>
+        <result column="market_price" property="marketPrice"/>
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
         <result column="is_topic_status" property="isTopicStatus"/>
         <result column="inventory" property="inventory"/>
-        <result column="excharge_amount" property="exchargeAmount"/>
+        <result column="exchange_amount" property="exchangeAmount"/>
         <result column="residue" property="residue"/>
         <result column="sort" property="sort"/>
         <result column="status" property="status"/>
@@ -23,7 +24,7 @@
 	</resultMap>
 
 	<sql id="MybatisTopicItemDAO_all_column_fields">
-	      id,topic_id,item_id,item_title,start_time,end_time,is_topic_status,inventory,excharge_amount,residue,sort,status,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_id,item_id,item_title,market_price,start_time,end_time,is_topic_status,inventory,exchange_amount,residue,sort,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -31,9 +32,10 @@
 			<if test="topicId != null "> AND topic_id=#{topicId} </if>
 			<if test="itemId != null "> AND item_id=#{itemId} </if>
 			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
+			<if test="marketPrice != null "> AND market_price=#{marketPrice} </if>
 			<if test="isTopicStatus != null "> AND is_topic_status=#{isTopicStatus} </if>
 			<if test="inventory != null "> AND inventory=#{inventory} </if>
-			<if test="exchargeAmount != null "> AND excharge_amount=#{exchargeAmount} </if>
+			<if test="exchangeAmount != null "> AND exchange_amount=#{exchangeAmount} </if>
 			<if test="residue != null "> AND residue=#{residue} </if>
 			<if test="sort != null "> AND sort=#{sort} </if>
 			<if test="status != null "> AND status=#{status} </if>
@@ -60,11 +62,12 @@
 				topic_id,
 				item_id,
 				item_title,
+				market_price,
 				start_time,
 				end_time,
 				is_topic_status,
 				inventory,
-				excharge_amount,
+				exchange_amount,
 				residue,
 				sort,
 				status,
@@ -77,11 +80,12 @@
 				#{topicId},
 				#{itemId},
 				#{itemTitle},
+				#{marketPrice},
 				#{startTime},
 				#{endTime},
 				#{isTopicStatus},
 				#{inventory},
-				#{exchargeAmount},
+				#{exchangeAmount},
 				#{residue},
 				#{sort},
 				#{status},
@@ -98,11 +102,12 @@
 					topic_id = #{topicId},
 					item_id = #{itemId},
 					item_title = #{itemTitle},
+					market_price = #{marketPrice},
 					start_time = #{startTime},
 					end_time = #{endTime},
 					is_topic_status = #{isTopicStatus},
 					inventory = #{inventory},
-					excharge_amount = #{exchargeAmount},
+					exchange_amount = #{exchangeAmount},
 					residue = #{residue},
 					sort = #{sort},
 					status = #{status},
@@ -123,11 +128,12 @@
 					<if test="topicId != null ">topic_id=#{topicId},</if>
 					<if test="itemId != null ">item_id=#{itemId},</if>
 					<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
+					<if test="marketPrice != null ">market_price=#{marketPrice},</if>
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
 					<if test="isTopicStatus != null ">is_topic_status=#{isTopicStatus},</if>
 					<if test="inventory != null ">inventory=#{inventory},</if>
-					<if test="exchargeAmount != null ">excharge_amount=#{exchargeAmount},</if>
+					<if test="exchangeAmount != null ">exchange_amount=#{exchangeAmount},</if>
 					<if test="residue != null ">residue=#{residue},</if>
 					<if test="sort != null ">sort=#{sort},</if>
 					<if test="status != null ">status=#{status},</if>

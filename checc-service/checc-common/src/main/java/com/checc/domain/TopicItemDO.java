@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题商品
-* @author fengyts Thu Nov 23 14:55:00 CST 2017
+* @author fengyts Mon Dec 11 22:42:41 CST 2017
 */
 
 public class TopicItemDO extends BaseDO {
@@ -23,6 +23,9 @@ private Long itemId;
 /** 商品名称 */
 private String itemTitle;
 
+/** 商品市场价，冗余字段 */
+private Double marketPrice;
+
 /** 商品在专题起始时间，该时间必须在专题时间范围内 */
 private Date startTime;
 
@@ -36,7 +39,7 @@ private Boolean isTopicStatus;
 private Integer inventory;
 
 /** 兑换商品价格 */
-private Double exchargeAmount;
+private Double exchangeAmount;
 
 /** 兑换剩余数量 */
 private Integer residue;
@@ -88,6 +91,13 @@ private Date modifyTime;
 	this.itemTitle = itemTitle;
 }
 /**
+* 设置 商品市场价，冗余字段
+* @param marketPrice
+*/
+	public void setMarketPrice(Double marketPrice) {
+	this.marketPrice = marketPrice;
+}
+/**
 * 设置 商品在专题起始时间，该时间必须在专题时间范围内
 * @param startTime
 */
@@ -117,10 +127,10 @@ private Date modifyTime;
 }
 /**
 * 设置 兑换商品价格
-* @param excharteAmount
+* @param exchangeAmount
 */
-	public void setExchargeAmount(Double exchargeAmount) {
-	this.exchargeAmount = exchargeAmount;
+	public void setExchangeAmount(Double exchangeAmount) {
+	this.exchangeAmount = exchangeAmount;
 }
 /**
 * 设置 兑换剩余数量
@@ -200,6 +210,13 @@ private Date modifyTime;
 	return itemTitle;
 }
 /**
+* 获取 商品市场价，冗余字段
+* @return marketPrice
+*/
+	public Double getMarketPrice() {
+	return marketPrice;
+}
+/**
 * 获取 商品在专题起始时间，该时间必须在专题时间范围内
 * @return startTime
 */
@@ -229,10 +246,10 @@ private Date modifyTime;
 }
 /**
 * 获取 兑换商品价格
-* @return excharteAmount
+* @return exchangeAmount
 */
-	public Double getExchargeAmount() {
-	return exchargeAmount;
+	public Double getExchangeAmount() {
+	return exchangeAmount;
 }
 /**
 * 获取 兑换剩余数量

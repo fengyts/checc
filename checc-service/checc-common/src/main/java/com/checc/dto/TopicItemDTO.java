@@ -24,7 +24,7 @@ public class TopicItemDTO implements Serializable {
 	/** 商品兑换总数量 */
 	private Integer inventory;
 	/** 商品兑换价格 */
-	private Double exchargeAmount;
+	private Double exchangeAmount;
 	/** 商品兑换剩余数量 */
 	private Integer residue;
 	/** 商品状态 */
@@ -102,12 +102,12 @@ public class TopicItemDTO implements Serializable {
 		this.inventory = inventory;
 	}
 
-	public Double getExchargeAmount() {
-		return exchargeAmount;
+	public Double getExchangeAmount() {
+		return exchangeAmount;
 	}
 
-	public void setExchargeAmount(Double exchargeAmount) {
-		this.exchargeAmount = exchargeAmount;
+	public void setExchangeAmount(Double exchangeAmount) {
+		this.exchangeAmount = exchangeAmount;
 	}
 
 	public Integer getResidue() {

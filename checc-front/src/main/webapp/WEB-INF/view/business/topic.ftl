@@ -69,7 +69,7 @@
 							</div>
 							<div class="auc_price">
 								<span class="lbtitle">兑换价:</span>
-								<span class="prc prc_curr">${excg.exchargeAmount?string['0']!0}西币</span>
+								<span class="prc prc_curr">${excg.exchangeAmount?string['0']!0}西币</span>
 							</div>
 							<div class="auc_btn">
 								<span>

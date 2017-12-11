@@ -84,7 +84,7 @@ css=[]
 								<#if obj.itemStatus == 'true'>有效<#else>无效</#if>
 							</td>
 							<td class="td_center">${obj.inventory}</td>
-							<td class="td_center">${obj.exchargeAmount!0?string('##.00')}</td>
+							<td class="td_center">${obj.exchangeAmount!0?string('##.00')}</td>
 							<td class="td_center">${obj.residue}</td>
 			    			<td class="td_center">
 			    				<#if obj.status == '01'>

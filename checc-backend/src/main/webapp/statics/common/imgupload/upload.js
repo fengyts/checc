@@ -591,6 +591,7 @@
 			picUrls += res.path + ",";
 			$("#picUrlsInput").val(picUrls);
 			$("#imgReturnUrls").append("<input type='hidden' name='listPicUrls' value='" + res.path + "'>");
+			$("#hasNewPic").val(1); // 有新的图片加入
 		});
 
         $upload.on('click', function() {

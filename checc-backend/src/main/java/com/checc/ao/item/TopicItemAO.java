@@ -73,7 +73,7 @@ public class TopicItemAO {
 			ti.setItemId(item.getItemId());
 			ti.setInventory(item.getInventory());
 			ti.setResidue(item.getResidue());
-			ti.setExchargeAmount(item.getExchargeAmount());
+			ti.setExchangeAmount(item.getExchangeAmount());
 			ti.setItemStatus(item.getStatus());
 			ti.setItemTitle(item.getItemTitle());
 			
@@ -96,7 +96,7 @@ public class TopicItemAO {
 	 * @param topicId
 	 * @return
 	 */
-	private boolean isExchargeItem(Long topicId){
+	private boolean isExchangeItem(Long topicId){
 		TopicDO topicDO = topicService.selectById(topicId);
 		return TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicDO.getTopicType());
 	}
@@ -109,11 +109,11 @@ public class TopicItemAO {
 		if(null == topicId){
 			return ResultMessage.failure("服务器异常：获取专题id失败");
 		}
-		if(isExchargeItem(topicId)){
+		if(isExchangeItem(topicId)){
 			if(null == topicItemDO.getInventory()){
 				return ResultMessage.failure("兑换商品数量不能为空");
 			}
-			if(null == topicItemDO.getExchargeAmount()){
+			if(null == topicItemDO.getExchangeAmount()){
 				return ResultMessage.failure("兑换商品价格不能为空");
 			}
 		}
@@ -145,11 +145,11 @@ public class TopicItemAO {
 		if(null == topicId){
 			return ResultMessage.failure("服务器异常：获取专题id失败");
 		}
-		if(isExchargeItem(topicId)){
+		if(isExchangeItem(topicId)){
 			if(null == topicItemDO.getInventory()){
 				return ResultMessage.failure("兑换商品数量不能为空");
 			}
-			if(null == topicItemDO.getExchargeAmount()){
+			if(null == topicItemDO.getExchangeAmount()){
 				return ResultMessage.failure("兑换商品价格不能为空");
 			}
 		}

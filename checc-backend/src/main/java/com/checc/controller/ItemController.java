@@ -87,7 +87,7 @@ public class ItemController extends BaseController {
 	
 	@RequestMapping({"/updateItem"})
 	@ResponseBody
-	public ResultMessage updateItem(ItemDTO itemDTO){
+	public ResultMessage updateItem(ItemDTO itemDTO, Boolean hasNewPic){
 		if(StringUtils.isBlank(itemDTO.getItemTitle())){
 			return ResultMessage.validParameterNull("商品名称");
 		}

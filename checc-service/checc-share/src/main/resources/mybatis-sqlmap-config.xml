@@ -19,7 +19,7 @@
 		<mapper resource="sqlmap/item-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/itemDesc-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/itemPicture-mybatis-sqlmap.xml" />
-		<mapper resource="sqlmap/exchargeRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/exchangeRecord-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/sysUser-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/depositCard-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/smsRecord-mybatis-sqlmap.xml" />

@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 商品图片
-* @author fengyts Tue Nov 21 13:31:45 CST 2017
+* @author fengyts Mon Dec 11 22:42:41 CST 2017
 */
 
 public class ItemPictureDO extends BaseDO {
@@ -28,6 +28,9 @@ private Integer sort;
 
 /** 是否删除,真实图片物理删除，记录逻辑删除：0-已删除；1-未删除 */
 private Boolean status;
+
+/** 删除状态,用于定期清理,是否已经删除：0-未删除；1-已删除 */
+private Boolean hasDelete;
 
 /** 创建人 */
 private Long createUserId;
@@ -82,6 +85,13 @@ private Date modifyTime;
 */
 	public void setStatus(Boolean status) {
 	this.status = status;
+}
+/**
+* 设置 删除状态,用于定期清理,是否已经删除：0-未删除；1-已删除
+* @param hasDelete
+*/
+	public void setHasDelete(Boolean hasDelete) {
+	this.hasDelete = hasDelete;
 }
 /**
 * 设置 创建人
@@ -152,6 +162,13 @@ private Date modifyTime;
 */
 	public Boolean getStatus() {
 	return status;
+}
+/**
+* 获取 删除状态,用于定期清理,是否已经删除：0-未删除；1-已删除
+* @return hasDelete
+*/
+	public Boolean getHasDelete() {
+	return hasDelete;
 }
 /**
 * 获取 创建人

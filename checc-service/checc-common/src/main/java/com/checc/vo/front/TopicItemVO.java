@@ -10,7 +10,7 @@ public class TopicItemVO extends BaseVO {
 
 	/** topicItem 主键ID */
 	private Long id;
-	
+
 	/** 专题主键id */
 	private Long topicId;
 	/** 专题类型 */
@@ -28,11 +28,13 @@ public class TopicItemVO extends BaseVO {
 	/** 商品兑换总数量 */
 	private Integer inventory;
 	/** 商品兑换价格 */
-	private Double exchargeAmount;
+	private Double exchangeAmount;
 	/** 商品兑换剩余数量 */
 	private Integer residue;
-	/** 商品状态 */
+	/** 商品状态,竞拍、兑换是否结束 */
 	private Boolean itemStatus;
+	/** 兑换商品是否已经兑光 */
+	private Boolean hasExchangeOut;
 
 	/** 商品图片地址 */
 	private String picture;
@@ -114,12 +116,12 @@ public class TopicItemVO extends BaseVO {
 		this.inventory = inventory;
 	}
 
-	public Double getExchargeAmount() {
-		return exchargeAmount;
+	public Double getExchangeAmount() {
+		return exchangeAmount;
 	}
 
-	public void setExchargeAmount(Double exchargeAmount) {
-		this.exchargeAmount = exchargeAmount;
+	public void setExchangeAmount(Double exchangeAmount) {
+		this.exchangeAmount = exchangeAmount;
 	}
 
 	public Integer getResidue() {
@@ -160,6 +162,14 @@ public class TopicItemVO extends BaseVO {
 
 	public void setCurrentAuctionPrice(Double currentAuctionPrice) {
 		this.currentAuctionPrice = currentAuctionPrice;
+	}
+
+	public Boolean getHasExchangeOut() {
+		return hasExchangeOut;
+	}
+
+	public void setHasExchangeOut(Boolean hasExchangeOut) {
+		this.hasExchangeOut = hasExchangeOut;
 	}
 
 }

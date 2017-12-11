@@ -6,10 +6,10 @@ import java.util.Date;
 
 /**
 * 商品兑换记录
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Mon Dec 11 22:42:40 CST 2017
 */
 
-public class ExchargeRecordDO extends BaseDO {
+public class ExchangeRecordDO extends BaseDO {
 
 /** 主键 */
 private Long id;
@@ -27,7 +27,7 @@ private Long userId;
 private Integer count;
 
 /** 兑换金额，即商品兑换单价，冗余字段 */
-private Integer exchargeAmount;
+private Integer exchangeAmount;
 
 /** 兑换时间 */
 private Date createTime;
@@ -69,10 +69,10 @@ private Date createTime;
 }
 /**
 * 设置 兑换金额，即商品兑换单价，冗余字段
-* @param exchargeAmount
+* @param exchangeAmount
 */
-	public void setExchargeAmount(Integer exchargeAmount) {
-	this.exchargeAmount = exchargeAmount;
+	public void setExchangeAmount(Integer exchangeAmount) {
+	this.exchangeAmount = exchangeAmount;
 }
 /**
 * 设置 兑换时间
@@ -118,10 +118,10 @@ private Date createTime;
 }
 /**
 * 获取 兑换金额，即商品兑换单价，冗余字段
-* @return exchargeAmount
+* @return exchangeAmount
 */
-	public Integer getExchargeAmount() {
-	return exchargeAmount;
+	public Integer getExchangeAmount() {
+	return exchangeAmount;
 }
 /**
 * 获取 兑换时间

@@ -1,7 +1,6 @@
 package com.checc.ao;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ng.bayue.fastdfs.ImageUrlUtil;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
-import com.checc.dto.TopicItemDTO;
 import com.checc.enums.TopicTypeEnum;
 import com.checc.service.ItemPictureService;
 import com.checc.service.TopicItemService;
@@ -95,7 +93,7 @@ public class TopicItemAO {
 			vo.setStatus(topicDO.getStatus());
 
 			vo.setId(item.getId());
-			vo.setExchargeAmount(item.getExchargeAmount());
+			vo.setExchangeAmount(item.getExchangeAmount());
 			vo.setInventory(item.getInventory());
 			vo.setItemId(item.getItemId());
 			vo.setItemTitle(item.getItemTitle());
