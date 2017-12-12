@@ -30,6 +30,7 @@ css=[
 			<div class="input-group">
 				<input type="text" class="form-control" readonly="readonly" id="itemTitle" name="itemTitle" placeholder="请选择商品" value="${topicItemDO.itemTitle}">
 				<input type="hidden" id="itemId" name="itemId" value="${topicItemDO.itemId}"/>
+				<input type="hidden" id="marketPrice" name="marketPrice" value="${topicItemDO.marketPrice}"/>
 				<span class="btn btn-default btn-sm input-group-addon" id="selectItem">
 					<span class="glyphicon glyphicon-plus"></span>
 					选择商品

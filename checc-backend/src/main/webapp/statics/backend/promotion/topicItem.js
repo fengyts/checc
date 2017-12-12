@@ -130,10 +130,13 @@ $(function() {
 			layer.alert("必须选择一个商品",{icon : 0});
 			return;
 		}
+		var _trs = _checkBox.parent().nextAll();
 		var _itemId = _checkBox.val();
-		var _itemTitle = _checkBox.parent().next().text();
-		window.parent.$("#itemTitle").val(_itemTitle);
+		var _itemTitle = $(_trs[0]).text();
+		var _marketPrice = $(_trs[1]).text();
 		window.parent.$("#itemId").val(_itemId);
+		window.parent.$("#itemTitle").val(_itemTitle);
+		window.parent.$("#marketPrice").val(_marketPrice);
 		
 		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 		parent.layer.close(index); //再执行关闭   

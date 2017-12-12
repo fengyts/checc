@@ -148,5 +148,19 @@
 	 		</foreach>
  			)
  	</select>
+ 	
+ 	<update id="MybatisItemPictureDAO_update_byItemId" parameterType="long">
+ 		UPDATE
+ 			item_picture
+ 		SET status = 0
+ 		WHERE item_id = #{itemId}
+ 	</update>
+ 	
+ 	<update id="MybatisItemPictureDAO_update_deleteStatus">
+ 		UPDATE
+ 			item_picture
+ 		SET has_delete = 1
+ 		WHERE has_delete = 0
+ 	</update>
 
 </mapper>

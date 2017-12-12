@@ -17,6 +17,7 @@ import com.checc.util.ResultMessage;
 import com.checc.util.UserHandler;
 
 import ng.bayue.common.Page;
+import ng.bayue.constants.CommonConstant;
 import ng.bayue.fastdfs.ImageUrlUtil;
 
 @Service
@@ -52,6 +53,7 @@ public class ItemAO {
 		ItemDescDO descDO = descService.selectDynamic(descDOParam).get(0);
 		ItemPictureDO pictureParam = new ItemPictureDO();
 		pictureParam.setItemId(itemId);
+		pictureParam.setStatus(CommonConstant.STATUS.TRUE);
 		List<ItemPictureDO> listPics = pictureService.selectDynamic(pictureParam);
 		for(ItemPictureDO pic : listPics){
 			pic.setPicture(imageUrlUtil.getFileFullUrl(pic.getPicture()));

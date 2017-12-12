@@ -27,7 +27,7 @@ private Long userId;
 private Integer count;
 
 /** 兑换金额，即商品兑换单价，冗余字段 */
-private Integer exchangeAmount;
+private Double exchangeAmount;
 
 /** 兑换时间 */
 private Date createTime;
@@ -71,7 +71,7 @@ private Date createTime;
 * 设置 兑换金额，即商品兑换单价，冗余字段
 * @param exchangeAmount
 */
-	public void setExchangeAmount(Integer exchangeAmount) {
+	public void setExchangeAmount(Double exchangeAmount) {
 	this.exchangeAmount = exchangeAmount;
 }
 /**
@@ -120,7 +120,7 @@ private Date createTime;
 * 获取 兑换金额，即商品兑换单价，冗余字段
 * @return exchangeAmount
 */
-	public Integer getExchangeAmount() {
+	public Double getExchangeAmount() {
 	return exchangeAmount;
 }
 /**

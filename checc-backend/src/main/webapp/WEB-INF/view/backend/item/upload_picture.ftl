@@ -15,7 +15,7 @@
 	        		<ul class="filelist ml10">
 	        		<#list picUrlList as picUrl>
 	        			<li>
-	        				<p class="imgWrap">
+	        				<p class="imgWrap" style="border: solid 1px #aaeeee">
 	        					<img src="${picUrl.picture}" />
 	        				</p>
 	        			</li>

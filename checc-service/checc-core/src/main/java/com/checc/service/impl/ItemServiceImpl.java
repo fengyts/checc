@@ -191,7 +191,7 @@ public class ItemServiceImpl  implements ItemService{
 
 			List<String> listPicUrls = itemDTO.getListPicUrls();
 			if (CollectionUtils.isNotEmpty(listPicUrls)) {
-				int count = 0;
+				int count = 0; // 排序值
 				for (String picture : listPicUrls) {
 					ItemPictureDO pictureDO = new ItemPictureDO();
 					pictureDO.setItemId(itemId);
@@ -199,6 +199,7 @@ public class ItemServiceImpl  implements ItemService{
 					pictureDO.setSort(count);
 					pictureDO.setStatus(CommonConstant.STATUS.TRUE);
 					pictureDO.setType(ItemPictureTypeEnum.PIC_PRIMARY.getCode());
+					pictureDO.setHasDelete(CommonConstant.STATUS.FALSE);
 
 					pictureDO.setCreateTime(date);
 					pictureDO.setCreateUserId(userId);
@@ -223,7 +224,7 @@ public class ItemServiceImpl  implements ItemService{
 	@Transactional
 	public int updateItem(ItemDTO itemDTO) throws CommonServiceException {
 		Date date = new Date();
-		Long userId = itemDTO.getCreateUserId();
+		Long userId = itemDTO.getModifyUserId();
 		Long itemId = itemDTO.getId();
 		try {
 			ItemDO itemDO = new ItemDO();
@@ -252,7 +253,27 @@ public class ItemServiceImpl  implements ItemService{
 			// 修改图片功能待定
 			List<String> listPicUrls = itemDTO.getListPicUrls();
 			if (CollectionUtils.isNotEmpty(listPicUrls)) {
+				// 清除原来的图片
+				pictureDAO.updateByItemId(itemId); 
+				// 插入新图片
+				int count = 0; // 排序值
 				for (String picture : listPicUrls) {
+					ItemPictureDO pictureDO = new ItemPictureDO();
+					pictureDO.setItemId(itemId);
+					pictureDO.setPicture(picture);
+					pictureDO.setSort(count);
+					pictureDO.setStatus(CommonConstant.STATUS.TRUE);
+					pictureDO.setType(ItemPictureTypeEnum.PIC_PRIMARY.getCode());
+					pictureDO.setHasDelete(CommonConstant.STATUS.FALSE);
+
+					pictureDO.setCreateTime(date);
+					pictureDO.setCreateUserId(userId);
+					pictureDO.setModifyTime(date);
+					pictureDO.setModifyUserId(userId);
+					
+					pictureDAO.insert(pictureDO);
+
+					count++;
 				}
 
 			}
