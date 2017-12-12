@@ -21,8 +21,8 @@
 		<div class="meta_auction_eninfo">
 			<span>若接下来无人出价,${detailVO.currentAuction}将以￥168830.00拍得本件商品</span>
 		</div>
-		<div class="meta_auction_eninfo">
-			<div>
+		<div class="meta_auction_action">
+			<div class="auc_action">
 				<span><a href="#">我要出价</a></span>
 				<span>20西币每次</span>
 			</div>

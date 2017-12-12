@@ -50,10 +50,13 @@
 			</div>
 			
 			<#-- 兑换或者竞拍  01:竞拍;02:兑换  -->
-				<#include "/business/details/auction.ftl" />
-			<#if detailVO.topicType == '01'>
-			<#else>
-			</#if>
+			<div class="detail_meta_box">
+				<#if detailVO.topicType == '01'>
+					<#include "/business/details/auction.ftl" />
+				<#else>
+					<#include "/business/details/exchange.ftl" />
+				</#if>
+			</div>
 			
 			<#-- 详情描述 -->
 			<div class="detail_desc">

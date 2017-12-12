@@ -70,7 +70,8 @@ public class TopicItemAO {
 	 */
 	public List<TopicItemVO> listExchange() {
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
-		List<TopicDO> listTopic = topicService.selectAllDynamic(null, TopicTypeEnum.TOPIC_EXCHANGE.getCode());
+		List<TopicDO> listTopic = topicService.selectAllDynamic(null,
+				TopicTypeEnum.TOPIC_EXCHANGE.getCode());
 		if (CollectionUtils.isEmpty(listTopic)) {
 			return listResult;
 		}
@@ -133,6 +134,7 @@ public class TopicItemAO {
 		Date endTime = topic.getEndTime();
 		String status = getTopicStatus(startTime, endTime);
 		Long itemId = item.getItemId();
+		String topicType = topic.getTopicType();
 
 		TopicItemDetailVO vo = new TopicItemDetailVO();
 		vo.setId(item.getId());
@@ -147,9 +149,17 @@ public class TopicItemAO {
 		vo.setTopicId(topicId);
 
 		vo.setStatus(status);
-		vo.setTopicType(topic.getTopicType());
+		vo.setTopicType(topicType);
 		vo.setStartTime(startTime);
 		vo.setEndTime(endTime);
+
+		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) {
+			if (item.getResidue() < 1) {
+				vo.setHasExchangeOut(true);
+			}
+		} else {
+			vo.setHasExchangeOut(false);
+		}
 
 		ItemPictureDO pdo = new ItemPictureDO();
 		pdo.setItemId(itemId);
@@ -160,11 +170,11 @@ public class TopicItemAO {
 			ItemPictureDO picture = listPics.get(0);
 			vo.setPicture(imageUrlUtil.getFileFullUrl(picture.getPicture()));
 		}
-		
+
 		ItemDescDO descDO = new ItemDescDO();
 		descDO.setItemId(itemId);
 		List<ItemDescDO> listDesc = itemDescService.selectDynamic(descDO);
-		if(CollectionUtils.isNotEmpty(listDesc)){
+		if (CollectionUtils.isNotEmpty(listDesc)) {
 			vo.setDescription(listDesc.get(0).getDescription());
 		}
 
