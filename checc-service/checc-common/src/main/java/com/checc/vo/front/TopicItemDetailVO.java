@@ -4,9 +4,9 @@ import java.util.Date;
 
 import com.checc.vo.BaseVO;
 
-public class TopicItemVO extends BaseVO {
+public class TopicItemDetailVO extends BaseVO {
 
-	private static final long serialVersionUID = 6084541220722196553L;
+	private static final long serialVersionUID = -3171606217018855718L;
 
 	/** topicItem 主键ID */
 	private Long id;
@@ -43,6 +43,11 @@ public class TopicItemVO extends BaseVO {
 	private Double marketPrice;
 	/** 当前竞拍价 */
 	private Double currentAuctionPrice;
+	
+	/** 结束倒计时 */
+	private Long timeCountDown;
+	
+	private String description;
 
 	public Long getId() {
 		return id;
@@ -140,6 +145,14 @@ public class TopicItemVO extends BaseVO {
 		this.itemStatus = itemStatus;
 	}
 
+	public Boolean getHasExchangeOut() {
+		return hasExchangeOut;
+	}
+
+	public void setHasExchangeOut(Boolean hasExchangeOut) {
+		this.hasExchangeOut = hasExchangeOut;
+	}
+
 	public String getPicture() {
 		return picture;
 	}
@@ -164,12 +177,21 @@ public class TopicItemVO extends BaseVO {
 		this.currentAuctionPrice = currentAuctionPrice;
 	}
 
-	public Boolean getHasExchangeOut() {
-		return hasExchangeOut;
+	public Long getTimeCountDown() {
+		return timeCountDown;
 	}
 
-	public void setHasExchangeOut(Boolean hasExchangeOut) {
-		this.hasExchangeOut = hasExchangeOut;
+	public void setTimeCountDown(Long timeCountDown) {
+		this.timeCountDown = timeCountDown;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 }

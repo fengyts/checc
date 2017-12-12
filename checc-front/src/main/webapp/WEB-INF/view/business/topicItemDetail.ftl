@@ -42,10 +42,23 @@
 	<#include "/common/header.ftl" />
 	
 	<div class="content">
-		<div class="checc_pos">
-			<span>首页</span>
-			<span>>></span>
-			<span>商品详情</span>
+		<div class="main_box">
+			<div class="checc_pos">
+				<span>首页</span>
+				<span>>></span>
+				<span>商品详情</span>
+			</div>
+			
+			<#-- 兑换或者竞拍  01:竞拍;02:兑换  -->
+				<#include "/business/details/auction.ftl" />
+			<#if detailVO.topicType == '01'>
+			<#else>
+			</#if>
+			
+			<#-- 详情描述 -->
+			<div class="detail_desc">
+				${detailVO.description}
+			</div>
 		</div>
 	</div>
 
