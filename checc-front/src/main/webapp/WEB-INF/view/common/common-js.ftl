@@ -15,14 +15,17 @@
 -->
 
 <script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
+
 <#-- 防止命名冲突 -->
 <script type="text/javascript">
-	var $ = jQuery.noConflict();
-	var orderDomain  ="${salesorder_domain}"; 
-	var  userDomain = "${user_domain}";
-	var  staticDomain = "${static_domain}";
-	var topicUrl = "${promotion_domain}";
-	var PCACHE={}; 
+	var $ = jQuery.noConflict(), 
+		domain = "${domain}", 
+		PCACHE = {}, 
+		layer;
+	layui.use('layer', function(){
+  		layer = layui.layer;
+	}); 
 </script>
 
 

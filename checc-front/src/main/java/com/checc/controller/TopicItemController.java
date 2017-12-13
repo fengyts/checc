@@ -49,9 +49,13 @@ public class TopicItemController {
 		
 		TopicItemDetailVO detailVO = topicItemAO.topicItemDetails(tpId);
 		model.addAttribute("detailVO", detailVO);
-		if(null != reqTime || reqTime > 0l){
+		if(null != reqTime && reqTime > 0l){
 			model.addAttribute("reqTime", reqTime);
 		}
+		long endTime = detailVO.getEndTime().getTime();
+		long countDownTime = endTime - System.currentTimeMillis();
+		model.addAttribute("countDownTime", countDownTime);
+		
 		return "/business/topicItemDetail";
 	}
 

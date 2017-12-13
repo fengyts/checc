@@ -26,7 +26,10 @@
 				<span><a href="#">我要出价</a></span>
 				<span>20西币每次</span>
 			</div>
-			<div class="meta_auct_timedown"></div>
+			<div class="meta_auct_timedown">
+				<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
+				<span id="countDownTime" class="auct_timedown"></span>
+			</div>
 		</div>
 	</div>
 </div>

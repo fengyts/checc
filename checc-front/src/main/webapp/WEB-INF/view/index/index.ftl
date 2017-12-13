@@ -16,7 +16,6 @@
 	<link rel="stylesheet" type="text/css" href="${css}/index.css" />
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
 	
-	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
 	<#include "/common/common-js.ftl" />
 	
 </head>

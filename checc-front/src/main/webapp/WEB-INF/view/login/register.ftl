@@ -9,7 +9,7 @@
 	<meta name="Keywords" content="" />
 	<meta name="Description" content="" />
 	
-	<title>用户中心_车西西-值得信赖的网上汽车商城</title>
+	<title>车西西-值得信赖的网上竞拍商城</title>
 	
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
@@ -22,13 +22,7 @@
 	<script type="text/javascript" src="${static}/common/crypto.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>
 	<script type="text/javascript" src="${js}/login/user.js"></script>
-	<#--
-	<script type="text/javascript" src="${static}/common/jquery.json.js"></script>
-	<script type="text/javascript" src="${static}/common/transport_jquery.js"></script>
-	<script type="text/javascript" src="${static}/common/jquery.SuperSlide.js"></script>
-	<script type="text/javascript" src="${static}/common/lizi_common.js"></script>
-	<script type="text/javascript" src="js/common.js"></script>
-	-->
+
 	<script type="text/javascript">
 		var layer;
 		layui.use('layer', function(){
