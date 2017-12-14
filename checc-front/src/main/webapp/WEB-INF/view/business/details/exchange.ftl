@@ -1,19 +1,24 @@
 <div class="detail_meta">
-	<div class="meta_item_img">
-		<img src="${detailVO.picture}">
+	<div class="item_detail_imgs">
+		<div class="meta_item_img">
+			<img src="${detailVO.picture}">
+		</div>
+		<div class="detail_img_list"></div>
 	</div>
 	<div class="meta_item_info">
 		<div class="meta_item_title">${detailVO.itemTitle}</div>
-		<div class="meta_item_exchangeprice">
-			<span>价值:</span>
-			<span>${detailVO.exchangeAmount!0}</span>
-		</div>
-		<div class="meta_inventory">
-			<span>数量:</span>
-			<span>${detailVO.residue}/${detailVO.inventory}</span>
-		</div>
-		<div class="meta_exchange_eninfo">
-			<span>每人限兑换一份，兑换后不可撤销</span>
+		<div class="auc_info_t">
+			<div class="meta_item_exchangeprice">
+				<span>价值:</span>
+				<span>${detailVO.exchangeAmount!0}</span>
+			</div>
+			<div class="meta_inventory">
+				<span>数量:</span>
+				<span>${detailVO.residue}/${detailVO.inventory}</span>
+			</div>
+			<div class="meta_exchange_eninfo">
+				<span>每人限兑换一份，兑换后不可撤销</span>
+			</div>
 		</div>
 		<div class="meta_exchange_action">
 			<div class="auc_action">

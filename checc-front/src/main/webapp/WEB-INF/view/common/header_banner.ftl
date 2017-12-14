@@ -1,5 +1,5 @@
 <div class="hd_m">
-    <div id="checc_lg" class="checc_lg">
+    <div id="checc_lg" class="checc_lg content_pos">
         <div class="checc_clg">
             <span class="checc_lgn_text"><a href="${domain}/">车西西</a></span>
             <span class="checc_lgn_link">

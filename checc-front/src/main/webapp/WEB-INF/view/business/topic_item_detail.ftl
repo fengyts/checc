@@ -38,12 +38,14 @@
 	
 	<#include "/common/header.ftl" />
 	
-	<div class="content">
-		<#include "/business/details/item_detail_main.ftl" />
+	<div class="content_box">
+		<div class="content">
+			<#include "/business/details/item_detail_main.ftl" />
+		</div>
 	</div>
 
 	<#include "/common/footer_both.ftl" />
 </body>
 
-<script type="text/javascript" src="${js}/detail.js"></script>
+<script type="text/javascript" src="${js}/item_detail.js"></script>
 </html>

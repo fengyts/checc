@@ -3,7 +3,7 @@ var mss;
 var _timeFlag = false;
 $(document).ready(function() {
 	o = $("#countDownTime");
-	mss = ($("#countDownTimeOrigin").text() / 1000) + 1;
+	mss = $("#countDownTimeOrigin").text() / 1000;
 	countDownTime(o);
 });
 

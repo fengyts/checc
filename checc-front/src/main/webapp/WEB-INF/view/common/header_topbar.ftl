@@ -1,5 +1,5 @@
 <div class="topbar">
-    <div class="hd_bar">
+    <div class="hd_bar content_pos">
         <ul class="login_bar">
             <li id="ECS_MEMBERZONE">
                 <a href="${domain}/index" rel="nofollow">车西西首页</a><s>|</s>

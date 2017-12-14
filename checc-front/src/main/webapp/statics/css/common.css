@@ -14,7 +14,6 @@ body {
 	width: inherit;
 	min-width: 100%;
 	min-height: 100%; */
-	
 }
 
 body, button, input, select, textarea {
@@ -25,6 +24,11 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li,
 	pre, form, fieldset, legend, button, input, select, textarea, th, td {
 	margin: 0;
 	padding: 0;
+}
+
+.content_pos {
+	width: 65%;
+	margin-left: 15%;
 }
 
 /* 头部样式开始 */
@@ -89,7 +93,7 @@ ul, ol {
 
 .login_bar {
 	float: left;
-	margin-left: 100px;
+/* 	margin-left: 100px; */
 }
 
 .userinfo_bar {
@@ -113,7 +117,7 @@ ul, ol {
 
 .checc_lg {
 	max-height: 70px;
-	margin: 0px 0 0 90px;
+/* 	margin: 0px 0 0 90px; */
 }
 
 .checc_lg div {
@@ -247,14 +251,17 @@ ul, ol {
 }
 
 /* 内容容器  */
-.content {
-	/* 	version:2017-12-09 */
-	/* 	position:absolute; */
+.content_box {
 	height: 100%;
 	min-height: 100%;
-	width: 90%;
+	width: 65%;
 	/* 	min-width: 900px; */
-	margin-left: 100px;
+	margin-left: 15%;
+}
+
+.content {
+	padding: 0;
+	margin:0 0 0 5%;
 }
 
 /*  竞拍流程图样式 */
@@ -385,13 +392,13 @@ ul, ol {
 }
 
 .topic_items {
-	margin-top: 10px;
+	margin: 10px 0px 0px 15px;
 }
 
 .items {
 	display: inline-block;
 	margin: 15px 0 0 18px;
-	width: 20%;
+	width: 22%;
 	border: solid 1px #aaeeee;
 }
 
@@ -487,8 +494,9 @@ ul, ol {
 }
 
 .checc_pos {
-	margin-top: 10px;
+	margin: 10px 0px 0px -53px;
 	min-height: 50px;
+	border-bottom: solid 1px #aaeeee;
 }
 
 .checc_pos>span {
@@ -499,21 +507,32 @@ ul, ol {
 	line-height: 50px;
 }
 
+.detail_meta_box {
+	margin: 0;
+	padding: 0;
+	height: 380px;
+}
+
 .detail_meta {
-	min-height: 350px;
-	margin-left: 20px;
 	margin-top: 20px;;
+	margin-left: 20px;
+	height: inherit;
+	min-width: 100%;
 }
 
 .detail_meta>div {
 	float: left;
 }
 
+.item_detail_imgs {
+	position: relative;
+	min-height: inherit;
+}
+
 .meta_item_img {
-	margin-top: 15px; min-height : 300px;
-	min-width: 320px;
-	height: 300px;
-	min-height: 300px; min-width : 320px; height : 300px;
+	min-height : 300px;
+	min-width: 330px;
+	height : 300px;
 	width: 320px;
 }
 
@@ -523,10 +542,125 @@ ul, ol {
 }
 
 .meta_item_info {
+	position: relative;
+	margin: -300px 0px 0px 380px;
+	height: 350px;
+	min-width: 500px;
+	max-width: 660px;
+}
+
+.meta_item_title {
+	font-size: 18px;
+	color: #333333;
+}
+
+.auc_info_t {
+	font-size: 16px;
+	color: #666666;
+}
+
+.meta_item_currauctprice, .meta_currauctper,.meta_item_exchangeprice,.meta_inventory {
+	margin-top: 15px;
+}
+
+.meta_item_currauctprice > .currauctprice{
+	color: #ff0000 !important;
+	font-size: 24px;
+	font-weight:600;
+}
+.meta_item_currauctprice > .compare_marketPrice {
+	margin-left:10px;
+	font-size:14px;
+	color: #aaaaaa !important;
+	text-decoration: line-through;
+}
+
+.meta_currauctper{
+/* 	margin-top: 15px; */
+	width: 500px;
+}
+.currauctperson, .curraucttime {
+	margin-left: 15px;
+}
+.meta_currauctper > .auctall {
+	margin-left: 130px;
+	font-size: 14px;
+}
+
+/* .meta_auction_eninfo { */
+/* 	margin-top: 15px; */
+/* } */
+.meta_auction_eninfo>p>.eninfo_price{
+	color:#ff0000;
+	font-weight:600;
+}
+
+.meta_auction_action{
 	margin-top: 10px;
-	margin-left: 100px;
-	min-height: inherit;
+	min-width: inherit;
+	height: 80px;
+}
+
+.meta_auction_action>div {
+	display: inline-block;
+}
+.auc_action,.auc_action_over {
+	margin-top: 10px;
+	width: 200px;
+	height: 55px;
+    font-size:18px;
+    font-weight:500;
+    overflow-wrap: normal;
+    text-align: center;
+    vertical-align: middle;
+	line-height: 230%;
+	border-radius: 6px;
+}
+.meta_auction_action>.auc_action {
+	float: left;
+    background-color: #1E9FFF;
+	cursor: pointer;
+}
+
+.meta_auction_action>.auc_act_btn_p{
+	line-height: 20px;
+	color:#eeeeee;
+}
+.meta_auction_action>.auc_action>p>a{
+	font-size:18px;
+	color:#ffffff;
+}
+.meta_auction_action>.auc_action:hover {
+	color: #ffffff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.auc_currency {
+	font-size: 14px;
+}
+
+.auc_act_btn {
+	margin-top: 10px;
+}
+
+.meta_auction_action>.meta_auct_timedown {
+	margin: 20px 0px 0px 30px;
+	font-size: 16px;
+	color: #ff0000;
+}
+
+.meta_auction_action>.auc_action_over {
+	background-color: #d9d9d9;
+	cursor: not-allowed;
+	color: #999999;
 }
 
 
+/* 商品详情描述 */
+.detail_desc {
+	clear: none;
+}
 

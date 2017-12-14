@@ -56,7 +56,7 @@ public class TopicItemController {
 		long countDownTime = endTime - System.currentTimeMillis();
 		model.addAttribute("countDownTime", countDownTime);
 		
-		return "/business/topicItemDetail";
+		return "/business/topic_item_detail";
 	}
 
 }

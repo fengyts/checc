@@ -13,7 +13,6 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	
-	<link rel="stylesheet" type="text/css" href="${css}/index.css" />
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
 	
 	<#include "/common/common-js.ftl" />
@@ -38,10 +37,11 @@
 	
 	<#include "/common/header.ftl" />
 	
-	<div class="content">
-		<#include "/index/auction_flow.ftl" />
-		
-		<#include "/business/topic.ftl" />
+	<div class="content_box">
+			<#include "/index/auction_flow.ftl" />
+		<div class="content">
+			<#include "/business/topic.ftl" />
+		</div>
 	</div>
 
 	<#include "/common/footer_both.ftl" />
