@@ -47,16 +47,19 @@ css=[]
 			<div class="box span10 oh">
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
-			    		<th width="5%">ID</th>
+			    		<th width="3%">ID</th>
 			    		<th>专题类型</th>
 			    		<th>专题状态</th>
 			    		<th width="200px">开始时间</th>
 			    		<th width="200px">结束时间</th>
 			    		<th>商品名称</th>
 			    		<th>商品状态</th>
+			    		<th>竞拍单价</th>
+			    		<th>竞拍最大限次</th>
 			    		<th>兑换数量</th>
 			    		<th>兑换价格</th>
 			    		<th>兑换剩余数量</th>
+			    		<th>兑换限次</th>
 			    		<th>操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
@@ -83,9 +86,12 @@ css=[]
 							<td class="td_center">
 								<#if obj.itemStatus == 'true'>有效<#else>无效</#if>
 							</td>
+							<td class="td_center">${obj.auctionCurrency}</td>
+							<td class="td_center">${obj.auctionMaxTimes}</td>
 							<td class="td_center">${obj.inventory}</td>
 							<td class="td_center">${obj.exchangeAmount!0?string('##.00')}</td>
 							<td class="td_center">${obj.residue}</td>
+							<td class="td_center">${obj.exchangeLimitNum}</td>
 			    			<td class="td_center">
 			    				<#if obj.status == '01'>
 			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>

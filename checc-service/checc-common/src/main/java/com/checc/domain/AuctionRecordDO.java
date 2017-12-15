@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 竞拍记录
-* @author fengyts Thu Nov 16 14:54:40 CST 2017
+* @author fengyts Fri Dec 15 14:33:19 CST 2017
 */
 
 public class AuctionRecordDO extends BaseDO {
@@ -14,23 +14,29 @@ public class AuctionRecordDO extends BaseDO {
 /** 主键 */
 private Long id;
 
-/** 专题id */
-private Long topicId;
-
-/** 商品id */
-private Long itemId;
+/** 专题商品表topic_item主键id */
+private Long topicItemId;
 
 /** 用户id */
 private Long userId;
 
+/** 用户昵称，冗余字段 */
+private String nickname;
+
+/** 用户手机号，冗余字段 */
+private String mobile;
+
 /** 用户出价 */
-private Integer bid;
+private Double bidPrice;
+
+/** 出价次数 */
+private Integer bidNum;
+
+/** 本次出价消耗总西币(出价次数*单次出价西币) */
+private Integer totalCurrency;
 
 /** 出价时间 */
 private Date bidTime;
-
-/** 商品当前竞拍价 */
-private Double itemPrice;
 
 /**
 * 设置 主键
@@ -40,18 +46,11 @@ private Double itemPrice;
 	this.id = id;
 }
 /**
-* 设置 专题id
-* @param topicId
+* 设置 专题商品表topic_item主键id
+* @param topicItemId
 */
-	public void setTopicId(Long topicId) {
-	this.topicId = topicId;
-}
-/**
-* 设置 商品id
-* @param itemId
-*/
-	public void setItemId(Long itemId) {
-	this.itemId = itemId;
+	public void setTopicItemId(Long topicItemId) {
+	this.topicItemId = topicItemId;
 }
 /**
 * 设置 用户id
@@ -61,11 +60,39 @@ private Double itemPrice;
 	this.userId = userId;
 }
 /**
-* 设置 用户出价
-* @param bid
+* 设置 用户昵称，冗余字段
+* @param nickname
 */
-	public void setBid(Integer bid) {
-	this.bid = bid;
+	public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+/**
+* 设置 用户手机号，冗余字段
+* @param mobile
+*/
+	public void setMobile(String mobile) {
+	this.mobile = mobile;
+}
+/**
+* 设置 用户出价
+* @param bidPrice
+*/
+	public void setBidPrice(Double bidPrice) {
+	this.bidPrice = bidPrice;
+}
+/**
+* 设置 出价次数
+* @param bidNum
+*/
+	public void setBidNum(Integer bidNum) {
+	this.bidNum = bidNum;
+}
+/**
+* 设置 本次出价消耗总西币(出价次数*单次出价西币)
+* @param totalCurrency
+*/
+	public void setTotalCurrency(Integer totalCurrency) {
+	this.totalCurrency = totalCurrency;
 }
 /**
 * 设置 出价时间
@@ -75,13 +102,6 @@ private Double itemPrice;
 	this.bidTime = bidTime;
 }
 /**
-* 设置 商品当前竞拍价
-* @param itemPrice
-*/
-	public void setItemPrice(Double itemPrice) {
-	this.itemPrice = itemPrice;
-}
-/**
 * 获取 主键
 * @return id
 */
@@ -89,18 +109,11 @@ private Double itemPrice;
 	return id;
 }
 /**
-* 获取 专题id
-* @return topicId
+* 获取 专题商品表topic_item主键id
+* @return topicItemId
 */
-	public Long getTopicId() {
-	return topicId;
-}
-/**
-* 获取 商品id
-* @return itemId
-*/
-	public Long getItemId() {
-	return itemId;
+	public Long getTopicItemId() {
+	return topicItemId;
 }
 /**
 * 获取 用户id
@@ -110,11 +123,39 @@ private Double itemPrice;
 	return userId;
 }
 /**
-* 获取 用户出价
-* @return bid
+* 获取 用户昵称，冗余字段
+* @return nickname
 */
-	public Integer getBid() {
-	return bid;
+	public String getNickname() {
+	return nickname;
+}
+/**
+* 获取 用户手机号，冗余字段
+* @return mobile
+*/
+	public String getMobile() {
+	return mobile;
+}
+/**
+* 获取 用户出价
+* @return bidPrice
+*/
+	public Double getBidPrice() {
+	return bidPrice;
+}
+/**
+* 获取 出价次数
+* @return bidNum
+*/
+	public Integer getBidNum() {
+	return bidNum;
+}
+/**
+* 获取 本次出价消耗总西币(出价次数*单次出价西币)
+* @return totalCurrency
+*/
+	public Integer getTotalCurrency() {
+	return totalCurrency;
 }
 /**
 * 获取 出价时间
@@ -122,13 +163,6 @@ private Double itemPrice;
 */
 	public Date getBidTime() {
 	return bidTime;
-}
-/**
-* 获取 商品当前竞拍价
-* @return itemPrice
-*/
-	public Double getItemPrice() {
-	return itemPrice;
 }
 
 }

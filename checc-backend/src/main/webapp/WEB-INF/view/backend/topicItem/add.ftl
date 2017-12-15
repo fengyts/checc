@@ -43,13 +43,29 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-md-2 control-label">竞拍单次出价西币</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="auctionCurrency" name="auctionCurrency" value="${topicItemDO.auctionCurrency!1}" />
+		</div>
+		<label class="col-md-2 control-label">竞拍单次最大次数</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="auctionMaxTimes" name="auctionMaxTimes" value="${topicItemDO.auctionMaxTimes!10}" />
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="col-md-2 control-label">兑换商品数量</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="inventory" name="inventory" value="${topicItemDO.inventory}" />
+			<input type="text" class="form-control" id="inventory" name="inventory" value="${topicItemDO.inventory!0}" />
 		</div>
 		<label class="col-md-2 control-label">兑换商品价格</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="exchangeAmount" name="exchangeAmount" value="${topicItemDO.exchangeAmount}" />
+			<input type="text" class="form-control" id="exchangeAmount" name="exchangeAmount" value="${topicItemDO.exchangeAmount!0.00}" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">兑换限兑次数</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="exchangeLimitNum" name="exchangeLimitNum" value="${topicItemDO.exchangeLimitNum!1}" />
 		</div>
 	</div>
 	<div class="form-group">

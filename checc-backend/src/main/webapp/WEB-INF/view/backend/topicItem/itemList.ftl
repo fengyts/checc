@@ -44,11 +44,11 @@ css=[
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<thead>
 				    	<tr>
-				    		<th style="width:3%">
+				    		<th style="width:5%">
 					    		<#--<input type="checkbox" id="selectAll">-->
 				    		</th>
 				    		<th>商品名称</th>
-				    		<th>市场价</th>
+				    		<th style="width:20%">市场价</th>
 				    	</tr>
 			    	</thead>
 			    	<tbody id="itemListData">

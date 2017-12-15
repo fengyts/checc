@@ -43,11 +43,17 @@ public class TopicItemDetailVO extends BaseVO {
 	private Double marketPrice;
 	/** 当前竞拍价 */
 	private Double currentAuctionPrice;
-	
+
 	/** 结束倒计时 */
 	private Long timeCountDown;
-	
+
+	/** 商品描述 */
 	private String description;
+
+	/** 竞拍商品单次出价西币 */
+	private Integer auctionCurrency;
+	/** 兑换商品限兑次数 */
+	private Integer exchangeLimitNum;
 
 	public Long getId() {
 		return id;
@@ -192,6 +198,21 @@ public class TopicItemDetailVO extends BaseVO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
+	public Integer getAuctionCurrency() {
+		return auctionCurrency;
+	}
+
+	public void setAuctionCurrency(Integer auctionCurrency) {
+		this.auctionCurrency = auctionCurrency;
+	}
+
+	public Integer getExchangeLimitNum() {
+		return exchangeLimitNum;
+	}
+
+	public void setExchangeLimitNum(Integer exchangeLimitNum) {
+		this.exchangeLimitNum = exchangeLimitNum;
+	}
+
 }

@@ -77,6 +77,10 @@ public class TopicItemAO {
 			ti.setItemStatus(item.getStatus());
 			ti.setItemTitle(item.getItemTitle());
 			
+			ti.setAuctionCurrency(item.getAuctionCurrency());
+			ti.setAuctionMaxTimes(item.getAuctionMaxTimes());
+			ti.setExchangeLimitNum(item.getExchangeLimitNum());
+			
 			listResult.add(ti);
 		}
 		

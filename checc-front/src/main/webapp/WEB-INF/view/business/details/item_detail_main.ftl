@@ -1,6 +1,6 @@
 <div class="main_box">
 	<div class="checc_pos">
-		<span>首页</span>
+		<span><a href="${domain}/index">首页</a></span>
 		<span>>></span>
 		<span>商品详情</span>
 	</div>

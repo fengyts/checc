@@ -12,9 +12,12 @@
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
         <result column="is_topic_status" property="isTopicStatus"/>
+        <result column="auction_currency" property="auctionCurrency"/>
+        <result column="auction_max_times" property="auctionMaxTimes"/>
         <result column="inventory" property="inventory"/>
         <result column="exchange_amount" property="exchangeAmount"/>
         <result column="residue" property="residue"/>
+        <result column="exchange_limit_num" property="exchangeLimitNum"/>
         <result column="sort" property="sort"/>
         <result column="status" property="status"/>
         <result column="create_user_id" property="createUserId"/>
@@ -24,7 +27,7 @@
 	</resultMap>
 
 	<sql id="MybatisTopicItemDAO_all_column_fields">
-	      id,topic_id,item_id,item_title,market_price,start_time,end_time,is_topic_status,inventory,exchange_amount,residue,sort,status,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_id,item_id,item_title,market_price,start_time,end_time,is_topic_status,auction_currency,auction_max_times,inventory,exchange_amount,residue,exchange_limit_num,sort,status,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicItemDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -34,9 +37,12 @@
 			<if test="itemTitle != null  and itemTitle != '' "> AND item_title=#{itemTitle} </if>
 			<if test="marketPrice != null "> AND market_price=#{marketPrice} </if>
 			<if test="isTopicStatus != null "> AND is_topic_status=#{isTopicStatus} </if>
+			<if test="auctionCurrency != null "> AND auction_currency=#{auctionCurrency} </if>
+			<if test="auctionMaxTimes != null "> AND auction_max_times=#{auctionMaxTimes} </if>
 			<if test="inventory != null "> AND inventory=#{inventory} </if>
 			<if test="exchangeAmount != null "> AND exchange_amount=#{exchangeAmount} </if>
 			<if test="residue != null "> AND residue=#{residue} </if>
+			<if test="exchangeLimitNum != null "> AND exchange_limit_num=#{exchangeLimitNum} </if>
 			<if test="sort != null "> AND sort=#{sort} </if>
 			<if test="status != null "> AND status=#{status} </if>
 			<if test="createUserId != null "> AND create_user_id=#{createUserId} </if>
@@ -66,9 +72,12 @@
 				start_time,
 				end_time,
 				is_topic_status,
+				auction_currency,
+				auction_max_times,
 				inventory,
 				exchange_amount,
 				residue,
+				exchange_limit_num,
 				sort,
 				status,
 				create_user_id,
@@ -84,9 +93,12 @@
 				#{startTime},
 				#{endTime},
 				#{isTopicStatus},
+				#{auctionCurrency},
+				#{auctionMaxTimes},
 				#{inventory},
 				#{exchangeAmount},
 				#{residue},
+				#{exchangeLimitNum},
 				#{sort},
 				#{status},
 				#{createUserId},
@@ -106,9 +118,12 @@
 					start_time = #{startTime},
 					end_time = #{endTime},
 					is_topic_status = #{isTopicStatus},
+					auction_currency = #{auctionCurrency},
+					auction_max_times = #{auctionMaxTimes},
 					inventory = #{inventory},
 					exchange_amount = #{exchangeAmount},
 					residue = #{residue},
+					exchange_limit_num = #{exchangeLimitNum},
 					sort = #{sort},
 					status = #{status},
 					create_user_id = #{createUserId},
@@ -132,9 +147,12 @@
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
 					<if test="isTopicStatus != null ">is_topic_status=#{isTopicStatus},</if>
+					<if test="auctionCurrency != null ">auction_currency=#{auctionCurrency},</if>
+					<if test="auctionMaxTimes != null ">auction_max_times=#{auctionMaxTimes},</if>
 					<if test="inventory != null ">inventory=#{inventory},</if>
 					<if test="exchangeAmount != null ">exchange_amount=#{exchangeAmount},</if>
 					<if test="residue != null ">residue=#{residue},</if>
+					<if test="exchangeLimitNum != null ">exchange_limit_num=#{exchangeLimitNum},</if>
 					<if test="sort != null ">sort=#{sort},</if>
 					<if test="status != null ">status=#{status},</if>
 					<if test="createUserId != null ">create_user_id=#{createUserId},</if>

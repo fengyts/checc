@@ -144,6 +144,8 @@ public class TopicItemAO {
 		vo.setExchangeAmount(item.getExchangeAmount());
 		vo.setInventory(item.getInventory());
 		vo.setResidue(item.getResidue());
+		vo.setAuctionCurrency(item.getAuctionCurrency());
+		vo.setExchangeLimitNum(item.getExchangeLimitNum());
 		vo.setItemStatus(status);
 
 		vo.setTopicId(topicId);
@@ -152,6 +154,8 @@ public class TopicItemAO {
 		vo.setTopicType(topicType);
 		vo.setStartTime(startTime);
 		vo.setEndTime(endTime);
+		
+		
 
 		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) {
 			if (item.getResidue() < 1) {

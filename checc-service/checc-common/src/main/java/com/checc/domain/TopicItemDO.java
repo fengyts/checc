@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题商品
-* @author fengyts Mon Dec 11 22:42:41 CST 2017
+* @author fengyts Fri Dec 15 14:33:19 CST 2017
 */
 
 public class TopicItemDO extends BaseDO {
@@ -35,6 +35,12 @@ private Date endTime;
 /** 是否和专题状态一致：1-一致；0-不一致 */
 private Boolean isTopicStatus;
 
+/** 竞拍商品单次出价西币 */
+private Integer auctionCurrency;
+
+/** 竞拍商品单次出价最大次数 */
+private Integer auctionMaxTimes;
+
 /** 兑换商品在本专题的库存数量 */
 private Integer inventory;
 
@@ -43,6 +49,9 @@ private Double exchangeAmount;
 
 /** 兑换剩余数量 */
 private Integer residue;
+
+/** 兑换商品每人限兑次数 */
+private Integer exchangeLimitNum;
 
 /** 商品在该专题排序值 */
 private Integer sort;
@@ -119,6 +128,20 @@ private Date modifyTime;
 	this.isTopicStatus = isTopicStatus;
 }
 /**
+* 设置 竞拍商品单次出价西币
+* @param auctionCurrency
+*/
+	public void setAuctionCurrency(Integer auctionCurrency) {
+	this.auctionCurrency = auctionCurrency;
+}
+/**
+* 设置 竞拍商品单次出价最大次数
+* @param auctionMaxTimes
+*/
+	public void setAuctionMaxTimes(Integer auctionMaxTimes) {
+	this.auctionMaxTimes = auctionMaxTimes;
+}
+/**
 * 设置 兑换商品在本专题的库存数量
 * @param inventory
 */
@@ -138,6 +161,13 @@ private Date modifyTime;
 */
 	public void setResidue(Integer residue) {
 	this.residue = residue;
+}
+/**
+* 设置 兑换商品每人限兑次数
+* @param exchangeLimitNum
+*/
+	public void setExchangeLimitNum(Integer exchangeLimitNum) {
+	this.exchangeLimitNum = exchangeLimitNum;
 }
 /**
 * 设置 商品在该专题排序值
@@ -238,6 +268,20 @@ private Date modifyTime;
 	return isTopicStatus;
 }
 /**
+* 获取 竞拍商品单次出价西币
+* @return auctionCurrency
+*/
+	public Integer getAuctionCurrency() {
+	return auctionCurrency;
+}
+/**
+* 获取 竞拍商品单次出价最大次数
+* @return auctionMaxTimes
+*/
+	public Integer getAuctionMaxTimes() {
+	return auctionMaxTimes;
+}
+/**
 * 获取 兑换商品在本专题的库存数量
 * @return inventory
 */
@@ -257,6 +301,13 @@ private Date modifyTime;
 */
 	public Integer getResidue() {
 	return residue;
+}
+/**
+* 获取 兑换商品每人限兑次数
+* @return exchangeLimitNum
+*/
+	public Integer getExchangeLimitNum() {
+	return exchangeLimitNum;
 }
 /**
 * 获取 商品在该专题排序值

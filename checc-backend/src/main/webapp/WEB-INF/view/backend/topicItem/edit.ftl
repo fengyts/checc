@@ -44,6 +44,16 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-md-2 control-label">竞拍单次出价西币</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="auctionCurrency" name="auctionCurrency" value="${topicItemDO.auctionCurrency}" />
+		</div>
+		<label class="col-md-2 control-label">竞拍单次最大次数</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="auctionMaxTimes" name="auctionMaxTimes" value="${topicItemDO.auctionMaxTimes}" />
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="col-md-2 control-label">兑换商品数量</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="inventory" name="inventory" value="${topicItemDO.inventory}" />
@@ -51,6 +61,12 @@ css=[
 		<label class="col-md-2 control-label">兑换商品价格</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="exchangeAmount" name="exchangeAmount" value="${topicItemDO.exchangeAmount}" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">兑换限兑次数</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="exchangeLimitNum" name="exchangeLimitNum" value="${topicItemDO.exchangeLimitNum!1}" />
 		</div>
 	</div>
 	<div class="form-group">

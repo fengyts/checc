@@ -27,8 +27,15 @@ public class TopicItemDTO implements Serializable {
 	private Double exchangeAmount;
 	/** 商品兑换剩余数量 */
 	private Integer residue;
+	/** 兑换商品限兑次数 */
+	private Integer exchangeLimitNum;
 	/** 商品状态 */
 	private Boolean itemStatus;
+
+	/** 竞拍商品单次出价 */
+	private Integer auctionCurrency;
+	/** 竞拍商品单次最大限次 */
+	private Integer auctionMaxTimes;
 
 	public Long getId() {
 		return id;
@@ -124,6 +131,30 @@ public class TopicItemDTO implements Serializable {
 
 	public void setItemStatus(Boolean itemStatus) {
 		this.itemStatus = itemStatus;
+	}
+
+	public Integer getExchangeLimitNum() {
+		return exchangeLimitNum;
+	}
+
+	public void setExchangeLimitNum(Integer exchangeLimitNum) {
+		this.exchangeLimitNum = exchangeLimitNum;
+	}
+
+	public Integer getAuctionCurrency() {
+		return auctionCurrency;
+	}
+
+	public void setAuctionCurrency(Integer auctionCurrency) {
+		this.auctionCurrency = auctionCurrency;
+	}
+
+	public Integer getAuctionMaxTimes() {
+		return auctionMaxTimes;
+	}
+
+	public void setAuctionMaxTimes(Integer auctionMaxTimes) {
+		this.auctionMaxTimes = auctionMaxTimes;
 	}
 
 }

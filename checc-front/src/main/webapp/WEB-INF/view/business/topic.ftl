@@ -67,7 +67,7 @@
 						<div class="pr_box">
 							<div class="basic_price">
 								<span class="lbtitle">数量:</span>
-								<span class="prc">剩${excg.residue!0}份 /总${excg.inventory!10}份</span>
+								<span class="prc">剩${excg.residue!0}份 /共${excg.inventory!10}份</span>
 							</div>
 							<div class="auc_price">
 								<span class="lbtitle">兑换价:</span>

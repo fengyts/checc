@@ -37,9 +37,15 @@
 		</div>
 		<div class="meta_auction_action">
 			<#if detailVO.status?? && detailVO.status=='02'>
-				<div class="auc_action auc_act_btn_p">
+				<div>
+					<form id="auction_action_form">
+						<input type="hidden" id="tpId" name="tpId" value="${detailVO.id}">
+						<input type="hidden" id="auctionType" name="auctionType" value="${detailVO.topicType}">
+					</form>
+				</div>
+				<div id="auc_action" class="auc_action auc_act_btn_p">
 					<p class="auc_act_btn"><a href="#">我要出价</a></p>
-					<p class="auc_currency"><span>(20西币每次)</span></p>
+					<p class="auc_currency"><span>(${detailVO.auctionCurrency}西币每次)</span></p>
 				</div>
 				<div class="meta_auct_timedown">
 					<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>

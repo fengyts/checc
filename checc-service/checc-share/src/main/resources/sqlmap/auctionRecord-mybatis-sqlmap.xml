@@ -5,25 +5,29 @@
 
 	<resultMap type="com.checc.domain.AuctionRecordDO" id="AuctionRecordDOResultMap">
 		<id column="id" property="id" />
-        <result column="topic_id" property="topicId"/>
-        <result column="item_id" property="itemId"/>
+        <result column="topic_item_id" property="topicItemId"/>
         <result column="user_id" property="userId"/>
-        <result column="bid" property="bid"/>
+        <result column="nickname" property="nickname"/>
+        <result column="mobile" property="mobile"/>
+        <result column="bid_price" property="bidPrice"/>
+        <result column="bid_num" property="bidNum"/>
+        <result column="total_currency" property="totalCurrency"/>
         <result column="bid_time" property="bidTime"/>
-        <result column="item_price" property="itemPrice"/>
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_id,item_id,user_id,bid,bid_time,item_price
+	      id,topic_item_id,user_id,nickname,mobile,bid_price,bid_num,total_currency,bid_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
-			<if test="topicId != null "> AND topic_id=#{topicId} </if>
-			<if test="itemId != null "> AND item_id=#{itemId} </if>
+			<if test="topicItemId != null "> AND topic_item_id=#{topicItemId} </if>
 			<if test="userId != null "> AND user_id=#{userId} </if>
-			<if test="bid != null "> AND bid=#{bid} </if>
-			<if test="itemPrice != null "> AND item_price=#{itemPrice} </if>
+			<if test="nickname != null  and nickname != '' "> AND nickname=#{nickname} </if>
+			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
+			<if test="bidPrice != null "> AND bid_price=#{bidPrice} </if>
+			<if test="bidNum != null "> AND bid_num=#{bidNum} </if>
+			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 		</where>
  	</sql>
 
@@ -42,32 +46,38 @@
         </selectKey>
         INSERT INTO auction_record(
 				id,
-				topic_id,
-				item_id,
+				topic_item_id,
 				user_id,
-				bid,
-				bid_time,
-				item_price
+				nickname,
+				mobile,
+				bid_price,
+				bid_num,
+				total_currency,
+				bid_time
 		)values(
 				#{id},
-				#{topicId},
-				#{itemId},
+				#{topicItemId},
 				#{userId},
-				#{bid},
-				#{bidTime},
-				#{itemPrice}
+				#{nickname},
+				#{mobile},
+				#{bidPrice},
+				#{bidNum},
+				#{totalCurrency},
+				#{bidTime}
 		)
     </insert>
 
 	<update id="MybatisAuctionRecordDAO_updateById" parameterType="com.checc.domain.AuctionRecordDO">
 		UPDATE auction_record
 		SET
-					topic_id = #{topicId},
-					item_id = #{itemId},
+					topic_item_id = #{topicItemId},
 					user_id = #{userId},
-					bid = #{bid},
-					bid_time = #{bidTime},
-					item_price = #{itemPrice}
+					nickname = #{nickname},
+					mobile = #{mobile},
+					bid_price = #{bidPrice},
+					bid_num = #{bidNum},
+					total_currency = #{totalCurrency},
+					bid_time = #{bidTime}
 		WHERE
 			id = #{id}
 	</update>
@@ -79,12 +89,14 @@
 	<update id="MybatisAuctionRecordDAO_update_dynamic" parameterType="com.checc.domain.AuctionRecordDO">
 		UPDATE auction_record
 		<set>
-					<if test="topicId != null ">topic_id=#{topicId},</if>
-					<if test="itemId != null ">item_id=#{itemId},</if>
+					<if test="topicItemId != null ">topic_item_id=#{topicItemId},</if>
 					<if test="userId != null ">user_id=#{userId},</if>
-					<if test="bid != null ">bid=#{bid},</if>
+					<if test="nickname != null  and nickname != '' ">nickname=#{nickname},</if>
+					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
+					<if test="bidPrice != null ">bid_price=#{bidPrice},</if>
+					<if test="bidNum != null ">bid_num=#{bidNum},</if>
+					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="bidTime != null ">bid_time=#{bidTime},</if>
-					<if test="itemPrice != null ">item_price=#{itemPrice},</if>
 		</set>
 		WHERE id = #{id}
 	</update>
