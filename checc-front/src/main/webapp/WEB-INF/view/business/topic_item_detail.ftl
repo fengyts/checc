@@ -10,10 +10,10 @@
 	<meta name="Description" content="车西西" />
 	<title>车西西-值得信赖的网上汽车商城</title>
 	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="javascript:void(0);" />
+	<#--
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
-	
-	<link rel="stylesheet" type="text/css" href="${css}/index.css" />
+	-->
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
 	
 	<#include "/common/common-js.ftl" />
@@ -48,4 +48,5 @@
 </body>
 
 <script type="text/javascript" src="${js}/item_detail.js"></script>
+
 </html>

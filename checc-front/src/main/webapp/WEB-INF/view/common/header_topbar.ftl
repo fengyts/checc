@@ -3,15 +3,23 @@
         <ul class="login_bar">
             <li id="ECS_MEMBERZONE">
                 <a href="${domain}/index" rel="nofollow">车西西首页</a><s>|</s>
-                <#if checcUser??>
-                	<#assign mb=checcUser.mobile />
-                	${mb[0..2] + '****' + mb[7..]}
-                	<s>|</s>
-                	<a href="${domain}/user/logout" rel="nofollow">退出</a>
-                <#else>
-                	<a href="${domain}/user/login" rel="nofollow">请登录</a><s>|</s>
-                	<a href="${domain}/user/register" rel="nofollow">免费注册</a>
-                </#if>
+                <div id="loginStatusOld" style="display:inline">
+	                <#if checcUser??>
+	                	<#assign mb=checcUser.mobile />
+	                	${mb[0..2] + '****' + mb[7..]}
+	                	<s>|</s>
+	                	<a id="logout" href="#" rel="nofollow">退出</a>
+	                <#else>
+	                	<a href="${domain}/user/login" rel="nofollow">请登录</a><s>|</s>
+	                	<a href="${domain}/user/register" rel="nofollow">免费注册</a>
+	                </#if>
+                </div>
+                <div id="loginAjax" style="display:none;">
+                	<span id="hasLogin">
+                		<s>|</s>
+                		<a id="logout" href="#" rel="nofollow">退出</a>
+                	</span>
+                </div>
             </li>
         </ul>
         <ul class="userinfo_bar">
@@ -37,3 +45,13 @@
         </ul>
     </div>
 </div>
+
+<script type="text/javascript">
+	var lgn_pg_ii;
+	$(function(){
+		$("#logout").on('click', function(){
+			var _ahref = '${domain}/user/logout';
+			$(this).attr('href', _ahref + '?returnUrl=' + window.location.pathname.substring(domain.length));
+		});
+	});
+</script>

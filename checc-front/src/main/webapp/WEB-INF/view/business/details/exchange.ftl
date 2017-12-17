@@ -22,6 +22,12 @@
 		</div>
 		<div class="meta_exchange_action meta_auction_action">
 			<#if detailVO.status?? && detailVO.status=='02'>
+				<div>
+					<form id="auction_action_form">
+						<input type="hidden" id="tpId" name="tpId" value="${detailVO.id}">
+						<input type="hidden" id="auctionType" name="auctionType" value="${detailVO.topicType}">
+					</form>
+				</div>
 				<div id="auc_action" class="auc_exchange auc_action auc_act_btn_p">
 					<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
 					<p class="auc_act_btn"><a href="#">立即兑换</a></p>
@@ -30,12 +36,12 @@
 					</p>
 				</div>
 			<#elseif detailVO.status?? && detailVO.status=='03'>
-				<div class="auc_action_over auc_act_btn_p">
+				<div class="auc_action_over auc_action auc_act_btn_p">
 					<p class="exchange_act_btn">已经结束</p>
 					<p class="auc_currency"><span></span></p>
 				</div>
 			<#else>
-				<div class="auc_action_over auc_act_btn_p">
+				<div class="auc_action_over auc_action auc_act_btn_p">
 					<p class="exchange_act_btn">未开始</p>
 					<p class="auc_currency"><span></span></p>
 				</div>

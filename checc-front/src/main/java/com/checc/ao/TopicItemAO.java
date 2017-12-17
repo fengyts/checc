@@ -106,7 +106,7 @@ public class TopicItemAO {
 			vo.setInventory(item.getInventory());
 			vo.setItemId(item.getItemId());
 			vo.setItemTitle(item.getItemTitle());
-			vo.setItemStatus(getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
+			vo.setItemStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
@@ -132,7 +132,7 @@ public class TopicItemAO {
 		TopicDO topic = topicService.selectById(topicId);
 		Date startTime = topic.getStartTime();
 		Date endTime = topic.getEndTime();
-		String status = getTopicStatus(startTime, endTime);
+		String status = AuctionCommonAO.getTopicStatus(startTime, endTime);
 		Long itemId = item.getItemId();
 		String topicType = topic.getTopicType();
 
@@ -185,19 +185,19 @@ public class TopicItemAO {
 		return vo;
 	}
 
-	private String getTopicStatus(Date startTime, Date endTime) {
-		if (null == startTime || null == endTime) {
-			return TopicStatusEnum.End.getCode();
-		}
-		Date now = new Date();
-		if (startTime.after(now)) {
-			return TopicStatusEnum.NotStarted.getCode();
-		}
-		if (endTime.before(now)) {
-			return TopicStatusEnum.End.getCode();
-		}
-		return TopicStatusEnum.InProgress.getCode();
-
-	}
+//	private String getTopicStatus(Date startTime, Date endTime) {
+//		if (null == startTime || null == endTime) {
+//			return TopicStatusEnum.End.getCode();
+//		}
+//		Date now = new Date();
+//		if (startTime.after(now)) {
+//			return TopicStatusEnum.NotStarted.getCode();
+//		}
+//		if (endTime.before(now)) {
+//			return TopicStatusEnum.End.getCode();
+//		}
+//		return TopicStatusEnum.InProgress.getCode();
+//
+//	}
 
 }

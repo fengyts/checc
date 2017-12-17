@@ -136,6 +136,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user/bis/**" />
 			<mvc:mapping path="/topicItem/auctionAction/**" />
+			<mvc:mapping path="/auction/**" />
 			<bean id="loginStatusInterceptor" class="com.checc.interceptor.LoginStatusInterceptor">
 				<property name="enable" value="true" />
 			</bean>

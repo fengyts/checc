@@ -131,7 +131,7 @@ canvas {
 	background-position:0 -18px
 }
 #main {
-	width:1008px;
+	width:100%;
 	margin:0 auto;
 }
 #header {
@@ -695,6 +695,11 @@ canvas {
 	height:42px;
 	background:url(images/zixun-qq.png) 0 0 no-repeat
 }
+#login-box{
+	max-width: 300px;
+	margin-left: 160px;
+	padding-top: 20px;
+}
 #login-box h2 {
 	font-size:18px;
 	font-style:normal;
@@ -950,13 +955,14 @@ canvas {
 	margin-bottom:10px
 }
 .g_box {
-	border:1px solid #ccc;
 	background-color:#fff;
-	width:320px;
-	height:auto;
+	/* border:1px solid #ccc;
+	width:100%;
+	max-width: 700px;
+	min-height:400px;
 	box-shadow:0 0 15px rgba(204,204,204,0.5);
-	float:right;
-	padding:15px 30px
+	padding:15px 30px */
+	min-height:455px;
 }
 #register_box h2 {
 	font-size:18px;

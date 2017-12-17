@@ -5,7 +5,15 @@
 			<span class="next_periods"><a>下期预告</a></span>
 		</div>
 		<div class="auction_time">
-			<span>竞拍时间:${topicStartTime?string('yyyy-MM-dd HH:mm:ss')!''} ~ ${topicEndTime?string('yyyy-MM-dd HH:mm:ss')!''}</span>
+			<span>竞拍时间:
+				<#if topicStartTime??>
+					${topicStartTime?string('yyyy-MM-dd HH:mm:ss')} 
+				</#if>
+				~ 
+				<#if topicEndTime??>
+					${topicEndTime?string('yyyy-MM-dd HH:mm:ss')}
+				</#if>
+			</span>
 		</div>
 	</div>
 	

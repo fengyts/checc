@@ -134,6 +134,7 @@ ul, ol {
 
 .checc_lg .checc_clg {
 	top: 4px;
+	margin-left: 3px;
 	max-width: 150px;
 }
 
@@ -150,7 +151,12 @@ ul, ol {
 	color: #0099cc;
 	word-break: normal;
 	white-space: nowrap;
-	letter-spacing: 6px;
+	letter-spacing: 3px;
+}
+
+.checc_lgn_link {
+	margin-top: -6px;
+	display: block;
 }
 
 .checc_lgn_link a {
@@ -467,7 +473,7 @@ ul, ol {
 .auc_btn {
 	text-align: center;
 	vertical-align: middle;
-	margin: 10px 0 10px 27%;
+	margin: 10px 0 10px 30px;
 }
 
 .auc_btn>span {
@@ -486,7 +492,6 @@ ul, ol {
 	color: #ffffff;
 	opacity: .8;
 	filter: alpha(opacity = 80);
-	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -495,7 +500,7 @@ ul, ol {
 }
 
 .checc_pos {
-	margin: 10px 0px 0px -53px;
+	margin: 0px 0px 0px -50px;
 	min-height: 50px;
 	border-bottom: solid 1px #aaeeee;
 }
@@ -504,9 +509,13 @@ ul, ol {
 	display: inline-block;
 	margin-left: 10px;
 	line-height: 50px;
-	font-size: 16px;
+	font-size: 15px;
 	color: #666666;
 	line-height: 50px;
+}
+
+.checc_pos>.pos_arrows{
+	letter-spacing: -3px;
 }
 
 .detail_meta_box {
@@ -517,7 +526,6 @@ ul, ol {
 
 .detail_meta {
 	margin-top: 20px;;
-	margin-left: 20px;
 	height: inherit;
 	min-width: 100%;
 }
@@ -536,6 +544,7 @@ ul, ol {
 	min-width: 330px;
 	height: 300px;
 	width: 320px;
+	border: solid 1px #eeeeee;
 }
 
 .meta_item_img>img {
@@ -562,11 +571,13 @@ ul, ol {
 }
 
 .meta_item_currauctprice, .meta_currauctper, .meta_curraucttime,
-	.meta_auction_eninfo, .meta_item_exchangeprice, .meta_inventory, .meta_exchange_eninfo {
+	.meta_auction_eninfo, .meta_item_exchangeprice, .meta_inventory,
+	.meta_exchange_eninfo {
 	margin-top: 13px;
 }
 
-.meta_item_currauctprice>.currauctprice,.meta_item_exchangeprice>.exchangeprice {
+.meta_item_currauctprice>.currauctprice, .meta_item_exchangeprice>.exchangeprice
+	{
 	color: #ff0000 !important;
 	font-size: 24px;
 	font-weight: 600;
@@ -589,7 +600,7 @@ ul, ol {
 }
 
 .meta_currauctper>.auctall {
-	margin-left: 130px;
+	margin-left: 100px;
 	font-size: 12px;
 }
 
@@ -640,11 +651,10 @@ ul, ol {
 	color: #ffffff;
 }
 
-.meta_auction_action>.auc_action:hover {
+.meta_auction_action>#auc_action:hover {
 	color: #ffffff;
 	opacity: .8;
 	filter: alpha(opacity = 80);
-	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -655,6 +665,7 @@ ul, ol {
 .auc_act_btn {
 	margin-top: 10px;
 }
+
 .exchange_act_btn {
 	margin-top: 15px;
 }
@@ -665,7 +676,7 @@ ul, ol {
 	color: #ff0000;
 }
 
-.meta_auction_action>.auc_action_over {
+.meta_auction_action>.auc_action_over,.meta_auction_action>.auc_action_over:hover {
 	background-color: #d9d9d9;
 	cursor: not-allowed;
 	color: #999999;
@@ -674,13 +685,15 @@ ul, ol {
 .auc_exchanged_list {
 	margin: 45px 0px 0px 10px;
 }
-.auc_exchanged_list>a{
+
+.auc_exchanged_list>a {
 	color: #333333 !important;
-	font-size: 12px;	
+	font-size: 12px;
 }
-.auc_exchanged_list>a:hover{
+
+.auc_exchanged_list>a:hover {
 	color: #666666 !important;
-	font-size: 12px;	
+	font-size: 12px;
 }
 
 /* 商品详情描述 */

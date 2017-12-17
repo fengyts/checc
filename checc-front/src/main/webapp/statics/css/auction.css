@@ -1,0 +1,232 @@
+@CHARSET "UTF-8";
+
+html, body {
+	font: 12px/1.5 "Microsoft YaHei", Tahoma, Helvetica, Arial, simsun;
+	margin: 0;
+	padding: 0;
+	width: inherit;
+	height: inherit;
+}
+
+a {
+	text-decoration: none;
+	outline: 0;
+}
+
+dt {
+	float: left;
+	margin-right: 5px;
+	width: 80px;
+	color: #6C6C6C;
+	display: block;
+}
+
+dd {
+	display: block;
+	-webkit-margin-start: 40px;
+	overflow: hidden;
+}
+
+input {
+	-webkit-appearance: textfield;
+	background-color: white;
+	-webkit-rtl-ordering: logical;
+	-webkit-user-select: text;
+	cursor: auto;
+	padding: 1px;
+	border: 2px inset;
+	text-rendering: auto;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+	margin: 0em 0em 0em 0em;
+	font: 13.3333px Arial;
+}
+
+.auction_box {
+	margin: 0;
+	padding: 0;
+}
+
+.auction_act_content {
+	width: 80%;
+	min-width: 320px;
+	margin: 10px 0px 0px 120px;
+}
+
+.auction_act_title {
+	/* 	padding: 0 0 0 100px; */
+	
+}
+
+.auction_act_title>.act_title_t {
+	margin-left: 100px;
+	color: #999999;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.auction_act_title>.act_title_ins {
+	margin-left: 110px;
+	color: #666666;
+	font-size: 14px;
+}
+
+.act_label {
+	/* 	font-size: 16px; */
+	
+}
+
+.act_item_title_box, .act_nums_box, .act_expend_currency {
+	font-size: 16px;
+	color: #666666;
+	margin: 10px 0px 0px 0px;
+}
+
+.act_item_title, .act_total_currency {
+	color: #333333;
+}
+
+.act_nums_box>div, .act_btn_box>div {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.act_nums_box {
+	
+}
+
+.act_max_nums {
+	font-size: 12px;
+}
+
+.auct_times_stock {
+	position: relative;
+	float: left;
+}
+
+.auct_times_stock .auct_reduce {
+	border-right: 0 !important;
+}
+
+.auct_times_stock .auct_increase {
+	border-left: 0 !important;
+	margin-right: 8px;
+}
+
+.auct_times_stock a, .auct_times_stock a:hover {
+	display: block;
+	_display: inline;
+	float: left;
+	width: 26px;
+	height: 26px;
+	border: 1px solid #ccc;
+	line-height: 26px;
+	padding: 0;
+	vertical-align: top;
+	overflow: hidden;
+	text-align: center;
+	background-color: #ededed;
+	overflow: hidden;
+}
+
+.auct-iconfont {
+	font-family: tb-iconfont !important;
+	font-size: 12px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscaleFont type;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.auct_times_stock input {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 48px;
+	height: 26px;
+	font-size: 16px;
+	line-height: 26px;
+	text-align: center;
+	color: #666;
+	border: 1px solid #ccc;
+	outline: 0;
+	background: #fff;
+	ime-mode: disabled;
+}
+
+.act_btn_box {
+	margin: 10px 0 0 0;
+	width: 300px;
+	vertical-align: middle;
+	font-size: 22px;
+	font-weight: 500;
+	color: #0099ff;
+}
+
+.act_btn_box>.act_abandon_btn, .act_btn_box>.act_bid_btn {
+	border: solid 1px #0099ff;
+	cursor: pointer;
+}
+
+.act_btn_box>.act_abandon_btn, .act_btn_box>.act_bid_btn, .act_btn_box>.act_unbid_btn {
+	margin-top: 10px;
+	width: 120px;
+	height: 35px;
+	overflow-wrap: normal;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 35px;
+	border-radius: 6px;
+	transform-origin: 108px 19px 0;
+}
+
+.act_btn_box>.act_abandon_btn, .act_btn_box>.act_abandon_btn>a {
+	background-color: #f0f0f0;
+	color: #1e9fff;
+}
+
+.act_btn_box>.act_abandon_btn:hover {
+	color: #f0f0f5;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	text-decoration: none;
+}
+
+.act_btn_box>.act_bid_btn, .act_btn_box>.act_bid_btn>a {
+	background-color: #1e9fff;
+	color: #ffffff !important;
+}
+
+.act_btn_box>.act_bid_btn:hover {
+	color: #ffffff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	text-decoration: none;
+}
+
+.act_unbid_btn {
+	background-color: #d9d9d9;
+	cursor: not-allowed;
+	color: #999999; 
+	border: solid 1px #999999;
+}
+.act_unbid_btn>a{
+	background-color: #d9d9d9;
+	color: #999999 !important;
+	cursor: not-allowed;
+}
+
+.user_currency_info {
+	margin: 10px 0 0 0;
+	font-size: 14px;
+	color: #ff0000;
+	/* 	display: none; */
+}

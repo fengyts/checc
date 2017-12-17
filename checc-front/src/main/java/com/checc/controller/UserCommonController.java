@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.CheccUserAO;
 import com.checc.constants.UserConstants;
+import com.checc.domain.CheccUserDO;
 import com.checc.dto.FgPwdDTO;
 import com.checc.dto.LoginDTO;
 import com.checc.dto.RegisterDTO;
@@ -25,6 +26,7 @@ import com.checc.enums.SmsTypeEnum;
 import com.checc.model.SmsCodeRedisModel;
 import com.checc.utils.CookieUtils;
 
+import ng.bayue.common.CommonMessages;
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.common.model.TokenModel;
 import ng.bayue.util.StringUtils;
@@ -36,7 +38,8 @@ import ng.bayue.validate.Validator;
  * </pre>
  *
  * @author fengyts
- * @version $Id: UserCommonController.java, v 0.1 2017年12月9日 下午7:46:53 fengyts Exp $
+ * @version $Id: UserCommonController.java, v 0.1 2017年12月9日 下午7:46:53 fengyts
+ *          Exp $
  */
 @Controller
 @RequestMapping({ "/user" })
@@ -56,11 +59,33 @@ public class UserCommonController {
 		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
 		return "/login/login";
 	}
-	
-	@RequestMapping({"/logout"})
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+	@RequestMapping({ "/loginAjax" })
+	public String loginAjaxIndex(HttpServletRequest request, HttpServletResponse response) {
+		CookieUtils cookieUtil = new CookieUtils();
+		TokenModel tk = new TokenModel();
+		String key = "checcUserLoginCkTk" + tk.getKey();
+		String value = tk.getBaseKey();
+		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
+		return "/login/login_ajax";
+	}
+
+	@RequestMapping({ "/getLoginInfo" })
+	@ResponseBody
+	public CommonResultMessage getLoginInfo(HttpServletRequest request) {
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
+		return null != userDO ? new CommonResultMessage(userDO) : CommonResultMessage
+				.failure(CommonMessages.UNLOGIN);
+	}
+
+	@RequestMapping({ "/logout" })
+	public String logout(HttpServletRequest request, HttpServletResponse response, String returnUrl) {
 		request.getSession().removeAttribute(UserConstants.USER_SESSION_KEY);
-		return "redirect:/index";
+		if(StringUtils.isBlank(returnUrl)){
+			returnUrl = "/";
+		}
+		return "redirect:" + returnUrl;
 	}
 
 	@RequestMapping({ "/register" })
@@ -105,7 +130,7 @@ public class UserCommonController {
 		SmsCodeRedisModel model = new SmsCodeRedisModel();
 		model.setMobile(mobile);
 		SmsTypeEnum st = SmsTypeEnum.Sms_Other;
-		if("01".equals(type)){
+		if ("01".equals(type)) {
 			st = SmsTypeEnum.Sms_Register;
 		} else {
 			st = SmsTypeEnum.Sms_Forgot_Password;
@@ -128,8 +153,8 @@ public class UserCommonController {
 		CommonResultMessage crm = userAO.register(request, dto);
 		return crm;
 	}
-	
-	@RequestMapping({ "/doLogin" })
+
+	@RequestMapping({ "/doLogin", "/doLoginAjax" })
 	@ResponseBody
 	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response,
 			LoginDTO dto) {
@@ -179,12 +204,12 @@ public class UserCommonController {
 		}
 		int data = (int) dataT;
 		int result = crm.getResult();
-		
+
 		String mobile = dto.getMobile();
 		if (1 == stepNum) {
 			model.addAttribute("mobileRv", mobile);
 			if (CommonResultMessage.Success == result) {
-				model.addAttribute("mobileSecurity", StringUtils.toSecurityMobile(mobile));
+				model.addAttribute("mobileSecurity", StringUtils.securityMobile(mobile));
 				return "/login/fg_step2";
 			} else {
 				if (-1 == data) {
@@ -197,8 +222,8 @@ public class UserCommonController {
 				}
 			}
 		}
-		
-		if(2 == stepNum){
+
+		if (2 == stepNum) {
 			model.addAttribute("mobileRv", mobile);
 			if (CommonResultMessage.Success == result) {
 				return "/login/fg_step3";
@@ -212,8 +237,8 @@ public class UserCommonController {
 				}
 			}
 		}
-		
-		if(3 == stepNum){
+
+		if (3 == stepNum) {
 			model.addAttribute("mobileRv", mobile);
 			if (CommonResultMessage.Success == result) {
 				return "/login/fg_step4";
@@ -231,6 +256,5 @@ public class UserCommonController {
 
 		return "";
 	}
-
 
 }

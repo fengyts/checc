@@ -498,8 +498,9 @@ public class CheccUserAO {
 
 		HttpSession session = request.getSession();
 		session.setAttribute(UserConstants.USER_SESSION_KEY, userDO);
-
-		return CommonResultMessage.success();
+		
+		userDO.setMobile(StringUtils.securityMobile(userDO.getMobile()));
+		return new CommonResultMessage(userDO);
 	}
 
 }

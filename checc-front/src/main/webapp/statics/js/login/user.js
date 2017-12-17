@@ -122,6 +122,11 @@ $(document).ready(function() {
 		doLogin();
 	})
 	
+	// 用户异步登陆
+	$("#doLoginAjax").on('click', function (){
+		doLoginAjax();
+	});
+	
 });
 
 
@@ -252,7 +257,6 @@ function doLogin(){
 		cache : false,
 		success : function(res) {
 			var data = res;
-			console.log(data);
 			if (1 == data.result) {// 成功
 //				top.window.location.href = domain + '/index';
 				window.location.href = domain + "/";
@@ -263,6 +267,41 @@ function doLogin(){
 			} else {// 失败
 				$("#captchaImg").trigger('click');
 				layer.alert(data.message);
+			}
+		}
+	});
+}
+
+function doLoginAjax(){
+	var _mobile = $("#mobile").val();
+	var _password = $("#password").val();
+	if(Utils.isEmpty(_mobile) || Utils.isEmpty(_password)){
+		layer.alert("用户名和密码不能为空");
+		return false;
+	}
+	
+	var _params = {};
+	_params.mobile = _mobile;
+	_params.password = Crypto.encryptAES(_password);
+	
+	$.ajax({
+		url: 'doLoginAjax',
+		type: 'POST',
+		data: _params,
+		dataType: 'json',
+		async: false,
+		cache : false,
+		success : function(res) {
+			if (1 == res.result) {// 成功
+//				parent.$("#loginStatusOld").css("display", "none");
+//				parent.$("#loginAjax").css("display", "inline");
+//				parent.$("#hasLogin").prepend(res.data.mobile);
+				window.parent.location.reload();
+				window.parent.layer.close(layer.index);
+//				window.parent.layer.close(parent.lgn_pg_ii);
+			} else {// 失败
+				$("#captchaImg").trigger('click');
+				layer.alert(res.message);
 			}
 		}
 	});

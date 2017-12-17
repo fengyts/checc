@@ -20,36 +20,20 @@
 	<div class="auction_box">
 		<div class="auction_act_content">
 			<div class="auction_act_title">
-				<div class="act_title_t">确定要出价吗?</div>
-				<div class="act_title_ins">(出价后不可撤销)</div>
+				<div class="act_title_t">确定要兑换吗?</div>
+				<div class="act_title_ins">(兑换后不可撤销)</div>
 			</div>
 			<div class="act_item_title_box">
 				<span class="act_label">商品名称：</span>			
 				<span class="act_item_title">${auctionVO.itemTitle}</span>			
 			</div>
-			
-			<div class="act_nums_box">
-				<dl>
-					<dt>
-						<span class="act_label">出价次数：</span>
-					</dt>
-					<dd>
-						<span class="auct_times_stock">
-							<a href="javascript:void(0);" title="减1" hidefocus class="auct_reduce tb-iconfont" id="auct_reduce">-</a>
-							<input type="hidden" id="auctionMaxTimes" value="${auctionVO.auctionMaxTimes!10}">
-							<input type="text" class="auct_times_text" maxlength="8" value="1" title="请输入竞拍次数" id="auctionTimes" name="auctionTimes">
-							<a href="javascript:void(0);" title="加1" hidefocus class="auct_increase tb-iconfont" id="auct_increase">+</a>次
-						</span>
-						<span class="act_max_nums">(最多出价${auctionVO.auctionMaxTimes!10}次)</span>
-					</dd>
-	        	</dl>
-			</div>
-			
 			<div class="act_expend_currency">
-				<span class="act_label">花费西币：</span>
-				<input type="hidden" id="auctionCurrency" value="${auctionVO.auctionCurrency!1}" />
-				<span class="act_total_currency" id="totalCurrencyView">${auctionVO.auctionCurrency!1}</span>个
-				<input type="hidden" id="totalCurrency" name="totalCurrency" value="${auctionVO.auctionCurrency!1}" />
+				<span class="act_label">兑换数量：</span>
+				<span class="exchange_num" id="exchangeLimitNum">${auctionVO.exchangeLimitNum!1}</span>个
+			</div>
+			<div class="act_exchange_amt_box">
+				<span class="act_label">花费西币：</span>			
+				<span class="act_exchange_amt">${auctionVO.exchangeAmount}</span>			
 			</div>
 			<div class="act_btn_box">
 				<div class="act_abandon_btn" id="act_abandon_btn">

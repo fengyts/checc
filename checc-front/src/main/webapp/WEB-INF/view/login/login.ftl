@@ -81,7 +81,7 @@
 							<form name="formLogin" action="" method="get" onSubmit="">
 								<ul class="form">
 									<li class="text_input">
-										<span class="error_icon"></span> 
+										<span class="error_icon"></span>
 										<span class="iconfont">Œ</span> 
 										<input id="mobile" name="mobile" type="text" class="text" placeholder="用户名/手机号" />
 									</li>

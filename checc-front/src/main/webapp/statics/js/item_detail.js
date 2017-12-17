@@ -2,33 +2,55 @@ var o;
 var mss;
 var _timeFlag = false;
 $(document).ready(function() {
-	// o = $("#countDownTime");
-	// mss = $("#countDownTimeOrigin").text() / 1000;
-	// countDownTime(o);
+	
 	cdt();
 
 	// 出价或兑换按钮点击事件
 	$("#auc_action").on('click', function() {
 		var _auctionType = $("#auctionType").val();
 		var _tpId = $("#tpId").val();
+		var _url = '', _title = '';
+		if('01' == _auctionType){
+			_url = domain + '/auction/auctionAction/' + _tpId;
+			_title = '竞拍';
+		} else {
+			_url = domain + '/auction/exchangeAction/' + _tpId;
+			_title = '兑换';
+		}
 		$.ajax({
-			url : domain + '/topicItem/auctionAction/' + _auctionType + "/" + _tpId,
+//			url : domain + '/topicItem/auctionAction/' + _auctionType + "/" + _tpId,
+			url : _url,
 			method : 'GET',
 			dataType : 'html',
-			data : {},
+			data : {reqTime: new Date().getTime()},
 			cache : false,
 
 			success: function(data, status, xhr) { 
-		        console.log(xhr.getResponseHeader("Content-Type"));
 		        var errorCode=xhr.getResponseHeader("errorCode");
-				console.log(errorCode);
-		        console.log(xhr);
-		        if('999' == errorCode) {
-		        	layer.open({
+		        if('999' == errorCode) { // 未登陆
+		        	lgn_pg_ii = layer.open({
 		        		type: 2,
 		        		title: '请先登录',
-		        		content: domain + '/user/login',
+		        		resize: false,
+		        		scrollbar: false,
+		        		//fixed: false,
+		        		move:false,
+		        		shade: 0.1,
+		        		content: domain + '/user/loginAjax',
 		        		area: ['700px', '500px']
+		        	});
+		        } else { // 已经登陆
+		        	lgn_pg_ii = layer.open({
+		        		type: 2,
+		        		title: _title,
+		        		resize: false,
+		        		scrollbar: false,
+		        		//fixed: false,
+		        		move:false,
+		        		shade: 0.1,
+		        		anim: 5,
+		        		content: _url,
+		        		area: ['600px', '400px']
 		        	});
 		        }
 		    }
@@ -38,6 +60,9 @@ $(document).ready(function() {
 
 });
 
+/**
+ * 倒计时
+ */
 function cdt() {
 	o = $("#countDownTime");
 	mss = $("#countDownTimeOrigin").text() / 1000;

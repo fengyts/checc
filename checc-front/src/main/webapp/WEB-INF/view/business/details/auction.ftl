@@ -24,14 +24,14 @@
 			</div>
 			<div class="meta_auction_eninfo">
 				<p>
-				<#if detailVO.currentAuction??>
-					若接下来无人出价,
-					${detailVO.currentAuction}将以
-					<span class="eninfo_price">${detailVO.currentAuctionPrice}</span>
-					拍得本件商品
-				<#else>
-					若一直无人出价,本商品将流拍
-				</#if>
+					<#if detailVO.currentAuction??>
+						若接下来无人出价,
+						${detailVO.currentAuction}将以
+						<span class="eninfo_price">${detailVO.currentAuctionPrice}</span>
+						拍得本件商品
+					<#else>
+						(若一直无人出价,本商品将流拍)
+					</#if>
 				</p>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 				</div>
 				<div id="auc_action" class="auc_action auc_act_btn_p">
 					<p class="auc_act_btn"><a href="#">我要出价</a></p>
-					<p class="auc_currency"><span>(${detailVO.auctionCurrency}西币每次)</span></p>
+					<p class="auc_currency"><span>(${detailVO.auctionCurrency!1}西币每次)</span></p>
 				</div>
 				<div class="meta_auct_timedown">
 					<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
@@ -53,14 +53,14 @@
 					<span id="countDownTime" class="auct_timedown"></span>
 				</div>
 			<#elseif detailVO.status?? && detailVO.status=='03'>
-				<div class="auc_action_over auc_act_btn_p">
+				<div class="auc_action_over auc_action auc_act_btn_p">
 					<p class="auc_act_btn">已经结束</p>
-					<p class="auc_currency"><span>(20西币每次)</span></p>
+					<p class="auc_currency"><span>(${detailVO.auctionCurrency!1}西币每次)</span></p>
 				</div>
 			<#else>
-				<div class="auc_action_over auc_act_btn_p">
+				<div class="auc_action_over auc_action auc_act_btn_p">
 					<p class="auc_act_btn">未开始</p>
-					<p class="auc_currency"><span>(20西币每次)</span></p>
+					<p class="auc_currency"><span>(${detailVO.auctionCurrency!1}西币每次)</span></p>
 				</div>
 			</#if>
 		</div>

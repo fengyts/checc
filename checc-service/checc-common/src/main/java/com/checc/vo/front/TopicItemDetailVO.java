@@ -24,6 +24,7 @@ public class TopicItemDetailVO extends BaseVO {
 
 	/** 专题商品id */
 	private Long itemId;
+	/** 商品名称 */
 	private String itemTitle;
 	/** 商品兑换总数量 */
 	private Integer inventory;
