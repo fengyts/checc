@@ -46,6 +46,10 @@
 					<p class="auc_currency"><span></span></p>
 				</div>
 			</#if>
+			<div id="auc_action_over" class="auc_action_over auc_action auc_act_btn_p" style="display:none;">
+				<p class="exchange_act_btn">已经结束</p>
+				<p class="auc_currency"><span></span></p>
+			</div>
 			<div class="auc_exchanged_list">
 				<a href="#">看看哪些人兑换了>></a>
 			</div>

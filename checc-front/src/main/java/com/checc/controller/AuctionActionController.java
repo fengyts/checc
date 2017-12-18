@@ -3,7 +3,6 @@ package com.checc.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ng.bayue.common.CommonMessages;
 import ng.bayue.common.CommonResultMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;

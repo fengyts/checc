@@ -49,7 +49,7 @@
 				<span class="act_label">花费西币：</span>
 				<input type="hidden" id="auctionCurrency" value="${auctionVO.auctionCurrency!1}" />
 				<span class="act_total_currency" id="totalCurrencyView">${auctionVO.auctionCurrency!1}</span>个
-				<input type="hidden" id="totalCurrency" name="totalCurrency" value="${auctionVO.auctionCurrency!1}" />
+				<input type="hidden" id="totalCurrency" name="totalCurrency" value="${auctionVO.auctionCurrency!1}" /><#-- 计算后的总西比值,传至后台 -->
 			</div>
 			<div class="act_btn_box">
 				<div class="act_abandon_btn" id="act_abandon_btn">
@@ -58,6 +58,7 @@
 				<div class="act_bid_btn" id="act_bid_btn">
 					<a href="#">出价</a>
 				</div>
+				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
 				<input type="hidden" id="auctactTKKey" name="auctactTKKey" value="${auctact_tk_key}" />
 			</div>
 			<div class="user_currency_info" id="user_currency_info">

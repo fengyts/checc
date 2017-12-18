@@ -176,7 +176,8 @@ input {
 	cursor: pointer;
 }
 
-.act_btn_box>.act_abandon_btn, .act_btn_box>.act_bid_btn, .act_btn_box>.act_unbid_btn {
+.act_btn_box>.act_abandon_btn, .act_btn_box>.act_bid_btn, .act_btn_box>.act_exchange_btn,
+	.act_btn_box>.act_unbid_btn {
 	margin-top: 10px;
 	width: 120px;
 	height: 35px;
@@ -200,12 +201,13 @@ input {
 	text-decoration: none;
 }
 
-.act_btn_box>.act_bid_btn, .act_btn_box>.act_bid_btn>a {
+.act_btn_box>.act_bid_btn, .act_btn_box>.act_bid_btn>a, .act_btn_box>.act_exchange_btn,
+	.act_btn_box>.act_exchange_btn>a {
 	background-color: #1e9fff;
 	color: #ffffff !important;
 }
 
-.act_btn_box>.act_bid_btn:hover {
+.act_btn_box>.act_bid_btn:hover,.act_btn_box>.act_exchange_btn:hover {
 	color: #ffffff;
 	opacity: .8;
 	filter: alpha(opacity = 80);
@@ -215,10 +217,11 @@ input {
 .act_unbid_btn {
 	background-color: #d9d9d9;
 	cursor: not-allowed;
-	color: #999999; 
+	color: #999999;
 	border: solid 1px #999999;
 }
-.act_unbid_btn>a{
+
+.act_unbid_btn>a {
 	background-color: #d9d9d9;
 	color: #999999 !important;
 	cursor: not-allowed;

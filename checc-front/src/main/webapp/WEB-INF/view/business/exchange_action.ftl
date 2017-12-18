@@ -39,9 +39,10 @@
 				<div class="act_abandon_btn" id="act_abandon_btn">
 					<a href="#">放弃</a>
 				</div>
-				<div class="act_bid_btn" id="act_bid_btn">
-					<a href="#">出价</a>
+				<div class="act_exchange_btn" id="act_exchange_btn">
+					<a href="#">兑换</a>
 				</div>
+				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
 				<input type="hidden" id="auctactTKKey" name="auctactTKKey" value="${auctact_tk_key}" />
 			</div>
 			<div class="user_currency_info" id="user_currency_info">

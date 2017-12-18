@@ -9,7 +9,7 @@ $(document).ready(function() {
 	_times = $("#auctionTimes").val();
 	_auctionMaxTimes = $("#auctionMaxTimes").val();
 
-	getTotalCurrency(_times);
+	getTotalCurrency();
 
 	if (_times <= 1) {
 		$("#auct_reduce").css('cursor', 'not-allowed');
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			_this.val(1).attr('value', 1);
 			$("#auct_reduce").css('cursor', 'not-allowed');
 			$("#auct_increase").css('cursor', 'pointer');
-			getTotalCurrency(_times);
+			getTotalCurrency();
 			return;
 		}
 		if (_ti >= _auctionMaxTimes) {
@@ -35,10 +35,10 @@ $(document).ready(function() {
 			_this.val(_auctionMaxTimes).attr('value', _auctionMaxTimes);
 			$("#auct_increase").css('cursor', 'not-allowed');
 			$("#auct_reduce").css('cursor', 'pointer');
-			getTotalCurrency(_times);
+			getTotalCurrency();
 			return;
 		}
-		getTotalCurrency(_times);
+		getTotalCurrency();
 	});
 
 	// 次数减
@@ -51,7 +51,7 @@ $(document).ready(function() {
 			--_times;
 			$("#auctionTimes").val(_times).attr('value', _times);
 			$("#auct_increase").css('cursor', 'pointer');
-			getTotalCurrency(_times);
+			getTotalCurrency();
 		}
 	});
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
 			++_times;
 			$("#auctionTimes").val(_times).attr('value', _times);
 			$("#auct_reduce").css('cursor', 'pointer');
-			getTotalCurrency(_times);
+			getTotalCurrency();
 		}
 	});
 
@@ -73,6 +73,16 @@ $(document).ready(function() {
 	$("#act_abandon_btn").on('click', function() {
 		parent.layer.close(parent.layer.index);
 //		parent.layer.close(parent.layer.getFrameIndex(window.name));
+	});
+	
+	//竞拍
+	$("#act_bid_btn").on('click', function(){
+		
+	});
+	
+	// 兑换
+	$("#act_exchange_btn").on('click', function(){
+		
 	});
 
 });
@@ -82,7 +92,7 @@ $(document).ready(function() {
  * 
  * @param times
  */
-function getTotalCurrency(times) {
+function getTotalCurrency() {
 	var _totalCu = _times * _auctionCurrency;
 	$("#totalCurrencyView").text(_totalCu);
 	$("#totalCurrency").val(_totalCu).attr('value', _totalCu);
@@ -98,4 +108,8 @@ function getTotalCurrency(times) {
 		$("#act_bid_btn").addClass('act_unbid_btn');
 		$("#act_bid_btn a").text("西币不足");
 	}
+}
+
+function auctionAction (){
+	
 }

@@ -32,7 +32,7 @@ $(document).ready(function() {
 		        		type: 2,
 		        		title: '请先登录',
 		        		resize: false,
-		        		scrollbar: false,
+		        		//scrollbar: false,
 		        		//fixed: false,
 		        		move:false,
 		        		shade: 0.1,
@@ -44,7 +44,7 @@ $(document).ready(function() {
 		        		type: 2,
 		        		title: _title,
 		        		resize: false,
-		        		scrollbar: false,
+		        		//scrollbar: false,
 		        		//fixed: false,
 		        		move:false,
 		        		shade: 0.1,
@@ -72,11 +72,13 @@ function cdt() {
 function countDownTime(o) {
 	if (mss < 0) {
 		_timeFlag = true;
+		$("#auc_action").css('display', 'none');
+		$("#auc_action_over").css('display', 'inline');
 		return;
 	}
 	setTimeout(function() {
 		formatTime(mss, o);
-		mss--;
+		--mss;
 		countDownTime(o);
 	}, 1000);
 }
