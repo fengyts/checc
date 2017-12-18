@@ -10,8 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.AuctionAO;
+import com.checc.dto.AuctionActionDTO;
 import com.checc.vo.front.ItemAuctionVO;
 
 import constants.CommonPathConstant;
@@ -60,6 +63,18 @@ public class AuctionActionController {
 		ItemAuctionVO vo = (ItemAuctionVO) crm.getData();
 		model.addAttribute("auctionVO", vo);
 		return "/business/exchange_action";
+	}
+	
+	@RequestMapping(value = "/auctionAct", method = {RequestMethod.POST})
+	@ResponseBody
+	public CommonResultMessage auctAct(AuctionActionDTO dto){
+		return null;
+	}
+	
+	@RequestMapping(value = "/exchangeAct", method = {RequestMethod.POST})
+	@ResponseBody
+	public CommonResultMessage exchangeAct(AuctionActionDTO dto){
+		return null;
 	}
 
 }

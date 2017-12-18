@@ -43,7 +43,7 @@
 					<a href="#">兑换</a>
 				</div>
 				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
-				<input type="hidden" id="auctactTKKey" name="auctactTKKey" value="${auctact_tk_key}" />
+				<input type="hidden" id="auctactTK" name="auctactTK" value="${auctact_tk_key}" />
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">

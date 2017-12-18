@@ -37,7 +37,7 @@
 						<span class="auct_times_stock">
 							<a href="javascript:void(0);" title="减1" hidefocus class="auct_reduce tb-iconfont" id="auct_reduce">-</a>
 							<input type="hidden" id="auctionMaxTimes" value="${auctionVO.auctionMaxTimes!10}">
-							<input type="text" class="auct_times_text" maxlength="8" value="1" title="请输入竞拍次数" id="auctionTimes" name="auctionTimes">
+							<input type="text" class="auct_times_text" maxlength="8" value="1" title="请输入出价次数" id="auctionTimes" name="auctionTimes">
 							<a href="javascript:void(0);" title="加1" hidefocus class="auct_increase tb-iconfont" id="auct_increase">+</a>次
 						</span>
 						<span class="act_max_nums">(最多出价${auctionVO.auctionMaxTimes!10}次)</span>
@@ -59,7 +59,7 @@
 					<a href="#">出价</a>
 				</div>
 				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
-				<input type="hidden" id="auctactTKKey" name="auctactTKKey" value="${auctact_tk_key}" />
+				<input type="hidden" id="auctactTK" name="auctactTK" value="${auctact_tk_key}" />
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">

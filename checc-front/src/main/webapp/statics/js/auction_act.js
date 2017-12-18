@@ -1,5 +1,5 @@
-var _times = 1, // 用户输入的竞拍次数
-_auctionMaxTimes = 10, // 允许最大次数
+var _times = 1, // 用户输入的竞拍出价次数
+_auctionMaxTimes = 10, // 允许最大出价次数
 _auctionCurrency = 1, // 单次竞拍需要的西币
 _useableCurrency = 0; // 用户可用西币
 
@@ -8,7 +8,7 @@ $(document).ready(function() {
 	_auctionCurrency = $("#auctionCurrency").val();
 	_times = $("#auctionTimes").val();
 	_auctionMaxTimes = $("#auctionMaxTimes").val();
-
+	
 	getTotalCurrency();
 
 	if (_times <= 1) {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 	// 处理次数输入
 	$("#auctionTimes").on('blur', function() {
 		var _this = $(this);
-		var _ti = _this.val();
+		var _ti = parseInt(_this.val());
 		if (_ti <= 1) {
 			_times = 1;
 			_this.val(1).attr('value', 1);
@@ -38,7 +38,7 @@ $(document).ready(function() {
 			getTotalCurrency();
 			return;
 		}
-		getTotalCurrency();
+		getTotalCurrency(_ti);
 	});
 
 	// 次数减
@@ -72,17 +72,17 @@ $(document).ready(function() {
 	// 放弃按钮
 	$("#act_abandon_btn").on('click', function() {
 		parent.layer.close(parent.layer.index);
-//		parent.layer.close(parent.layer.getFrameIndex(window.name));
+		// parent.layer.close(parent.layer.getFrameIndex(window.name));
 	});
-	
-	//竞拍
-	$("#act_bid_btn").on('click', function(){
-		
+
+	// 竞拍
+	$("#act_bid_btn").on('click', function() {
+		auctionAction();
 	});
-	
+
 	// 兑换
-	$("#act_exchange_btn").on('click', function(){
-		
+	$("#act_exchange_btn").on('click', function() {
+		exchangeAction();
 	});
 
 });
@@ -92,7 +92,10 @@ $(document).ready(function() {
  * 
  * @param times
  */
-function getTotalCurrency() {
+function getTotalCurrency(_t) {
+	if(_t){
+		_times = _t;
+	}
 	var _totalCu = _times * _auctionCurrency;
 	$("#totalCurrencyView").text(_totalCu);
 	$("#totalCurrency").val(_totalCu).attr('value', _totalCu);
@@ -110,6 +113,32 @@ function getTotalCurrency() {
 	}
 }
 
-function auctionAction (){
+// 竞拍
+function auctionAction() {
+	var _auctactTK = $("#auctactTK").val(),
+		_tpId = $("#tpId").val(),
+		_auctionTimes = $("#auctionTimes").val(),
+		_totalCurrency = $("#totalCurrency").val();
+	var _params = {};
+	_params.auctactTK = _auctactTK;
+	_params.tpId = _tpId;
+	_params.auctionTimes = _auctionTimes;
+	_params.totalCurrency = _totalCurrency;
+	
+	$.ajax({
+		url: '',
+		method:'POST',
+		cache: false,
+		dataType:'json',
+		data: _params,
+		success: function(data, status, xhr){
+			
+		}
+	});
+	
+}
+
+// 兑换
+function exchangeAction() {
 	
 }
