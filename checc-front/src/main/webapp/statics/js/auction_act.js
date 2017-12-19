@@ -8,7 +8,7 @@ $(document).ready(function() {
 	_auctionCurrency = $("#auctionCurrency").val();
 	_times = $("#auctionTimes").val();
 	_auctionMaxTimes = $("#auctionMaxTimes").val();
-	
+
 	getTotalCurrency();
 
 	if (_times <= 1) {
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			_this.val(1).attr('value', 1);
 			$("#auct_reduce").css('cursor', 'not-allowed');
 			$("#auct_increase").css('cursor', 'pointer');
-//			$("#act_bid_btn").attr('disabled', false);
+			// $("#act_bid_btn").attr('disabled', false);
 			getTotalCurrency();
 			return;
 		}
@@ -36,7 +36,7 @@ $(document).ready(function() {
 			_this.val(_auctionMaxTimes).attr('value', _auctionMaxTimes);
 			$("#auct_increase").css('cursor', 'not-allowed');
 			$("#auct_reduce").css('cursor', 'pointer');
-//			$("#act_bid_btn").attr('disabled', 'disabled');
+			// $("#act_bid_btn").attr('disabled', 'disabled');
 			getTotalCurrency();
 			return;
 		}
@@ -80,7 +80,7 @@ $(document).ready(function() {
 	// 竞拍
 	$("#act_bid_btn").on('click', function() {
 		var _disabled = $(this).attr('disabled');
-		if(_disabled == 'disabled'){
+		if (_disabled == 'disabled') {
 			return;
 		}
 		auctionAction();
@@ -88,6 +88,10 @@ $(document).ready(function() {
 
 	// 兑换
 	$("#act_exchange_btn").on('click', function() {
+		var _disabled = $(this).attr('disabled');
+		if (_disabled == 'disabled') {
+			return;
+		}
 		exchangeAction();
 	});
 
@@ -99,35 +103,96 @@ $(document).ready(function() {
  * @param times
  */
 function getTotalCurrency(_t) {
-	if(_t){
+	if (_t) {
 		_times = _t;
 	}
 	var _totalCu = _times * _auctionCurrency;
+	var _typeFlag = true;
+	if ($("#typeId").val() == 'exchange') {
+		_typeFlag = false;
+		_totalCu = $("#exchangeAmount").val();
+	}
 	$("#totalCurrencyView").text(_totalCu);
 	$("#totalCurrency").val(_totalCu).attr('value', _totalCu);
 
 	if (_useableCurrency >= _totalCu) {
 		$("#user_currency_info").css('display', 'none');
-		$("#act_bid_btn").removeClass('act_unbid_btn');
-		$("#act_bid_btn").addClass('act_bid_btn');
-		$("#act_bid_btn").attr('disabled', false);
-		$("#act_bid_btn a").text("出价");
+		$("#act_bid_btn, #act_exchange_btn").removeClass('act_unbid_btn');
+		$("#act_bid_btn, #act_exchange_btn").attr('disabled', false);
+		if (_typeFlag) {
+			$("#act_bid_btn").addClass('act_bid_btn');
+			$("#act_bid_btn a").text("竞拍");
+		} else {
+			$("#act_exchange_btn").addClass('act_exchange_btn');
+			$("#act_exchange_btn a").text("兑换");
+		}
 	} else {
 		$("#user_currency_info").css('display', 'inline-block');
-		$("#act_bid_btn").removeClass('act_bid_btn');
-		$("#act_bid_btn").addClass('act_unbid_btn');
-		$("#act_bid_btn").attr('disabled', 'disabled');
-//		$("#act_bid_btn").css('pointer-events', 'none');
-		$("#act_bid_btn a").text("西币不足");
+		$("#act_bid_btn, #act_exchange_btn").addClass('act_unbid_btn');
+		$("#act_bid_btn, #act_exchange_btn").attr('disabled', 'disabled');
+		// $("#act_bid_btn #act_exchange_btn").css('pointer-events', 'none');
+		$("#act_bid_btn a, #act_exchange_btn a").text("西币不足");
+		if (_typeFlag) {
+			$("#act_bid_btn").removeClass('act_bid_btn');
+			$("#act_bid_btn a").text("竞拍");
+		} else {
+			$("#act_exchange_btn").removeClass('act_exchange_btn');
+			$("#act_exchange_btn a").text("兑换");
+		}
 	}
+}
+
+function countDownTime(mss) {
+	if (mss < 0) {
+		window.parent.location.reload();
+		window.parent.layer.close(parent.lgn_pg_ii);
+		return;
+	}
+	setTimeout(function() {
+		--mss;
+		countDownTime(mss);
+	}, 1000);
 }
 
 // 竞拍
 function auctionAction() {
-	var _auctactTK = $("#auctactTK").val(),
-		_tpId = $("#tpId").val(),
-		_auctionTimes = $("#auctionTimes").val(),
+	var _auctactTK = $("#auctactTK").val(), 
+		_tpId = $("#tpId").val(), 
+		_auctionTimes = $("#auctionTimes").val(), 
 		_totalCurrency = $("#totalCurrency").val();
+	var _params = {};
+	_params.auctactTK = _auctactTK;
+	_params.tpId = _tpId;
+	_params.auctionTimes = _auctionTimes;
+	_params.totalCurrency = _totalCurrency;
+
+	$.ajax({
+		url : domain + '/auction/auctionAct',
+		method : 'POST',
+		cache : false,
+		dataType : 'json',
+		data : _params,
+		success : function(data, status, xhr) {
+			var _tic = 2;
+			if (data.result != 1) {
+				layer.msg("出价失败：" + data.message, {
+					time : 3000
+				});
+				countDownTime(_tic);
+			} else {
+				layer.msg('您已成功出价该商品！当前处于领先状态');
+				countDownTime(_tic);
+			}
+		}
+	});
+
+}
+
+// 兑换
+function exchangeAction() {
+	var _auctactTK = $("#auctactTK").val(), 
+		_tpId = $("#tpId").val(), 
+		_totalCurrency = $("#exchangeAmount").val();
 	var _params = {};
 	_params.auctactTK = _auctactTK;
 	_params.tpId = _tpId;
@@ -135,22 +200,22 @@ function auctionAction() {
 	_params.totalCurrency = _totalCurrency;
 	
 	$.ajax({
-		url: domain + '/auction/auctionAct',
-		method:'POST',
-		cache: false,
-		dataType:'json',
-		data: _params,
-		success: function(data, status, xhr){
-			console.log(data);
-			if(data.result != 1){
-				layer.msg(data.message, {time: 2000});
+		url : domain + '/auction/exchangeAct',
+		method : 'POST',
+		cache : false,
+		dataType : 'json',
+		data : _params,
+		success : function(data, status, xhr) {
+			var _tic = 2;
+			if (data.result != 1) {
+				layer.msg("出价失败：" + data.message, {
+					time : 3000
+				});
+				countDownTime(_tic);
+			} else {
+				layer.msg('您已成功出价该商品！当前处于领先状态');
+				countDownTime(_tic);
 			}
 		}
 	});
-	
-}
-
-// 兑换
-function exchangeAction() {
-	
 }

@@ -12,10 +12,11 @@
         <result column="bid_num" property="bidNum"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="bid_time" property="bidTime"/>
+        <result column="current_auct_price" property="currentAuctPrice"/>
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,user_id,nickname,mobile,bid_num,total_currency,bid_time
+	      id,topic_item_id,user_id,nickname,mobile,bid_num,total_currency,bid_time,current_auct_price
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -26,6 +27,7 @@
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
 			<if test="bidNum != null "> AND bid_num=#{bidNum} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
+			<if test="currentAuctPrice != null "> AND current_auct_price=#{currentAuctPrice} </if>
 		</where>
  	</sql>
 
@@ -50,7 +52,8 @@
 				mobile,
 				bid_num,
 				total_currency,
-				bid_time
+				bid_time,
+				current_auct_price
 		)values(
 				#{id},
 				#{topicItemId},
@@ -59,7 +62,8 @@
 				#{mobile},
 				#{bidNum},
 				#{totalCurrency},
-				#{bidTime}
+				#{bidTime},
+				#{currentAuctPrice}
 		)
     </insert>
 
@@ -72,7 +76,8 @@
 					mobile = #{mobile},
 					bid_num = #{bidNum},
 					total_currency = #{totalCurrency},
-					bid_time = #{bidTime}
+					bid_time = #{bidTime},
+					current_auct_price = #{currentAuctPrice}
 		WHERE
 			id = #{id}
 	</update>
@@ -91,6 +96,7 @@
 					<if test="bidNum != null ">bid_num=#{bidNum},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="bidTime != null ">bid_time=#{bidTime},</if>
+					<if test="currentAuctPrice != null ">current_auct_price=#{currentAuctPrice},</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -120,5 +126,17 @@
 	 	ORDER BY auction_record.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
+ 	<select id="MybatisAuctionRecordDAO_select_latest" parameterType="long" resultMap="AuctionRecordDOResultMap">
+ 		 SELECT
+	     	<include refid="MybatisAuctionRecordDAO_all_column_fields" />
+		 FROM
+		 	auction_record
+		 WHERE 
+		 	topic_item_id = #{topicItemId}
+ 		 ORDER BY bid_time DESC
+ 	 	 Limit 1
+ 	</select>
+ 	
 
 </mapper>

@@ -10,24 +10,30 @@
 		<div class="auc_info_t">
 			<div class="meta_item_currauctprice">
 				<span class="curraucttile">当前价:</span>
-				<span class="currauctprice">￥${detailVO.currentAuctionPrice!0.00?string('0.00')}</span>
-				<span class="compare_marketPrice">市场价：${detailVO.markgePrice!0.00?string('0.00')}</span>
+				<span class="currauctprice">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+				<span class="compare_marketPrice">市场价：￥${detailVO.marketPrice?string('0.00')}</span>
 			</div>
 			<div class="meta_currauctper">
 				<span class="curraucttile">当前出价人:</span>
-				<span class="currauctperson">${detailVO.currentAuction!'暂时无人出价'}</span>
+				<span class="currauctperson">${detailVO.currentBidder!'暂时无人出价'}</span>
 				<span class="auctall"><a href="#">查看全部出价记录>></a></span>
 			</div>
 			<div class="meta_curraucttime">
 				<span class="curraucttile">当前出价时间:</span>
-				<span class="curraucttime">${detailVO.currentAuctionTime!'暂时无人出价'}</span>
+				<span class="curraucttime">
+					<#if detailVO.currentBidTime??>
+						${detailVO.currentBidTime?string('yyyy-MM-dd HH:mm:ss')}
+					<#else>
+						暂时无人出价
+					</#if>
+				</span>
 			</div>
 			<div class="meta_auction_eninfo">
 				<p>
-					<#if detailVO.currentAuction??>
+					<#if detailVO.currentBidder??>
 						若接下来无人出价,
-						${detailVO.currentAuction}将以
-						<span class="eninfo_price">${detailVO.currentAuctionPrice}</span>
+						${detailVO.currentBidder}将以
+						<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
 						拍得本件商品
 					<#else>
 						(若一直无人出价,本商品将流拍)

@@ -20,6 +20,7 @@
 	<div class="auction_box">
 		<div class="auction_act_content">
 			<div class="auction_act_title">
+				<input type="hidden" id="typeId" value="auction">
 				<div class="act_title_t">确定要出价吗?</div>
 				<div class="act_title_ins">(出价后不可撤销)</div>
 			</div>
@@ -56,14 +57,14 @@
 					<a href="#">放弃</a>
 				</div>
 				<div class="act_bid_btn" id="act_bid_btn" disabled='false'>
-					<a href="#">出价</a>
+					<a href="#">竞拍</a>
 				</div>
 				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
 				<input type="hidden" id="auctactTK" name="auctactTK" value="${auctact_tk_key}" />
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">
-				<span>您的西币剩余${auctionVO.useableCurrency!0}个,不够本次出价！</span>
+				<span>您的西币剩余${auctionVO.useableCurrency!0}个,不够本次竞拍！</span>
 				<span class="auct_deposit_now">
 					<a href="javascript:window.open('_blank');">去充值>></a>
 				</span>

@@ -9,4 +9,14 @@ import com.checc.domain.AuctionRecordDO;
  */
 public interface AuctionRecordService extends GeneralService<AuctionRecordDO, AuctionRecordDO> {
 	
+	/**
+	 * <pre>
+	 * 获取最新的出价记录
+	 * </pre>
+	 *
+	 * @param topicItemId
+	 * @return
+	 */
+	AuctionRecordDO selectLatestAuction(Long topicItemId);
+	
 }

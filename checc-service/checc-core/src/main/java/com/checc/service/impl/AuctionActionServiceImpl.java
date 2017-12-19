@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.CheccUserDO;
@@ -50,6 +51,7 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 	private UserCurrencyService userCurrencyService;
 
 	@Override
+	@Transactional
 	public CommonResultMessage auctionAction(AuctionActionDTO dto) throws CommonServiceException {
 		CheccUserDO userDO = dto.getCheccUserDO();
 		Long userId = userDO.getId();
@@ -107,9 +109,16 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 			auctRecord.setNickname(userDO.getNickname());
 
 			// 扣减用户西币
+			// 锁用户，每个用户同一时间只能请求一次
 			if (redisCacheService.lock(auctKeyLock)) {
-				// 锁用户，每个用户同一时间只能请求一次
 				userCurrencyService.freezeCurrency(userId, plusTotalCur);
+				
+				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
+				int currentAuctPrice = plusTotalCur;
+				if(null != latest){
+					currentAuctPrice += latest.getCurrentAuctPrice();
+				}
+				auctRecord.setCurrentAuctPrice(currentAuctPrice);
 				auctionRecordService.insert(auctRecord);
 			} else {
 				return new CommonResultMessage(CommonResultCode.BusinessError.ONCE_EVERY_TIME.code,

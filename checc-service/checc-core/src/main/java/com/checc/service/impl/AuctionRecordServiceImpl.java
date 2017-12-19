@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.domain.AuctionRecordDO;
 import com.checc.service.AuctionRecordService;
+
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.common.Page;
@@ -124,6 +125,13 @@ public class AuctionRecordServiceImpl  implements AuctionRecordService{
 		}
 		return new Page<AuctionRecordDO>();
 	}
-	
+
+	@Override
+	public AuctionRecordDO selectLatestAuction(Long topicItemId) {
+		if(null == topicItemId){
+			return null;
+		}
+		return auctionRecordDAO.selectLatestAuction(topicItemId);
+	}
 	
 }

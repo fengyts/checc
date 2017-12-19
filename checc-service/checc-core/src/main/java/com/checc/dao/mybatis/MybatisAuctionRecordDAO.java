@@ -3,9 +3,11 @@ package com.checc.dao.mybatis;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.AuctionRecordDO;
+
 import ng.bayue.exception.CommonDAOException;
 
 @Component(value="auctionRecordDAO")
@@ -58,6 +60,11 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 	@Override
 	public List<AuctionRecordDO> selectDynamicPageQuery(AuctionRecordDO auctionRecordDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), auctionRecordDO);
+	}
+
+	@Override
+	public AuctionRecordDO selectLatestAuction(Long topicItemId) {
+		return getSqlSession().selectOne(getStatement("select_latest"), topicItemId);
 	}
 
 }

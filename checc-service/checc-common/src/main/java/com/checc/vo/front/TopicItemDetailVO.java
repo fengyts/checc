@@ -44,6 +44,10 @@ public class TopicItemDetailVO extends BaseVO {
 	private Double marketPrice;
 	/** 当前竞拍价 */
 	private Double currentAuctionPrice;
+	/** 当前出价人 */
+	private String currentBidder;
+	/** 当前出价时间 */
+	private Date currentBidTime;
 
 	/** 结束倒计时 */
 	private Long timeCountDown;
@@ -214,6 +218,22 @@ public class TopicItemDetailVO extends BaseVO {
 
 	public void setExchangeLimitNum(Integer exchangeLimitNum) {
 		this.exchangeLimitNum = exchangeLimitNum;
+	}
+
+	public String getCurrentBidder() {
+		return currentBidder;
+	}
+
+	public void setCurrentBidder(String currentBidder) {
+		this.currentBidder = currentBidder;
+	}
+
+	public Date getCurrentBidTime() {
+		return currentBidTime;
+	}
+
+	public void setCurrentBidTime(Date currentBidTime) {
+		this.currentBidTime = currentBidTime;
 	}
 
 }

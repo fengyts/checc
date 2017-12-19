@@ -20,6 +20,7 @@
 	<div class="auction_box">
 		<div class="auction_act_content">
 			<div class="auction_act_title">
+				<input type="hidden" id="typeId" value="exchange">
 				<div class="act_title_t">确定要兑换吗?</div>
 				<div class="act_title_ins">(兑换后不可撤销)</div>
 			</div>
@@ -31,9 +32,10 @@
 				<span class="act_label">兑换数量：</span>
 				<span class="exchange_num" id="exchangeLimitNum">${auctionVO.exchangeLimitNum!1}</span>个
 			</div>
-			<div class="act_exchange_amt_box">
+			<div class="act_expend_currency">
 				<span class="act_label">花费西币：</span>			
-				<span class="act_exchange_amt">${auctionVO.exchangeAmount}</span>			
+				<span class="act_exchange_amt">${auctionVO.exchangeAmount}</span>个
+				<input type="hidden" id="exchangeAmount" name="exchangeAmount" value="${auctionVO.exchangeAmount}" />			
 			</div>
 			<div class="act_btn_box">
 				<div class="act_abandon_btn" id="act_abandon_btn">
@@ -47,7 +49,7 @@
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">
-				<span>您的西币剩余${auctionVO.useableCurrency!0}个,不够本次出价！</span>
+				<span>您的西币剩余${auctionVO.useableCurrency!0}个,不够本次兑换！</span>
 				<span class="auct_deposit_now">
 					<a href="javascript:window.open('_blank');">去充值>></a>
 				</span>

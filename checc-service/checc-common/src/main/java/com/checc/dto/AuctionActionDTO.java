@@ -14,7 +14,7 @@ public class AuctionActionDTO extends BaseDTO {
 	private Long tpId;
 	/** 竞拍出价次数 */
 	private Integer auctionTimes;
-	/** 话费的总西比值 */
+	/** 花费的总西比值 */
 	private Integer totalCurrency;
 
 	public CheccUserDO getCheccUserDO() {

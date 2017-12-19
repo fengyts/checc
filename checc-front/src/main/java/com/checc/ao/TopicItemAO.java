@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.ItemDescDO;
 import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
@@ -15,6 +16,7 @@ import com.checc.domain.TopicItemDO;
 import com.checc.enums.ItemPictureTypeEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
+import com.checc.service.AuctionRecordService;
 import com.checc.service.ItemDescService;
 import com.checc.service.ItemPictureService;
 import com.checc.service.TopicItemService;
@@ -24,6 +26,7 @@ import com.checc.vo.front.TopicItemVO;
 
 import ng.bayue.constants.CommonConstant;
 import ng.bayue.fastdfs.ImageUrlUtil;
+import ng.bayue.util.StringUtils;
 
 @Service
 public class TopicItemAO {
@@ -38,6 +41,8 @@ public class TopicItemAO {
 	private ItemPictureService pictureService;
 	@Autowired
 	private ItemDescService itemDescService;
+	@Autowired
+	private AuctionRecordService auctionRecordService;
 
 	/**
 	 * <pre>
@@ -155,14 +160,18 @@ public class TopicItemAO {
 		vo.setStartTime(startTime);
 		vo.setEndTime(endTime);
 		
-		
-
-		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) {
+		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) { // 兑换
 			if (item.getResidue() < 1) {
 				vo.setHasExchangeOut(true);
 			}
 		} else {
 			vo.setHasExchangeOut(false);
+			AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
+			if(null != recordDO){
+				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
+				vo.setCurrentBidTime(recordDO.getBidTime());
+				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
+			}
 		}
 
 		ItemPictureDO pdo = new ItemPictureDO();
