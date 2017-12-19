@@ -1,5 +1,6 @@
 package com.checc.service;
 
+import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralService;
 import com.checc.domain.UserCurrencyDO;
 
@@ -9,5 +10,24 @@ import com.checc.domain.UserCurrencyDO;
  */
 public interface UserCurrencyService extends GeneralService<UserCurrencyDO, UserCurrencyDO> {
 
+	/**
+	 * <pre>
+	 * 冻结用户西币
+	 * </pre>
+	 *
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	public int freezeCurrency(Long userId, Integer currency) throws CommonServiceException;
+	
+	/**
+	 * <pre>
+	 * 增加用户西币值
+	 * </pre>
+	 *
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonServiceException;
 
 }

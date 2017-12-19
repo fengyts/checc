@@ -8,6 +8,5 @@ import com.checc.domain.AuctionRecordDO;
  * @author fengyts 2017-11-16 14:54:40
  */
 public interface AuctionRecordService extends GeneralService<AuctionRecordDO, AuctionRecordDO> {
-
-
+	
 }

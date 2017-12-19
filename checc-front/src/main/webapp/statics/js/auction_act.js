@@ -27,6 +27,7 @@ $(document).ready(function() {
 			_this.val(1).attr('value', 1);
 			$("#auct_reduce").css('cursor', 'not-allowed');
 			$("#auct_increase").css('cursor', 'pointer');
+//			$("#act_bid_btn").attr('disabled', false);
 			getTotalCurrency();
 			return;
 		}
@@ -35,6 +36,7 @@ $(document).ready(function() {
 			_this.val(_auctionMaxTimes).attr('value', _auctionMaxTimes);
 			$("#auct_increase").css('cursor', 'not-allowed');
 			$("#auct_reduce").css('cursor', 'pointer');
+//			$("#act_bid_btn").attr('disabled', 'disabled');
 			getTotalCurrency();
 			return;
 		}
@@ -77,6 +79,10 @@ $(document).ready(function() {
 
 	// 竞拍
 	$("#act_bid_btn").on('click', function() {
+		var _disabled = $(this).attr('disabled');
+		if(_disabled == 'disabled'){
+			return;
+		}
 		auctionAction();
 	});
 
@@ -104,11 +110,14 @@ function getTotalCurrency(_t) {
 		$("#user_currency_info").css('display', 'none');
 		$("#act_bid_btn").removeClass('act_unbid_btn');
 		$("#act_bid_btn").addClass('act_bid_btn');
+		$("#act_bid_btn").attr('disabled', false);
 		$("#act_bid_btn a").text("出价");
 	} else {
 		$("#user_currency_info").css('display', 'inline-block');
 		$("#act_bid_btn").removeClass('act_bid_btn');
 		$("#act_bid_btn").addClass('act_unbid_btn');
+		$("#act_bid_btn").attr('disabled', 'disabled');
+//		$("#act_bid_btn").css('pointer-events', 'none');
 		$("#act_bid_btn a").text("西币不足");
 	}
 }
@@ -126,13 +135,16 @@ function auctionAction() {
 	_params.totalCurrency = _totalCurrency;
 	
 	$.ajax({
-		url: '',
+		url: domain + '/auction/auctionAct',
 		method:'POST',
 		cache: false,
 		dataType:'json',
 		data: _params,
 		success: function(data, status, xhr){
-			
+			console.log(data);
+			if(data.result != 1){
+				layer.msg(data.message, {time: 2000});
+			}
 		}
 	});
 	

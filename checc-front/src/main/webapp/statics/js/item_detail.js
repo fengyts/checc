@@ -36,6 +36,7 @@ $(document).ready(function() {
 		        		//fixed: false,
 		        		move:false,
 		        		shade: 0.1,
+		        		zIndex: 0,
 		        		content: domain + '/user/loginAjax',
 		        		area: ['700px', '500px']
 		        	});

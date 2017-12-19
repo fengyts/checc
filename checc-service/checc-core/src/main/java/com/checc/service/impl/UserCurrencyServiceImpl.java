@@ -32,16 +32,6 @@ public class UserCurrencyServiceImpl  implements UserCurrencyService{
 		}
 	}
 
-//	@Override
-//	public int updateById(UserCurrencyDO userCurrencyDO) throws CommonServiceException {
-//		try {
-//			return (Integer) userCurrencyDAO.updateById(userCurrencyDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
-
 	@Override
 	public int update(UserCurrencyDO userCurrencyDO,boolean isAllField) throws CommonServiceException {
 		try {
@@ -65,16 +55,6 @@ public class UserCurrencyServiceImpl  implements UserCurrencyService{
             throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(UserCurrencyDO userCurrencyDO) throws CommonServiceException {
-//		try {
-//			return (Integer) userCurrencyDAO.updateDynamic(userCurrencyDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public UserCurrencyDO selectById(Long id) throws CommonServiceException {
@@ -144,6 +124,25 @@ public class UserCurrencyServiceImpl  implements UserCurrencyService{
 		}
 		return new Page<UserCurrencyDO>();
 	}
-	
+
+	@Override
+	public int freezeCurrency(Long userId, Integer currency) throws CommonServiceException {
+		try {
+			return userCurrencyDAO.freezeCurrency(userId, currency);
+		} catch (CommonDAOException e) {
+			logger.error("冻结用户西币异常:{}", e);
+		}
+		return -1;
+	}
+
+	@Override
+	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonServiceException {
+		try {
+			return userCurrencyDAO.increaseTotalCurrency(userId, currency);
+		} catch (CommonDAOException e) {
+			logger.error("用户增加西币异常：{}", e);
+		}
+		return -1;
+	}
 	
 }

@@ -14,7 +14,6 @@
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
-	
 	<#include "/common/common-js.ftl" />
 	
 </head>

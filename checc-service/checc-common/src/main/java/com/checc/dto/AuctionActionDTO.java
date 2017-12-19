@@ -1,8 +1,12 @@
 package com.checc.dto;
 
+import com.checc.domain.CheccUserDO;
+
 public class AuctionActionDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 9064572015627777256L;
+
+	private CheccUserDO checcUserDO;
 
 	/** token key */
 	private String auctactTK;
@@ -12,6 +16,14 @@ public class AuctionActionDTO extends BaseDTO {
 	private Integer auctionTimes;
 	/** 话费的总西比值 */
 	private Integer totalCurrency;
+
+	public CheccUserDO getCheccUserDO() {
+		return checcUserDO;
+	}
+
+	public void setCheccUserDO(CheccUserDO checcUserDO) {
+		this.checcUserDO = checcUserDO;
+	}
 
 	public String getAuctactTK() {
 		return auctactTK;

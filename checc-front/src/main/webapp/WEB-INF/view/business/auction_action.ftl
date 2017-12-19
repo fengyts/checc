@@ -55,7 +55,7 @@
 				<div class="act_abandon_btn" id="act_abandon_btn">
 					<a href="#">放弃</a>
 				</div>
-				<div class="act_bid_btn" id="act_bid_btn">
+				<div class="act_bid_btn" id="act_bid_btn" disabled='false'>
 					<a href="#">出价</a>
 				</div>
 				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />

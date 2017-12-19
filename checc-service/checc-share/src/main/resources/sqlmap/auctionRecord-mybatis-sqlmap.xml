@@ -9,14 +9,13 @@
         <result column="user_id" property="userId"/>
         <result column="nickname" property="nickname"/>
         <result column="mobile" property="mobile"/>
-        <result column="bid_price" property="bidPrice"/>
         <result column="bid_num" property="bidNum"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="bid_time" property="bidTime"/>
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,user_id,nickname,mobile,bid_price,bid_num,total_currency,bid_time
+	      id,topic_item_id,user_id,nickname,mobile,bid_num,total_currency,bid_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -25,7 +24,6 @@
 			<if test="userId != null "> AND user_id=#{userId} </if>
 			<if test="nickname != null  and nickname != '' "> AND nickname=#{nickname} </if>
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
-			<if test="bidPrice != null "> AND bid_price=#{bidPrice} </if>
 			<if test="bidNum != null "> AND bid_num=#{bidNum} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 		</where>
@@ -50,7 +48,6 @@
 				user_id,
 				nickname,
 				mobile,
-				bid_price,
 				bid_num,
 				total_currency,
 				bid_time
@@ -60,7 +57,6 @@
 				#{userId},
 				#{nickname},
 				#{mobile},
-				#{bidPrice},
 				#{bidNum},
 				#{totalCurrency},
 				#{bidTime}
@@ -74,7 +70,6 @@
 					user_id = #{userId},
 					nickname = #{nickname},
 					mobile = #{mobile},
-					bid_price = #{bidPrice},
 					bid_num = #{bidNum},
 					total_currency = #{totalCurrency},
 					bid_time = #{bidTime}
@@ -93,7 +88,6 @@
 					<if test="userId != null ">user_id=#{userId},</if>
 					<if test="nickname != null  and nickname != '' ">nickname=#{nickname},</if>
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
-					<if test="bidPrice != null ">bid_price=#{bidPrice},</if>
 					<if test="bidNum != null ">bid_num=#{bidNum},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="bidTime != null ">bid_time=#{bidTime},</if>

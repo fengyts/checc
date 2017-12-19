@@ -1,21 +1,28 @@
 package com.checc.ao;
 
-import ng.bayue.common.CommonMessages;
-import ng.bayue.common.CommonResultMessage;
-import ng.bayue.common.model.TokenModel;
-import ng.bayue.constants.TokenTypeConstant;
-import ng.bayue.service.TokenService;
-import ng.bayue.util.crypto.AESUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
+import com.checc.domain.UserCurrencyDO;
+import com.checc.dto.AuctionActionDTO;
+import com.checc.service.AuctionActionService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
+import com.checc.service.UserCurrencyService;
 import com.checc.vo.front.ItemAuctionVO;
+
+import ng.bayue.common.CommonMessages;
+import ng.bayue.common.CommonResultCode;
+import ng.bayue.common.CommonResultMessage;
+import ng.bayue.common.model.TokenModel;
+import ng.bayue.constants.TokenTypeConstant;
+import ng.bayue.enums.RedisModelStatusEnum;
+import ng.bayue.service.TokenService;
+import ng.bayue.util.StringUtils;
+import ng.bayue.util.crypto.AESUtils;
 
 @Service
 public class AuctionAO {
@@ -26,8 +33,12 @@ public class AuctionAO {
 	private TopicItemService topicItemService;
 	@Autowired
 	private TopicService topicService;
+	@Autowired
+	private UserCurrencyService userCurrencyService;
+	@Autowired
+	private AuctionActionService auctionActionService;
 
-	public CommonResultMessage auctionDetails(Model model, Long tpId) {
+	public CommonResultMessage auctionDetails(Model model, Long tpId, Long userId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonResultMessage.failure(CommonMessages.ReqException);
 		}
@@ -46,22 +57,20 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-		
-		vo.setUseableCurrency(1000);
+
+		vo.setUseableCurrency(getUseableCurrency(userId));
 
 		// 创建token
-		TokenModel tokenModel = new TokenModel();
-		tokenModel.setTokenType(TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION
-				.getCodeType());
+		TokenModel tokenModel = new TokenModel(userId.toString(),
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType());
 		tokenService.create(tokenModel);
-		String keyOrigin = tokenModel.getKey();
 		AESUtils aes = new AESUtils();
-		model.addAttribute("auctact_tk_key", aes.encrypt(keyOrigin));
-		
+		model.addAttribute("auctact_tk_key", aes.encrypt(tokenModel.getToken()));
+
 		return new CommonResultMessage(vo);
 	}
-	
-	public CommonResultMessage exchangeDetails(Model model, Long tpId) {
+
+	public CommonResultMessage exchangeDetails(Model model, Long tpId, Long userId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonResultMessage.failure(CommonMessages.ReqException);
 		}
@@ -80,19 +89,62 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-		
-		vo.setUseableCurrency(1000);
+
+		vo.setUseableCurrency(getUseableCurrency(userId));
 
 		// 创建token
-		TokenModel tokenModel = new TokenModel();
-		tokenModel.setTokenType(TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE
-				.getCodeType());
+		TokenModel tokenModel = new TokenModel(userId.toString(),
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType());
 		tokenService.create(tokenModel);
-		String keyOrigin = tokenModel.getKey();
 		AESUtils aes = new AESUtils();
-		model.addAttribute("auctact_tk_key", aes.encrypt(keyOrigin));
-		
+		model.addAttribute("auctact_tk_key", aes.encrypt(tokenModel.getToken()));
+
 		return new CommonResultMessage(vo);
+	}
+
+	public CommonResultMessage auctionAct(AuctionActionDTO dto) {
+		String auctionTK = dto.getAuctactTK();
+		if (StringUtils.isBlank(auctionTK)) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+		Long tpId = dto.getTpId();
+		Integer auctionTimes = dto.getAuctionTimes();
+		Integer totalCurrency = dto.getTotalCurrency();
+		if (null == tpId || null == auctionTimes || null == totalCurrency || tpId < 0 || auctionTimes < 1
+				|| totalCurrency < 1) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+
+		// 校验token
+		AESUtils aes = new AESUtils();
+		auctionTK = aes.decrypt(auctionTK);
+		TokenModel tokenModel = new TokenModel(dto.getCheccUserDO().getId().toString(), TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType());
+		tokenModel.setToken(auctionTK);
+		RedisModelStatusEnum tokenStatus = tokenService.check(tokenModel);
+		if (RedisModelStatusEnum.CORRECT != tokenStatus) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+
+		CommonResultMessage crm = auctionActionService.auctionAction(dto);
+
+		return crm;
+	}
+	
+	public int getUseableCurrency(Long userId){
+		if(null == userId){
+			return 0;
+		}
+		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
+		if(null == currencyDO){
+			return 0;
+		}
+		int userUseable = currencyDO.getTotalCurrency() - currencyDO.getFreeze();
+		
+		return userUseable;
+		
 	}
 
 }

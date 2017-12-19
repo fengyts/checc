@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 竞拍记录
-* @author fengyts Fri Dec 15 14:33:19 CST 2017
+* @author fengyts Tue Dec 19 13:15:09 CST 2017
 */
 
 public class AuctionRecordDO extends BaseDO {
@@ -25,9 +25,6 @@ private String nickname;
 
 /** 用户手机号，冗余字段 */
 private String mobile;
-
-/** 用户出价 */
-private Double bidPrice;
 
 /** 出价次数 */
 private Integer bidNum;
@@ -72,13 +69,6 @@ private Date bidTime;
 */
 	public void setMobile(String mobile) {
 	this.mobile = mobile;
-}
-/**
-* 设置 用户出价
-* @param bidPrice
-*/
-	public void setBidPrice(Double bidPrice) {
-	this.bidPrice = bidPrice;
 }
 /**
 * 设置 出价次数
@@ -135,13 +125,6 @@ private Date bidTime;
 */
 	public String getMobile() {
 	return mobile;
-}
-/**
-* 获取 用户出价
-* @return bidPrice
-*/
-	public Double getBidPrice() {
-	return bidPrice;
 }
 /**
 * 获取 出价次数

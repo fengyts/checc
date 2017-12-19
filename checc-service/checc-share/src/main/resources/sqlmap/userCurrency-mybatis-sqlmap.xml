@@ -8,10 +8,11 @@
         <result column="total_currency" property="totalCurrency"/>
         <result column="freeze" property="freeze"/>
         <result column="refund" property="refund"/>
+        <result column="modify_time" property="modifyTime"/>
 	</resultMap>
 
 	<sql id="MybatisUserCurrencyDAO_all_column_fields">
-	      user_id,total_currency,freeze,refund
+	      user_id,total_currency,freeze,refund,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisUserCurrencyDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -39,12 +40,14 @@
 				user_id,
 				total_currency,
 				freeze,
-				refund
+				refund,
+				modify_time
 		)values(
 				#{userId},
 				#{totalCurrency},
 				#{freeze},
-				#{refund}
+				#{refund},
+				#{modifyTime}
 		)
     </insert>
 
@@ -53,7 +56,8 @@
 		SET
 					total_currency = #{totalCurrency},
 					freeze = #{freeze},
-					refund = #{refund}
+					refund = #{refund},
+					modify_time = #{modifyTime}
 		WHERE
 			user_id = #{userId}
 	</update>
@@ -68,6 +72,7 @@
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="freeze != null ">freeze=#{freeze},</if>
 					<if test="refund != null ">refund=#{refund},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
 		</set>
 		WHERE user_id = #{userId}
 	</update>
@@ -97,5 +102,23 @@
 	 	ORDER BY user_currency.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
+ 	<update id="MybatisUserCurrencyDAO_freezeCurrency" parameterType="map">
+ 		UPDATE 
+ 			user_currency 
+		SET 
+			freeze = freeze + #{currency}, modify_time = now()
+ 		WHERE 
+ 			user_id = #{userId}
+ 	</update>
+ 	
+ 	<update id="MybatisUserCurrencyDAO_increaseTotalCurrency" parameterType="map">
+ 		UPDATE 
+ 			user_currency 
+		SET 
+			total_currency = total_currency + #{currency}, modify_time = now()
+ 		WHERE 
+ 			user_id = #{userId}
+ 	</update>
 
 </mapper>

@@ -32,16 +32,6 @@ public class AuctionRecordServiceImpl  implements AuctionRecordService{
 		}
 	}
 
-//	@Override
-//	public int updateById(AuctionRecordDO auctionRecordDO) throws CommonServiceException {
-//		try {
-//			return (Integer) auctionRecordDAO.updateById(auctionRecordDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
-
 	@Override
 	public int update(AuctionRecordDO auctionRecordDO,boolean isAllField) throws CommonServiceException {
 		try {
@@ -65,16 +55,6 @@ public class AuctionRecordServiceImpl  implements AuctionRecordService{
             throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(AuctionRecordDO auctionRecordDO) throws CommonServiceException {
-//		try {
-//			return (Integer) auctionRecordDAO.updateDynamic(auctionRecordDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public AuctionRecordDO selectById(Long id) throws CommonServiceException {

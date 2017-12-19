@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.AuctionAO;
+import com.checc.constants.UserConstants;
+import com.checc.domain.CheccUserDO;
 import com.checc.dto.AuctionActionDTO;
 import com.checc.vo.front.ItemAuctionVO;
 
@@ -36,12 +38,13 @@ public class AuctionActionController {
 	private AuctionAO auctionAO;
 
 	@RequestMapping("/auctionAction/{tpId}")
-	public String auctionPage(HttpServletRequest request, HttpServletResponse response,
-			Model model, @PathVariable Long tpId) {
+	public String auctionPage(HttpServletRequest request, HttpServletResponse response, Model model,
+			@PathVariable Long tpId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
-		CommonResultMessage crm = auctionAO.auctionDetails(model, tpId);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		CommonResultMessage crm = auctionAO.auctionDetails(model, tpId, userDO.getId());
 		if (CommonResultMessage.Failure == crm.getResult()) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
@@ -51,12 +54,13 @@ public class AuctionActionController {
 	}
 
 	@RequestMapping("/exchangeAction/{tpId}")
-	public String exchangePage(HttpServletRequest request, HttpServletResponse response,
-			Model model, @PathVariable Long tpId) {
+	public String exchangePage(HttpServletRequest request, HttpServletResponse response, Model model,
+			@PathVariable Long tpId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
-		CommonResultMessage crm = auctionAO.exchangeDetails(model, tpId);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		CommonResultMessage crm = auctionAO.exchangeDetails(model, tpId, userDO.getId());
 		if (CommonResultMessage.Failure == crm.getResult()) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
@@ -64,16 +68,18 @@ public class AuctionActionController {
 		model.addAttribute("auctionVO", vo);
 		return "/business/exchange_action";
 	}
-	
-	@RequestMapping(value = "/auctionAct", method = {RequestMethod.POST})
+
+	@RequestMapping(value = "/auctionAct", method = { RequestMethod.POST })
 	@ResponseBody
-	public CommonResultMessage auctAct(AuctionActionDTO dto){
-		return null;
+	public CommonResultMessage auctAct(HttpServletRequest request, AuctionActionDTO dto) {
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		dto.setCheccUserDO(userDO);
+		return auctionAO.auctionAct(dto);
 	}
-	
-	@RequestMapping(value = "/exchangeAct", method = {RequestMethod.POST})
+
+	@RequestMapping(value = "/exchangeAct", method = { RequestMethod.POST })
 	@ResponseBody
-	public CommonResultMessage exchangeAct(AuctionActionDTO dto){
+	public CommonResultMessage exchangeAct(AuctionActionDTO dto) {
 		return null;
 	}
 
