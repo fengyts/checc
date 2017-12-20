@@ -32,16 +32,6 @@ public class TopicItemServiceImpl  implements TopicItemService{
 		}
 	}
 
-//	@Override
-//	public int updateById(TopicItemDO topicItemDO) throws CommonServiceException {
-//		try {
-//			return (Integer) topicItemDAO.updateById(topicItemDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
-
 	@Override
 	public int update(TopicItemDO topicItemDO,boolean isAllField) throws CommonServiceException {
 		try {
@@ -65,16 +55,6 @@ public class TopicItemServiceImpl  implements TopicItemService{
             throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(TopicItemDO topicItemDO) throws CommonServiceException {
-//		try {
-//			return (Integer) topicItemDAO.updateDynamic(topicItemDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public TopicItemDO selectById(Long id) throws CommonServiceException {
@@ -144,6 +124,16 @@ public class TopicItemServiceImpl  implements TopicItemService{
 		}
 		return new Page<TopicItemDO>();
 	}
-	
+
+	@Override
+	public int reduceExchangeResidue(Long id) throws CommonServiceException {
+		try {
+			return topicItemDAO.reduceExchangeResidue(id);
+		} catch (CommonDAOException e) {
+			logger.error("兑换商品扣减剩余数量异常：{}", e);
+		}
+		
+		return -1;
+	}
 	
 }

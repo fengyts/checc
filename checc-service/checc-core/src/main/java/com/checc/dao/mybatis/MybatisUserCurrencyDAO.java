@@ -11,6 +11,7 @@ import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.UserCurrencyDO;
 
 import ng.bayue.exception.CommonDAOException;
+import ng.bayue.exception.CommonServiceException;
 
 @Component(value="userCurrencyDAO")
 public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurrencyDAO {
@@ -69,7 +70,7 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("currency", currency);
-		return getSqlSession().update(getStatement("freezeCurrency"), param);
+		return getSqlSession().update(getStatement("freeze_currency"), param);
 	}
 
 	@Override
@@ -77,7 +78,17 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("currency", currency);
-		return getSqlSession().update(getStatement("increaseTotalCurrency"), param);
+		return getSqlSession().update(getStatement("increase_total_currency"), param);
 	}
+
+	@Override
+	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonDAOException {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("currency", currency);
+		return getSqlSession().update(getStatement("reduce_exchange_currency"), param);
+	}
+	
+	
 
 }

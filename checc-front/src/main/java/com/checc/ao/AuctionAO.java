@@ -57,8 +57,13 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-
-		vo.setUseableCurrency(getUseableCurrency(userId));
+		
+		int userUseable = 0;
+		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
+		if (null != currencyDO) {
+			userUseable = currencyDO.getTotalCurrency() - currencyDO.getFreeze();
+		}
+		vo.setUseableCurrency(userUseable);
 
 		// 创建token
 		TokenModel tokenModel = new TokenModel(userId.toString(),
@@ -89,8 +94,13 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-
-		vo.setUseableCurrency(getUseableCurrency(userId));
+		
+		int userUseable = 0;
+		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
+		if (null != currencyDO) {
+			userUseable = currencyDO.getRefund();
+		}
+		vo.setUseableCurrency(userUseable);
 
 		// 创建token
 		TokenModel tokenModel = new TokenModel(userId.toString(),
@@ -103,11 +113,6 @@ public class AuctionAO {
 	}
 
 	public CommonResultMessage auctionAct(AuctionActionDTO dto) {
-		String auctionTK = dto.getAuctactTK();
-		if (StringUtils.isBlank(auctionTK)) {
-			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
-					CommonResultCode.SystemError.REQ_ERROR.desc);
-		}
 		Long tpId = dto.getTpId();
 		Integer auctionTimes = dto.getAuctionTimes();
 		Integer totalCurrency = dto.getTotalCurrency();
@@ -116,35 +121,79 @@ public class AuctionAO {
 			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
 					CommonResultCode.SystemError.REQ_ERROR.desc);
 		}
+		String auctionTk = dto.getAuctactTK();
+		CommonResultMessage crm = validateTk(auctionTk,
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType(), dto.getCheccUserDO().getId());
+		if (CommonResultMessage.Success != crm.getResult()) {
+			return crm;
+		}
+
+		crm = auctionActionService.auctionAction(dto);
+		return crm;
+	}
+
+	public CommonResultMessage exchangeAct(AuctionActionDTO dto) {
+		Long tpId = dto.getTpId();
+		Integer totalCurrency = dto.getTotalCurrency();
+		if (null == tpId || null == totalCurrency || tpId < 0 || totalCurrency < 1) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+		String auctionTk = dto.getAuctactTK();
+		CommonResultMessage crm = validateTk(auctionTk,
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType(), dto.getCheccUserDO().getId());
+		if (CommonResultMessage.Success != crm.getResult()) {
+			return crm;
+		}
+		
+		try {
+			crm = auctionActionService.exchangeAction(dto);
+		} catch (Exception e) {
+			crm = CommonResultMessage.failure(e.getMessage());
+		}
+		return crm;
+	}
+
+	private CommonResultMessage validateTk(String auctionTk, String tkType, Long userId) {
+		if (StringUtils.isBlank(auctionTk)) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
 
 		// 校验token
 		AESUtils aes = new AESUtils();
-		auctionTK = aes.decrypt(auctionTK);
-		TokenModel tokenModel = new TokenModel(dto.getCheccUserDO().getId().toString(), TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType());
-		tokenModel.setToken(auctionTK);
+		auctionTk = aes.decrypt(auctionTk);
+		TokenModel tokenModel = new TokenModel(userId.toString(), tkType);
+		tokenModel.setToken(auctionTk);
 		RedisModelStatusEnum tokenStatus = tokenService.check(tokenModel);
 		if (RedisModelStatusEnum.CORRECT != tokenStatus) {
 			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
 					CommonResultCode.SystemError.REQ_ERROR.desc);
 		}
 
-		CommonResultMessage crm = auctionActionService.auctionAction(dto);
+		return CommonResultMessage.success();
+	}
 
-		return crm;
-	}
-	
-	public int getUseableCurrency(Long userId){
-		if(null == userId){
-			return 0;
-		}
-		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
-		if(null == currencyDO){
-			return 0;
-		}
-		int userUseable = currencyDO.getTotalCurrency() - currencyDO.getFreeze();
-		
-		return userUseable;
-		
-	}
+	/**
+	 * <pre>
+	 * 获取用户可用西币
+	 * </pre>
+	 *
+	 * @param userId
+	 * @return
+	 */
+//	private int getUseableCurrency(Long userId) {
+//		if (null == userId) {
+//			return 0;
+//		}
+//		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
+//		if (null == currencyDO) {
+//			return 0;
+//		}
+//		int userUseable = currencyDO.getTotalCurrency() - currencyDO.getFreeze();
+//
+//		return userUseable;
+//
+//	}
 
 }

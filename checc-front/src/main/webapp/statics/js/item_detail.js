@@ -66,7 +66,8 @@ $(document).ready(function() {
  */
 function cdt() {
 	o = $("#countDownTime");
-	mss = $("#countDownTimeOrigin").text() / 1000;
+//	mss = $("#countDownTimeOrigin").text() / 1000;
+	mss = 5;
 	countDownTime(o);
 }
 

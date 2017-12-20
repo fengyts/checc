@@ -3,6 +3,7 @@ package com.checc.dao;
 import com.checc.domain.UserCurrencyDO;
 
 import ng.bayue.exception.CommonDAOException;
+import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralDAO;
 
 /**
@@ -35,4 +36,19 @@ public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
 	 * @throws CommonServiceException
 	 */
 	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonDAOException;
+	
+	/**
+	 * <pre>
+	 * 兑换商品扣减西币
+	 * </pre>
+	 *
+	 * @param userId
+	 * @param currency
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonDAOException;
+	
+	
+	
 }

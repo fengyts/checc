@@ -12,7 +12,7 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 
 	/**
 	 * <pre>
-	 * 冻结用户西币
+	 * 竞拍冻结用户西币
 	 * </pre>
 	 *
 	 * @return
@@ -29,5 +29,17 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	 * @throws CommonServiceException
 	 */
 	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonServiceException;
+	
+	/**
+	 * <pre>
+	 * 兑换商品扣减西币
+	 * </pre>
+	 *
+	 * @param userId
+	 * @param currency
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonServiceException;
 
 }

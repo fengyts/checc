@@ -23,4 +23,18 @@ public interface AuctionActionService {
 	 * @throws CommonServiceException
 	 */
 	public CommonResultMessage auctionAction(AuctionActionDTO dto) throws CommonServiceException;
+	
+	
+	/**
+	 * <pre>
+	 * 兑换
+	 * </pre>
+	 *
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	public CommonResultMessage exchangeAction(AuctionActionDTO dto) throws CommonServiceException;
+	
+	
+	
 }

@@ -6,28 +6,38 @@
 	<resultMap type="com.checc.domain.AuctionRecordDO" id="AuctionRecordDOResultMap">
 		<id column="id" property="id" />
         <result column="topic_item_id" property="topicItemId"/>
+        <result column="record_type" property="recordType"/>
+        <result column="deposit_type" property="depositType"/>
         <result column="user_id" property="userId"/>
         <result column="nickname" property="nickname"/>
         <result column="mobile" property="mobile"/>
         <result column="bid_num" property="bidNum"/>
+        <result column="exchange_count" property="exchangeCount"/>
         <result column="total_currency" property="totalCurrency"/>
-        <result column="bid_time" property="bidTime"/>
         <result column="current_auct_price" property="currentAuctPrice"/>
+        <result column="card_no" property="cardNo"/>
+        <result column="deposit_amount" property="depositAmount"/>
+        <result column="create_time" property="createTime"/>
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,user_id,nickname,mobile,bid_num,total_currency,bid_time,current_auct_price
+	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,total_currency,current_auct_price,card_no,deposit_amount,create_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="topicItemId != null "> AND topic_item_id=#{topicItemId} </if>
+			<if test="recordType != null  and recordType != '' "> AND record_type=#{recordType} </if>
+			<if test="depositType != null  and depositType != '' "> AND deposit_type=#{depositType} </if>
 			<if test="userId != null "> AND user_id=#{userId} </if>
 			<if test="nickname != null  and nickname != '' "> AND nickname=#{nickname} </if>
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
 			<if test="bidNum != null "> AND bid_num=#{bidNum} </if>
+			<if test="exchangeCount != null "> AND exchange_count=#{exchangeCount} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 			<if test="currentAuctPrice != null "> AND current_auct_price=#{currentAuctPrice} </if>
+			<if test="cardNo != null  and cardNo != '' "> AND card_no=#{cardNo} </if>
+			<if test="depositAmount != null "> AND deposit_amount=#{depositAmount} </if>
 		</where>
  	</sql>
 
@@ -47,23 +57,33 @@
         INSERT INTO auction_record(
 				id,
 				topic_item_id,
+				record_type,
+				deposit_type,
 				user_id,
 				nickname,
 				mobile,
 				bid_num,
+				exchange_count,
 				total_currency,
-				bid_time,
-				current_auct_price
+				current_auct_price,
+				card_no,
+				deposit_amount,
+				create_time
 		)values(
 				#{id},
 				#{topicItemId},
+				#{recordType},
+				#{depositType},
 				#{userId},
 				#{nickname},
 				#{mobile},
 				#{bidNum},
+				#{exchangeCount},
 				#{totalCurrency},
-				#{bidTime},
-				#{currentAuctPrice}
+				#{currentAuctPrice},
+				#{cardNo},
+				#{depositAmount},
+				#{createTime}
 		)
     </insert>
 
@@ -71,13 +91,17 @@
 		UPDATE auction_record
 		SET
 					topic_item_id = #{topicItemId},
+					record_type = #{recordType},
+					deposit_type = #{depositType},
 					user_id = #{userId},
 					nickname = #{nickname},
 					mobile = #{mobile},
 					bid_num = #{bidNum},
+					exchange_count = #{exchangeCount},
 					total_currency = #{totalCurrency},
-					bid_time = #{bidTime},
-					current_auct_price = #{currentAuctPrice}
+					current_auct_price = #{currentAuctPrice},
+					card_no = #{cardNo},
+					deposit_amount = #{depositAmount},
 		WHERE
 			id = #{id}
 	</update>
@@ -90,13 +114,17 @@
 		UPDATE auction_record
 		<set>
 					<if test="topicItemId != null ">topic_item_id=#{topicItemId},</if>
+					<if test="recordType != null  and recordType != '' ">record_type=#{recordType},</if>
+					<if test="depositType != null  and depositType != '' ">deposit_type=#{depositType},</if>
 					<if test="userId != null ">user_id=#{userId},</if>
 					<if test="nickname != null  and nickname != '' ">nickname=#{nickname},</if>
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
 					<if test="bidNum != null ">bid_num=#{bidNum},</if>
+					<if test="exchangeCount != null ">exchange_count=#{exchangeCount},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
-					<if test="bidTime != null ">bid_time=#{bidTime},</if>
 					<if test="currentAuctPrice != null ">current_auct_price=#{currentAuctPrice},</if>
+					<if test="cardNo != null  and cardNo != '' ">card_no=#{cardNo},</if>
+					<if test="depositAmount != null ">deposit_amount=#{depositAmount},</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -134,7 +162,7 @@
 		 	auction_record
 		 WHERE 
 		 	topic_item_id = #{topicItemId}
- 		 ORDER BY bid_time DESC
+ 		 ORDER BY create_time DESC
  	 	 Limit 1
  	</select>
  	

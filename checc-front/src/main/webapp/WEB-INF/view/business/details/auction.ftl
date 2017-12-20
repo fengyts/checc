@@ -10,7 +10,13 @@
 		<div class="auc_info_t">
 			<div class="meta_item_currauctprice">
 				<span class="curraucttile">当前价:</span>
-				<span class="currauctprice">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+					<#if detailVO.currentAuctionPrice??>
+				<span class="currauctprice">
+						${detailVO.currentAuctionPrice?string('0.##')}西币
+				</span>
+					<#else>
+						暂时无人出价
+					</#if>
 				<span class="compare_marketPrice">市场价：￥${detailVO.marketPrice?string('0.00')}</span>
 			</div>
 			<div class="meta_currauctper">

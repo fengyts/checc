@@ -144,5 +144,15 @@ public class UserCurrencyServiceImpl  implements UserCurrencyService{
 		}
 		return -1;
 	}
+
+	@Override
+	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonServiceException {
+		try {
+			return userCurrencyDAO.reduceExchangeCurrency(userId, currency);
+		} catch (CommonDAOException e) {
+			logger.error("兑换商品扣减西币异常：{}", e);
+		}
+		return -1;
+	}
 	
 }

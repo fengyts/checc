@@ -103,7 +103,7 @@
 	 	Limit #{start},#{pageSize}
  	</select>
 
- 	<update id="MybatisUserCurrencyDAO_freezeCurrency" parameterType="map">
+ 	<update id="MybatisUserCurrencyDAO_freeze_currency" parameterType="map">
  		UPDATE 
  			user_currency 
 		SET 
@@ -112,13 +112,26 @@
  			user_id = #{userId}
  	</update>
  	
- 	<update id="MybatisUserCurrencyDAO_increaseTotalCurrency" parameterType="map">
+ 	<update id="MybatisUserCurrencyDAO_increase_total_currency" parameterType="map">
  		UPDATE 
  			user_currency 
 		SET 
 			total_currency = total_currency + #{currency}, modify_time = now()
  		WHERE 
  			user_id = #{userId}
+ 	</update>
+ 	
+ 	<update id="MybatisUserCurrencyDAO_reduce_exchange_currency" parameterType="map">
+ 		UPDATE
+			user_currency 
+		SET 
+			total_currency = total_currency - #{currency}, 
+			refund = refund - #{currency}, 
+			modify_time = now()
+ 		WHERE 
+ 			user_id = #{userId}
+ 		AND total_currency - #{currency} &gt;= 0
+ 		AND refund - #{currency} &gt;= 0
  	</update>
 
 </mapper>

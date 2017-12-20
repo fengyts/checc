@@ -188,4 +188,13 @@
 	 	Limit #{start},#{pageSize}
  	</select>
 
+	<update id="MybatisTopicItemDAO_reduce_exchange_residue" parameterType="long">
+		UPDATE 
+			topic_item
+		SET residue = residue - 1, modify_time = now()
+		WHERE 
+			id = #{id}
+		AND residue - 1 &gt;= 0
+	</update>
+
 </mapper>

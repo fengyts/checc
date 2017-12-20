@@ -148,10 +148,14 @@ public class TopicItemAO {
 		vo.setMarketPrice(item.getMarketPrice());
 		vo.setExchangeAmount(item.getExchangeAmount());
 		vo.setInventory(item.getInventory());
-		vo.setResidue(item.getResidue());
 		vo.setAuctionCurrency(item.getAuctionCurrency());
 		vo.setExchangeLimitNum(item.getExchangeLimitNum());
+		Integer residue = item.getResidue();
+		if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType) && residue <= 0){
+			status = TopicStatusEnum.End.getCode();
+		}
 		vo.setItemStatus(status);
+		vo.setResidue(residue);
 
 		vo.setTopicId(topicId);
 
@@ -161,7 +165,7 @@ public class TopicItemAO {
 		vo.setEndTime(endTime);
 		
 		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) { // 兑换
-			if (item.getResidue() < 1) {
+			if (residue < 1) {
 				vo.setHasExchangeOut(true);
 			}
 		} else {
@@ -169,7 +173,7 @@ public class TopicItemAO {
 			AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
 			if(null != recordDO){
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
-				vo.setCurrentBidTime(recordDO.getBidTime());
+				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
 			}
 		}
@@ -193,20 +197,5 @@ public class TopicItemAO {
 
 		return vo;
 	}
-
-//	private String getTopicStatus(Date startTime, Date endTime) {
-//		if (null == startTime || null == endTime) {
-//			return TopicStatusEnum.End.getCode();
-//		}
-//		Date now = new Date();
-//		if (startTime.after(now)) {
-//			return TopicStatusEnum.NotStarted.getCode();
-//		}
-//		if (endTime.before(now)) {
-//			return TopicStatusEnum.End.getCode();
-//		}
-//		return TopicStatusEnum.InProgress.getCode();
-//
-//	}
 
 }

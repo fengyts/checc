@@ -60,4 +60,10 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), topicItemDO);
 	}
 
+	@Override
+	public int reduceExchangeResidue(Long id) throws CommonDAOException {
+		return getSqlSession().update(getStatement("reduce_exchange_residue"), id);
+	}
+	
+	
 }

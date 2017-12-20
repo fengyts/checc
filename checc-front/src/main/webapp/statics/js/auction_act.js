@@ -4,10 +4,10 @@ _auctionCurrency = 1, // 单次竞拍需要的西币
 _useableCurrency = 0; // 用户可用西币
 
 $(document).ready(function() {
-	_useableCurrency = $("#useableCurrency").val();
-	_auctionCurrency = $("#auctionCurrency").val();
-	_times = $("#auctionTimes").val();
-	_auctionMaxTimes = $("#auctionMaxTimes").val();
+	_useableCurrency = parseInt($("#useableCurrency").val());
+	_auctionCurrency = parseInt($("#auctionCurrency").val());
+	_times = parseInt($("#auctionTimes").val());
+	_auctionMaxTimes = parseInt($("#auctionMaxTimes").val());
 
 	getTotalCurrency();
 
@@ -110,7 +110,7 @@ function getTotalCurrency(_t) {
 	var _typeFlag = true;
 	if ($("#typeId").val() == 'exchange') {
 		_typeFlag = false;
-		_totalCu = $("#exchangeAmount").val();
+		_totalCu = parseInt($("#exchangeAmount").val());
 	}
 	$("#totalCurrencyView").text(_totalCu);
 	$("#totalCurrency").val(_totalCu).attr('value', _totalCu);
@@ -180,7 +180,7 @@ function auctionAction() {
 				});
 				countDownTime(_tic);
 			} else {
-				layer.msg('您已成功出价该商品！当前处于领先状态');
+				layer.msg('您已成功出价该商品! 当前处于领先状态');
 				countDownTime(_tic);
 			}
 		}
@@ -196,7 +196,6 @@ function exchangeAction() {
 	var _params = {};
 	_params.auctactTK = _auctactTK;
 	_params.tpId = _tpId;
-	_params.auctionTimes = _auctionTimes;
 	_params.totalCurrency = _totalCurrency;
 	
 	$.ajax({
@@ -208,12 +207,13 @@ function exchangeAction() {
 		success : function(data, status, xhr) {
 			var _tic = 2;
 			if (data.result != 1) {
-				layer.msg("出价失败：" + data.message, {
+				//window.parent.layer.close(parent.lgn_pg_ii);
+				parent.layer.msg("兑换失败：" + data.message, {
 					time : 3000
 				});
 				countDownTime(_tic);
 			} else {
-				layer.msg('您已成功出价该商品！当前处于领先状态');
+				layer.msg('您已成功兑换该商品! 请至个人中心查看');
 				countDownTime(_tic);
 			}
 		}

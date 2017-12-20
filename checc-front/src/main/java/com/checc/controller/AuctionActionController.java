@@ -3,6 +3,7 @@ package com.checc.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ng.bayue.common.CommonResultCode;
 import ng.bayue.common.CommonResultMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,14 +74,22 @@ public class AuctionActionController {
 	@ResponseBody
 	public CommonResultMessage auctAct(HttpServletRequest request, AuctionActionDTO dto) {
 		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		if(null == userDO){
+			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code, CommonResultCode.SystemError.UN_LOGIN.desc);
+		}
 		dto.setCheccUserDO(userDO);
 		return auctionAO.auctionAct(dto);
 	}
 
 	@RequestMapping(value = "/exchangeAct", method = { RequestMethod.POST })
 	@ResponseBody
-	public CommonResultMessage exchangeAct(AuctionActionDTO dto) {
-		return null;
+	public CommonResultMessage exchangeAct(HttpServletRequest request, AuctionActionDTO dto) {
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		if(null == userDO){
+			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code, CommonResultCode.SystemError.UN_LOGIN.desc);
+		}
+		dto.setCheccUserDO(userDO);
+		return auctionAO.exchangeAct(dto);
 	}
 
 }
