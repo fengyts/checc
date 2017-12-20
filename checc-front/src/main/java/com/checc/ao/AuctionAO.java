@@ -1,22 +1,32 @@
 package com.checc.ao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.dto.AuctionActionDTO;
+import com.checc.dto.AuctionListDTO;
 import com.checc.service.AuctionActionService;
+import com.checc.service.AuctionRecordService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
+import com.checc.vo.AuctionListVO;
+import com.checc.vo.AuctionListVO.ListTableVO;
 import com.checc.vo.front.ItemAuctionVO;
 
 import ng.bayue.common.CommonMessages;
 import ng.bayue.common.CommonResultCode;
 import ng.bayue.common.CommonResultMessage;
+import ng.bayue.common.Page;
 import ng.bayue.common.model.TokenModel;
 import ng.bayue.constants.TokenTypeConstant;
 import ng.bayue.enums.RedisModelStatusEnum;
@@ -37,6 +47,8 @@ public class AuctionAO {
 	private UserCurrencyService userCurrencyService;
 	@Autowired
 	private AuctionActionService auctionActionService;
+	@Autowired
+	private AuctionRecordService auctionRecordService;
 
 	public CommonResultMessage auctionDetails(Model model, Long tpId, Long userId) {
 		if (null == tpId || tpId < 0l) {
@@ -57,7 +69,7 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-		
+
 		int userUseable = 0;
 		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
 		if (null != currencyDO) {
@@ -94,7 +106,7 @@ public class AuctionAO {
 		vo.setItemTitle(itemDO.getItemTitle());
 		vo.setStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 		vo.setExchangeLimitNum(itemDO.getExchangeLimitNum());
-		
+
 		int userUseable = 0;
 		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
 		if (null != currencyDO) {
@@ -116,14 +128,15 @@ public class AuctionAO {
 		Long tpId = dto.getTpId();
 		Integer auctionTimes = dto.getAuctionTimes();
 		Integer totalCurrency = dto.getTotalCurrency();
-		if (null == tpId || null == auctionTimes || null == totalCurrency || tpId < 0 || auctionTimes < 1
-				|| totalCurrency < 1) {
+		if (null == tpId || null == auctionTimes || null == totalCurrency || tpId < 0
+				|| auctionTimes < 1 || totalCurrency < 1) {
 			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
 					CommonResultCode.SystemError.REQ_ERROR.desc);
 		}
 		String auctionTk = dto.getAuctactTK();
 		CommonResultMessage crm = validateTk(auctionTk,
-				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType(), dto.getCheccUserDO().getId());
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType(), dto
+						.getCheccUserDO().getId());
 		if (CommonResultMessage.Success != crm.getResult()) {
 			return crm;
 		}
@@ -141,11 +154,12 @@ public class AuctionAO {
 		}
 		String auctionTk = dto.getAuctactTK();
 		CommonResultMessage crm = validateTk(auctionTk,
-				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType(), dto.getCheccUserDO().getId());
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType(), dto
+						.getCheccUserDO().getId());
 		if (CommonResultMessage.Success != crm.getResult()) {
 			return crm;
 		}
-		
+
 		try {
 			crm = auctionActionService.exchangeAction(dto);
 		} catch (Exception e) {
@@ -174,26 +188,54 @@ public class AuctionAO {
 		return CommonResultMessage.success();
 	}
 
-	/**
-	 * <pre>
-	 * 获取用户可用西币
-	 * </pre>
-	 *
-	 * @param userId
-	 * @return
-	 */
-//	private int getUseableCurrency(Long userId) {
-//		if (null == userId) {
-//			return 0;
-//		}
-//		UserCurrencyDO currencyDO = userCurrencyService.selectById(userId);
-//		if (null == currencyDO) {
-//			return 0;
-//		}
-//		int userUseable = currencyDO.getTotalCurrency() - currencyDO.getFreeze();
-//
-//		return userUseable;
-//
-//	}
+	public void auctionList(Model model, AuctionListDTO dto, Long userId) {
+		Long tpId = dto.getTpId();
+
+		AuctionRecordDO pr = new AuctionRecordDO();
+		pr.setTopicItemId(tpId);
+		Boolean isOnlyMe = dto.getIsOnlyMe();
+		if (isOnlyMe) {
+			pr.setUserId(userId);
+		}
+		Integer pageNo = dto.getPageNo();
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(pr,
+				pageNo, dto.getPageSize());
+		List<AuctionRecordDO> listDb = page.getList();
+
+		AuctionListVO vo = new AuctionListVO();
+		vo.setIsOnlyMe(isOnlyMe);
+		vo.setTpId(tpId);
+		vo.setItemTitle(topicItemService.selectById(tpId).getItemTitle());
+
+		if (CollectionUtils.isEmpty(listDb)) {
+			model.addAttribute("auctlVO", vo);
+			model.addAttribute("pageNo", page.getPageNo());
+			model.addAttribute("totalCount", page.getTotalCount());
+			model.addAttribute("totalPage", page.getTotalPageCount());
+			return;
+		}
+
+		List<ListTableVO> tableList = new ArrayList<ListTableVO>();
+		int size = 0;
+		for (AuctionRecordDO aucr : listDb) {
+			ListTableVO tvo = vo.new ListTableVO();
+			tvo.setBidder(StringUtils.securityMobile(aucr.getMobile()));
+			tvo.setBidNum(aucr.getBidNum());
+			tvo.setBidTime(aucr.getCreateTime());
+			tvo.setCurrenctAuctPrice(aucr.getCurrentAuctPrice().doubleValue());
+			tvo.setTotalCurrency(aucr.getTotalCurrency());
+
+			tvo.setIsAhead(pageNo <= 1 && size == 0);
+			size++;
+			tableList.add(tvo);
+		}
+		vo.setAuctionList(tableList);
+
+		model.addAttribute("auctlVO", vo);
+		model.addAttribute("pageNo", page.getPageNo());
+		model.addAttribute("totalCount", page.getTotalCount());
+		model.addAttribute("totalPage", page.getTotalPageCount());
+
+	}
 
 }

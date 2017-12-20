@@ -3,7 +3,10 @@ var mss;
 var _timeFlag = false;
 $(document).ready(function() {
 	
-	cdt();
+	var _t = $("#tpId").val();
+	if(_t){
+		cdt();
+	}
 
 	// 出价或兑换按钮点击事件
 	$("#auc_action").on('click', function() {
@@ -66,8 +69,7 @@ $(document).ready(function() {
  */
 function cdt() {
 	o = $("#countDownTime");
-//	mss = $("#countDownTimeOrigin").text() / 1000;
-	mss = 5;
+	mss = $("#countDownTimeOrigin").text() / 1000;
 	countDownTime(o);
 }
 

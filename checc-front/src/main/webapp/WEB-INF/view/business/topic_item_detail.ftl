@@ -21,21 +21,6 @@
 </head>
 <body>
 	
-	<style>
-		.topimg {
-			width: 100%;
-			height: 50px;
-			margin: 0 auto
-		}
-		
-		.topimg a img {
-			width: 100%;
-			height: 50px;
-			margin: 0 auto;
-			border: 0px
-		}
-	</style>
-	
 	<#include "/common/header.ftl" />
 	
 	<div class="content_box">
@@ -45,8 +30,9 @@
 	</div>
 
 	<#include "/common/footer_both.ftl" />
-</body>
-
+	
 <script type="text/javascript" src="${js}/item_detail.js"></script>
+
+</body>
 
 </html>

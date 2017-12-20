@@ -44,8 +44,10 @@
 	</div>
 
 	<#include "/common/footer_both.ftl" />
+	
+<script type="text/javascript" src="${js}/index.js"></script>
+	
 </body>
 
-<script type="text/javascript" src="${js}/index.js"></script>
 
 </html>

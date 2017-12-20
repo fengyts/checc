@@ -22,7 +22,7 @@
 			<div class="meta_currauctper">
 				<span class="curraucttile">当前出价人:</span>
 				<span class="currauctperson">${detailVO.currentBidder!'暂时无人出价'}</span>
-				<span class="auctall"><a href="#">查看全部出价记录>></a></span>
+				<span class="auctall"><a href="${domain}/auction/auctionList?tpId=${detailVO.id}">查看全部出价记录>></a></span>
 			</div>
 			<div class="meta_curraucttime">
 				<span class="curraucttile">当前出价时间:</span>

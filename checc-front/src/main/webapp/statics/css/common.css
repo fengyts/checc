@@ -4,10 +4,14 @@ html {
 	_background-attachment: fixed;
 	min-width: 1396px;
 	min-height: 100%;
+	
+	height: 100%;
 }
 
 body {
-	
+	display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 body, button, input, select, textarea {
@@ -46,6 +50,10 @@ a:focus, area:focus {
 
 ul, ol {
 	list-style: outside none none;
+}
+
+.header {
+	flex: 0 0 auto;
 }
 
 .topbar {
@@ -173,13 +181,14 @@ ul, ol {
 页脚样式开始
 */
 .ft_box {
-	min-width: 1396px;
+	/* min-width: 1396px;
 	bottom: 0;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	background-color: #f5f5f5;
-	margin-top: 80px;
+	margin-top: 80px; */
+	flex: 0 0 auto;
 }
 
 .footer {
@@ -192,6 +201,14 @@ ul, ol {
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
+	
+	min-width: 1396px;
+	bottom: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #f5f5f5;
+	margin-top: 80px;
 }
 
 .footer a {
@@ -227,16 +244,17 @@ ul, ol {
 
 /* 内容容器  */
 .content_box {
-	height: 100%;
-	min-height: 100%;
+/* 	height: 100%; */
+/* 	min-height: 100%; */
 	width: 65%;
-	/* 	min-width: 900px; */
 	margin-left: 15%;
+	flex: 1 0 auto;
 }
 
 .content {
 	padding: 0;
-	margin: 0 0 0 5%;
+/* 	margin: 0 0 0 5%; */
+	margin: 0 0 0 0;
 }
 
 /*  竞拍流程图样式 */
@@ -487,7 +505,8 @@ ul, ol {
 }
 
 .checc_pos {
-	margin: 0px 0px 0px -50px;
+/* 	margin: 0px 0px 0px -50px; */
+	margin: 0px 0px 0px -10px;
 	min-height: 50px;
 	border-bottom: solid 1px #aaeeee;
 }
@@ -680,6 +699,31 @@ ul, ol {
 	color: #666666 !important;
 	font-size: 12px;
 }
+
+/* 出价记录列表 */
+.auc_list_title {
+	margin: 20px 0 0 270px;
+	font-size: 22px;
+}
+
+.list_pager {
+	margin: 10px 0 0 270px;
+	font-size: 14px;
+}
+
+.list_pager>span {
+	display: inline-block;
+}
+
+.is_only_me {
+	cursor: pointer;
+	width: 80px;
+}
+
+.is_only_me a{
+	color: #0099cc;
+}
+
 
 /* 商品详情描述 */
 .detail_desc {

@@ -18,6 +18,7 @@ import com.checc.ao.AuctionAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
 import com.checc.dto.AuctionActionDTO;
+import com.checc.dto.AuctionListDTO;
 import com.checc.vo.front.ItemAuctionVO;
 
 import constants.CommonPathConstant;
@@ -39,12 +40,13 @@ public class AuctionActionController {
 	private AuctionAO auctionAO;
 
 	@RequestMapping("/auctionAction/{tpId}")
-	public String auctionPage(HttpServletRequest request, HttpServletResponse response, Model model,
-			@PathVariable Long tpId) {
+	public String auctionPage(HttpServletRequest request, HttpServletResponse response,
+			Model model, @PathVariable Long tpId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
-		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
 		CommonResultMessage crm = auctionAO.auctionDetails(model, tpId, userDO.getId());
 		if (CommonResultMessage.Failure == crm.getResult()) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
@@ -55,12 +57,13 @@ public class AuctionActionController {
 	}
 
 	@RequestMapping("/exchangeAction/{tpId}")
-	public String exchangePage(HttpServletRequest request, HttpServletResponse response, Model model,
-			@PathVariable Long tpId) {
+	public String exchangePage(HttpServletRequest request, HttpServletResponse response,
+			Model model, @PathVariable Long tpId) {
 		if (null == tpId || tpId < 0l) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
 		}
-		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
 		CommonResultMessage crm = auctionAO.exchangeDetails(model, tpId, userDO.getId());
 		if (CommonResultMessage.Failure == crm.getResult()) {
 			return CommonPathConstant.PATH_ERROR_UNSAFE_REQ;
@@ -73,9 +76,11 @@ public class AuctionActionController {
 	@RequestMapping(value = "/auctionAct", method = { RequestMethod.POST })
 	@ResponseBody
 	public CommonResultMessage auctAct(HttpServletRequest request, AuctionActionDTO dto) {
-		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
-		if(null == userDO){
-			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code, CommonResultCode.SystemError.UN_LOGIN.desc);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
+		if (null == userDO) {
+			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code,
+					CommonResultCode.SystemError.UN_LOGIN.desc);
 		}
 		dto.setCheccUserDO(userDO);
 		return auctionAO.auctionAct(dto);
@@ -84,12 +89,26 @@ public class AuctionActionController {
 	@RequestMapping(value = "/exchangeAct", method = { RequestMethod.POST })
 	@ResponseBody
 	public CommonResultMessage exchangeAct(HttpServletRequest request, AuctionActionDTO dto) {
-		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
-		if(null == userDO){
-			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code, CommonResultCode.SystemError.UN_LOGIN.desc);
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
+		if (null == userDO) {
+			return new CommonResultMessage(CommonResultCode.SystemError.UN_LOGIN.code,
+					CommonResultCode.SystemError.UN_LOGIN.desc);
 		}
 		dto.setCheccUserDO(userDO);
 		return auctionAO.exchangeAct(dto);
+	}
+
+	@RequestMapping(value = "auctionList")
+	public String auctionList(HttpServletRequest request, Model model, AuctionListDTO dto) {
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
+		if (null == userDO) {
+			return "rederect: /usr/login";
+		}
+
+		auctionAO.auctionList(model, dto, userDO.getId());
+		return "/business/auction_list";
 	}
 
 }
