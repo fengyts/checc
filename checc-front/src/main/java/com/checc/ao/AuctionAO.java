@@ -190,6 +190,7 @@ public class AuctionAO {
 
 	public void auctionList(Model model, AuctionListDTO dto, Long userId) {
 		Long tpId = dto.getTpId();
+		Page<ListTableVO> pageRes = new Page<ListTableVO>();
 
 		AuctionRecordDO pr = new AuctionRecordDO();
 		pr.setTopicItemId(tpId);
@@ -200,8 +201,12 @@ public class AuctionAO {
 		Integer pageNo = dto.getPageNo();
 		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(pr,
 				pageNo, dto.getPageSize());
+		pageRes.setPageNo(page.getPageNo());
+		pageRes.setPageSize(page.getPageSize());
+		pageRes.setTotalCount(page.getTotalCount());
+		
 		List<AuctionRecordDO> listDb = page.getList();
-
+		
 		AuctionListVO vo = new AuctionListVO();
 		vo.setIsOnlyMe(isOnlyMe);
 		vo.setTpId(tpId);
@@ -212,11 +217,13 @@ public class AuctionAO {
 			model.addAttribute("pageNo", page.getPageNo());
 			model.addAttribute("totalCount", page.getTotalCount());
 			model.addAttribute("totalPage", page.getTotalPageCount());
+			
+			model.addAttribute("page", pageRes);
 			return;
 		}
 
+		AuctionRecordDO ard = auctionRecordService.selectLatestAuction(tpId); // 获取领先者
 		List<ListTableVO> tableList = new ArrayList<ListTableVO>();
-		int size = 0;
 		for (AuctionRecordDO aucr : listDb) {
 			ListTableVO tvo = vo.new ListTableVO();
 			tvo.setBidder(StringUtils.securityMobile(aucr.getMobile()));
@@ -225,8 +232,7 @@ public class AuctionAO {
 			tvo.setCurrenctAuctPrice(aucr.getCurrentAuctPrice().doubleValue());
 			tvo.setTotalCurrency(aucr.getTotalCurrency());
 
-			tvo.setIsAhead(pageNo <= 1 && size == 0);
-			size++;
+			tvo.setIsAhead(aucr.getId().longValue() == ard.getId().longValue()); // 是否领先者
 			tableList.add(tvo);
 		}
 		vo.setAuctionList(tableList);
@@ -235,6 +241,9 @@ public class AuctionAO {
 		model.addAttribute("pageNo", page.getPageNo());
 		model.addAttribute("totalCount", page.getTotalCount());
 		model.addAttribute("totalPage", page.getTotalPageCount());
+		
+		pageRes.setList(tableList);
+		model.addAttribute("page", pageRes);
 
 	}
 

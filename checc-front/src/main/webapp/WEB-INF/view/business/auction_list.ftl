@@ -41,28 +41,28 @@
 			</div>
 			
 			<div class="auc_list_title">
-				${auctlVO.itemTitle}
+				<span>${auctlVO.itemTitle}</span>
 			</div>
-			<div>
+			<div class="auc_data_list">
 				<table class="layui-table">
-					  <colgroup>
-					    <col width="165px">
+				  	<colgroup>
+				    	<col width="165px">
 					    <col width="100px">
 					    <col>
 					    <col>
 					    <col>
-					  </colgroup>
-					  <thead>
+				  	</colgroup>
+				  	<thead>
 					    <tr>
-					      <th>出价时间</th>
-					      <th>出价人</th>
-					      <th>出价次数(次)</th>
-					      <th>出价西币(个)</th>
-					      <th>当前状态</th>
-					      <th>商品当前价</th>
-					    </tr> 
-					  </thead>
-					  <tbody>
+						    <th>出价时间</th>
+						    <th>出价人</th>
+						    <th>出价次数(次)</th>
+						    <th>出价西币(个)</th>
+						    <th>当前状态</th>
+						    <th>商品当前价</th>
+						</tr> 
+					</thead>
+					<tbody>
 					  	<#if auctlVO.auctionList?default([])?size!=0>
 					  		<#list auctlVO.auctionList as auct>
 					  			<tr <#if auct.isAhead == 'true'>style="color:red;"</#if>>
@@ -80,23 +80,39 @@
 					  				<td>${auct.currenctAuctPrice}</td>
 					  			</tr>
 					  		</#list>
+						<#else>
+							<tr>
+								<td colSpan=6><font style="color:#666;font-size:16px;">暂时无人出价</font></td>
+							<tr>
 					  	</#if>
-					  
-					  </tbody>
-					</table>
+					</tbody>
+				</table>
 			</div>
-			<div class="list_pager">
-				<span class="is_only_me" id="is_only_me">
-					<a href="#">只看我出价</a>
-					<input type="hidden" id="isOnlyMe" name="isOnlyMe" value="0" />
-				</span>
-				<span><a href="#" class="prepage">上一页</a></span>
-				<span><a href="#" class="nextpage">下一页</a></span>
-				<span>共188条记录</span>
+			<div class="list_pager_act">
+				<div class="is_only_me" id="is_only_me">
+					<a href="#" <#if auctlVO.auctionList?default([])?size!=0>style="display:inline;"<#else>style="display:none;"</#if>>
+						<#if auctlVO.isOnlyMe == 'true'>看全部出价<#else>只看我出价</#if>
+					</a>
+				</div>
+				
+				<div class="pager_act">
+					<#include "/common/page.ftl" />
+					<form id="auctionListForm" method="GET" action="${domain}/auction/auctionList?tpId=${auctlVO.tpId}">
+						<@pager  pagination=page  formId="auctionListForm" />
+						<input type="hidden" id="tpId" name="tpId" value="${auctlVO.tpId}" />
+						<input type="hidden" id="isOnlyMe" name="isOnlyMe" value="${auctlVO.isOnlyMe?string('1','0')}" />
+					</form>
+				</div>
+				<#--
+				<span><a href="#" class="prepage a_disabled" id="prepage">上一页</a></span>
+				<span><a href="#" class="nextpage" id="nextpage">下一页</a></span>
+				<span>共${totalCount!0}条记录</span>
 				<input type="hidden" id="currentPageNo" name="currentPageNo" value="1" />
-				<input type="hidden" id="totalPage" name="totalPage" value="1" />
-				<input type="hidden" id="pageNo" name="pageNo" value="1" />
-				<input type="hidden" id="tpId" name="tpId" value="${auctlVO.tpId}" />
+				<input type="hidden" id="totalPage" name="totalPage" value="${totalPage}" />
+				<input type="hidden" id="totalCount" name="totalCount" value="${totalCount}" />
+					<input type="hidden" id="pageNo" name="pageNo" value="${pageNo}" />
+				-->
+				
 			</div>
 		</div>
 	</div>

@@ -106,7 +106,7 @@ public class AuctionActionController {
 		if (null == userDO) {
 			return "rederect: /usr/login";
 		}
-
+		model.addAttribute("checcUser", userDO);
 		auctionAO.auctionList(model, dto, userDO.getId());
 		return "/business/auction_list";
 	}
