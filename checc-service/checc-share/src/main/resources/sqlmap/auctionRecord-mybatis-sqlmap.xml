@@ -166,5 +166,38 @@
  	 	 Limit 1
  	</select>
  	
+ 	<select id="MybatisAuctionRecordDAO_select_uc_count">
+ 		SELECT 
+ 			COUNT(1)
+ 		FROM auction_record ar
+ 		INNER JOIN 
+		(
+			SELECT MAX(id) id
+			FROM auction_record
+			WHERE user_id = #{userId} AND record_type = #{recordType}
+			GROUP BY topic_item_id
+		) b 
+		ON ar.id = b.id AND ar.user_id = #{userId} AND ar.record_type = #{recordType}
+ 	</select>
+ 	
+ 	<select id="MybatisAuctionRecordDAO_select_uc_list" parameterType="map" resultMap="AuctionRecordDOResultMap" >
+ 		SELECT 
+ 			ar.id,topic_item_id,record_type,deposit_type,user_id,
+ 			nickname,mobile,bid_num,exchange_count,total_currency,
+ 			current_auct_price,card_no,deposit_amount,create_time
+		FROM auction_record ar
+		INNER JOIN 
+		(
+			SELECT MAX(id) id
+			FROM auction_record
+			WHERE user_id = #{userId} AND record_type = #{recordType}
+			GROUP BY topic_item_id
+		) b 
+		ON ar.id = b.id AND ar.user_id = #{userId} AND ar.record_type = #{recordType}
+		ORDER BY ar.id DESC
+		Limit #{start},#{pageSize}
+				
+ 	</select>
+ 	
 
 </mapper>

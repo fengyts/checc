@@ -196,5 +196,16 @@
 			id = #{id}
 		AND residue - 1 &gt;= 0
 	</update>
+	
+	<select id="MybatisTopicItemDAO_select_by_ids" parameterType="list" resultMap="TopicItemDOResultMap">
+		SELECT
+			<include refid="MybatisTopicItemDAO_all_column_fields" />
+		FROM
+			topic_item
+		WHERE id IN
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 
 </mapper>

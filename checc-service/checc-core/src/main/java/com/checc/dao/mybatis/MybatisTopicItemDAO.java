@@ -3,9 +3,11 @@ package com.checc.dao.mybatis;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.TopicItemDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.TopicItemDO;
+
 import ng.bayue.exception.CommonDAOException;
 
 @Component(value="topicItemDAO")
@@ -63,6 +65,11 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	@Override
 	public int reduceExchangeResidue(Long id) throws CommonDAOException {
 		return getSqlSession().update(getStatement("reduce_exchange_residue"), id);
+	}
+
+	@Override
+	public List<TopicItemDO> selectByIds(List<Long> ids) {
+		return getSqlSession().selectList(getStatement("select_by_ids"), ids);
 	}
 	
 	

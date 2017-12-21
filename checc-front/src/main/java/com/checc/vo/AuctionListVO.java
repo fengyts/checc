@@ -3,6 +3,14 @@ package com.checc.vo;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <pre>
+ * 竞拍详情页-->出价记录列表数据模型
+ * </pre>
+ *
+ * @author fengyts
+ * @version $Id: AuctionListVO.java, v 0.1 2017年12月21日 下午9:33:25 fengyts Exp $
+ */
 public class AuctionListVO extends BaseVO {
 
 	/**  */

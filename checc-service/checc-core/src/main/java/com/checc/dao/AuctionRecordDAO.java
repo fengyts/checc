@@ -1,5 +1,8 @@
 package com.checc.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.checc.domain.AuctionRecordDO;
 
 import ng.bayue.service.common.GeneralDAO;
@@ -20,5 +23,17 @@ public interface AuctionRecordDAO extends GeneralDAO<AuctionRecordDO> {
 	 * @return
 	 */
 	AuctionRecordDO selectLatestAuction(Long topicItemId); 
+	
+	Long selectUCAuctionCount(Map<String, Object> params);
+	
+	/**
+	 * <pre>
+	 * 获取用户竞拍或兑换列表
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	List<AuctionRecordDO> selectUCAuctionList(Map<String, Object> params);
 	
 }

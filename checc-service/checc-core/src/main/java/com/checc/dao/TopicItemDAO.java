@@ -1,5 +1,7 @@
 package com.checc.dao;
 
+import java.util.List;
+
 import com.checc.domain.TopicItemDO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -21,5 +23,7 @@ public interface TopicItemDAO extends GeneralDAO<TopicItemDO> {
 	 * @throws CommonServiceException
 	 */
 	public int reduceExchangeResidue(Long id) throws CommonDAOException;
+	
+	public List<TopicItemDO> selectByIds(List<Long> ids);
 
 }

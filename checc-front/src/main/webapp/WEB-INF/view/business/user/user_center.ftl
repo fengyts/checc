@@ -42,7 +42,7 @@
 			
 			<#include "/business/user/currency_detail.ftl" />
 			
-			<#include "/business/user/user_auction_list.ftl" />
+			<#include "/business/user/user_auction_main.ftl" />
 			
 		</div>
 	</div>

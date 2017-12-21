@@ -99,7 +99,7 @@ public class AuctionActionController {
 		return auctionAO.exchangeAct(dto);
 	}
 
-	@RequestMapping(value = "auctionList")
+	@RequestMapping(value = "/auctionList")
 	public String auctionList(HttpServletRequest request, Model model, AuctionListDTO dto) {
 		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
 				UserConstants.USER_SESSION_KEY);

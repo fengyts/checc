@@ -1,9 +1,11 @@
 package com.checc.service;
 
-import com.checc.domain.TopicItemDO;
+import java.util.List;
 
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralService;
+
+import com.checc.domain.TopicItemDO;
 
  /**
  * 专题商品 Service
@@ -20,5 +22,7 @@ public interface TopicItemService extends GeneralService<TopicItemDO, TopicItemD
 	 * @throws CommonServiceException
 	 */
 	public int reduceExchangeResidue(Long id) throws CommonServiceException;
+	
+	public List<TopicItemDO> selectByIds(List<Long> ids);
 	
 }

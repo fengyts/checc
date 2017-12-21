@@ -1,18 +1,21 @@
 package com.checc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ng.bayue.common.Page;
+import ng.bayue.exception.CommonDAOException;
+import ng.bayue.exception.CommonServiceException;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.checc.dao.TopicItemDAO;
 import com.checc.domain.TopicItemDO;
 import com.checc.service.TopicItemService;
-import ng.bayue.exception.CommonDAOException;
-import ng.bayue.exception.CommonServiceException;
-import ng.bayue.common.Page;
 
 @Service(value="topicItemService")
 public class TopicItemServiceImpl  implements TopicItemService{
@@ -135,5 +138,15 @@ public class TopicItemServiceImpl  implements TopicItemService{
 		
 		return -1;
 	}
+
+	@Override
+	public List<TopicItemDO> selectByIds(List<Long> ids) {
+		if(CollectionUtils.isEmpty(ids)){
+			return new ArrayList<TopicItemDO>();
+		}
+		return topicItemDAO.selectByIds(ids);
+	}
+	
+	
 	
 }

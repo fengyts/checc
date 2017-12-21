@@ -1,6 +1,7 @@
 package com.checc.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -65,6 +66,16 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 	@Override
 	public AuctionRecordDO selectLatestAuction(Long topicItemId) {
 		return getSqlSession().selectOne(getStatement("select_latest"), topicItemId);
+	}
+	
+	@Override
+	public Long selectUCAuctionCount(Map<String, Object> param) {
+		return getSqlSession().selectOne(getStatement("select_uc_count"), param);
+	}
+	
+	@Override
+	public List<AuctionRecordDO> selectUCAuctionList(Map<String, Object> param) {
+		return getSqlSession().selectOne(getStatement("select_uc_list"), param);
 	}
 
 }

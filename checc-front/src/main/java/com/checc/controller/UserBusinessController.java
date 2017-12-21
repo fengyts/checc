@@ -7,12 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.checc.ao.UserCenterAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
+import com.checc.enums.AuctionRecordTypeEnum;
 
 /**
  * <pre>
@@ -47,6 +51,24 @@ public class UserBusinessController {
 		}
 		userCenterAO.userCurrencyInfo(model, userDO);
 		return "/business/user/user_center";
+	}
+
+	@RequestMapping(value = "/ucAuctionList/{auctionType}")
+	public String ucAuctionList(HttpServletRequest request, Model model,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+			@PathVariable String auctionType) {
+		HttpSession session = request.getSession();
+		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
+		String returnUrl = "";
+		if ("auction".equals(auctionType)) {
+			auctionType = AuctionRecordTypeEnum.AUCTION.code;
+			returnUrl = "/business/user/uc_auction_list";
+		} else {
+			auctionType = AuctionRecordTypeEnum.EXCHANGE.code;
+			returnUrl = "/business/user/uc_exchange_list";
+		}
+		userCenterAO.ucAuctionList(model, userDO, auctionType, pageNo);
+		return returnUrl;
 	}
 
 	@RequestMapping(value = { "/deposit" }, method = { RequestMethod.GET })
