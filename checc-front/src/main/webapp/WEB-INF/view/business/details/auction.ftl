@@ -37,10 +37,16 @@
 			<div class="meta_auction_eninfo">
 				<p>
 					<#if detailVO.currentBidder??>
-						若接下来无人出价,
-						${detailVO.currentBidder}将以
-						<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
-						拍得本件商品
+						<#if detailVO.status?? && detailVO.status=='03'>
+							恭喜<font style="color: #0099ff;">${detailVO.currentBidder}</font>以
+							<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+							拍得本件商品
+						<#else>
+							若接下来无人出价,
+							${detailVO.currentBidder}将以
+							<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+							拍得本件商品
+						</#if>
 					<#else>
 						(若一直无人出价,本商品将流拍)
 					</#if>

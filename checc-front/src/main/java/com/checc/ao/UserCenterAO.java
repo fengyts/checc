@@ -67,8 +67,8 @@ public class UserCenterAO {
 	}
 
 	public void ucAuctionList(Model model, CheccUserDO userDO, String recordType, Integer pageNo) {
-		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userDO.getId(),
-				recordType, pageNo, 10);
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userDO.getId(), recordType, pageNo,
+				10);
 
 		Page<UCAuctionListVO> pageRes = new Page<UCAuctionListVO>();
 		pageRes.setPageNo(page.getPageNo());
@@ -89,8 +89,7 @@ public class UserCenterAO {
 
 				// 获取商品进度状态
 				TopicDO topicDO = topicService.selectById(ti.getTopicId());
-				String topicStatus = AuctionCommonAO.getTopicStatus(topicDO.getStartTime(),
-						topicDO.getEndTime());
+				String topicStatus = AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
 
 				UCAuctionListVO vo = new UCAuctionListVO();
 				long tpId = ti.getId();
@@ -100,7 +99,8 @@ public class UserCenterAO {
 				vo.setItemStatus(topicStatus);
 				for (AuctionRecordDO ar : listDb) {
 					if (tpId == ar.getTopicItemId().longValue()) {
-						vo.setCurrenctAuctPrice(ar.getCurrentAuctPrice().doubleValue());
+						vo.setCurrenctAuctPrice(
+								ar.getCurrentAuctPrice() != null ? ar.getCurrentAuctPrice().doubleValue() : 0);
 						if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
 							vo.setIsWinner(true);
 						}

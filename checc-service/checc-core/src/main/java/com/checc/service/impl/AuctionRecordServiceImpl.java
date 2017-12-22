@@ -9,6 +9,7 @@ import ng.bayue.common.Page;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.domain.AuctionRecordDO;
+import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionRecordService;
 
 @Service(value = "auctionRecordService")
@@ -37,8 +39,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public int update(AuctionRecordDO auctionRecordDO, boolean isAllField)
-			throws CommonServiceException {
+	public int update(AuctionRecordDO auctionRecordDO, boolean isAllField) throws CommonServiceException {
 		try {
 			if (isAllField) {
 				return (Integer) auctionRecordDAO.update(auctionRecordDO);
@@ -82,8 +83,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public List<AuctionRecordDO> selectDynamic(AuctionRecordDO auctionRecordDO)
-			throws CommonServiceException {
+	public List<AuctionRecordDO> selectDynamic(AuctionRecordDO auctionRecordDO) throws CommonServiceException {
 		try {
 			return auctionRecordDAO.selectDynamic(auctionRecordDO);
 		} catch (CommonDAOException e) {
@@ -103,8 +103,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public Page<AuctionRecordDO> queryPageListDynamic(AuctionRecordDO auctionRecordDO)
-			throws CommonServiceException {
+	public Page<AuctionRecordDO> queryPageListDynamic(AuctionRecordDO auctionRecordDO) throws CommonServiceException {
 		if (auctionRecordDO != null) {
 			Long totalCount = this.selectCountDynamic(auctionRecordDO);
 
@@ -123,9 +122,8 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public Page<AuctionRecordDO> queryPageListDynamicAndStartPageSize(
-			AuctionRecordDO auctionRecordDO, Integer startPage, Integer pageSize)
-			throws CommonServiceException {
+	public Page<AuctionRecordDO> queryPageListDynamicAndStartPageSize(AuctionRecordDO auctionRecordDO,
+			Integer startPage, Integer pageSize) throws CommonServiceException {
 		if (auctionRecordDO != null && startPage > 0 && pageSize > 0) {
 			auctionRecordDO.setStartPage(startPage);
 			auctionRecordDO.setPageSize(pageSize);
@@ -143,25 +141,38 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public Page<AuctionRecordDO> queryPageListUCAuction(Long userId, String recordType,
-			Integer startPage, Integer pageSize) {
+	public Boolean isExchanged(Long userId, Long topicItemId) {
+		AuctionRecordDO ar = new AuctionRecordDO();
+		ar.setUserId(userId);
+		ar.setTopicItemId(topicItemId);
+		ar.setRecordType(AuctionRecordTypeEnum.EXCHANGE.code);
+		List<AuctionRecordDO> list = this.selectDynamic(ar);
+		return CollectionUtils.isNotEmpty(list);
+	}
+
+	@Override
+	public Page<AuctionRecordDO> queryPageListUCAuction(Long userId, String recordType, Integer startPage,
+			Integer pageSize) {
 		if (startPage > 0 && pageSize > 0) {
 			Page<AuctionRecordDO> page = new Page<AuctionRecordDO>();
 			Map<String, Object> params = new HashMap<String, Object>();
 			int start = startPage < 0 || pageSize < 0 ? 0 : (startPage - 1) * pageSize;
 			params.put("start", start);
+			params.put("pageSize", pageSize);
 			params.put("userId", userId);
 			params.put("recordType", recordType);
-			
+
 			Long totalCount = auctionRecordDAO.selectUCAuctionCount(params);
 			List<AuctionRecordDO> list = new ArrayList<AuctionRecordDO>();
-			if(totalCount.longValue() > 0){
+			if (totalCount.longValue() > 0) {
 				list = auctionRecordDAO.selectUCAuctionList(params);
 			}
 			page.setList(list);
 			page.setPageNo(startPage);
 			page.setPageSize(pageSize);
 			page.setTotalCount(totalCount.intValue());
+			
+			return page;
 		}
 		return new Page<AuctionRecordDO>();
 	}

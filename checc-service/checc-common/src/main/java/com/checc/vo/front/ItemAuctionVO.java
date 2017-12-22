@@ -23,6 +23,8 @@ public class ItemAuctionVO extends BaseVO {
 	private Double exchangeAmount;
 	/** 兑换商品每人限兑次数 */
 	private Integer exchangeLimitNum;
+	/** 是否已经兑换 */
+	private Boolean hasExchanged;
 
 	/** 专题状态 */
 	private String status;
@@ -81,6 +83,14 @@ public class ItemAuctionVO extends BaseVO {
 
 	public void setExchangeLimitNum(Integer exchangeLimitNum) {
 		this.exchangeLimitNum = exchangeLimitNum;
+	}
+
+	public Boolean getHasExchanged() {
+		return hasExchanged;
+	}
+
+	public void setHasExchanged(Boolean hasExchanged) {
+		this.hasExchanged = hasExchanged;
 	}
 
 	public String getStatus() {

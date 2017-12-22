@@ -166,7 +166,7 @@
  	 	 Limit 1
  	</select>
  	
- 	<select id="MybatisAuctionRecordDAO_select_uc_count">
+ 	<select id="MybatisAuctionRecordDAO_select_uc_count" parameterType="map" resultType="long">
  		SELECT 
  			COUNT(1)
  		FROM auction_record ar

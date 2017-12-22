@@ -16,5 +16,33 @@ $(document).ready(function() {
 		layer.closeAll('tips');
 	});
 	
-
+	$("iframe").css('width', function(){
+		return $(this).parent().width();
+	});
+	
+	$("iframe").resize(function(){
+		$(this).css('width', function(){
+			return $("iframe").parent().width();
+		})
+	});
+	
 });
+
+//function reinitIframe(){
+//	var iframe = document.getElementsByTagName("iframe");
+//	try{
+//		for(var i =0;i<iframe.length;i++){
+//			var dHeight = iframe[i].contentWindow.document.documentElement.scrollHeight;
+//			iframe[i].height = dHeight;
+//			iframe[i].width = $(iframe[i]).parent().width();
+//		}
+//		/**
+//		var iframe = document.getElementById("auct_data_list");
+//		//var bHeight = iframe.contentWindow.document.body.scrollHeight;
+//		var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+//		//var height = Math.max(bHeight, dHeight);
+//		iframe.height = dHeight;
+//		iframe.width = $("#auct_data_list").parent().width();
+//		*/
+//	}catch (ex){}
+//}

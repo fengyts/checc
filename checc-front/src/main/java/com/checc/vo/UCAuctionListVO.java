@@ -20,6 +20,7 @@ public class UCAuctionListVO extends BaseVO {
 	private String itemTitle;
 	/** 图片地址 */
 	private String picture;
+	/** 商品进度状态 */
 	private String itemStatus;
 	/** 收货状态(是否已提车) */
 	private String deliveryStatus;

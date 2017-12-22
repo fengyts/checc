@@ -14,7 +14,6 @@ import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.enums.ItemPictureTypeEnum;
-import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
 import com.checc.service.AuctionRecordService;
 import com.checc.service.ItemDescService;
@@ -75,8 +74,7 @@ public class TopicItemAO {
 	 */
 	public List<TopicItemVO> listExchange() {
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
-		List<TopicDO> listTopic = topicService.selectAllDynamic(null,
-				TopicTypeEnum.TOPIC_EXCHANGE.getCode());
+		List<TopicDO> listTopic = topicService.selectAllDynamic(null, TopicTypeEnum.TOPIC_EXCHANGE.getCode());
 		if (CollectionUtils.isEmpty(listTopic)) {
 			return listResult;
 		}
@@ -131,15 +129,16 @@ public class TopicItemAO {
 		}
 	}
 
-	public TopicItemDetailVO topicItemDetails(Long tpId) {
+	public TopicItemDetailVO topicItemDetails(Long userId, Long tpId) {
 		TopicItemDO item = topicItemService.selectById(tpId);
 		Long topicId = item.getTopicId();
+		Long itemId = item.getItemId();
+
 		TopicDO topic = topicService.selectById(topicId);
+		String topicType = topic.getTopicType();
 		Date startTime = topic.getStartTime();
 		Date endTime = topic.getEndTime();
 		String status = AuctionCommonAO.getTopicStatus(startTime, endTime);
-		Long itemId = item.getItemId();
-		String topicType = topic.getTopicType();
 
 		TopicItemDetailVO vo = new TopicItemDetailVO();
 		vo.setId(item.getId());
@@ -151,9 +150,10 @@ public class TopicItemAO {
 		vo.setAuctionCurrency(item.getAuctionCurrency());
 		vo.setExchangeLimitNum(item.getExchangeLimitNum());
 		Integer residue = item.getResidue();
-		if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType) && residue <= 0){
-			status = TopicStatusEnum.End.getCode();
-		}
+		// if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType) &&
+		// residue <= 0){
+		// status = TopicStatusEnum.End.getCode();
+		// }
 		vo.setItemStatus(status);
 		vo.setResidue(residue);
 
@@ -163,15 +163,21 @@ public class TopicItemAO {
 		vo.setTopicType(topicType);
 		vo.setStartTime(startTime);
 		vo.setEndTime(endTime);
-		
+
 		if (TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType)) { // 兑换
-			if (residue < 1) {
+			if (residue <= 0) { // 商品已经兑光
 				vo.setHasExchangeOut(true);
 			}
+			// 用户是否已经兑换过
+			Boolean hasExchanged = false;
+			if(null != userId){
+				hasExchanged = auctionRecordService.isExchanged(userId, tpId);
+			}
+			vo.setHasExchanged(hasExchanged);
 		} else {
-			vo.setHasExchangeOut(false);
+			//vo.setHasExchangeOut(false);
 			AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
-			if(null != recordDO){
+			if (null != recordDO) {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
 				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());

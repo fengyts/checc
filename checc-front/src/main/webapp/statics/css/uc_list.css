@@ -1,0 +1,103 @@
+@CHARSET "UTF-8";
+
+.pager_act {
+	margin: 10px 0 0 0;
+}
+
+.uc_list_data_c {
+	margin: 10px 0px 0px 15px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.items {
+	position: relative;
+	相对定位 display: inline-block;
+	float: left;
+	height: 290px;
+	border: solid 1px #aaeeee;
+	width: 18%;
+	/* 	width: 220px; */ margin : 15px 0 0 18px;
+	vertical-align: top;
+	margin: 15px 0 0 18px;
+}
+
+.items:hover {
+	border: solid 1px #ff0000;
+}
+
+.item_img {
+	height: 200px;
+	max-height: 200px;
+	max-width: inherit;
+	cursor: pointer;
+	border-bottom: 1px solid #aaeeee;
+	text-align: center;
+	background-color: #333333;
+}
+
+.item_img img {
+	width: 100%;
+	height: 100%;
+}
+
+.uc_my_win {
+	position: relative;
+	display: block;
+	/* 	width: 100%; */
+	/*     top: 50px; */
+	/*     left: 50px; */
+	text-align: center;
+	vertical-align: middle;
+	margin: -180px auto;
+	width: 100px;
+	height: 100px;
+	border: 0px solid #999999;
+	background-color: #cccccc;
+	border-radius: 50%;
+}
+
+.uc_my_win>span {
+	display: block;
+	margin-top: 30px;
+	padding-top: 30px;
+	font-size: 20px;
+	color: #f2f2f2;
+	font-weight: 700;
+	font-size: 20px;
+}
+
+.uc_item_info {
+	color: #666666;
+	font-size: 14px;
+	margin: 10px 0 0 0;
+}
+
+.uc_item_info>.uc_item_title {
+	height: 35px;
+}
+
+.uc_item_info>.uc_item_aucres {
+	color: #999999;
+	font-size: 16px;
+	margin: 10px 0 0 0;
+}
+
+.uc_item_info>.uc_item_aucres>div {
+	display: inline-block;
+	float: left;
+	vertical-align: top;
+}
+
+.win_currauc1 {
+	margin: 0 0 0 5px;
+	color: #666666;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.win_currauc2 {
+	margin: 0 0 0 80px;
+	color: #1e9fff;
+}

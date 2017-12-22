@@ -75,7 +75,7 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 	
 	@Override
 	public List<AuctionRecordDO> selectUCAuctionList(Map<String, Object> param) {
-		return getSqlSession().selectOne(getStatement("select_uc_list"), param);
+		return getSqlSession().selectList(getStatement("select_uc_list"), param);
 	}
 
 }

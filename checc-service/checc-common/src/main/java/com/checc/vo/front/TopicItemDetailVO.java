@@ -36,6 +36,8 @@ public class TopicItemDetailVO extends BaseVO {
 	private String itemStatus;
 	/** 兑换商品是否已经兑光 */
 	private Boolean hasExchangeOut;
+	/** 是否已经兑换 */
+	private Boolean hasExchanged;
 
 	/** 商品图片地址 */
 	private String picture;
@@ -234,6 +236,14 @@ public class TopicItemDetailVO extends BaseVO {
 
 	public void setCurrentBidTime(Date currentBidTime) {
 		this.currentBidTime = currentBidTime;
+	}
+
+	public Boolean getHasExchanged() {
+		return hasExchanged;
+	}
+
+	public void setHasExchanged(Boolean hasExchanged) {
+		this.hasExchanged = hasExchanged;
 	}
 
 }

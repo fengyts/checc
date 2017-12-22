@@ -394,7 +394,8 @@ ul, ol {
 	height: 380px;
 	border: solid 1px #aaeeee;
 	width: 22%;
-	margin: 15px 0 0 18px /*
+	margin: 15px 0 0 18px;
+	 /*
 	padding-right: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -480,7 +481,7 @@ ul, ol {
 }
 
 .auc_btn>span {
-	background-color: #1E9FFF;
+	background-color: #1e9fff;
 	display: block;
 	height: 35px;
 	width: 120px;
@@ -847,7 +848,7 @@ ul, ol {
 
 .uc_auct_box {
 	margin: 180px 0 0 0;
-	border-top: dashed #999;
+	border-top: 1px dashed #999999;
 }
 
 .uc_auct_data, .uc_exchange_data {
@@ -856,11 +857,15 @@ ul, ol {
 
 .uc_exchange_box {
 	margin: 20px 0 0 0;
-	border-top: 1px dashed #999;
+	border-top: 1px dashed #999999;
 }
 
 .uc_auct_box_t {
 	text-align: center;
+}
+.uc_auct_t{
+	font-size: 18px;
+	color: #666666;
 }
 
 /* 商品详情描述 */

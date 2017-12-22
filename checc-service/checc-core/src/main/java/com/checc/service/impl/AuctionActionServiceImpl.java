@@ -1,9 +1,11 @@
 package com.checc.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,9 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 	private static Logger logger = LoggerFactory.getLogger(AuctionActionServiceImpl.class);
 
 	/** 竞拍用户锁 */
-	private static final String LOCK_AUCTION_KEY = "AUCTION_";
+	private static final String LOCK_AUCTION_KEY = "AUCTION_ACT_";
 	/** 兑换用户锁 */
-	private static final String LOCK_EXCHANGE_KEY = "EXCHANGE_";
+	private static final String LOCK_EXCHANGE_KEY = "EXCHANGE_ACT_";
 
 	@Resource(name = "redisCacheService1")
 	private RedisCacheService redisCacheService;
@@ -152,63 +154,69 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 		Long userId = userDO.getId();
 		String auctKeyLock = LOCK_EXCHANGE_KEY + userId;
 		try {
-			Long tpId = dto.getTpId();
-
-			// 校验专题状态 和 兑换商品库存
-			// synchronized (this) {
-			TopicItemDO topicItemDO = topicItemService.selectById(tpId);
-			if (null == topicItemDO) {
-				return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
-						CommonResultCode.SystemError.REQ_ERROR.desc);
-			}
-
-			Long topicId = topicItemDO.getTopicId();
-			TopicDO topicDO = topicService.selectById(topicId);
-			// 校验专题状态
-			String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
-			if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
-						CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
-			}
-
-			// // 校验兑换库存
-			// int residue = topicItemDO.getResidue();
-			// if (residue <= 0) {
-			// return new
-			// CommonResultMessage(CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.code,
-			// CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.desc);
-			// }
-
-			// }
-
-			// 校验用户西币是否足够
-			UserCurrencyDO userCurrencyDO = userCurrencyService.selectById(userDO.getId());
-			if (null == userCurrencyDO) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
-			}
-
-			int totalCurrency = dto.getTotalCurrency(); // 兑换金额
-			int userUseable = userCurrencyDO.getRefund(); // 兑换商品仅能使用退回的西币兑换C
-			if (totalCurrency > userUseable) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
-			}
-
-			AuctionRecordDO auctRecord = new AuctionRecordDO();
-			auctRecord.setRecordType(AuctionRecordTypeEnum.EXCHANGE.code);
-			auctRecord.setTopicItemId(tpId);
-			auctRecord.setCreateTime(new Date());
-			auctRecord.setTotalCurrency(totalCurrency);
-
-			auctRecord.setUserId(userDO.getId());
-			auctRecord.setMobile(userDO.getMobile());
-			auctRecord.setNickname(userDO.getNickname());
-
-			auctRecord.setExchangeCount(1); // 默认仅能兑换1次
-
 			// 锁用户，每个用户同一时间只能请求一次
 			if (redisCacheService.lock(auctKeyLock)) {
+				Long tpId = dto.getTpId();
+
+				// 校验专题状态 和 兑换商品库存
+				// synchronized (this) {
+				TopicItemDO topicItemDO = topicItemService.selectById(tpId);
+				if (null == topicItemDO) {
+					return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+							CommonResultCode.SystemError.REQ_ERROR.desc);
+				}
+
+				Long topicId = topicItemDO.getTopicId();
+				TopicDO topicDO = topicService.selectById(topicId);
+				// 校验专题状态
+				String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
+				if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
+					return new CommonResultMessage(CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
+							CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
+				}
+
+				// // 校验兑换库存
+				// int residue = topicItemDO.getResidue();
+				// if (residue <= 0) {
+				// return new
+				// CommonResultMessage(CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.code,
+				// CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.desc);
+				// }
+
+				// }
+
+				// 校验用户西币是否足够
+				UserCurrencyDO userCurrencyDO = userCurrencyService.selectById(userDO.getId());
+				if (null == userCurrencyDO) {
+					return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+				}
+
+				int totalCurrency = dto.getTotalCurrency(); // 兑换金额
+				int userUseable = userCurrencyDO.getRefund(); // 兑换商品仅能使用退回的西币兑换
+				if (totalCurrency > userUseable) {
+					return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+				}
+
+				AuctionRecordDO auctRecord = new AuctionRecordDO();
+				auctRecord.setRecordType(AuctionRecordTypeEnum.EXCHANGE.code);
+				auctRecord.setTopicItemId(tpId);
+				auctRecord.setCreateTime(new Date());
+				auctRecord.setTotalCurrency(totalCurrency);
+
+				auctRecord.setUserId(userDO.getId());
+				auctRecord.setMobile(userDO.getMobile());
+				auctRecord.setNickname(userDO.getNickname());
+
+				auctRecord.setExchangeCount(1); // 默认仅能兑换1次
+
+				// 校验用户是否已经兑换
+				if (auctionRecordService.isExchanged(userId, tpId)) {
+					return new CommonResultMessage(CommonResultCode.BusinessError.HAS_EXCHANGED.code,
+							CommonResultCode.BusinessError.HAS_EXCHANGED.desc);
+				}
+
 				int res = 0;
 				// 扣减兑换商品剩余数量
 				res = topicItemService.reduceExchangeResidue(tpId);

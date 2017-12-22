@@ -21,6 +21,17 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 * @return
 	 */
 	AuctionRecordDO selectLatestAuction(Long topicItemId);
+	
+	/**
+	 * <pre>
+	 * 获取用户是否已经兑换过商品
+	 * </pre>
+	 *
+	 * @param userId
+	 * @param topicItemId
+	 * @return true:已经兑换过,false:尚未兑换
+	 */
+	Boolean isExchanged(Long userId, Long topicItemId);
 
 	/**
 	 * <pre>
@@ -35,5 +46,7 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 */
 	Page<AuctionRecordDO> queryPageListUCAuction(Long userId, String recordType, Integer startPage,
 			Integer pageSize);
+	
+	
 
 }

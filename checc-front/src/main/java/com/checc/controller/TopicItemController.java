@@ -46,13 +46,15 @@ public class TopicItemController {
 			return CommonPathConstant.PATH_ERROR_404;
 		}
 		
+		Long userId = null;
 		HttpSession session = request.getSession();
 		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
-		if(null != userDO){
+		if (null != userDO) {
 			model.addAttribute("checcUser", userDO);
+			userId = userDO.getId();
 		}
 
-		TopicItemDetailVO detailVO = topicItemAO.topicItemDetails(tpId);
+		TopicItemDetailVO detailVO = topicItemAO.topicItemDetails(userId, tpId);
 		model.addAttribute("detailVO", detailVO);
 		if (null != reqTime && reqTime > 0l) {
 			model.addAttribute("reqTime", reqTime);

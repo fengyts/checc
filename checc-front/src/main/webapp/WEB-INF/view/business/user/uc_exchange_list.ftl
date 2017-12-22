@@ -1,5 +1,40 @@
-<div class="item_list_box">
-	<#if page.list?default([])?size!=0>
-	</#if>
+<#include "/common/common.ftl" />
+<#include "/common/common-js.ftl" />
+<#include "/common/page.ftl" />
 
+<link rel="stylesheet" type="text/css" href="${css}/uc_list.css" />
+
+
+<div class="item_list_box" id="auct_ifm_box">
+	<div class="uc_list_data_c">
+		<#if page.list?default([])?size!=0>
+			<#list page.list as ucItem>
+				<div class="items">
+					<div class="uc_ld_items">
+						<div class="item_img">
+							<a href="javascript:parent.window.location.href='${domain}/topicItem/itemDetails/auction/${ucItem.tpId}';" class="itemsal" reqTime="${.now?long}">
+								<img src="${ucItem.picture}">
+							</a>
+						</div>
+					</div>
+					<div class="uc_item_info">
+						<div class="uc_item_title">${ucItem.itemTitle}</div>
+					</div>
+				</div>
+			</#list>
+		<#else>
+			<div style="font-size:18px;color:#666666;text-align:center;">
+				<span>尚未参与兑换</spa>
+			</div>
+		</#if>
+	</div>
+	<div class="pager_act">
+		<form id="ucAuctionForm" action="${domain}/user/bis/ucAuctionList/exchange">
+			<@pager  pagination=page  formId="ucAuctionForm" />
+		</form>
+	</div>
 </div>
+<script type="text/javascript">
+	var _ifh = $("#auct_ifm_box").height();
+	window.parent.$("#exchange_data_list").height(_ifh + 55);
+</script>
