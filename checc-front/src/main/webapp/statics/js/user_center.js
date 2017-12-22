@@ -26,6 +26,27 @@ $(document).ready(function() {
 		})
 	});
 	
+	// 西币交易记录点击事件
+	$("#ucCurrencyDetails").on('click', function(){
+//		var layerIndex = layer.open({
+//			
+//		});
+		
+		lgn_pg_ii = layer.open({
+    		type: 2,
+    		title: '用户中心',
+    		resize: false,
+    		//scrollbar: false,
+    		//fixed: false,
+    		move:false,
+    		shade: 0.1,
+    		anim: 5,
+    		content: [domain + '/user/bis/currencyRecList'],
+    		area: ['800px', '500px']
+    	});
+		
+	});
+	
 });
 
 //function reinitIframe(){

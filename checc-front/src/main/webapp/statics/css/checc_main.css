@@ -15,7 +15,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #eeeeee;
-/* 	background-color: #1E9FFF; */
+	/* 	background-color: #1E9FFF; */
 	height: 70px;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .checc_lgn_text {
-/* 	font-family: "Arial Normal", "Arial"; */
+	/* 	font-family: "Arial Normal", "Arial"; */
 	font-size: 32px;
 	font-weight: 600;
 	color: #0099cc;
@@ -123,13 +123,12 @@ body {
 	vertical-align: middle;
 	line-height: 30px;
 } */
-
 .step_num {
 	align-self: center;
 	display: block;
 	font-weight: bolder;
 	font-size: 20px;
-/* 	margin-top: 4px; */
+	/* 	margin-top: 4px; */
 	text-align: center;
 	vertical-align: middle;
 	line-height: 30px;
@@ -172,7 +171,7 @@ body {
 	max-height: 100px;
 	background-color: #eeeeee;
 	overflow-wrap: normal;
-/* 	font-family: "Arial Normal", "Arial"; */
+	/* 	font-family: "Arial Normal", "Arial"; */
 	font-size: 14px;
 	line-height: 22px;
 	font-style: normal;
@@ -205,6 +204,12 @@ body {
 	padding: 0 18px;
 }
 
+.copyright>p>a:hover, .about>a:hover {
+	opacity: .6;
+	filter: alpha(opacity = 80);
+	text-decoration: underline;
+}
+
 .footer .copyright {
 	padding-bottom: 8px;
 	text-align: center;
@@ -229,7 +234,7 @@ label {
 	border-color: #e6e6e6;
 }
 
-input,button {
+input, button {
 	font-family: inherit;
 	font-size: inherit;
 	font-style: inherit;
@@ -361,8 +366,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	box-sizing: border-box;
 }
 
-.checc_input:focus{
-/* 	border-color:blue; */
+.checc_input:focus {
+	/* 	border-color:blue; */
 	border: 2px solid #b0e0e6;
 }
 
@@ -418,7 +423,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	width: 500px;
 	min-height: 350px;
 } */
-
 .step_ifa {
 	top: 50px;
 	left: 320px;
@@ -436,9 +440,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	text-decoration-line: none;
 	/* font-size: 20px;
 	font-family: "Neue,Helvetica,PingFang SC,微软雅黑,Tahoma,Arial,sans-serif"; */
-/* 	font-family: "Arial Normal","Arial"; */
+	/* 	font-family: "Arial Normal","Arial"; */
 	letter-spacing: 10px;
-    font-size: 20px;
-    font-weight: 600;
-    color: #e6e6e6;
+	font-size: 20px;
+	font-weight: 600;
+	color: #e6e6e6;
 }

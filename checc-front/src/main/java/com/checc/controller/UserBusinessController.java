@@ -52,6 +52,17 @@ public class UserBusinessController {
 		return "/business/user/user_center";
 	}
 
+	/**
+	 * <pre>
+	 * 用户中心-- &gt; 我的兑换 | 竞拍列表
+	 * </pre>
+	 *
+	 * @param request
+	 * @param model
+	 * @param pageNo
+	 * @param auctionType
+	 * @return
+	 */
 	@RequestMapping(value = "/ucAuctionList/{auctionType}")
 	public String ucAuctionList(HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
@@ -68,6 +79,27 @@ public class UserBusinessController {
 		}
 		userCenterAO.ucAuctionList(model, userDO, auctionType, pageNo);
 		return returnUrl;
+	}
+
+	/**
+	 * <pre>
+	 * 用户中心-->西币交易详细记录列表
+	 * </pre>
+	 *
+	 * @param request
+	 * @param model
+	 * @param pageNo
+	 * @return
+	 */
+	@RequestMapping(value = { "/currencyRecList" })
+	public String currencyRecList(HttpServletRequest request, Model model,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+
+		HttpSession session = request.getSession();
+		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
+		userCenterAO.currencyRecList(model, userDO.getId(), pageNo, 10);
+
+		return "/business/user/currency_record_list";
 	}
 
 	@RequestMapping(value = { "/deposit" }, method = { RequestMethod.GET })

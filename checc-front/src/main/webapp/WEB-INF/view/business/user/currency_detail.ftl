@@ -18,7 +18,7 @@
 					<span class="num_unit">个</span>
 				</div>
 				<div class="act_btn_box">
-					<div><a href="javascript:window.open('_blank');">充值</a></div>
+					<div><a href="javascript:window.open('${domain}/user/bis/deposit');">去充值</a></div>
 					<div><a href="${domain}/">去竞拍</a></div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 					<span class="num_unit">条</span>
 				</div>
 				<div class="act_btn_box">
-					<div><a href="#">详细记录</a></div>
+					<div id="ucCurrencyDetails"><a href="#">详细记录</a></div>
 				</div>
 			</div>
 		</div>

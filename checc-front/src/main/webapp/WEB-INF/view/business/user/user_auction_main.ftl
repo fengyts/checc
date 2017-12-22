@@ -14,7 +14,7 @@
 		<div class="uc_auct_box_t">
 			<div class="uc_auct_t">
 				<span>我参与的竞拍</span>
-				(<span id="my_auct_num">12</span>)
+				(<span id="myAuctActNum">0</span>)
 			</div>
 		</div>
 		
@@ -33,7 +33,7 @@
 		<div class="uc_auct_box_t">
 			<div class="uc_auct_t">
 				<span>我兑换的商品</span>
-				(<span id="my_exchange_num">12</span>)
+				(<span id="myExchangeActNum">0</span>)
 			</div>
 		</div>
 		

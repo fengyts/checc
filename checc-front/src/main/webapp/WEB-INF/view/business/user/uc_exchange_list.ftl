@@ -7,6 +7,7 @@
 
 <div class="item_list_box" id="auct_ifm_box">
 	<div class="uc_list_data_c">
+		<input type="hidden" id="ucExchangeActNum" value="${page.totalCount!0}" />
 		<#if page.list?default([])?size!=0>
 			<#list page.list as ucItem>
 				<div class="items">
@@ -37,4 +38,5 @@
 <script type="text/javascript">
 	var _ifh = $("#auct_ifm_box").height();
 	window.parent.$("#exchange_data_list").height(_ifh + 55);
+	window.parent.$("#myExchangeActNum").text($("#ucExchangeActNum").val());
 </script>

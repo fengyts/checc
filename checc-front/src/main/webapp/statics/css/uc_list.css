@@ -14,10 +14,11 @@
 	position: relative;
 	相对定位 display: inline-block;
 	float: left;
-	height: 290px;
+	height: 300px;
 	border: solid 1px #aaeeee;
-	width: 18%;
-	/* 	width: 220px; */ margin : 15px 0 0 18px;
+	width: 22%;
+/* 		width: 220px;  */
+	margin : 15px 0 0 18px;
 	vertical-align: top;
 	margin: 15px 0 0 18px;
 }
@@ -74,7 +75,7 @@
 }
 
 .uc_item_info>.uc_item_title {
-	height: 35px;
+	height: 50px;
 }
 
 .uc_item_info>.uc_item_aucres {

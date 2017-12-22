@@ -5,9 +5,9 @@ import ng.bayue.common.BaseDO;
 import java.util.Date;
 
 /**
- * 竞拍|兑换|充值记录
+ * 竞拍|兑换|充值|竞拍退回 记录表
  * 
- * @author fengyts Wed Dec 20 09:51:37 CST 2017
+ * @author fengyts Fri Dec 22 21:14:43 CST 2017
  */
 
 public class AuctionRecordDO extends BaseDO {
@@ -38,6 +38,9 @@ public class AuctionRecordDO extends BaseDO {
 
 	/** 兑换件数 */
 	private Integer exchangeCount;
+
+	/** 本商品退回总次数 */
+	private Integer refundNum;
 
 	/** 本次出价消耗总西币(出价次数*单次出价西币);兑换消耗总西币(兑换单价*兑换件数) */
 	private Integer totalCurrency;
@@ -133,6 +136,15 @@ public class AuctionRecordDO extends BaseDO {
 	 */
 	public void setExchangeCount(Integer exchangeCount) {
 		this.exchangeCount = exchangeCount;
+	}
+
+	/**
+	 * 设置 本商品退回总次数
+	 * 
+	 * @param refundNum
+	 */
+	public void setRefundNum(Integer refundNum) {
+		this.refundNum = refundNum;
 	}
 
 	/**
@@ -259,6 +271,15 @@ public class AuctionRecordDO extends BaseDO {
 	 */
 	public Integer getExchangeCount() {
 		return exchangeCount;
+	}
+
+	/**
+	 * 获取 本商品退回总次数
+	 * 
+	 * @return refundNum
+	 */
+	public Integer getRefundNum() {
+		return refundNum;
 	}
 
 	/**

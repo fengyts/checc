@@ -13,6 +13,7 @@
         <result column="mobile" property="mobile"/>
         <result column="bid_num" property="bidNum"/>
         <result column="exchange_count" property="exchangeCount"/>
+        <result column="refund_num" property="refundNum"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="current_auct_price" property="currentAuctPrice"/>
         <result column="card_no" property="cardNo"/>
@@ -21,7 +22,7 @@
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,total_currency,current_auct_price,card_no,deposit_amount,create_time
+	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,refund_num,total_currency,current_auct_price,card_no,deposit_amount,create_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -34,6 +35,7 @@
 			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
 			<if test="bidNum != null "> AND bid_num=#{bidNum} </if>
 			<if test="exchangeCount != null "> AND exchange_count=#{exchangeCount} </if>
+			<if test="refundNum != null "> AND refund_num=#{refundNum} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 			<if test="currentAuctPrice != null "> AND current_auct_price=#{currentAuctPrice} </if>
 			<if test="cardNo != null  and cardNo != '' "> AND card_no=#{cardNo} </if>
@@ -64,6 +66,7 @@
 				mobile,
 				bid_num,
 				exchange_count,
+				refund_num,
 				total_currency,
 				current_auct_price,
 				card_no,
@@ -79,6 +82,7 @@
 				#{mobile},
 				#{bidNum},
 				#{exchangeCount},
+				#{refundNum},
 				#{totalCurrency},
 				#{currentAuctPrice},
 				#{cardNo},
@@ -98,6 +102,7 @@
 					mobile = #{mobile},
 					bid_num = #{bidNum},
 					exchange_count = #{exchangeCount},
+					refund_num = #{refundNum},
 					total_currency = #{totalCurrency},
 					current_auct_price = #{currentAuctPrice},
 					card_no = #{cardNo},
@@ -121,6 +126,7 @@
 					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
 					<if test="bidNum != null ">bid_num=#{bidNum},</if>
 					<if test="exchangeCount != null ">exchange_count=#{exchangeCount},</if>
+					<if test="refundNum != null ">refund_num=#{refundNum},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="currentAuctPrice != null ">current_auct_price=#{currentAuctPrice},</if>
 					<if test="cardNo != null  and cardNo != '' ">card_no=#{cardNo},</if>
@@ -154,6 +160,7 @@
 	 	ORDER BY auction_record.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
 
  	<select id="MybatisAuctionRecordDAO_select_latest" parameterType="long" resultMap="AuctionRecordDOResultMap">
  		 SELECT

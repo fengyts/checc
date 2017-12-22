@@ -228,6 +228,12 @@ ul, ol {
 	padding: 0 18px;
 }
 
+.copyright>p>a:hover, .about>a:hover {
+	opacity: .6;
+	filter: alpha(opacity = 80);
+	text-decoration: underline;
+}
+
 .footer .copyright {
 	padding-bottom: 8px;
 	text-align: center;
@@ -395,7 +401,7 @@ ul, ol {
 	border: solid 1px #aaeeee;
 	width: 22%;
 	margin: 15px 0 0 18px;
-	 /*
+	/*
 	padding-right: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -795,7 +801,6 @@ ul, ol {
 
 .uc_box_t>span {
 	display: inline-block;
-	cursor: pointer;
 }
 
 .uc_box_t>.uc_help_i {
@@ -804,6 +809,7 @@ ul, ol {
 	background-image: url("../images/help.png");
 	background-repeat: no-repeat;
 	background-size: 18px;
+	cursor: pointer;
 }
 
 .uc_ta_num>span {
@@ -863,7 +869,8 @@ ul, ol {
 .uc_auct_box_t {
 	text-align: center;
 }
-.uc_auct_t{
+
+.uc_auct_t {
 	font-size: 18px;
 	color: #666666;
 }
