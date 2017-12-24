@@ -25,11 +25,11 @@ import com.checc.service.CheccUserService;
 import com.checc.service.generate.SmsCodeRedisService;
 import com.checc.service.generate.SmsSendService;
 
+import constants.TokenTypeConstant;
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.common.model.FrequencyModel;
 import ng.bayue.common.model.TokenModel;
 import ng.bayue.constants.RedisCacheTimeConstant;
-import ng.bayue.constants.TokenTypeConstant;
 import ng.bayue.enums.RedisModelStatusEnum;
 import ng.bayue.service.FrequencyService;
 import ng.bayue.service.TokenService;

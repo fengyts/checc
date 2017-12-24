@@ -23,12 +23,12 @@ import com.checc.vo.AuctionListVO;
 import com.checc.vo.AuctionListVO.ListTableVO;
 import com.checc.vo.front.ItemAuctionVO;
 
+import constants.TokenTypeConstant;
 import ng.bayue.common.CommonMessages;
 import ng.bayue.common.CommonResultCode;
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.common.Page;
 import ng.bayue.common.model.TokenModel;
-import ng.bayue.constants.TokenTypeConstant;
 import ng.bayue.enums.RedisModelStatusEnum;
 import ng.bayue.service.TokenService;
 import ng.bayue.util.StringUtils;
