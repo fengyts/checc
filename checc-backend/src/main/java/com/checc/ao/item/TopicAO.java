@@ -5,6 +5,7 @@ import java.util.List;
 
 import ng.bayue.common.Page;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +37,10 @@ public class TopicAO {
 	public Page<TopicDO> queryPageList(TopicDO topicDO, Integer pageNo, Integer pageSize) {
 		Page<TopicDO> page = topicService.queryPageListDynamicAndStartPageSize(topicDO, pageNo, pageSize);
 		List<TopicDO> list = page.getList();
-		for(TopicDO t : list){
-			topicStatus(t);
+		if(CollectionUtils.isNotEmpty(list)){
+			for(TopicDO t : list){
+				topicStatus(t);
+			}
 		}
 		return page;
 	}
