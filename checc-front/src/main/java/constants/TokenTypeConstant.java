@@ -55,4 +55,23 @@ public interface TokenTypeConstant {
 		}
 
 	}
+
+	public static enum DepositTokenTypeEnum {
+		DEPOSIT("DEPOSIT");
+		
+		public String desc;
+
+		DepositTokenTypeEnum(String desc) {
+			this.desc = desc;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		public void setDesc(String desc) {
+			this.desc = desc;
+		}
+
+	}
 }

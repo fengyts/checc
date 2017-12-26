@@ -30,6 +30,7 @@
 <#include "/common/footer_both.ftl" />
 
 <script type="text/javascript" src="${js}/deposit.js"></script>
+<script type="text/javascript" src="${static}/common/utils.js"></script>
 
 </body>
 

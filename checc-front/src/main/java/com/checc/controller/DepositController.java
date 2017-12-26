@@ -26,11 +26,13 @@ public class DepositController {
 	@RequestMapping(value = { "/dplist" }, method = { RequestMethod.GET })
 	public String depositList(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
+		Long userId = null;
 		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
 		if (null != userDO) {
 			model.addAttribute("checcUser", userDO);
+			userId = userDO.getId();
 		}
-		List<DepositConfigDO> listAll = depositAO.getDepositList();
+		List<DepositConfigDO> listAll = depositAO.getDepositList(model, userId);
 
 		model.addAttribute("dpList", listAll);
 		return "/business/deposit/deposit_center";
