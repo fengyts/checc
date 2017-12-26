@@ -749,14 +749,16 @@ ul, ol {
 }
 
 /* 个人中心 */
-.user_currency_detail {
+.user_currency_detail, .deposit_box {
+	/* 个人 中心,充值中心 box样式*/
 	font-family: "Arial Negreta", "Arial";
 	font-style: normal;
 	text-align: center;
 	margin: 0;
 }
 
-.center_title {
+.center_title, .deposit_title {
+	/* 个人 中心,充值中心 标题样式*/
 	margin: 20px 0 0 0;
 	color: #0099cc;
 	font-size: 24px;
@@ -873,6 +875,62 @@ ul, ol {
 .uc_auct_t {
 	font-size: 18px;
 	color: #666666;
+}
+
+/* 充值中心样式 */
+.deposit_box{
+	color: #666666;
+	font-size: 18px;
+	text-align: center;
+}
+
+.deposit_list_box {
+	margin: 50px 0 0 0;
+}
+
+.deposit_list, .other_amount {
+	width: 500px;
+	margin: 0px auto;
+}
+.deposit_list>div{
+	margin: 20px 0 0 0;
+	width: 32%;
+/* 	width: 120px; */
+	height: 30px;
+	display: inline-block;
+	vertical-align: top;
+	border: solid 1px #0000ff;
+	text-align: center;
+	
+}
+
+.dpl_d_box_checked{
+	background-color: #4d4dff;
+	color: #ffffff;
+}
+
+.dpl_amount{
+	
+}
+.dpl_discount{
+	width: 30px;
+	font-size: 14px;
+	margin: -15px 0 0 125px;
+	color: #ff0000;
+}
+
+.deposit_list_box>.other_amount{
+	padding : 20px 0 0 0;
+	text-align: left;
+	height: 30px;
+}
+#otherAmount{
+	height: 30px;
+	width: 200px;
+}
+
+.pay_type_box{
+	margin: 30px 0 0 0;
 }
 
 /* 商品详情描述 */

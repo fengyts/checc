@@ -24,7 +24,7 @@
         </ul>
         <ul class="userinfo_bar">
             <li class="more-menu">
-                <a href="${domain}/user/bis/deposit"><i class="iconfont"></i>西币充值</a>
+                <a href="${domain}/user/deposit/dplist"><i class="iconfont"></i>西币充值</a>
                 <a href="${domain}/user/bis/membercenter"><i class="iconfont"></i>会员中心</a>
                 <a href="${domain}/index/helper"><i class="iconfont"></i>帮助中心</a>
             </li>

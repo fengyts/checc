@@ -102,14 +102,5 @@ public class UserBusinessController {
 		return "/business/user/currency_record_list";
 	}
 
-	@RequestMapping(value = { "/deposit" }, method = { RequestMethod.GET })
-	public String deposit(HttpServletRequest request, HttpServletResponse response, Model model) {
-		HttpSession session = request.getSession();
-		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
-		if (null != userDO) {
-			model.addAttribute("checcUser", userDO);
-		}
-		return "/user/deposit";
-	}
 
 }

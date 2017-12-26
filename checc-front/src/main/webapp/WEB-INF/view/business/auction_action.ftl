@@ -66,7 +66,7 @@
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">
 				<span>您的西币剩余${auctionVO.useableCurrency!0}个,不够本次竞拍！</span>
 				<span class="auct_deposit_now">
-					<a href="javascript:window.open('${domain}/user/bis/deposit');">去充值>></a>
+					<a href="javascript:window.open('${domain}/user/deposit/dplist');">去充值>></a>
 				</span>
 			</div>
 		</div>

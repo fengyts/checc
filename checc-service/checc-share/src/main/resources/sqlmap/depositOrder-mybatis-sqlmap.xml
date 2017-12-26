@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.DepositOrderMapper">
+
+	<resultMap type="com.checc.domain.DepositOrderDO" id="DepositOrderDOResultMap">
+		<id column="id" property="id" />
+        <result column="user_id" property="userId"/>
+        <result column="deposit_amount" property="depositAmount"/>
+        <result column="deposit_type" property="depositType"/>
+        <result column="discount" property="discount"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="create_time" property="createTime"/>
+	</resultMap>
+
+	<sql id="MybatisDepositOrderDAO_all_column_fields">
+	      id,user_id,deposit_amount,deposit_type,discount,order_status,create_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisDepositOrderDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="userId != null "> AND user_id=#{userId} </if>
+			<if test="depositAmount != null "> AND deposit_amount=#{depositAmount} </if>
+			<if test="depositType != null  and depositType != '' "> AND deposit_type=#{depositType} </if>
+			<if test="discount != null "> AND discount=#{discount} </if>
+			<if test="orderStatus != null  and orderStatus != '' "> AND order_status=#{orderStatus} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisDepositOrderDAO_selectById" parameterType="long" resultMap="DepositOrderDOResultMap">
+	SELECT
+		<include refid="MybatisDepositOrderDAO_all_column_fields" />
+	FROM
+		deposit_order
+	WHERE
+		 id = #{id}
+	</select>
+
+    <insert id="MybatisDepositOrderDAO_insert" parameterType="com.checc.domain.DepositOrderDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO deposit_order(
+				id,
+				user_id,
+				deposit_amount,
+				deposit_type,
+				discount,
+				order_status,
+				create_time
+		)values(
+				#{id},
+				#{userId},
+				#{depositAmount},
+				#{depositType},
+				#{discount},
+				#{orderStatus},
+				#{createTime}
+		)
+    </insert>
+
+	<update id="MybatisDepositOrderDAO_updateById" parameterType="com.checc.domain.DepositOrderDO">
+		UPDATE deposit_order
+		SET
+					user_id = #{userId},
+					deposit_amount = #{depositAmount},
+					deposit_type = #{depositType},
+					discount = #{discount},
+					order_status = #{orderStatus},
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="MybatisDepositOrderDAO_deleteById" parameterType="long">
+		DELETE FROM deposit_order WHERE id = #{id}
+	</delete>
+
+	<update id="MybatisDepositOrderDAO_update_dynamic" parameterType="com.checc.domain.DepositOrderDO">
+		UPDATE deposit_order
+		<set>
+					<if test="userId != null ">user_id=#{userId},</if>
+					<if test="depositAmount != null ">deposit_amount=#{depositAmount},</if>
+					<if test="depositType != null  and depositType != '' ">deposit_type=#{depositType},</if>
+					<if test="discount != null ">discount=#{discount},</if>
+					<if test="orderStatus != null  and orderStatus != '' ">order_status=#{orderStatus},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+ 	<select id="MybatisDepositOrderDAO_select_dynamic" resultMap="DepositOrderDOResultMap" parameterType="com.checc.domain.DepositOrderDO">
+	     SELECT
+	     	<include refid="MybatisDepositOrderDAO_all_column_fields" />
+		 FROM
+		 	deposit_order
+			<include refid="MybatisDepositOrderDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisDepositOrderDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.DepositOrderDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	deposit_order
+	 	<include refid="MybatisDepositOrderDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisDepositOrderDAO_select_dynamic_page_query" resultMap="DepositOrderDOResultMap" parameterType="com.checc.domain.DepositOrderDO">
+	     SELECT
+	     	<include refid="MybatisDepositOrderDAO_all_column_fields" />
+		 FROM
+		 	deposit_order
+	 	<include refid="MybatisDepositOrderDAO_dynamic_where_fields" />
+	 	ORDER BY deposit_order.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

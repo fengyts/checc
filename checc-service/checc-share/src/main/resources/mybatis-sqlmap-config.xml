@@ -23,5 +23,7 @@
 		<mapper resource="sqlmap/sysUser-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/depositCard-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/smsRecord-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositOrder-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/depositConfig-mybatis-sqlmap.xml" />
 	</mappers>
 </configuration>
