@@ -17,6 +17,8 @@ import com.checc.domain.CheccUserDO;
 import com.checc.domain.DepositConfigDO;
 import com.checc.dto.DepositDTO;
 
+import ng.bayue.common.CommonResultMessage;
+
 @Controller
 @RequestMapping(value = { "/user/deposit" })
 public class DepositController {
@@ -40,9 +42,18 @@ public class DepositController {
 	}
 
 	@RequestMapping(value = { "/dptAct" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String depositAction(HttpServletRequest request, DepositDTO dto) {
-		depositAO.depositQrcode(dto);
-		return "/business/deposit/dept_wechat_scan";
+	public String depositAction(HttpServletRequest request, Model model, DepositDTO dto) {
+		Long userId = null;
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(UserConstants.USER_SESSION_KEY);
+		if (null != userDO) {
+			model.addAttribute("checcUser", userDO);
+			userId = userDO.getId();
+		}
+		CommonResultMessage crm = depositAO.depositQrcode(dto, userId);
+		if(CommonResultMessage.Success != crm.getResult()){
+			return "/business/deposit/dept_act_err";
+		}
+		return "redirect:/pay/wechat/payQRCode";
 	}
 
 }

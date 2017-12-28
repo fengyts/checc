@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import ng.bayue.common.CommonResultCode;
 import ng.bayue.common.CommonResultMessage;
 import ng.bayue.common.model.TokenModel;
+import ng.bayue.enums.RedisModelStatusEnum;
 import ng.bayue.service.TokenService;
 import ng.bayue.util.crypto.AESUtils;
 
@@ -42,53 +44,31 @@ public class DepositAO {
 		return listAll;
 	}
 
-	public CommonResultMessage depositQrcode(DepositDTO dto) {
+	public CommonResultMessage depositQrcode(DepositDTO dto, Long userId) {
 		String depositTk = dto.getDepositTk();
 		Long discountId = dto.getDiscountId();
 		Integer depositAmt = dto.getDepositAmt();
 		Double discount = dto.getDiscount();
 
 		if (StringUtils.isEmpty(depositTk)) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+		if (null == discountId || discountId < 0 || null == depositAmt || depositAmt < 0 || null == discount
+				|| discount.doubleValue() < 0) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
 		}
 
-		return null;
+		TokenModel tm = new TokenModel(userId.toString(), TokenTypeConstant.DepositTokenTypeEnum.DEPOSIT.desc);
+		RedisModelStatusEnum tkCheckStatus = tokenService.check(tm);
+		if (RedisModelStatusEnum.CORRECT != tkCheckStatus) {
+			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+					CommonResultCode.SystemError.REQ_ERROR.desc);
+		}
+
+		return CommonResultMessage.success();
 
 	}
 
-	/*public static String getQrocdePay(String notifyUrl, String productName, String orderNum, Double price,
-			String ipLocal) throws Exception {
-		String url = "";
-		// 金额转为分单位
-		Double expandPrice = price * 100;
-		// 转int类型
-		Integer totalFee = expandPrice.intValue();
-		// 生成签名
-		String timeStamp = Sha1Util.getTimeStamp();
-		TreeMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-		packageParams.put("appid", WeChatConfig.APP_ID);
-		packageParams.put("mch_id", WeChatConfig.PARTNER);// 设置商户号
-		packageParams.put("nonce_str", Sha1Util.getNonceStr());
-		packageParams.put("time_stamp", timeStamp);// 时间戳
-		packageParams.put("out_trade_no", orderNum); // 商户订单号
-		packageParams.put("body", productName); // 商品描述
-		packageParams.put("fee_type", "CNY"); // 银行币种
-		packageParams.put("total_fee", totalFee); // 商品总金额,以分为单位
-		packageParams.put("spbill_create_ip", ipLocal); // 订单生成的机器IP，指用户浏览器端IP
-		packageParams.put("notify_url", notifyUrl); // 通知地址
-		packageParams.put("trade_type", "NATIVE"); // 交易类型
-													// JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付，统一下单接口trade_type的传参可参考这里
-		// 调用获取订单接口，并返回相关参数
-		try {
-			String str = WXPrepay.QRcodePay(packageParams);
-			if (str != null) {
-				url = TenpayUtil.QRfromOSchina(str);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return url;
-	}*/
-	
-	
 }
