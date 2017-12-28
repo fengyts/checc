@@ -1,19 +1,24 @@
 $(function() {
-
+	
+	// 充值选项点击事件
 	$(".dpl_d_box").on('click', function() {
 		var _this = $(this);
 		$(".dpl_d_box").removeClass('dpl_d_box_checked');
 		_this.addClass('dpl_d_box_checked');
 		var _index = _this.attr('index');
 		// var _dpamt = $("#dpamt_" + _index).val();
-		$("#dpInfo").empty().text($("#dpamt_" + _index).val());
+		var _dpamt=$("#dpamt_" + _index).val(), _discountChecked = $("#discount_" + _index).val();
+		$("#dpInfo").empty().text(_dpamt);
 		$("#dpInfoMo").empty().text($("#dpamtm_" + _index).val());
+		$("#depositAmt").val(_dpamt);
+		$("#discount").val(_discountChecked);
 		
 		$("#dpCheckInfo").removeClass('dpcheck_info').css('display', 'inline');
 		//$("#dpamtInputErr").css('display', 'none');
 		$("#discountId").val($("#discountId_" + _index).val());
 	});
-
+	
+	// 其他金额输入框焦点事件
 	$("#otherAmount").on('focus', function() {
 		$(".dpl_d_box").removeClass('dpl_d_box_checked');
 		$("#dpCheckInfo").removeClass('dpcheck_info').css('display', 'none');
@@ -36,12 +41,62 @@ $(function() {
 		}
 	});
 	
+	// 立即支付点击事件
 	$("#depositBtnAct").on('click', function(){
 		var _discountId = parseInt($("#discountId").val());
 		if('NaN' == _discountId || undefined == _discountId || -1 == _discountId){
 			layer.alert("请选择或输入合法的充值金额");
 			return;
 		}
+		
+		var _param = {};
+		_param.depositTk = $("#depositTk").val();
+		_param.discountId = $("#discountId").val(); 
+		_param.discount = $("#discount").val();
+		_param.depositAmt = $("#depositAmt").val();
+		_param.otherAmount = $("#otherAmount").val();
+		
+		var _url = domain + '/user/deposit/dptAct';
+		$.ajax({
+			url : _url,
+			method : 'GET',
+			dataType : 'html',
+			data : _param,
+			cache : false,
+
+			success: function(data, status, xhr) { 
+		        var errorCode=xhr.getResponseHeader("errorCode");
+		        if('999' == errorCode) { // 未登陆
+		        	lgn_pg_ii = layer.open({
+		        		type: 2,
+		        		title: '请先登录',
+		        		resize: false,
+		        		//scrollbar: false,
+		        		//fixed: false,
+		        		move:false,
+		        		shade: 0.1,
+		        		zIndex: 0,
+		        		area: ['700px', '500px'],
+		        		content: domain + '/user/loginAjax'
+		        	});
+		        } else { // 已经登陆
+		        	lgn_pg_ii = layer.open({
+		        		type: 2,
+		        		title: '',
+		        		resize: false,
+		        		//scrollbar: false,
+		        		//fixed: false,
+		        		move:false,
+		        		shade: 0.1,
+		        		anim: 5,
+		        		area: ['600px', '400px'],
+		        		content: _url
+		        	});
+		        }
+		    }
+
+		});
+		
 	});
 
 })

@@ -5,7 +5,7 @@
 		</div>
 		<div class="deposit_list_box">
 			<div>
-				<span>请选择充值数额</span>
+				<span>请选择充值数量</span>
 			</div>
 			<div class="deposit_list">
 				<#if dpList?default([])?size!=0>
@@ -17,13 +17,14 @@
 								<div class="dpl_discount">${dpl.discount[2..]}折</div>
 							</#if>
 							<input type="hidden" id="dpamt_${dpl_index}" value="${dpl.depositAmount}">
+							<input type="hidden" id="discount_${dpl_index}" value="${dpl.discount}">
 							<input type="hidden" id="dpamtm_${dpl_index}" value="${(dpl.discount * dpl.depositAmount)?string('#.00')}">
 						</div>
 					</#list>
 				</#if>
 			</div>
 			<div class="other_amount">
-				<span>其他金额:</span>
+				<span>其他数量:</span>
 				<input type="text" id="otherAmount" name="otherAmount" value="">
 				<span id="dpamtInputErr" style="font-size:14px;color:#ff0000;">(金额必须是>=0.1的有效值)</span>
 			</div>
@@ -63,8 +64,10 @@
 				<a href="#">立即支付</a>
 			</div>
 			<form id="depositListForm" action="">
-				<input type="hidden" id="discountId" value="-1">
 				<input type="hidden" id="depositTk" name="depositTk" value="${depositTk}">
+				<input type="hidden" id="discountId" value="-1">
+				<input type="hidden" id="discount" name="discount" value="1">
+				<input type="hidden" id="depositAmt" name="depositAmt" value="">
 			</form>
 		</div>
 		

@@ -1,5 +1,6 @@
 package com.checc.ao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -498,6 +499,13 @@ public class CheccUserAO {
 
 		HttpSession session = request.getSession();
 		session.setAttribute(UserConstants.USER_SESSION_KEY, userDO);
+		//session.setMaxInactiveInterval(10); // 测试用，有效期10秒
+		
+		// 更新登录时间
+		CheccUserDO ud = new CheccUserDO();
+		ud.setId(userDO.getId());
+		ud.setLastLoginTime(new Date());
+		userService.update(ud, false);
 		
 //		userDO.setMobile(StringUtils.securityMobile(userDO.getMobile()));
 		return new CommonResultMessage(userDO);

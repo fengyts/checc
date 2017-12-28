@@ -15,6 +15,7 @@ import com.checc.ao.DepositAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
 import com.checc.domain.DepositConfigDO;
+import com.checc.dto.DepositDTO;
 
 @Controller
 @RequestMapping(value = { "/user/deposit" })
@@ -36,6 +37,12 @@ public class DepositController {
 
 		model.addAttribute("dpList", listAll);
 		return "/business/deposit/deposit_center";
+	}
+
+	@RequestMapping(value = { "/dptAct" }, method = { RequestMethod.GET, RequestMethod.POST })
+	public String depositAction(HttpServletRequest request, DepositDTO dto) {
+		depositAO.depositQrcode(dto);
+		return "/business/deposit/dept_wechat_scan";
 	}
 
 }
