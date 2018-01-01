@@ -26,7 +26,7 @@
 			<div class="other_amount">
 				<span>其他数量:</span>
 				<input type="text" id="otherAmount" name="otherAmount" value="">
-				<span id="dpamtInputErr" style="font-size:14px;color:#ff0000;">(金额必须是>=0.1的有效值)</span>
+				<span id="dpamtInputErr" style="font-size:14px;color:#ff0000;">(数量必须是正整数,不接受其他类型)</span>
 			</div>
 		</div>
 		<div class="pay_type_box">
@@ -58,6 +58,9 @@
 					您本次充值西币<span id="dpInfo"></span>个，需支付￥<span id="dpInfoMo"></span>
 				</p>
 			</div>
+			<div class="dpckipt_info" id="dpckipt_info">
+				<p>输入的数量必须为正整数,不接受其他任意类型</p>
+			</div>
 		</div>
 		<div class="deposit_btn_box">
 			<div class="deposit_btn" id="depositBtnAct">
@@ -69,6 +72,10 @@
 				<input type="hidden" id="discount" name="discount" value="1">
 				<input type="hidden" id="depositAmt" name="depositAmt" value="">
 			</form>
+			
+			<div>
+				距离订单过期还剩<b class="timer" data-cd="${leftTime!('0,0,30,0')}">00分00秒</b>
+			</div
 		</div>
 		
 		

@@ -4,19 +4,22 @@
 <mapper namespace="com.checc.domain.UserCurrencyMapper">
 
 	<resultMap type="com.checc.domain.UserCurrencyDO" id="UserCurrencyDOResultMap">
-		<id column="user_id" property="userId" />
+		<id column="id" property="id" />
+        <result column="user_id" property="userId"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="freeze" property="freeze"/>
         <result column="refund" property="refund"/>
+        <result column="create_time" property="createTime"/>
         <result column="modify_time" property="modifyTime"/>
 	</resultMap>
 
 	<sql id="MybatisUserCurrencyDAO_all_column_fields">
-	      user_id,total_currency,freeze,refund,modify_time
+	      id,user_id,total_currency,freeze,refund,create_time,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisUserCurrencyDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
+			<if test="userId != null "> AND user_id=#{userId} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 			<if test="freeze != null "> AND freeze=#{freeze} </if>
 			<if test="refund != null "> AND refund=#{refund} </if>
@@ -29,24 +32,28 @@
 	FROM
 		user_currency
 	WHERE
-		 user_id = #{userId}
+		 id = #{id}
 	</select>
 
     <insert id="MybatisUserCurrencyDAO_insert" parameterType="com.checc.domain.UserCurrencyDO" useGeneratedKeys="true">
-        <selectKey resultType="long" keyProperty="userId" order="AFTER">
-            SELECT LAST_INSERT_ID() AS user_id
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
         </selectKey>
         INSERT INTO user_currency(
+				id,
 				user_id,
 				total_currency,
 				freeze,
 				refund,
+				create_time,
 				modify_time
 		)values(
+				#{id},
 				#{userId},
 				#{totalCurrency},
 				#{freeze},
 				#{refund},
+				#{createTime},
 				#{modifyTime}
 		)
     </insert>
@@ -54,27 +61,29 @@
 	<update id="MybatisUserCurrencyDAO_updateById" parameterType="com.checc.domain.UserCurrencyDO">
 		UPDATE user_currency
 		SET
+					user_id = #{userId},
 					total_currency = #{totalCurrency},
 					freeze = #{freeze},
 					refund = #{refund},
 					modify_time = #{modifyTime}
 		WHERE
-			user_id = #{userId}
+			id = #{id}
 	</update>
 
 	<delete id="MybatisUserCurrencyDAO_deleteById" parameterType="long">
-		DELETE FROM user_currency WHERE user_id = #{userId}
+		DELETE FROM user_currency WHERE id = #{id}
 	</delete>
 
 	<update id="MybatisUserCurrencyDAO_update_dynamic" parameterType="com.checc.domain.UserCurrencyDO">
 		UPDATE user_currency
 		<set>
+					<if test="userId != null ">user_id=#{userId},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="freeze != null ">freeze=#{freeze},</if>
 					<if test="refund != null ">refund=#{refund},</if>
 					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
 		</set>
-		WHERE user_id = #{userId}
+		WHERE id = #{id}
 	</update>
 
  	<select id="MybatisUserCurrencyDAO_select_dynamic" resultMap="UserCurrencyDOResultMap" parameterType="com.checc.domain.UserCurrencyDO">
@@ -102,6 +111,14 @@
 	 	ORDER BY user_currency.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+	
+	<select id="MybatisUserCurrencyDAO_selectByUserId" parameterType="long" resultMap="UserCurrencyDOResultMap">
+		SELECT
+	     	<include refid="MybatisUserCurrencyDAO_all_column_fields" />
+		 FROM
+		 	user_currency
+		 WHERE user_id = #{userId}
+	</select>
 
  	<update id="MybatisUserCurrencyDAO_freeze_currency" parameterType="map">
  		UPDATE 

@@ -2,11 +2,13 @@ package com.checc.dao.mybatis;
 
 import java.util.List;
 
+import ng.bayue.exception.CommonDAOException;
+
 import org.springframework.stereotype.Component;
+
 import com.checc.dao.DepositOrderDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.DepositOrderDO;
-import ng.bayue.exception.CommonDAOException;
 
 @Component(value="depositOrderDAO")
 public class MybatisDepositOrderDAO extends MybatisBaseDAO implements DepositOrderDAO {
@@ -58,6 +60,11 @@ public class MybatisDepositOrderDAO extends MybatisBaseDAO implements DepositOrd
 	@Override
 	public List<DepositOrderDO> selectDynamicPageQuery(DepositOrderDO depositOrderDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), depositOrderDO);
+	}
+
+	@Override
+	public DepositOrderDO selectByOrderNo(String orderNo) throws CommonDAOException {
+		return getSqlSession().selectOne(getStatement("selectByOrderNo"), orderNo);
 	}
 
 }

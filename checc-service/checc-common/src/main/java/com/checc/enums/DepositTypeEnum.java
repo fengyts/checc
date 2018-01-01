@@ -11,7 +11,10 @@ package com.checc.enums;
  */
 public enum DepositTypeEnum {
 
-	RECHARGE_CARD("01", "卡密"), ALIPAY("02", "支付宝"), WECHAT("03", "微信"), OTHER("04", "其他");
+	RECHARGE_CARD("01", "卡密"), 
+	ALIPAY("02", "支付宝"), 
+	WECHAT("03", "微信"), 
+	OTHER("04", "其他");
 
 	public String code;
 	public String desc;

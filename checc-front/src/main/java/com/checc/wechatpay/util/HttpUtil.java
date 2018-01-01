@@ -7,18 +7,25 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * http工具类，负责发起post请求并获取的返回
  */
 public class HttpUtil {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     private final static int CONNECT_TIMEOUT = 5000; // in milliseconds  
     private final static String DEFAULT_ENCODING = "UTF-8";  
       
-    public static String postData(String urlStr, String data){  
-        return postData(urlStr, data, null);
+    public static String postData(String urlStr, String data) throws Exception{  
+        //return postData(urlStr, data, null);
+    	return HttpSSLRequest.doRequest(urlStr, data, DEFAULT_ENCODING);
     }
-      
+    
+    
     public static String postData(String urlStr, String data, String contentType){  
         BufferedReader reader = null;  
         try {  
@@ -45,7 +52,7 @@ public class HttpUtil {
             }  
             return sb.toString();  
         } catch (IOException e) {  
-            //logger.error("Error connecting to " + urlStr + ": " + e.getMessage());  
+            logger.error("Error connecting to " + urlStr + ": " + e.getMessage()); 
         } finally {  
             try {  
                 if (reader != null)  

@@ -5,9 +5,9 @@ import ng.bayue.common.BaseDO;
 import java.util.Date;
 
 /**
- * 竞拍|兑换|充值|竞拍退回 记录表
+ * 竞拍|兑换|充值记录
  * 
- * @author fengyts Fri Dec 22 21:14:43 CST 2017
+ * @author fengyts Sat Dec 30 21:56:48 CST 2017
  */
 
 public class AuctionRecordDO extends BaseDO {
@@ -21,7 +21,7 @@ public class AuctionRecordDO extends BaseDO {
 	/** 本记录类型：01-竞拍；02-兑换；03-充值；04-竞拍退回 */
 	private String recordType;
 
-	/** 充值类型：01-卡密；02-支付宝；03-微信；04-其他方式 */
+	/** 充值支付类型：01-卡密；02-支付宝；03-微信；04-其他方式 */
 	private String depositType;
 
 	/** 用户id */
@@ -39,7 +39,7 @@ public class AuctionRecordDO extends BaseDO {
 	/** 兑换件数 */
 	private Integer exchangeCount;
 
-	/** 本商品退回总次数 */
+	/** 退回总次数 */
 	private Integer refundNum;
 
 	/** 本次出价消耗总西币(出价次数*单次出价西币);兑换消耗总西币(兑换单价*兑换件数) */
@@ -48,11 +48,20 @@ public class AuctionRecordDO extends BaseDO {
 	/** 当前竞拍价(为本商品往次出价[包含本次]总和) */
 	private Integer currentAuctPrice;
 
+	/** 充值订单id */
+	private Long depositId;
+
 	/** 充值卡卡号,冗余字段 */
 	private String cardNo;
 
-	/** 充值金额 */
+	/** 充值金额,西币个数 */
 	private Integer depositAmount;
+
+	/** 充值折扣配置id */
+	private Long discountId;
+
+	/** 充值折扣,范围区间:(0,1],如95折则为0.95,默认无折扣为1 */
+	private Double discount;
 
 	/** 交易时间 */
 	private Date createTime;
@@ -85,7 +94,7 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 设置 充值类型：01-卡密；02-支付宝；03-微信；04-其他方式
+	 * 设置 充值支付类型：01-卡密；02-支付宝；03-微信；04-其他方式
 	 * 
 	 * @param depositType
 	 */
@@ -139,7 +148,7 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 设置 本商品退回总次数
+	 * 设置 退回总次数
 	 * 
 	 * @param refundNum
 	 */
@@ -166,6 +175,15 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
+	 * 设置 充值订单id
+	 * 
+	 * @param depositId
+	 */
+	public void setDepositId(Long depositId) {
+		this.depositId = depositId;
+	}
+
+	/**
 	 * 设置 充值卡卡号,冗余字段
 	 * 
 	 * @param cardNo
@@ -175,12 +193,30 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 设置 充值金额
+	 * 设置 充值金额,西币个数
 	 * 
 	 * @param depositAmount
 	 */
 	public void setDepositAmount(Integer depositAmount) {
 		this.depositAmount = depositAmount;
+	}
+
+	/**
+	 * 设置 充值折扣配置id
+	 * 
+	 * @param discountId
+	 */
+	public void setDiscountId(Long discountId) {
+		this.discountId = discountId;
+	}
+
+	/**
+	 * 设置 充值折扣,范围区间:(0,1],如95折则为0.95,默认无折扣为1
+	 * 
+	 * @param discount
+	 */
+	public void setDiscount(Double discount) {
+		this.discount = discount;
 	}
 
 	/**
@@ -220,7 +256,7 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 获取 充值类型：01-卡密；02-支付宝；03-微信；04-其他方式
+	 * 获取 充值支付类型：01-卡密；02-支付宝；03-微信；04-其他方式
 	 * 
 	 * @return depositType
 	 */
@@ -274,7 +310,7 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 获取 本商品退回总次数
+	 * 获取 退回总次数
 	 * 
 	 * @return refundNum
 	 */
@@ -301,6 +337,15 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
+	 * 获取 充值订单id
+	 * 
+	 * @return depositId
+	 */
+	public Long getDepositId() {
+		return depositId;
+	}
+
+	/**
 	 * 获取 充值卡卡号,冗余字段
 	 * 
 	 * @return cardNo
@@ -310,12 +355,30 @@ public class AuctionRecordDO extends BaseDO {
 	}
 
 	/**
-	 * 获取 充值金额
+	 * 获取 充值金额,西币个数
 	 * 
 	 * @return depositAmount
 	 */
 	public Integer getDepositAmount() {
 		return depositAmount;
+	}
+
+	/**
+	 * 获取 充值折扣配置id
+	 * 
+	 * @return discountId
+	 */
+	public Long getDiscountId() {
+		return discountId;
+	}
+
+	/**
+	 * 获取 充值折扣,范围区间:(0,1],如95折则为0.95,默认无折扣为1
+	 * 
+	 * @return discount
+	 */
+	public Double getDiscount() {
+		return discount;
 	}
 
 	/**

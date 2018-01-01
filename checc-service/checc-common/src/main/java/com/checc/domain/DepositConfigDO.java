@@ -17,7 +17,7 @@ private Long id;
 /** 充值金额(西币个数) */
 private Integer depositAmount;
 
-/** 折扣,默认无折扣为1,如95折则为0.95 */
+/** 折扣,范围区间:(0,1],如95折则为0.95,默认无折扣为1 */
 private Double discount;
 
 /** 有效性状态:1-有效;0-无效 */

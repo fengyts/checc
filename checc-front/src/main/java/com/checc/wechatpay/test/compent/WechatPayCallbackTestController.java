@@ -23,7 +23,7 @@ import com.checc.wechatpay.util.XMLUtil4jdom;
 
 @Controller
 @RequestMapping({"/wechartpay"})
-public class WechatPayCallbackController {
+public class WechatPayCallbackTestController {
 	
 	/**
 	 * 微信平台发起的回调方法，
@@ -50,8 +50,8 @@ public class WechatPayCallbackController {
 	       m = XMLUtil4jdom.doXMLParse(sb.toString());  
 	        
 	       //过滤空 设置 TreeMap  
-	       SortedMap<Object,Object> packageParams = new TreeMap<Object,Object>();        
-	       Iterator it = m.keySet().iterator();  
+	       SortedMap<String,String> packageParams = new TreeMap<String,String>();        
+	       Iterator<String> it = m.keySet().iterator();  
 	       while (it.hasNext()) {  
 	           String parameter = (String) it.next();
 	           String parameterValue = m.get(parameter);
@@ -67,7 +67,7 @@ public class WechatPayCallbackController {
 	       String key = PayConfigUtil.API_KEY; //key  
 	  
 	       //判断签名是否正确  
-	       if(PayToolUtil.isTenpaySign("UTF-8", packageParams,key)) {  
+	       if(PayToolUtil.isTenpaySign(packageParams)) {  
 	           //------------------------------  
 	           //处理业务开始  
 	           //------------------------------  

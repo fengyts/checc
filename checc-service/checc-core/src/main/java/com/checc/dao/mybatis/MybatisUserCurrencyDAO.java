@@ -4,24 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ng.bayue.exception.CommonDAOException;
+
 import org.springframework.stereotype.Component;
 
 import com.checc.dao.UserCurrencyDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.UserCurrencyDO;
 
-import ng.bayue.exception.CommonDAOException;
-import ng.bayue.exception.CommonServiceException;
-
-@Component(value="userCurrencyDAO")
+@Component(value = "userCurrencyDAO")
 public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurrencyDAO {
-	
+
 	private static final String NAMESPACE = "com.checc.domain.UserCurrencyMapper.MybatisUserCurrencyDAO_";
-	
-	private static String getStatement (String operation){
+
+	private static String getStatement(String operation) {
 		return NAMESPACE + operation;
 	}
-	
+
 	public Long insert(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
 		int i = getSqlSession().insert(getStatement("insert"), userCurrencyDO);
 		if (i > 0) {
@@ -56,13 +55,21 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 	}
 
 	@Override
-	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
+	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO)
+			throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic"), userCurrencyDO);
 	}
 
 	@Override
-	public List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
-		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), userCurrencyDO);
+	public List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO)
+			throws CommonDAOException {
+		return getSqlSession()
+				.selectList(getStatement("select_dynamic_page_query"), userCurrencyDO);
+	}
+
+	@Override
+	public UserCurrencyDO selectByUserId(Long userId) throws CommonDAOException {
+		return getSqlSession().selectOne(getStatement("selectByUserId"), userId);
 	}
 
 	@Override
@@ -88,7 +95,5 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 		param.put("currency", currency);
 		return getSqlSession().update(getStatement("reduce_exchange_currency"), param);
 	}
-	
-	
 
 }

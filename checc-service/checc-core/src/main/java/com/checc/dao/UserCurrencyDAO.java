@@ -12,6 +12,16 @@ import ng.bayue.service.common.GeneralDAO;
  * @author fengyts 2017-11-16 14:54:40
  */
 public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
+	
+	/**
+	 * <pre>
+	 * 根据用户id获取用户西币信息
+	 * </pre>
+	 *
+	 * @param userId
+	 * @return
+	 */
+	UserCurrencyDO selectByUserId(Long userId) throws CommonDAOException;
 
 	/**
 	 * <pre>

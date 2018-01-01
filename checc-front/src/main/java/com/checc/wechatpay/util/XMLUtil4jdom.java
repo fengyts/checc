@@ -3,6 +3,7 @@ package com.checc.wechatpay.util;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,11 +25,10 @@ public class XMLUtil4jdom {
      * @throws IOException 
      */  
     public static Map<String, String> doXMLParse(String strxml) throws JDOMException, IOException {  
+    	if(null == strxml || "".equals(strxml)) {
+    		return Collections.emptyMap();  
+    	}
         strxml = strxml.replaceFirst("encoding=\".*\"", "encoding=\"UTF-8\"");  
-  
-        if(null == strxml || "".equals(strxml)) {
-            return null;  
-        }
           
         Map<String, String> m = new HashMap<String, String>(); 
         InputStream in = new ByteArrayInputStream(strxml.getBytes("UTF-8"));  

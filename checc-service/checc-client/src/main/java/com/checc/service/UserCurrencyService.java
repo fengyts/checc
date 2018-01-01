@@ -9,6 +9,16 @@ import com.checc.domain.UserCurrencyDO;
  * @author fengyts 2017-11-16 14:54:40
  */
 public interface UserCurrencyService extends GeneralService<UserCurrencyDO, UserCurrencyDO> {
+	
+	/**
+	 * <pre>
+	 * 根据用户id查询用户西币信息
+	 * </pre>
+	 *
+	 * @param userId
+	 * @return
+	 */
+	UserCurrencyDO selectByUserId(Long userId);
 
 	/**
 	 * <pre>
@@ -22,7 +32,9 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	
 	/**
 	 * <pre>
-	 * 增加用户西币值
+	 * 用户西币充值
+	 * 先校验用户是否存在：存在则直接更新用户西币值，否则创建新纪录
+	 * 详见<link>DepositService.deposit()</link>
 	 * </pre>
 	 *
 	 * @return

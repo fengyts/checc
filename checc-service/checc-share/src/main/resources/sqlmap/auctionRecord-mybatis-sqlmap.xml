@@ -16,13 +16,16 @@
         <result column="refund_num" property="refundNum"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="current_auct_price" property="currentAuctPrice"/>
+        <result column="deposit_id" property="depositId"/>
         <result column="card_no" property="cardNo"/>
         <result column="deposit_amount" property="depositAmount"/>
+        <result column="discount_id" property="discountId"/>
+        <result column="discount" property="discount"/>
         <result column="create_time" property="createTime"/>
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,refund_num,total_currency,current_auct_price,card_no,deposit_amount,create_time
+	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,refund_num,total_currency,current_auct_price,deposit_id,card_no,deposit_amount,discount_id,discount,create_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -38,8 +41,11 @@
 			<if test="refundNum != null "> AND refund_num=#{refundNum} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 			<if test="currentAuctPrice != null "> AND current_auct_price=#{currentAuctPrice} </if>
+			<if test="depositId != null "> AND deposit_id=#{depositId} </if>
 			<if test="cardNo != null  and cardNo != '' "> AND card_no=#{cardNo} </if>
 			<if test="depositAmount != null "> AND deposit_amount=#{depositAmount} </if>
+			<if test="discountId != null "> AND discount_id=#{discountId} </if>
+			<if test="discount != null "> AND discount=#{discount} </if>
 		</where>
  	</sql>
 
@@ -69,8 +75,11 @@
 				refund_num,
 				total_currency,
 				current_auct_price,
+				deposit_id,
 				card_no,
 				deposit_amount,
+				discount_id,
+				discount,
 				create_time
 		)values(
 				#{id},
@@ -85,8 +94,11 @@
 				#{refundNum},
 				#{totalCurrency},
 				#{currentAuctPrice},
+				#{depositId},
 				#{cardNo},
 				#{depositAmount},
+				#{discountId},
+				#{discount},
 				#{createTime}
 		)
     </insert>
@@ -105,8 +117,11 @@
 					refund_num = #{refundNum},
 					total_currency = #{totalCurrency},
 					current_auct_price = #{currentAuctPrice},
+					deposit_id = #{depositId},
 					card_no = #{cardNo},
 					deposit_amount = #{depositAmount},
+					discount_id = #{discountId},
+					discount = #{discount},
 		WHERE
 			id = #{id}
 	</update>
@@ -129,8 +144,11 @@
 					<if test="refundNum != null ">refund_num=#{refundNum},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="currentAuctPrice != null ">current_auct_price=#{currentAuctPrice},</if>
+					<if test="depositId != null ">deposit_id=#{depositId},</if>
 					<if test="cardNo != null  and cardNo != '' ">card_no=#{cardNo},</if>
 					<if test="depositAmount != null ">deposit_amount=#{depositAmount},</if>
+					<if test="discountId != null ">discount_id=#{discountId},</if>
+					<if test="discount != null ">discount=#{discount},</if>
 		</set>
 		WHERE id = #{id}
 	</update>

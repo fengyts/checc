@@ -52,7 +52,7 @@ public class UserCenterAO {
 	public void userCurrencyInfo(Model model, CheccUserDO userDO) {
 		Long userId = userDO.getId();
 		UserCenterVO vo = new UserCenterVO();
-		UserCurrencyDO uc = userCurrencyService.selectById(userId);
+		UserCurrencyDO uc = userCurrencyService.selectByUserId(userId);
 		if (null != uc) {
 			vo.setTotalCurrency(uc.getTotalCurrency());
 			vo.setRefund(uc.getRefund());

@@ -7,12 +7,15 @@ import java.util.Date;
 /**
  * 用户西币
  * 
- * @author fengyts Tue Dec 19 14:55:51 CST 2017
+ * @author fengyts Sun Dec 31 22:49:32 CST 2017
  */
 
 public class UserCurrencyDO extends BaseDO {
 
 	/** 主键 */
+	private Long id;
+
+	/** 对应c_user用户表id */
 	private Long userId;
 
 	/** 总的西币 */
@@ -24,11 +27,23 @@ public class UserCurrencyDO extends BaseDO {
 	/** 退还金额，兑换商品只能使用用此金额 */
 	private Integer refund;
 
+	/** 第一次充值时间 */
+	private Date createTime;
+
 	/** 修改时间 */
 	private Date modifyTime;
 
 	/**
 	 * 设置 主键
+	 * 
+	 * @param id
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * 设置 对应c_user用户表id
 	 * 
 	 * @param userId
 	 */
@@ -64,6 +79,15 @@ public class UserCurrencyDO extends BaseDO {
 	}
 
 	/**
+	 * 设置 第一次充值时间
+	 * 
+	 * @param createTime
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	/**
 	 * 设置 修改时间
 	 * 
 	 * @param modifyTime
@@ -74,6 +98,15 @@ public class UserCurrencyDO extends BaseDO {
 
 	/**
 	 * 获取 主键
+	 * 
+	 * @return id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * 获取 对应c_user用户表id
 	 * 
 	 * @return userId
 	 */
@@ -106,6 +139,15 @@ public class UserCurrencyDO extends BaseDO {
 	 */
 	public Integer getRefund() {
 		return refund;
+	}
+
+	/**
+	 * 获取 第一次充值时间
+	 * 
+	 * @return createTime
+	 */
+	public Date getCreateTime() {
+		return createTime;
 	}
 
 	/**

@@ -1,11 +1,9 @@
 package com.checc.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,19 +84,22 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 			// 校验专题状态
 			String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
 			if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
+				return new CommonResultMessage(
+						CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
 						CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
 			}
 
 			// 校验用户西币是否足够
-			UserCurrencyDO userCurrencyDO = userCurrencyService.selectById(userDO.getId());
+			UserCurrencyDO userCurrencyDO = userCurrencyService.selectByUserId(userDO.getId());
 			if (null == userCurrencyDO) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+				return new CommonResultMessage(
+						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
 						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
 			}
 			int userUseable = userCurrencyDO.getTotalCurrency() - userCurrencyDO.getFreeze();
 			if (plusTotalCur > userUseable) {
-				return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+				return new CommonResultMessage(
+						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
 						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
 			}
 
@@ -115,8 +116,15 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 
 			// 扣减用户西币
 			// 锁用户，每个用户同一时间只能请求一次
+			long res = 0l;
 			if (redisCacheService.lock(auctKeyLock)) {
-				userCurrencyService.freezeCurrency(userId, plusTotalCur);
+				res = userCurrencyService.freezeCurrency(userId, plusTotalCur);
+				if (res <= 0l) {
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.code,
+							CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
+				}
 
 				// 获取最新出价
 				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
@@ -125,7 +133,13 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 					currentAuctPrice += latest.getCurrentAuctPrice();
 				}
 				auctRecord.setCurrentAuctPrice(currentAuctPrice);
-				auctionRecordService.insert(auctRecord);
+				res = auctionRecordService.insert(auctRecord);
+				if (res <= 0l) {
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.code,
+							CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
+				}
 			} else {
 				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
 				return new CommonResultMessage(CommonResultCode.BusinessError.ONCE_EVERY_TIME.code,
@@ -134,7 +148,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
-			return new CommonResultMessage(CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.code,
+			return new CommonResultMessage(
+					CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.code,
 					CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
 		} finally {
 			try {
@@ -171,7 +186,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				// 校验专题状态
 				String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
 				if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
-					return new CommonResultMessage(CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
 							CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
 				}
 
@@ -186,16 +202,18 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				// }
 
 				// 校验用户西币是否足够
-				UserCurrencyDO userCurrencyDO = userCurrencyService.selectById(userDO.getId());
+				UserCurrencyDO userCurrencyDO = userCurrencyService.selectByUserId(userDO.getId());
 				if (null == userCurrencyDO) {
-					return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
 							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
 				}
 
 				int totalCurrency = dto.getTotalCurrency(); // 兑换金额
 				int userUseable = userCurrencyDO.getRefund(); // 兑换商品仅能使用退回的西币兑换
 				if (totalCurrency > userUseable) {
-					return new CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
 							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
 				}
 
@@ -213,15 +231,17 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 
 				// 校验用户是否已经兑换
 				if (auctionRecordService.isExchanged(userId, tpId)) {
-					return new CommonResultMessage(CommonResultCode.BusinessError.HAS_EXCHANGED.code,
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.HAS_EXCHANGED.code,
 							CommonResultCode.BusinessError.HAS_EXCHANGED.desc);
 				}
 
-				int res = 0;
+				long res = 0l;
 				// 扣减兑换商品剩余数量
 				res = topicItemService.reduceExchangeResidue(tpId);
-				if (res <= 0) { // 扣减剩余数量失败,数量不足
-					throw new CommonServiceException(CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.desc);
+				if (res <= 0l) { // 扣减剩余数量失败,数量不足
+					throw new CommonServiceException(
+							CommonResultCode.BusinessError.EXCHANGE_COUNT_NOT_ENOUGH.desc);
 					// // 手动回滚事务
 					// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 					// return new
@@ -230,10 +250,20 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				}
 				// 扣减用户西币
 				res = userCurrencyService.reduceExchangeCurrency(userId, totalCurrency);
-				if (res > 0) { // 扣减用户西币成功
-					auctionRecordService.insert(auctRecord);
+				if (res > 0l) { // 扣减用户西币成功
+					res = auctionRecordService.insert(auctRecord);
+					if (res <= 0l) {
+						// // 手动回滚事务
+						// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+						// return new
+						// CommonResultMessage(CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.code,
+						// CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
+						throw new CommonServiceException(
+								CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
+					}
 				} else { // 返回西币不足
-					throw new CommonServiceException(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+					throw new CommonServiceException(
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
 					// // 手动回滚事务
 					// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 					// return new
@@ -248,7 +278,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 		} catch (CommonServiceException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new CommonServiceException(CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
+			throw new CommonServiceException(
+					CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
 			// // 手动回滚事务
 			// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			// return new

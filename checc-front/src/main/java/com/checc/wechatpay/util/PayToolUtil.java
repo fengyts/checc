@@ -4,25 +4,35 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+import ng.bayue.constants.CharsetConstant;
+import ng.bayue.util.StringUtils;
+
 public class PayToolUtil {
 
+	public static boolean isTenpaySign(SortedMap<String, String> packageParams) {
+		return checkSign(CharsetConstant.UTF8, packageParams, PayConfigUtil.API_KEY);
+	}
+	
 	/**
 	 * 是否签名正确,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
 	 * 
 	 * @return boolean
 	 */
-	public static boolean isTenpaySign(String characterEncoding, SortedMap<Object, Object> packageParams,
-			String API_KEY) {
+	private static boolean checkSign(String characterEncoding,
+			SortedMap<String, String> packageParams, String API_KEY) {
 		StringBuffer sb = new StringBuffer();
-		Set<?> es = packageParams.entrySet();
-		Iterator<?> it = es.iterator();
+		Set<Entry<String, String>> es = packageParams.entrySet();
+		Iterator<Entry<String, String>> it = es.iterator();
 		while (it.hasNext()) {
-			Map.Entry<?, ?> entry = (Map.Entry<?, ?>) it.next();
-			String k = (String) entry.getKey();
-			String v = (String) entry.getValue();
+			Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+			String k = entry.getKey();
+			String v = entry.getValue();
 			if (!"sign".equals(k) && null != v && !"".equals(v)) {
 				sb.append(k + "=" + v + "&");
 			}
@@ -31,10 +41,42 @@ public class PayToolUtil {
 		sb.append("key=" + API_KEY);
 
 		// 算出摘要
-		String mysign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toLowerCase();
-		String tenpaySign = ((String) packageParams.get("sign")).toLowerCase();
+		String mysign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
+		String tenpaySign = ((String) packageParams.get("sign"));
 
-		return tenpaySign.equals(mysign);
+		return tenpaySign.equalsIgnoreCase(mysign);
+	}
+
+	public static String createSign(SortedMap<String, String> packageParams) {
+		return createSign(CharsetConstant.UTF8, packageParams, PayConfigUtil.API_KEY);
+	}
+	
+	public static String createSign(Map<String, String> packageParams) {
+		return createSignature(packageParams);
+	}
+	
+	private static String createSignature(Map<String, String> map) {
+		StringBuilder signStr = new StringBuilder();
+		Set<Entry<String, String>> entrySet = map.entrySet();
+		for (Entry<String, String> entry : entrySet) {
+			String key = entry.getKey();
+			if ("sign".equals(key)) {
+				continue;
+			}
+			String value = entry.getValue();
+			if (StringUtils.isBlank(value)) {
+				continue;
+			}
+			if (signStr.length()>0) {
+				signStr.append('&');
+			}
+			signStr.append(key).append('=').append(value);
+		}
+		String key = PayConfigUtil.API_KEY;
+		signStr.append("&key=").append(key);
+		
+		String sign = DigestUtils.md5Hex(signStr.toString()).toUpperCase();
+		return sign;
 	}
 
 	/**
@@ -47,14 +89,15 @@ public class PayToolUtil {
 	 *            请求参数
 	 * @return
 	 */
-	public static String createSign(String characterEncoding, SortedMap<Object, Object> packageParams, String API_KEY) {
+	private static String createSign(String characterEncoding,
+			SortedMap<String, String> packageParams, String API_KEY) {
 		StringBuffer sb = new StringBuffer();
-		Set<?> es = packageParams.entrySet();
-		Iterator<?> it = es.iterator();
+		Set<Entry<String, String>> es = packageParams.entrySet();
+		Iterator<Entry<String, String>> it = es.iterator();
 		while (it.hasNext()) {
-			Map.Entry<?, ?> entry = (Map.Entry<?, ?>) it.next();
-			String k = (String) entry.getKey();
-			String v = (String) entry.getValue();
+			Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+			String k = entry.getKey();
+			String v = entry.getValue();
 			if (null != v && !"".equals(v) && !"sign".equals(k) && !"key".equals(k)) {
 				sb.append(k + "=" + v + "&");
 			}
@@ -72,19 +115,21 @@ public class PayToolUtil {
 	 *            请求参数
 	 * @return
 	 */
-	public static String getRequestXml(SortedMap<Object, Object> parameters) {
+	public static String packageRequestToXmlStr(SortedMap<String, String> parameters) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<xml>");
-		Set<?> es = parameters.entrySet();
-		Iterator<?> it = es.iterator();
+		Set<Entry<String, String>> es = parameters.entrySet();
+		Iterator<Entry<String, String>> it = es.iterator();
 		while (it.hasNext()) {
-			Map.Entry<?, ?> entry = (Map.Entry<?, ?>) it.next();
-			String k = (String) entry.getKey();
-			String v = (String) entry.getValue();
-			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k) || "sign".equalsIgnoreCase(k)) {
+			Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+			String k = entry.getKey();
+			String v = entry.getValue();
+			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k)
+					|| "sign".equalsIgnoreCase(k)) {
 				sb.append("<" + k + ">" + "<![CDATA[" + v + "]]></" + k + ">");
 			} else {
-				sb.append("<" + k + ">" + v + "</" + k + ">");
+				//sb.append("<" + k + ">" + v + "</" + k + ">");
+				sb.append(String.format("<%s>%s</%s>", k, v, k));
 			}
 		}
 		sb.append("</xml>");

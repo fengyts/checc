@@ -71,6 +71,7 @@
 		<property name="exposeRequestAttributes" value="true" />
 		<property name="exposeSessionAttributes" value="true" />
 		<!-- 支持@SessionAttributes -->
+    	<property name="allowRequestOverride" value="true" />
 		<property name="allowSessionOverride" value="true" />
 		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="viewClass"
@@ -138,6 +139,7 @@
 			<mvc:mapping path="/user/deposit/**" />
 			<mvc:mapping path="/topicItem/auctionAction/**" />
 			<mvc:mapping path="/auction/**" />
+			<mvc:mapping path="/pay/wechat/payQRCode" />
 			<bean id="loginStatusInterceptor" class="com.checc.interceptor.LoginStatusInterceptor">
 				<property name="enable" value="true" />
 			</bean>

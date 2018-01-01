@@ -929,7 +929,7 @@ ul, ol {
 
 #otherAmount {
 	height: 28px;
-	width: 200px;
+	width: 180px;
 	border: solid 1px #d9d9d9;
 }
 
@@ -938,13 +938,18 @@ ul, ol {
 	padding-top: 15px;
 }
 
-.dpcheck_info {
+.dpcheck_info, .dpckipt_info {
 	display: none;
-	color: #ff0000;
-	font-size: 15px;
+/* 	color: #ff0000; */
+/* 	font-size: 15px; */
 }
 
-.dpck_info>p {
+/* .dpck_info>p {
+	color: #0099cc;
+	font-size: 15px;
+} */
+
+.dpckipt_info>p, .dpck_info>p {
 	color: #ff0000;
 	font-size: 15px;
 }
