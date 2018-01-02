@@ -1,17 +1,40 @@
-<style type="text/css">
-	.content {
-		text-align: center;
-	}
-	.pay_qrcode{
-		padding-top: 10px;
-		width:150px;
-		height:150px;
-	}
-	img {
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<#include "/common/common.ftl" />
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="Generator" content="ECSHOP v2.7.3" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	
+	<title>用户中心_车西西-值得信赖的网上汽车商城</title>
+	
+	<#include "/common/common-js.ftl" />
+	
+	<style type="text/css">
+		.content {
+		}
+		.pay_qrcode{
+			padding-top: 10px;
+			margin-left: 20px;
+			width:150px;
+			height:150px;
+		}
+		img {
+			width: 100%;
+			height: 100%;
+		}
+		.hp_info {
+			color: #555555;
+			width: 250px;
+			margin-left: -15px;
+			font-size: 14px;
+		}
+	</style>
+	
+</header>
+<body>
 
 <div class="content_box">
 	<div class="content">
@@ -31,40 +54,8 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	function pay_status(){
-	     var dpOrderNo = $("#dpOrderNo").val();
-	     if(null == dpOrderNo || "" == dpOrderNo){
-	     	return;
-	     }
-	     $.ajax({   
-	        url:domain + '',
-	        dataType:'html', 
-	        type:'post',   
-	        data:{'order_id':order_id},  
-	        success:function(data){   
-	            if(data == '1' ){
-	                window.clearInterval(int); //销毁定时器
-	                setTimeout(function(){
-	                    //跳转到结果页面，并传递状态
-	                    window.location.href="http://"+window.location.host+"/home/cart/pay_result?pay_status=success";
-	                },1000)
-	                
-	            }else if(data =='2'){
-	                window.clearInterval(int); //销毁定时器
-	                setTimeout(function(){
-	                    //跳转到结果页面，并传递状态
-	                    window.location.href="http://"+window.location.host+"/home/cart/pay_result?pay_status=fail";
-	                },1000)
-	            }
-	        }, 
-	        error:function(){   
-	            alert("error");
-	            
-	        },   
-	
-	  });
-	}
-	//启动定时器
-	var int=self.setInterval(function(){pay_status()},1000);
-</script>
+<script type="text/javascript" src="${js}/pay_scan.js"></script>
+
+</body>
+</html>
+

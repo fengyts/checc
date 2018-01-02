@@ -145,6 +145,9 @@ public class WechatPayAO {
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
+		if("0:0:0:0:0:0:0:1".equals(ip)){
+			ip = "127.0.0.1";
+		}
 		return ip;
 	}
 
@@ -405,10 +408,7 @@ public class WechatPayAO {
 				redisCacheService.setRedisCache(payOrderQueryCountKey, queryCount,
 						RedisCacheTimeConstant.ONE_MINUTES);
 			}
-			int queryWaitTime = 1000; // 1 秒查询一次
-			if (0 == queryCount) { // 第一次查询等待2秒后再查询
-				queryWaitTime = 2000;
-			}
+			int queryWaitTime = 2000; // 2 秒查询一次
 			Thread.sleep(queryWaitTime);
 
 			if (queryCount >= 60) { // 如果60次仍然未查询到结果,则中断查询
@@ -423,7 +423,7 @@ public class WechatPayAO {
 							+ "the deposit order is not existed, dpOrderNo-{}", dpOrderNo);
 					return CommonResultMessage.failure("系统中查询不到该支付订单信息");
 				}
-
+				
 				String nonce_str = UUID.randomUUID().toString().replace("-", "");
 				SortedMap<String, String> packageParams = new TreeMap<String, String>();
 				packageParams.put("appid", APPID);
@@ -453,13 +453,21 @@ public class WechatPayAO {
 							+ "the returned result is blank;请求微信支付订单查询异常,返回报文为空");
 					return CommonResultMessage.failure("查询订单异常, 返回报文为空");
 				}
-
+				
+				PayOrderQueryVO vo = new PayOrderQueryVO();
+				vo.setDepositAmt(dpOrder.getDepositAmount());
+				vo.setDepositType(DepositTypeEnum.WECHAT.code);
+				vo.setDepositTypeDesc(DepositTypeEnum.WECHAT.desc);
+				vo.setDpOrderNo(dpOrderNo);
+				vo.setRealCNY(dpOrder.getDiscount() * dpOrder.getDepositAmount());
+				
 				logger.info("wechat payorder query request success, return result data - "
 						+ "parse xml to map data: {}", map);
 				String return_code = map.get("return_code"); // 获取网络通信结果
 				if (!"SUCCESS".equals(return_code)) {
 					logger.info("wechat payorder query failure: connection timeout");
-					return CommonResultMessage.failure("获取支付状态失败：网络连接超时,若您确定支付成功,请务必联系客服");
+					vo.setDepositStatus("FAILURE");
+					return new CommonResultMessage(8001, "获取支付结果失败,请确认西币是否已经到账,如未到账请务必联系客服", vo);
 				}
 
 				// 过滤空 设置 TreeMap
@@ -486,13 +494,7 @@ public class WechatPayAO {
 				String trade_state = map.get("trade_state");
 				String trade_state_desc = map.get("trade_state_desc");
 
-				PayOrderQueryVO vo = new PayOrderQueryVO();
-				vo.setDepositAmt(dpOrder.getDepositAmount());
 				vo.setDepositTime(DateUtils.parseDate(map.get("time_end"), "yyyyMMddHHmmss"));
-				vo.setDepositType(DepositTypeEnum.WECHAT.code);
-				vo.setDepositType(DepositTypeEnum.WECHAT.desc);
-				vo.setDpOrderNo(dpOrderNo);
-				vo.setRealCNY(dpOrder.getDiscount() * dpOrder.getDepositAmount());
 
 				if (!"SUCCESS".equals(result_code) || !"SUCCESS".equals(trade_state)) {
 					logger.info("wechat payorder query failure, order status fail, "
@@ -514,8 +516,8 @@ public class WechatPayAO {
 				queryCount++;
 				redisCacheService.setRedisCache(payOrderQueryCountKey, queryCount,
 						RedisCacheTimeConstant.ONE_MINUTES);
-
-				return new CommonResultMessage(vo);
+				
+				return new CommonResultMessage(8008, "支付成功", vo);
 
 			} else {
 				return CommonResultMessage.failure("请求过于频繁");

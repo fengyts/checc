@@ -61,8 +61,24 @@ $(function() {
 			return;
 		}
 		depositAct();
+		
 	});
 	
+	
+	$("#testPaySuccess").on('click', function(){
+		lgn_pg_ii = layer.open({
+    		type: 2,
+    		title: '',
+    		resize: false,
+    		scrollbar: false,
+    		//fixed: false,
+    		move:false,
+    		shade: 0.1,
+    		zIndex: 0,
+    		area: ['600px', '350px'],
+    		content: domain + '/paytest/payQRCode?dpOrderNo=877249130680001470'
+		});
+	});
 		
 })
 
@@ -84,7 +100,7 @@ function depositAct() {
 		cache : false,
 
 		success: function(data, status, xhr) { 
-	        var errorCode=xhr.getResponseHeader("errorCode");
+	        var errorCode = xhr.getResponseHeader("errorCode");
 	        if('999' == errorCode) { // 未登陆
 	        	lgn_pg_ii = layer.open({
 	        		type: 2,
@@ -99,7 +115,7 @@ function depositAct() {
 	        		content: domain + '/user/loginAjax'
 	        	});
 	        } else { // 已经登陆
-	        	lgn_pg_ii = layer.open({
+	        	layer.open({
 	        		type: 1,
 	        		title: '',
 	        		resize: false,
@@ -108,7 +124,7 @@ function depositAct() {
 	        		move:false,
 	        		shade: 0.1,
 	        		anim: 5,
-	        		area: ['240px', '220px'],
+	        		area: ['300px', '280px'],
 	        		content: data
 	        	});
 	        }

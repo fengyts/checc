@@ -175,6 +175,7 @@ public class UserCenterAO {
 			vo.setBidTime(ar.getCreateTime());
 			vo.setRecordType(ar.getRecordType());
 			vo.setTotalCurrency(ar.getTotalCurrency());
+			vo.setDepositCurrency(ar.getDepositAmount());
 
 			String recordType = ar.getRecordType();
 			if (AuctionRecordTypeEnum.AUCTION.code.equals(recordType)) {

@@ -64,7 +64,16 @@
 			  						${arc.itemTitle}(总计出价${arc.auctNum!1}次)
 			  					</#if>
 			  				</td>
-			  				<td><font style="color:#888;"><b>${plusOrMinus}${arc.totalCurrency}</b></font></td>
+			  				<td>
+			  					<font style="color:#888;"><b>
+									${plusOrMinus}
+									<#if arc.recordType == '03'>
+										${arc.depositCurrency}
+									<#else>
+										${arc.totalCurrency}
+									</#if>
+								</b></font>
+							</td>
 			  			</tr>
 			  		</#list>
 				<#else>

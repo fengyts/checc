@@ -29,7 +29,7 @@ $(document).ready(function() {
 			cache : false,
 
 			success: function(data, status, xhr) { 
-		        var errorCode=xhr.getResponseHeader("errorCode");
+		        var errorCode = xhr.getResponseHeader("errorCode");
 		        if('999' == errorCode) { // 未登陆
 		        	lgn_pg_ii = layer.open({
 		        		type: 2,

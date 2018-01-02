@@ -1,8 +1,13 @@
 <div class="topic">
 	<div class="topic_hd">
+		<#--
 		<div class="topic_tab">
 			<span class="current_periods select_tab"><a>本期竞拍(${auctionList?default([])?size!0})</a></span>
 			<span class="next_periods"><a>下期预告</a></span>
+		</div>
+		-->
+		<div class="topic_tab">
+			<span>正在竞拍中</span>
 		</div>
 		<div class="auction_time">
 			<span>竞拍时间:

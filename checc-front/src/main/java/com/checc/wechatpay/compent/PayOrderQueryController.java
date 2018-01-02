@@ -1,6 +1,7 @@
 package com.checc.wechatpay.compent;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import ng.bayue.common.CommonResultMessage;
 
@@ -38,7 +39,7 @@ public class PayOrderQueryController {
 	private WechatPayAO wechatPayAO;
 
 	@RequestMapping(value = { "/orderQuery" }, method = { RequestMethod.GET })
-	public String payOrderQuery(HttpServletRequest request, Model model, String dpOrderNo) {
+	public String payOrderQuery(HttpServletRequest request, HttpServletResponse response, Model model, String dpOrderNo) {
 		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
 				UserConstants.USER_SESSION_KEY);
 		if (null == userDO) {
@@ -53,6 +54,12 @@ public class PayOrderQueryController {
 
 		CommonResultMessage crm = wechatPayAO.queryOrderStatus(dpOrderNo, userDO.getId());
 		
+		if(8001 == crm.getResult()){
+			response.setHeader("statusCode", "8001");
+		}
+		if(8008 == crm.getResult()){
+			response.setHeader("statusCode", "8008");
+		}
 		model.addAttribute("result", crm);
 		return "/business/pay/pay_success";
 	}

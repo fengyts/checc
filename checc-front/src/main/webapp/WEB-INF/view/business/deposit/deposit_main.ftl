@@ -76,6 +76,9 @@
 			<div>
 				距离订单过期还剩<b class="timer" data-cd="${leftTime!('0,0,30,0')}">00分00秒</b>
 			</div
+			<div class="deposit_btn">
+				<a id="testPaySuccess">测试支付成功页面</a>
+			</div>
 		</div>
 		
 		

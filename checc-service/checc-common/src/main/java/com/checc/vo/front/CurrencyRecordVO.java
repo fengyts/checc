@@ -4,6 +4,14 @@ import java.util.Date;
 
 import com.checc.vo.BaseVO;
 
+/**
+ * <pre>
+ * 用户中心西币交易记录数据模型
+ * </pre>
+ *
+ * @author lenovopc
+ * @version $Id: CurrencyRecordVO.java, v 0.1 2018年1月2日 下午5:09:43 lenovopc Exp $
+ */
 public class CurrencyRecordVO extends BaseVO {
 
 	private static final long serialVersionUID = -5423907802897545804L;
@@ -19,8 +27,10 @@ public class CurrencyRecordVO extends BaseVO {
 	private String itemTitle;
 	/** 出价、兑换次数 */
 	private Integer auctNum;
-	/** 交易西币值 */
+	/** 交易西币值(兑换,竞拍,回退) */
 	private Integer totalCurrency;
+	/** 充值西比值 */
+	private Integer depositCurrency;
 
 	public Long getId() {
 		return id;
@@ -76,6 +86,14 @@ public class CurrencyRecordVO extends BaseVO {
 
 	public void setTotalCurrency(Integer totalCurrency) {
 		this.totalCurrency = totalCurrency;
+	}
+
+	public Integer getDepositCurrency() {
+		return depositCurrency;
+	}
+
+	public void setDepositCurrency(Integer depositCurrency) {
+		this.depositCurrency = depositCurrency;
 	}
 
 }

@@ -10,7 +10,7 @@
 	<meta name="Description" content="车西西" />
 	<title>车西西-值得信赖的网上汽车商城</title>
 	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="javascript:void(0);" />
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
@@ -37,7 +37,9 @@
 	<#include "/common/header.ftl" />
 	
 	<div class="content_box">
+			<#--
 			<#include "/index/auction_flow.ftl" />
+			-->			
 		<div class="content">
 			<#include "/business/topic.ftl" />
 		</div>
