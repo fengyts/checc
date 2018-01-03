@@ -8,14 +8,23 @@
 	<div class="meta_item_info">
 		<div class="meta_item_title">${detailVO.itemTitle}</div>
 		<div class="auc_info_t">
+			<div class="item_floorprice_box">
+				<span class="floor_price_label">竞拍底价:</span>
+				<span class="floor_price">
+					￥${detailVO.floorPrice?string('#0.00')}
+				</span>
+			</div>
 			<div class="meta_item_currauctprice">
 				<span class="curraucttile">当前价:</span>
 					<#if detailVO.currentAuctionPrice??>
-				<span class="currauctprice">
-						${detailVO.currentAuctionPrice?string('0.##')}西币
-				</span>
+						<span class="currauctprice">
+							<#if detailVO.currentAuctionPrice == detailVO.floorPrice>
+								￥${(detailVO.floorPrice!0.00)?string('#0.00')}
+							<#else>
+								￥${detailVO.currentAuctionPrice?string('#0.00')}
+							</#if>
+						</span>
 					<#else>
-						暂时无人出价
 					</#if>
 				<span class="compare_marketPrice">市场价：￥${detailVO.marketPrice?string('0.00')}</span>
 			</div>
@@ -39,12 +48,12 @@
 					<#if detailVO.currentBidder??>
 						<#if detailVO.status?? && detailVO.status=='03'>
 							恭喜<font style="color: #0099ff;">${detailVO.currentBidder}</font>以
-							<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+							<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
 							拍得本件商品
 						<#else>
 							若接下来无人出价,
-							${detailVO.currentBidder}将以
-							<span class="eninfo_price">${detailVO.currentAuctionPrice?string('0.##')}西币</span>
+							<span style="color:#0099cc;">${detailVO.currentBidder}</span>
+							将以<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
 							拍得本件商品
 						</#if>
 					<#else>

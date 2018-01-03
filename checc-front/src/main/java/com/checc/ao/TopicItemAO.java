@@ -153,12 +153,9 @@ public class TopicItemAO {
 		vo.setExchangeAmount(item.getExchangeAmount());
 		vo.setInventory(item.getInventory());
 		vo.setAuctionCurrency(item.getAuctionCurrency());
+		vo.setFloorPrice(item.getFloorPrice());
 		vo.setExchangeLimitNum(item.getExchangeLimitNum());
 		Integer residue = item.getResidue();
-		// if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicType) &&
-		// residue <= 0){
-		// status = TopicStatusEnum.End.getCode();
-		// }
 		vo.setItemStatus(status);
 		vo.setResidue(residue);
 
@@ -186,6 +183,8 @@ public class TopicItemAO {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
 				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
+			} else {
+				vo.setCurrentAuctionPrice(item.getFloorPrice());
 			}
 		}
 

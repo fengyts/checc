@@ -131,6 +131,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				int currentAuctPrice = plusTotalCur;
 				if (null != latest) {
 					currentAuctPrice += latest.getCurrentAuctPrice();
+				} else { // 不是最新出价，即第一个人出价，需要加上底价
+					currentAuctPrice += topicItemDO.getFloorPrice();
 				}
 				auctRecord.setCurrentAuctPrice(currentAuctPrice);
 				res = auctionRecordService.insert(auctRecord);

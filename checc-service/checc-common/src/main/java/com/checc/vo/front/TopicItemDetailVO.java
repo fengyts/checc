@@ -44,6 +44,8 @@ public class TopicItemDetailVO extends BaseVO {
 
 	/** 市场价 */
 	private Double marketPrice;
+	/** 竞拍底价 */
+	private Double floorPrice;
 	/** 当前竞拍价 */
 	private Double currentAuctionPrice;
 	/** 当前出价人 */
@@ -244,6 +246,14 @@ public class TopicItemDetailVO extends BaseVO {
 
 	public void setHasExchanged(Boolean hasExchanged) {
 		this.hasExchanged = hasExchanged;
+	}
+
+	public Double getFloorPrice() {
+		return floorPrice;
+	}
+
+	public void setFloorPrice(Double floorPrice) {
+		this.floorPrice = floorPrice;
 	}
 
 }

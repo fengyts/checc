@@ -91,7 +91,8 @@ function depositAct() {
 	_param.otherAmount = $("#otherAmount").val();
 	
 //	var _url = domain + '/user/deposit/dptAct';
-	var _url = domain + '/pay/wechat/payQRCode';
+//	var _url = domain + '/pay/wechat/payQRCode';
+	var _url = domain + '/paytest/paysuccess?dpOrderNo=877249130680001470';
 	$.ajax({
 		url : _url,
 		method : 'GET',
@@ -115,7 +116,7 @@ function depositAct() {
 	        		content: domain + '/user/loginAjax'
 	        	});
 	        } else { // 已经登陆
-	        	layer.open({
+	        	lgn_pg_ii = layer.open({
 	        		type: 1,
 	        		title: '',
 	        		resize: false,
@@ -124,6 +125,7 @@ function depositAct() {
 	        		move:false,
 	        		shade: 0.1,
 	        		anim: 5,
+	        		offset: 'auto',
 	        		area: ['300px', '280px'],
 	        		content: data
 	        	});
