@@ -63,7 +63,7 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">专题描述</label>
 		<div class="col-md-4">
-			<textarea class="form-control" rows="2" id="description" name="description" value="${topicDO.description}"></textarea>
+			<textarea class="form-control" rows="2" id="description" name="description" value="${topicDO.description!'竞拍专题'}">${topicDO.description!'竞拍专题'}</textarea>
 		</div>
 	</div>
 	<div class="form-group">

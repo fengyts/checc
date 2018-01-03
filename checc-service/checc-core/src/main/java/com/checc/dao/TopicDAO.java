@@ -16,4 +16,23 @@ public interface TopicDAO extends GeneralDAO<TopicDO> {
 	
 	List<TopicDO> selectAllDynamic(Map<String, Object> params);
 	
+	/**
+	 * <pre>
+	 * 根据专题进度查询专题数据
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	List<TopicDO> selectTopicByProgress(Map<String, Object> params);
+	
+	/**
+	 * <pre>
+	 * 获取已经结束但是还未退还西币的专题
+	 * </pre>
+	 *
+	 * @return
+	 */
+	List<TopicDO> selectTopicNotRefund(Map<String, Object> params);
+	
 }

@@ -19,7 +19,7 @@ public class SmsCodeRedisServiceImpl implements SmsCodeRedisService {
 	public int LIVE_TIME = RedisCacheTimeConstant.HALF_HOUR; // (单位秒)缓存时间30分钟
 
 	@Resource(name = "redisCacheService1")
-	RedisCacheService redisCacheService1;
+	private RedisCacheService redisCacheService1;
 
 	@Override
 	public void create(SmsCodeRedisModel model) {

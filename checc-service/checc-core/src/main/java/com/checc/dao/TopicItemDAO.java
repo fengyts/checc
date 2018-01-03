@@ -24,6 +24,24 @@ public interface TopicItemDAO extends GeneralDAO<TopicItemDO> {
 	 */
 	public int reduceExchangeResidue(Long id) throws CommonDAOException;
 	
+	/**
+	 * <pre>
+	 * 根据主键id列表获取专题商品信息
+	 * </pre>
+	 *
+	 * @param ids
+	 * @return
+	 */
 	public List<TopicItemDO> selectByIds(List<Long> ids);
+	
+	/**
+	 * <pre>
+	 * 根据专题id列表获取专题商品信息
+	 * </pre>
+	 *
+	 * @param topicIds
+	 * @return
+	 */
+	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds);
 
 }

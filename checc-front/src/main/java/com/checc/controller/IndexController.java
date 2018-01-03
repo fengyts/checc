@@ -31,6 +31,8 @@ public class IndexController {
 		if(null != userDO){
 			model.addAttribute("checcUser", userDO);
 		}
+		
+		// 获取竞拍商品列表
 		List<TopicItemVO> auctionList = topicItemAO.listAuction("01", TopicTypeEnum.TOPIC_AUCTION.getCode());
 		model.addAttribute("auctionList", auctionList);
 		
@@ -40,6 +42,7 @@ public class IndexController {
 			model.addAttribute("topicEndTime", vo.getEndTime());
 		}
 		
+		// 获取兑换商品列表
 		List<TopicItemVO> exchangeList = topicItemAO.listExchange();
 		model.addAttribute("exchangeList", exchangeList);
 		

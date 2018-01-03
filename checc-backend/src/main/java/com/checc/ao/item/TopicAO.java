@@ -75,6 +75,7 @@ public class TopicAO {
 		topicDO.setCreateTime(date);
 		topicDO.setModifyUserId(userId);
 		topicDO.setModifyTime(date);
+		topicDO.setRefundCurrencyStatus(false);
 
 		topicService.insert(topicDO);
 		

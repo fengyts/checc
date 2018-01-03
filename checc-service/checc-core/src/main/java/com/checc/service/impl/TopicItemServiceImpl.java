@@ -146,6 +146,14 @@ public class TopicItemServiceImpl  implements TopicItemService{
 		}
 		return topicItemDAO.selectByIds(ids);
 	}
+
+	@Override
+	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds) {
+		if(CollectionUtils.isEmpty(topicIds)){
+			return new ArrayList<TopicItemDO>();
+		}
+		return topicItemDAO.selectByTopicIds(topicIds);
+	}
 	
 	
 	

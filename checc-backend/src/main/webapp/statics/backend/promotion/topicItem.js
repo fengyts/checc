@@ -11,7 +11,7 @@ $(function() {
 			maxmin : true,
 			fix : false,
 			scrollbar : false,
-			area : [ '1000px', '550px' ],
+			area : [ '1000px', '600px' ],
 			content : domain + '/topicItem/add.htm?topicId=' + _topicId,
 		});
 	});
@@ -30,7 +30,7 @@ $(function() {
 			maxmin : true,
 			fix : false,
 			scrollbar : false,
-			area : [ '1000px', '550px' ],
+			area : [ '1000px', '600px' ],
 			content : domain + '/topicItem/edit.htm?id=' + _id,
 		});
 	});

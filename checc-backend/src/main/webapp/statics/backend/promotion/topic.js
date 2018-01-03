@@ -31,6 +31,15 @@ $(function(){
 		});
 	});
 	
+	$("#topicType").change(this, function(){
+		var _tc = $(this).val();
+		if('01' == _tc){
+			$("#description").val("竞拍专题");
+		} else {
+			$("#description").val("兑换专题");
+		}
+	});
+	
 	// 取消按钮
 //	$("#cancelTabBtn").on('click',function(){
 //		var type = $(this).attr("param");

@@ -169,7 +169,7 @@ public class UploadController {
 			}
 			try{
 				mf.transferTo(file);
-//				dfsPath =  dfsAO.uploadPic(file);
+				dfsPath =  dfsAO.uploadFile(file);
 			}catch(IOException e){
 				fileName = null;
 				logger.error("文件上传时保存出错！");
@@ -179,9 +179,9 @@ public class UploadController {
 		}
 		JSONObject json = new JSONObject();
 		json.put("error", 0);
-//		json.put("url",dfsDomainUtil.getFileFullUrl(dfsPath));
+		json.put("url",imageUrlUtil.getFileFullUrl(dfsPath));
 //		json.put("url", "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg");
-		json.put("url", "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg");
+//		json.put("url", "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg");
 		return json.toJSONString();
 	}
 

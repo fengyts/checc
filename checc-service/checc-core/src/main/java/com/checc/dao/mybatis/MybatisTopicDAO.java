@@ -68,4 +68,16 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 		return getSqlSession().selectList(getStatement("select_all_byStatus"), params);
 	}
 
+	@Override
+	public List<TopicDO> selectTopicByProgress(Map<String, Object> params) {
+		return getSqlSession().selectList(getStatement("selectTopicByProgress"), params);
+	}
+
+	@Override
+	public List<TopicDO> selectTopicNotRefund(Map<String, Object> params) {
+		return getSqlSession().selectList(getStatement("selectTopicNotRefund"), params);
+	}
+	
+	
+
 }

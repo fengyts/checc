@@ -18,7 +18,7 @@ public class CaptchaRedisServiceImpl implements CaptchaRedisService {
 	public int LIVE_TIME = RedisCacheTimeConstant.DEFAULT_TIME; // (单位秒)缓存时间30分钟
 
 	@Resource(name = "redisCacheService1")
-	RedisCacheService redisCacheService1;
+	private RedisCacheService redisCacheService1;
 
 	@Override
 	public void create(CaptchaRedisModel model) {

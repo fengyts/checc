@@ -9,6 +9,7 @@
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
         <result column="status" property="status"/>
+        <result column="refund_currency_status" property="refundCurrencyStatus"/>
         <result column="sort" property="sort"/>
         <result column="description" property="description"/>
         <result column="remark" property="remark"/>
@@ -19,13 +20,14 @@
 	</resultMap>
 
 	<sql id="MybatisTopicDAO_all_column_fields">
-	      id,topic_type,start_time,end_time,status,sort,description,remark,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_type,start_time,end_time,status,refund_currency_status,sort,description,remark,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="topicType != null  and topicType != '' "> AND topic_type=#{topicType} </if>
 			<if test="status != null  and status != '' "> AND status=#{status} </if>
+			<if test="refundCurrencyStatus != null "> AND refund_currency_status=#{refundCurrencyStatus} </if>
 			<if test="sort != null "> AND sort=#{sort} </if>
 			<if test="description != null  and description != '' "> AND description=#{description} </if>
 			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
@@ -53,6 +55,7 @@
 				start_time,
 				end_time,
 				status,
+				refund_currency_status,
 				sort,
 				description,
 				remark,
@@ -66,6 +69,7 @@
 				#{startTime},
 				#{endTime},
 				#{status},
+				#{refundCurrencyStatus},
 				#{sort},
 				#{description},
 				#{remark},
@@ -83,6 +87,7 @@
 					start_time = #{startTime},
 					end_time = #{endTime},
 					status = #{status},
+					refund_currency_status = #{refundCurrencyStatus},
 					sort = #{sort},
 					description = #{description},
 					remark = #{remark},
@@ -104,6 +109,7 @@
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
 					<if test="status != null  and status != '' ">status=#{status},</if>
+					<if test="refundCurrencyStatus != null ">refund_currency_status=#{refundCurrencyStatus},</if>
 					<if test="sort != null ">sort=#{sort},</if>
 					<if test="description != null  and description != '' ">description=#{description},</if>
 					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
@@ -134,11 +140,12 @@
 	     SELECT
 	     	<include refid="MybatisTopicDAO_all_column_fields" />
 		 FROM
-	 	 	topic
+		 	topic
 	 	<include refid="MybatisTopicDAO_dynamic_where_fields" />
 	 	ORDER BY topic.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
  	
  	<select id="MybatisTopicDAO_select_all_byStatus" resultMap="TopicDOResultMap" parameterType="map">
  		SELECT
@@ -162,6 +169,40 @@
 				AND end_time &lt;= #{exchangeEndTime}
 			</if>
 		</where>
+ 	</select>
+ 	
+ 	<!-- 根据时间状态获取专题(未开始和进行中的) -->
+ 	<select id="MybatisTopicDAO_selectTopicByProgress" resultMap="TopicDOResultMap" parameterType="map">
+ 		SELECT
+ 			<include refid="MybatisTopicDAO_all_column_fields" />
+ 		FROM 
+ 			topic
+		<where>
+			<if test="topicType != null and topicType != '' "> AND topic_type=#{topicType} </if>
+			<!-- 查询进行中的专题 -->
+			<if test="inProgress != null and inProgress != ''">
+				AND start_time &lt; now() 
+				AND end_time &gt; now()
+			</if>
+			<!-- 查询未开始的专题 -->
+			<if test="notStart != null and notStart != ''">
+				AND start_time &gt; now() 
+				<!-- 
+				AND end_time &gt; now()
+				 -->
+			</if>
+		</where>
+ 	</select>
+ 	
+ 	<select id="MybatisTopicDAO_selectTopicNotRefund" resultMap="TopicDOResultMap" parameterType="map">
+ 		SELECT
+ 			<include refid="MybatisTopicDAO_all_column_fields" />
+ 		FROM 
+ 			topic
+ 		WHERE
+ 			refund_currency_status = 0
+ 		AND topic_type = '01'
+ 		AND end_time &gt;= #{timerTime}
  	</select>
 
 </mapper>

@@ -14,6 +14,7 @@ import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.enums.ItemPictureTypeEnum;
+import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
 import com.checc.service.AuctionRecordService;
 import com.checc.service.ItemDescService;
@@ -53,7 +54,7 @@ public class TopicItemAO {
 	 * @return
 	 */
 	public List<TopicItemVO> listAuction(String type, String topicType) {
-		List<TopicDO> listTopic = topicService.selectAllDynamic(type, topicType);
+		List<TopicDO> listTopic = topicService.selectTopicByProgress(topicType, TopicStatusEnum.InProgress);
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
 		if (CollectionUtils.isEmpty(listTopic)) {
 			return listResult;
@@ -74,7 +75,11 @@ public class TopicItemAO {
 	 */
 	public List<TopicItemVO> listExchange() {
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
-		List<TopicDO> listTopic = topicService.selectAllDynamic(null, TopicTypeEnum.TOPIC_EXCHANGE.getCode());
+		// 获取正在进行中的兑换专题，若为空则获取即将进行的兑换专题
+		List<TopicDO> listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(), TopicStatusEnum.InProgress);
+		if (CollectionUtils.isEmpty(listTopic)) {
+			listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(), TopicStatusEnum.NotStarted);
+		}
 		if (CollectionUtils.isEmpty(listTopic)) {
 			return listResult;
 		}

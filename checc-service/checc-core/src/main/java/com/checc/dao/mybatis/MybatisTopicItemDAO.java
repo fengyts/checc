@@ -71,6 +71,11 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	public List<TopicItemDO> selectByIds(List<Long> ids) {
 		return getSqlSession().selectList(getStatement("select_by_ids"), ids);
 	}
+
+	@Override
+	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds) {
+		return getSqlSession().selectList(getStatement("select_by_topicIds"), topicIds);
+	}
 	
 	
 }

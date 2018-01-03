@@ -31,7 +31,7 @@ public class TopicItemController {
 	@RequestMapping({"/list"})
 	public String list(Model model, TopicItemDO topicItemDO, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-		Page<TopicItemDTO> page = topicItemAO.queryPageList(topicItemDO, pageNo, pageSize);
+		Page<TopicItemDTO> page = topicItemAO.queryPageList(model, topicItemDO, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("topicItemDO", topicItemDO);
 		model.addAttribute("topicStatus", TopicStatusEnum.values());

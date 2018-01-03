@@ -53,13 +53,19 @@ css=[]
 			    		<th width="200px">开始时间</th>
 			    		<th width="200px">结束时间</th>
 			    		<th>商品名称</th>
+			    		<#--
 			    		<th>商品状态</th>
-			    		<th>竞拍单价</th>
-			    		<th>竞拍最大限次</th>
-			    		<th>兑换数量</th>
-			    		<th>兑换价格</th>
-			    		<th>兑换剩余数量</th>
-			    		<th>兑换限次</th>
+						-->			    		
+			    		<#if '01' == topicType>
+			    			<th>竞拍底价</th>
+			    			<th>竞拍单次出价</th>
+			    			<th>竞拍最大限次</th>
+			    		<#else>
+			    			<th>兑换数量</th>
+			    			<th>兑换价格</th>
+			    			<th>兑换剩余数量</th>
+			    			<th>兑换限次</th>
+			    		</#if>
 			    		<th>操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
@@ -68,7 +74,7 @@ css=[]
 			    			<td class="td_center">${obj.id}</td>
 			    			<td class="td_center">
 			    				<#list topicTypes as type>
-			    					<#if type.code == obj.topicType>
+			    					<#if type.code == topicType>
 			    						${type.desc}
 			    					</#if>
 								</#list>
@@ -83,15 +89,21 @@ css=[]
 							<td class="td_center">${obj.startTime?datetime}</td>
 							<td class="td_center">${obj.endTime?datetime}</td>
 							<td class="td_center">${obj.itemTitle}</td>
+							<#--
 							<td class="td_center">
 								<#if obj.itemStatus == 'true'>有效<#else>无效</#if>
 							</td>
-							<td class="td_center">${obj.auctionCurrency}</td>
-							<td class="td_center">${obj.auctionMaxTimes}</td>
-							<td class="td_center">${obj.inventory}</td>
-							<td class="td_center">${obj.exchangeAmount!0?string('##.00')}</td>
-							<td class="td_center">${obj.residue}</td>
-							<td class="td_center">${obj.exchangeLimitNum}</td>
+							-->
+							<#if '01' == topicType>
+								<td class="td_center">${obj.floorPrices!0?string('##.00')}</td>
+								<td class="td_center">${obj.auctionCurrency}</td>
+								<td class="td_center">${obj.auctionMaxTimes}</td>
+							<#else>
+								<td class="td_center">${obj.inventory}</td>
+								<td class="td_center">${obj.exchangeAmount!0?string('##.00')}</td>
+								<td class="td_center">${obj.residue}</td>
+								<td class="td_center">${obj.exchangeLimitNum}</td>
+							</#if>
 			    			<td class="td_center">
 			    				<#if obj.status == '01'>
 			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>

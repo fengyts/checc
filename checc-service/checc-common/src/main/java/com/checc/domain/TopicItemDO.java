@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
 * 专题商品
-* @author fengyts Fri Dec 15 14:33:19 CST 2017
+* @author fengyts Wed Jan 03 09:07:15 CST 2018
 */
 
 public class TopicItemDO extends BaseDO {
@@ -20,7 +20,7 @@ private Long topicId;
 /** 商品id */
 private Long itemId;
 
-/** 商品名称 */
+/** 商品名称,冗余字段 */
 private String itemTitle;
 
 /** 商品市场价，冗余字段 */
@@ -34,6 +34,9 @@ private Date endTime;
 
 /** 是否和专题状态一致：1-一致；0-不一致 */
 private Boolean isTopicStatus;
+
+/** 竞拍底价 */
+private Double floorPrice;
 
 /** 竞拍商品单次出价西币 */
 private Integer auctionCurrency;
@@ -93,7 +96,7 @@ private Date modifyTime;
 	this.itemId = itemId;
 }
 /**
-* 设置 商品名称
+* 设置 商品名称,冗余字段
 * @param itemTitle
 */
 	public void setItemTitle(String itemTitle) {
@@ -126,6 +129,13 @@ private Date modifyTime;
 */
 	public void setIsTopicStatus(Boolean isTopicStatus) {
 	this.isTopicStatus = isTopicStatus;
+}
+/**
+* 设置 竞拍底价
+* @param floorPrice
+*/
+	public void setFloorPrice(Double floorPrice) {
+	this.floorPrice = floorPrice;
 }
 /**
 * 设置 竞拍商品单次出价西币
@@ -233,7 +243,7 @@ private Date modifyTime;
 	return itemId;
 }
 /**
-* 获取 商品名称
+* 获取 商品名称,冗余字段
 * @return itemTitle
 */
 	public String getItemTitle() {
@@ -266,6 +276,13 @@ private Date modifyTime;
 */
 	public Boolean getIsTopicStatus() {
 	return isTopicStatus;
+}
+/**
+* 获取 竞拍底价
+* @return floorPrice
+*/
+	public Double getFloorPrice() {
+	return floorPrice;
 }
 /**
 * 获取 竞拍商品单次出价西币

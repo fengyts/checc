@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.checc.domain.ItemDO;
 import com.checc.domain.TopicDO;
@@ -45,10 +47,14 @@ public class TopicItemAO {
 		topicDO.setStatus(status);
 	}
 
-	public Page<TopicItemDTO> queryPageList(TopicItemDO topicItemDO, Integer pageNo, Integer pageSize) {
+	public Page<TopicItemDTO> queryPageList(Model model, TopicItemDO topicItemDO, Integer pageNo, Integer pageSize) {
 		Page<TopicItemDTO> pageResult = new Page<TopicItemDTO>();
 		Page<TopicItemDO> page = topicItemService.queryPageListDynamicAndStartPageSize(topicItemDO, pageNo, pageSize);
 		List<TopicItemDO> list = page.getList();
+		
+		Long topicId = topicItemDO.getTopicId();
+		TopicDO topicDO = topicService.selectById(topicId);
+		model.addAttribute("topicType", topicDO.getTopicType());
 		
 		pageResult.setPageNo(page.getPageNo());
 		pageResult.setPageSize(page.getPageSize());
@@ -57,8 +63,6 @@ public class TopicItemAO {
 			return pageResult;
 		}
 		
-		Long topicId = topicItemDO.getTopicId();
-		TopicDO topicDO = topicService.selectById(topicId);
 		topicStatus(topicDO);
 		List<TopicItemDTO> listResult = new ArrayList<TopicItemDTO>();
 		for(TopicItemDO item : list){
@@ -94,38 +98,42 @@ public class TopicItemAO {
 		return page;
 	}
 	
-	/**
-	 * 是否兑换专题
-	 *
-	 * @param topicId
-	 * @return
-	 */
-	private boolean isExchangeItem(Long topicId){
-		TopicDO topicDO = topicService.selectById(topicId);
-		return TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicDO.getTopicType());
-	}
 
 	public ResultMessage save(TopicItemDO topicItemDO) {
 		Long topicId = topicItemDO.getTopicId();
-		if(null == topicItemDO.getInventory()){
-			return ResultMessage.validParameterNull("兑换数量不能为空");
-		}
 		if(null == topicId){
 			return ResultMessage.failure("服务器异常：获取专题id失败");
 		}
-		if(isExchangeItem(topicId)){
-			if(null == topicItemDO.getInventory()){
-				return ResultMessage.failure("兑换商品数量不能为空");
+		String itemTitle = topicItemDO.getItemTitle();
+		if(StringUtils.isBlank(itemTitle) || null == topicItemDO.getItemId()){
+			return ResultMessage.failure("请选择商品");
+		}
+		Integer inventory = topicItemDO.getInventory();
+		TopicDO topicDO = topicService.selectById(topicId);
+		if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicDO.getTopicType())){
+			if(null == inventory || inventory.intValue() < 1){
+				return ResultMessage.failure("兑换专题：兑换商品数量必须大于0");
 			}
-			if(null == topicItemDO.getExchangeAmount()){
-				return ResultMessage.failure("兑换商品价格不能为空");
+			Double exchangeAmount = topicItemDO.getExchangeAmount();
+			if(null == exchangeAmount){
+				return ResultMessage.failure("兑换专题：兑换商品价格必须大于0");
+			}
+		}
+		if(TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())){
+			Double floor = topicItemDO.getFloorPrice();
+			if (null == floor || floor.doubleValue() < 1d){
+				return ResultMessage.failure("竞拍专题：竞拍低价必须大于0");
+			}
+			Integer auctionCurrency = topicItemDO.getAuctionCurrency();
+			if (null == auctionCurrency || auctionCurrency.intValue() < 1){
+				return ResultMessage.failure("竞拍专题：单次竞拍西币必须大于0");
 			}
 		}
 		
 		Date date = new Date();
 		Long userId = UserHandler.getUser().getId();
 		
-		topicItemDO.setResidue(topicItemDO.getInventory());
+		topicItemDO.setResidue(inventory);
 		topicItemDO.setCreateTime(date);
 		topicItemDO.setCreateUserId(userId);
 		topicItemDO.setModifyTime(date);
@@ -143,18 +151,32 @@ public class TopicItemAO {
 	
 	public ResultMessage update(TopicItemDO topicItemDO) {
 		Long topicId = topicItemDO.getTopicId();
-		if(null == topicItemDO.getInventory()){
-			return ResultMessage.validParameterNull("兑换数量不能为空");
-		}
 		if(null == topicId){
 			return ResultMessage.failure("服务器异常：获取专题id失败");
 		}
-		if(isExchangeItem(topicId)){
-			if(null == topicItemDO.getInventory()){
-				return ResultMessage.failure("兑换商品数量不能为空");
+		String itemTitle = topicItemDO.getItemTitle();
+		if(StringUtils.isBlank(itemTitle) || null == topicItemDO.getItemId()){
+			return ResultMessage.failure("请选择商品");
+		}
+		Integer inventory = topicItemDO.getInventory();
+		TopicDO topicDO = topicService.selectById(topicId);
+		if(TopicTypeEnum.TOPIC_EXCHANGE.getCode().equals(topicDO.getTopicType())){
+			if(null == inventory || inventory.intValue() < 1){
+				return ResultMessage.failure("兑换专题：兑换商品数量必须大于0");
 			}
-			if(null == topicItemDO.getExchangeAmount()){
-				return ResultMessage.failure("兑换商品价格不能为空");
+			Double exchangeAmount = topicItemDO.getExchangeAmount();
+			if(null == exchangeAmount){
+				return ResultMessage.failure("兑换专题：兑换商品价格必须大于0");
+			}
+		}
+		if(TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())){
+			Double floor = topicItemDO.getFloorPrice();
+			if (null == floor || floor.doubleValue() < 1d){
+				return ResultMessage.failure("竞拍专题：竞拍低价必须大于0");
+			}
+			Integer auctionCurrency = topicItemDO.getAuctionCurrency();
+			if (null == auctionCurrency || auctionCurrency.intValue() < 1){
+				return ResultMessage.failure("竞拍专题：单次竞拍西币必须大于0");
 			}
 		}
 		

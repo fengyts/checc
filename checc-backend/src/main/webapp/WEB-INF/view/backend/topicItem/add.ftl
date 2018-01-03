@@ -43,6 +43,19 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-md-2 control-label">商品状态</label>
+		<div class="radio">
+			<label>
+				<input type="radio" name="status" id="status" value="1" checked>有效
+			</label>
+			<label>
+				<input type="radio" name="status" id="status" value="0">无效
+			</label>
+		</div>
+	</div>
+	
+	<hr/>
+	<div class="form-group">
 		<label class="col-md-2 control-label">竞拍单次出价西币</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="auctionCurrency" name="auctionCurrency" value="${topicItemDO.auctionCurrency!1}" />
@@ -52,6 +65,14 @@ css=[
 			<input type="text" class="form-control" id="auctionMaxTimes" name="auctionMaxTimes" value="${topicItemDO.auctionMaxTimes!10}" />
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">竞拍底价</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="floorPrice" name="floorPrice" value="${topicItemDO.floorPrice!0}" />
+		</div>
+	</div>
+	
+	<hr/>
 	<div class="form-group">
 		<label class="col-md-2 control-label">兑换商品数量</label>
 		<div class="col-md-4">
@@ -69,16 +90,6 @@ css=[
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-2 control-label">商品状态</label>
-		<div class="radio">
-			<label>
-				<input type="radio" name="status" id="status" value="1" checked>有效
-			</label>
-			<label>
-				<input type="radio" name="status" id="status" value="0">无效
-			</label>
-		</div>
-		
 		<label class="col-md-2 control-label" style="display:none;">是否和专题状态一致</label>
 		<div class="radio" style="display:none;">
 			<label>
