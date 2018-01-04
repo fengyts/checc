@@ -8,8 +8,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content="车西西" />
 	<meta name="Description" content="车西西" />
-	<title>车西西-值得信赖的网上汽车商城</title>
-	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="javascript:void(0);" />
+	<title>${webtitle}</title>
+	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
+	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	
 	<link rel="stylesheet" type="text/css" href="${css}/auction.css" />
 	

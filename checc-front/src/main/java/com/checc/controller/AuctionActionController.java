@@ -99,6 +99,16 @@ public class AuctionActionController {
 		return auctionAO.exchangeAct(dto);
 	}
 
+	/**
+	 * <pre>
+	 * 商品全部出价记录列表
+	 * </pre>
+	 *
+	 * @param request
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
 	@RequestMapping(value = "/auctionList")
 	public String auctionList(HttpServletRequest request, Model model, AuctionListDTO dto) {
 		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(

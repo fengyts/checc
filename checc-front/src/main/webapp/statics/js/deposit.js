@@ -93,7 +93,7 @@ function depositAct() {
 //	var _url = domain + '/user/deposit/dptAct';
 	var _url = domain + '/pay/wechat/payQRCode';
 //	var _url = domain + '/paytest/paysuccess?dpOrderNo=877249130680001470';
-	var lindex = layer.msg('正在请求支付平台...', {icon: 16, shade: 0.01, time: 20*1000});
+	var lindex = layer.msg('正在请求支付平台...', {icon: 16, shade: 0.2, time: 20*1000});
 	
 	$.ajax({
 		url : _url,

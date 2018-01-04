@@ -8,7 +8,8 @@
 	<meta name="Keywords" content="" />
 	<meta name="Description" content="" />
 	
-	<title>用户中心_车西西-值得信赖的网上汽车商城</title>
+	<title>${webtitle}</title>
+	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	
 	<#include "/common/common-js.ftl" />
 	

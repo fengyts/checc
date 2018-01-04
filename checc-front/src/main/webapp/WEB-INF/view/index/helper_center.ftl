@@ -13,8 +13,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	
 	<title>车西西-帮助中心</title>
-	<link rel="alternate" type="application/rss+xml" title="RSS|车西西-值得信赖的网上汽车商城" href="javascript:void(0);" />
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
+	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	
 	<#include "/common/common-js.ftl" />

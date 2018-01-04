@@ -1,6 +1,6 @@
 <div class="ft_box">
 	<div class="footer">
-	    <div class="about">
+	    <div class="about" style="display:none;">
 	        <a href="">关于我们</a>
 	        <a href="">新手指南</a>
 	        <a href="">售后服务</a>

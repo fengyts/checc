@@ -22,6 +22,9 @@
 <#assign itemOvertimeDetailjsVersion="20151128">
 <#assign itemOverDetailjsVersion="20151128">
 
+<#assign favicon=images + "/favicon.ico">
+<#assign webtitle="车西西-值得信赖的网上汽车商城">
+
 <#--
 <#include "/domain/domain.ftl">
 -->
