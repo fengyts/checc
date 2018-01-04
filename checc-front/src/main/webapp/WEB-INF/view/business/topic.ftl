@@ -41,7 +41,7 @@
 							</div>
 							<div class="auc_price">
 								<span class="lbtitle">当前竞拍价:</span>
-								<span class="prc prc_curr">￥${auc.currentAuctionPrice!0.00?string('0.00')}</span>
+								<span class="prc prc_curr">￥${auc.currentAuctionPrice?string('#0.00')}</span>
 							</div>
 							<div class="auc_btn">
 								<span>

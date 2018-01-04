@@ -1,9 +1,12 @@
 package com.checc.service;
 
-import ng.bayue.common.Page;
-import ng.bayue.service.common.GeneralService;
+import java.util.List;
 
 import com.checc.domain.AuctionRecordDO;
+
+import ng.bayue.common.Page;
+import ng.bayue.exception.CommonServiceException;
+import ng.bayue.service.common.GeneralService;
 
 /**
  * 竞拍记录 Service
@@ -47,6 +50,25 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	Page<AuctionRecordDO> queryPageListUCAuction(Long userId, String recordType, Integer startPage,
 			Integer pageSize);
 	
+	/**
+	 * <pre>
+	 *  根据topicItemId查询商品	竞拍的记录
+	 * </pre>
+	 *
+	 * @param tpIds
+	 * @return
+	 */
+	List<AuctionRecordDO> selectByTopicItemIds(List<Long> tpIds);
 	
+	/**
+	 * <pre>
+	 * 批量插入操作记录
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	int insertBatch(List<AuctionRecordDO> list) throws CommonServiceException;
 
 }

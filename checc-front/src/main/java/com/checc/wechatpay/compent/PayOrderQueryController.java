@@ -3,11 +3,7 @@ package com.checc.wechatpay.compent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ng.bayue.common.CommonResultMessage;
-
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
+
+import ng.bayue.common.CommonResultMessage;
 
 /**
  * <pre>
@@ -30,7 +28,7 @@ import com.checc.domain.CheccUserDO;
 @RequestMapping({ "/pay/wechat" })
 public class PayOrderQueryController {
 
-	private static Logger logger = LoggerFactory.getLogger(PayOrderQueryController.class);
+	//private static Logger logger = LoggerFactory.getLogger(PayOrderQueryController.class);
 
 	/** 业务异常错误页面 */
 	private static final String ERROR_VIEW_PATH = "/business/deposit/dept_act_err";

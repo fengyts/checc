@@ -150,5 +150,20 @@
  		AND total_currency - #{currency} &gt;= 0
  		AND refund - #{currency} &gt;= 0
  	</update>
+ 	
+ 	<update id="MybatisUserCurrencyDAO_refund_user_currency" parameterType="map">
+ 		<foreach collection="params.keys" item="key" separator=";" >
+ 			UPDATE
+				user_currency 
+			SET 
+				freeze = freeze - #{params[${key}]},
+				refund = refund + #{params[${key}]}, 
+				modify_time = now()
+	 		WHERE 
+	 			user_id = #{key}
+	 		AND freeze - #{params[${key}]} &gt;= 0
+ 		</foreach>
+ 		
+ 	</update>
 
 </mapper>

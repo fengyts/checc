@@ -1,40 +1,32 @@
 <#include "/common/common.ftl" />
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta name="Generator" content="ECSHOP v2.7.3" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="Keywords" content="" />
-	<meta name="Description" content="" />
-	
-	<title>用户中心_车西西-值得信赖的网上汽车商城</title>
-	
-	<#include "/common/common-js.ftl" />
-	
-	<style type="text/css">
-		.content {
-		}
-		.pay_qrcode{
-			padding-top: 10px;
-			margin-left: 20px;
-			width:150px;
-			height:150px;
-		}
-		img {
-			width: 100%;
-			height: 100%;
-		}
-		.hp_info {
-			color: #555555;
-			width: 250px;
-			margin-left: -15px;
-			font-size: 14px;
-		}
-	</style>
-	
-</header>
-<body>
+<style type="text/css">
+	.content {
+	}
+	.pay_qrcode{
+		padding-top: 10px;
+		margin-left: 20px;
+		width:150px;
+		height:150px;
+	}
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	.hp_info {
+		color: #555555;
+		width: 250px;
+		margin-left: -15px;
+		font-size: 14px;
+	}
+</style>
+
+<script type="text/javascript">
+	var $ = window.parent.jQuery.noConflict(), 
+		domain = "${domain}", 
+		PCACHE = {}, 
+		layer = window.parent.layer;
+</script>	
 
 <div class="content_box">
 	<div class="content">
@@ -54,8 +46,60 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="${js}/pay_scan.js"></script>
 
-</body>
-</html>
+<script type="text/javascript">
+
+var timer;
+$(function() {
+	//pay_status();
+	
+	// 启动定时器
+	timer = self.setInterval(function() {
+		pay_status()
+	}, 3000);
+	
+});
+
+function pay_status() {
+	 var dpOrderNo = $("#dpOrderNo").val();
+//	var dpOrderNo = '877249130680001470';
+	if (null == dpOrderNo || "" == dpOrderNo) {
+		return;
+	}
+	$.ajax({
+		url : domain + '/pay/wechat/orderQuery',
+		dataType : 'html',
+		type : 'GET',
+		data : {
+			'dpOrderNo' : dpOrderNo
+		},
+		success : function(data, status, xhr) {
+			var statusCode = xhr.getResponseHeader("statusCode");
+			if('8001' == statusCode || 8008 == statusCode){
+				window.clearInterval(timer); // 销毁定时器
+				var index = layer.open({
+					type : 1,
+					title : '',
+					resize : false,
+					// scrollbar: false,
+					// fixed: false,
+					move : false,
+					shade : 0.1,
+					anim : 5,
+					area : [ '600px', '350px' ],
+					content : data
+				});
+				return;
+			} 
+		},
+		error : function() {
+			alert("网络连接异常");
+		},
+
+	});
+}
+
+
+</script>
+
 

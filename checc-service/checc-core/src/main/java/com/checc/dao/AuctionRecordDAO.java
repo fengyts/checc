@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.checc.domain.AuctionRecordDO;
 
+import ng.bayue.exception.CommonDAOException;
+import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralDAO;
 
  /**
@@ -35,5 +37,26 @@ public interface AuctionRecordDAO extends GeneralDAO<AuctionRecordDO> {
 	 * @return
 	 */
 	List<AuctionRecordDO> selectUCAuctionList(Map<String, Object> params);
+	
+	/**
+	 * <pre>
+	 *  根据topicItemId查询商品	竞拍的记录
+	 * </pre>
+	 *
+	 * @param tpIds
+	 * @return
+	 */
+	List<AuctionRecordDO> selectByTopicItemIds(List<Long> tpIds);
+	
+	/**
+	 * <pre>
+	 * 批量插入操作记录
+	 * </pre>
+	 *
+	 * @param list
+	 * @return
+	 * @throws CommonServiceException
+	 */
+	int insertBatch(List<AuctionRecordDO> list) throws CommonDAOException;
 	
 }

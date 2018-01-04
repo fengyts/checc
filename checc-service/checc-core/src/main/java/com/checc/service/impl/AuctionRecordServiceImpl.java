@@ -171,10 +171,31 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 			page.setPageNo(startPage);
 			page.setPageSize(pageSize);
 			page.setTotalCount(totalCount.intValue());
-			
+
 			return page;
 		}
 		return new Page<AuctionRecordDO>();
+	}
+
+	@Override
+	public List<AuctionRecordDO> selectByTopicItemIds(List<Long> tpIds) {
+		if (CollectionUtils.isEmpty(tpIds)) {
+			return new ArrayList<AuctionRecordDO>();
+		}
+		return auctionRecordDAO.selectByTopicItemIds(tpIds);
+	}
+
+	@Override
+	public int insertBatch(List<AuctionRecordDO> list) throws CommonServiceException {
+		if (CollectionUtils.isEmpty(list)) {
+			return 0;
+		}
+		try {
+			return auctionRecordDAO.insertBatch(list);
+		} catch (CommonDAOException e) {
+			logger.error("批量插入操作记录异常:{}", e);
+		}
+		return -1;
 	}
 
 }

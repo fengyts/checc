@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ng.bayue.exception.CommonDAOException;
-
 import org.springframework.stereotype.Component;
 
 import com.checc.dao.UserCurrencyDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.UserCurrencyDO;
+
+import ng.bayue.exception.CommonDAOException;
 
 @Component(value = "userCurrencyDAO")
 public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurrencyDAO {
@@ -55,16 +55,13 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 	}
 
 	@Override
-	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO)
-			throws CommonDAOException {
+	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic"), userCurrencyDO);
 	}
 
 	@Override
-	public List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO)
-			throws CommonDAOException {
-		return getSqlSession()
-				.selectList(getStatement("select_dynamic_page_query"), userCurrencyDO);
+	public List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO) throws CommonDAOException {
+		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), userCurrencyDO);
 	}
 
 	@Override
@@ -94,6 +91,11 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 		param.put("userId", userId);
 		param.put("currency", currency);
 		return getSqlSession().update(getStatement("reduce_exchange_currency"), param);
+	}
+
+	@Override
+	public int refundCurrency(Map<String, Object> params) throws CommonDAOException {
+		return getSqlSession().update(getStatement("refund_user_currency"), params);
 	}
 
 }

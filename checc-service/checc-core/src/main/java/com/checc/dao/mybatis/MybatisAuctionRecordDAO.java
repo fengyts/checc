@@ -78,4 +78,16 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 		return getSqlSession().selectList(getStatement("select_uc_list"), param);
 	}
 
+	@Override
+	public List<AuctionRecordDO> selectByTopicItemIds(List<Long> tpIds) {
+		return getSqlSession().selectList(getStatement("select_by_tpItemIds"), tpIds);
+	}
+
+	@Override
+	public int insertBatch(List<AuctionRecordDO> list) throws CommonDAOException {
+		return getSqlSession().insert(getStatement("insert_batch"), list);
+	}
+	
+	
+
 }

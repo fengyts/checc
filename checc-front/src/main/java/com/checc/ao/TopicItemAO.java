@@ -76,9 +76,11 @@ public class TopicItemAO {
 	public List<TopicItemVO> listExchange() {
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
 		// 获取正在进行中的兑换专题，若为空则获取即将进行的兑换专题
-		List<TopicDO> listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(), TopicStatusEnum.InProgress);
+		List<TopicDO> listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(),
+				TopicStatusEnum.InProgress);
 		if (CollectionUtils.isEmpty(listTopic)) {
-			listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(), TopicStatusEnum.NotStarted);
+			listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(),
+					TopicStatusEnum.NotStarted);
 		}
 		if (CollectionUtils.isEmpty(listTopic)) {
 			return listResult;
@@ -100,8 +102,10 @@ public class TopicItemAO {
 			return;
 		}
 		List<Long> itemIds = new ArrayList<Long>();
+		//List<Long> topicItemIds = new ArrayList<Long>();
 		for (TopicItemDO item : listItems) {
 			itemIds.add(item.getItemId());
+			//topicItemIds.add(item.getId());
 
 			TopicItemVO vo = new TopicItemVO();
 			vo.setTopicType(topicDO.getTopicType());
@@ -118,9 +122,11 @@ public class TopicItemAO {
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
+			vo.setCurrentAuctionPrice(item.getFloorPrice());
 
 			listResult.add(vo);
 		}
+
 		List<ItemPictureDO> pictures = pictureService.selectByItemIds(itemIds);
 		for (TopicItemVO vo : listResult) {
 			long itemId = vo.getItemId();
@@ -131,7 +137,17 @@ public class TopicItemAO {
 					break;
 				}
 			}
+
+			// 竞拍专题获取当前竞拍价格
+			if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())) {
+				AuctionRecordDO latestAuction = auctionRecordService.selectLatestAuction(vo.getId());
+				if(null != latestAuction){
+					vo.setCurrentAuctionPrice(latestAuction.getCurrentAuctPrice().doubleValue());
+				}
+				
+			}
 		}
+
 	}
 
 	public TopicItemDetailVO topicItemDetails(Long userId, Long tpId) {
@@ -172,12 +188,12 @@ public class TopicItemAO {
 			}
 			// 用户是否已经兑换过
 			Boolean hasExchanged = false;
-			if(null != userId){
+			if (null != userId) {
 				hasExchanged = auctionRecordService.isExchanged(userId, tpId);
 			}
 			vo.setHasExchanged(hasExchanged);
 		} else {
-			//vo.setHasExchangeOut(false);
+			// vo.setHasExchangeOut(false);
 			AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
 			if (null != recordDO) {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));

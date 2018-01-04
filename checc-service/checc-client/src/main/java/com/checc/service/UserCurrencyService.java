@@ -2,6 +2,9 @@ package com.checc.service;
 
 import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralService;
+
+import java.util.Map;
+
 import com.checc.domain.UserCurrencyDO;
 
  /**
@@ -53,5 +56,16 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	 * @throws CommonServiceException
 	 */
 	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonServiceException;
+	
+	/**
+	 * <pre>
+	 * 竞拍结束回退用户西币
+	 * </pre>
+	 *
+	 *@param refundMap回退列表
+	 *
+	 * @return
+	 */
+	public int refundCurrency(Map<String, Integer> refundMap);
 
 }

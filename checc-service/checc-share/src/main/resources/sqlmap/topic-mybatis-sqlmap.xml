@@ -202,7 +202,7 @@
  		WHERE
  			refund_currency_status = 0
  		AND topic_type = '01'
- 		AND end_time &gt;= #{timerTime}
+ 		AND end_time &lt;= #{timerTime}
  	</select>
 
 </mapper>

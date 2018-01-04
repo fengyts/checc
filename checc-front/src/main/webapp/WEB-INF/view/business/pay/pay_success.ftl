@@ -10,6 +10,7 @@
 	
 	<title>用户中心_车西西-值得信赖的网上汽车商城</title>
 	
+	<#include "/common/common-js.ftl" />
 	
 	<style type="text/css">
 		html,body{
@@ -83,7 +84,7 @@
 	<div class="pay_content">
 		<#assign resInfo=result.data />
 		<div class="res_status_title">
-			<#if resInfo.depositStatus?? && resInfo.depositStatus == 'SUCCESS'>
+			<#if resInfo?? && resInfo.depositStatus?? && resInfo.depositStatus == 'SUCCESS'>
 				<div class="res_status">
 					<img src="${images}/icon_correct.png" style="width:100%;height:100%;">
 				</div>
@@ -98,15 +99,17 @@
 		</div>
 		<div class="res_dl">
 			<span class="res_info_label">充值时间: </span>
-			<span class="label_c_text">${resInfo.depositTime?string('yyyy-MM-dd HH:mm:ss')}</span>
+			<span class="label_c_text">
+				<#if resInfo.depositTime??>${resInfo.depositTime?string('yyyy-MM-dd HH:mm:ss')}</#if>
+			</span>
 		</div>
 		<div class="res_dl">
 			<span class="res_info_label">充值数量: </span>
-			<span class="label_c_text">${resInfo.depositAmt}个</span>
+			<span class="label_c_text"><#if resInfo.depositAmt??>${resInfo.depositAmt}个</#if></span>
 		</div>
 		<div class="res_dl">
 			<span class="res_info_label">实付金额: </span>
-			<span class="label_c_text real_cny">￥${resInfo.realCNY?string('#0.00')}</span>
+			<span class="label_c_text real_cny"><#if resInfo.realCNY??>￥${resInfo.realCNY?string('#0.00')}</#if></span>
 		</div>
 		<div class="res_dl">
 			<span class="res_info_label">支付方式: </span>

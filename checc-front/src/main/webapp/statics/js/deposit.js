@@ -91,8 +91,10 @@ function depositAct() {
 	_param.otherAmount = $("#otherAmount").val();
 	
 //	var _url = domain + '/user/deposit/dptAct';
-//	var _url = domain + '/pay/wechat/payQRCode';
-	var _url = domain + '/paytest/paysuccess?dpOrderNo=877249130680001470';
+	var _url = domain + '/pay/wechat/payQRCode';
+//	var _url = domain + '/paytest/paysuccess?dpOrderNo=877249130680001470';
+	var lindex = layer.msg('正在请求支付平台...', {icon: 16, shade: 0.01, time: 20*1000});
+	
 	$.ajax({
 		url : _url,
 		method : 'GET',
@@ -101,36 +103,46 @@ function depositAct() {
 		cache : false,
 
 		success: function(data, status, xhr) { 
+			parent.layer.close(lindex);
 	        var errorCode = xhr.getResponseHeader("errorCode");
 	        if('999' == errorCode) { // 未登陆
-	        	lgn_pg_ii = layer.open({
-	        		type: 2,
-	        		title: '请先登录',
-	        		resize: false,
-	        		//scrollbar: false,
-	        		//fixed: false,
-	        		move:false,
-	        		shade: 0.1,
-	        		zIndex: 0,
-	        		area: ['700px', '500px'],
-	        		content: domain + '/user/loginAjax'
-	        	});
+	        	needLoginAjax();
 	        } else { // 已经登陆
-	        	lgn_pg_ii = layer.open({
-	        		type: 1,
-	        		title: '',
-	        		resize: false,
-	        		//scrollbar: false,
-	        		//fixed: false,
-	        		move:false,
-	        		shade: 0.1,
-	        		anim: 5,
-	        		offset: 'auto',
-	        		area: ['300px', '280px'],
-	        		content: data
-	        	});
+	        	business(data);
 	        }
 	    }
 
 	});
 }
+
+function needLoginAjax(){
+	lgn_pg_ii = layer.open({
+		type: 2,
+		title: '请先登录',
+		resize: false,
+		//scrollbar: false,
+		//fixed: false,
+		move:false,
+		shade: 0.1,
+		zIndex: 0,
+		area: ['700px', '500px'],
+		content: domain + '/user/loginAjax'
+	});
+}
+
+function business(data){
+	lgn_pg_ii = layer.open({
+		type: 1,
+		resize: false,
+		//scrollbar: false,
+		//fixed: false,
+		move:false,
+		shade: 0.1,
+		anim: 5,
+		//offset: 'auto',
+		area: ['300px', '280px'],
+		content: data,
+	});
+}
+
+

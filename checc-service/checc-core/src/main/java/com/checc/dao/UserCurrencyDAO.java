@@ -1,5 +1,7 @@
 package com.checc.dao;
 
+import java.util.Map;
+
 import com.checc.domain.UserCurrencyDO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -59,6 +61,16 @@ public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
 	 */
 	public int reduceExchangeCurrency(Long userId, Integer currency) throws CommonDAOException;
 	
+	/**
+	 * <pre>
+	 * 竞拍结束回退用户西币
+	 * </pre>
+	 *
+	 *@param refundList回退列表
+	 *
+	 * @return
+	 */
+	public int refundCurrency(Map<String, Object> refundList) throws CommonDAOException;
 	
 	
 }

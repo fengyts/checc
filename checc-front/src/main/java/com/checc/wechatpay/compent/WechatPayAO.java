@@ -397,7 +397,7 @@ public class WechatPayAO {
 		logger.info("wechat pay order query start, params : {}", dpOrderNo);
 		if (StringUtils.isBlank(dpOrderNo) || null == userId || userId.longValue() < 0l) {
 			logger.info("wechat pay order query failure, exception: dpOrderNo or userId is blank");
-			return CommonResultMessage.failure("微信支付状态异常,为保证充值成功,若微信端支付成功,则请务必联系客服");
+			return new CommonResultMessage(CommonResultMessage.Failure, "微信支付状态异常,为保证充值成功,若微信端支付成功,则请务必联系客服", new PayOrderQueryVO());
 		}
 		String payOrderQueryLock = LOCK_PAYORDER_STATUS_QUERY_KEY + userId;
 		try {
@@ -413,7 +413,7 @@ public class WechatPayAO {
 
 			if (queryCount >= 60) { // 如果60次仍然未查询到结果,则中断查询
 				logger.info("wechat pay order query times is out limit, times is more than 60");
-				return CommonResultMessage.failure("查询订单状态失败：未查询到订单");
+				return new CommonResultMessage(CommonResultMessage.Failure, "查询订单状态失败：未查询到订单", new PayOrderQueryVO());
 			}
 			// 同一用户同一时间只能查询一次
 			if (redisCacheService.lock(payOrderQueryLock)) {
@@ -421,7 +421,7 @@ public class WechatPayAO {
 				if (null == dpOrder) {
 					logger.info("wechat payorder query exception: "
 							+ "the deposit order is not existed, dpOrderNo-{}", dpOrderNo);
-					return CommonResultMessage.failure("系统中查询不到该支付订单信息");
+					return new CommonResultMessage(CommonResultMessage.Failure, "系统中查询不到该支付订单信息", new PayOrderQueryVO());
 				}
 				
 				String nonce_str = UUID.randomUUID().toString().replace("-", "");
@@ -451,7 +451,7 @@ public class WechatPayAO {
 				if (null == map || map.isEmpty()) {
 					logger.info("request wechat pay order exception, "
 							+ "the returned result is blank;请求微信支付订单查询异常,返回报文为空");
-					return CommonResultMessage.failure("查询订单异常, 返回报文为空");
+					return new CommonResultMessage(CommonResultMessage.Failure, "查询订单异常, 返回报文为空", new PayOrderQueryVO());
 				}
 				
 				PayOrderQueryVO vo = new PayOrderQueryVO();
@@ -487,46 +487,63 @@ public class WechatPayAO {
 				// 校验查询结果签名
 				if (!PayToolUtil.isTenpaySign(sortedMap)) {
 					logger.info("wechat payorder query failure: result data sign invalid");
-					return CommonResultMessage.failure("获取支付状态失败：查询结果数据签名校验失败");
+					return new CommonResultMessage(CommonResultMessage.Failure, "获取支付状态失败：查询结果数据签名校验失败", new PayOrderQueryVO());
 				}
 
 				String result_code = map.get("result_code"); // 获取业务处理结果
 				String trade_state = map.get("trade_state");
 				String trade_state_desc = map.get("trade_state_desc");
 
-				vo.setDepositTime(DateUtils.parseDate(map.get("time_end"), "yyyyMMddHHmmss"));
+				String time_end = map.get("time_end");
+				if(StringUtils.isNotBlank(time_end)){
+					vo.setDepositTime(DateUtils.parseDate(time_end, "yyyyMMddHHmmss"));
+				}
 
-				if (!"SUCCESS".equals(result_code) || !"SUCCESS".equals(trade_state)) {
+				if (!"SUCCESS".equals(result_code)) {
 					logger.info("wechat payorder query failure, order status fail, "
 							+ "result_code: {}, trade_state: {}, trade_state_desc: {}",
 							result_code, trade_state, trade_state_desc);
 					vo.setDepositStatus("FAILURE");
 					return new CommonResultMessage(8001, "获取支付结果失败,请确认西币是否已经到账,如未到账请务必联系客服", vo);
 				}
-
+				
 				dpOrder.setTradeState(trade_state);
 				dpOrder.setTradeStateDesc(trade_state_desc);
 				dpOrder.setErrCode(map.get("err_code"));
 				dpOrder.setErrCodeDes(map.get("err_code_des"));
-
+				
+				if ("PAYERROR".equals(trade_state)){ // 支付失败
+					logger.info("wechat payorder query failure, order status fail, "
+							+ "result_code: {}, trade_state: {}, trade_state_desc: {}",
+							result_code, trade_state, trade_state_desc);
+					dpOrder.setOrderStatus(PayOrderStatusEnum.FAILURE.code);
+					depositOrderService.update(dpOrder, false);
+					
+					vo.setDepositStatus("FAILURE");
+					return new CommonResultMessage(8001, "获取支付结果失败,请确认西币是否已经到账,如未到账请务必联系客服", vo);
+				}
+				
 				depositOrderService.update(dpOrder, false);
-
-				vo.setDepositStatus("SUCCESS");
+				
+				if("SUCCESS".equals(trade_state)){
+					vo.setDepositStatus("SUCCESS");
+					return new CommonResultMessage(8008, "支付成功", vo);
+				}
 
 				queryCount++;
 				redisCacheService.setRedisCache(payOrderQueryCountKey, queryCount,
 						RedisCacheTimeConstant.ONE_MINUTES);
 				
-				return new CommonResultMessage(8008, "支付成功", vo);
+				return new CommonResultMessage(CommonResultMessage.Failure, "未查询到支付成功或失败信息", vo);
 
 			} else {
-				return CommonResultMessage.failure("请求过于频繁");
+				return new CommonResultMessage(CommonResultMessage.Failure, "请求过于频繁", new PayOrderQueryVO());
 			}
 
 		} catch (Exception e) {
 			logger.info("wechatpay order query exception: {}", e);
-			return CommonResultMessage.failure("微信支付状态异常,为保证充值成功,若微信端支付成功,"
-					+ "请查询西币是否到账,若未到账,则请务必联系客服");
+			return new CommonResultMessage(CommonResultMessage.Failure, "微信支付状态异常,为保证充值成功,若微信端支付成功,"
+					+ "请查询西币是否到账,若未到账,则请务必联系客服", new PayOrderQueryVO());
 		} finally {
 			try {
 				redisCacheService.unLock(payOrderQueryLock);

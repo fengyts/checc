@@ -1,19 +1,21 @@
 package com.checc.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.checc.dao.UserCurrencyDAO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.service.UserCurrencyService;
 
+import ng.bayue.common.Page;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
-import ng.bayue.common.Page;
 
 @Service(value = "userCurrencyService")
 public class UserCurrencyServiceImpl implements UserCurrencyService {
@@ -175,4 +177,24 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 
 	}
 
+	@Override
+	public int refundCurrency(Map<String, Integer> refundMap) {
+		if(null == refundMap || refundMap.isEmpty()){
+			return 0;
+		}
+		try {
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("params", refundMap);
+			return userCurrencyDAO.refundCurrency(params);
+		} catch (CommonDAOException e) {
+			logger.error("用户回退竞拍西币接口异常", e);
+		}
+		return -1;
+	}
+
+	
+	
+	
+	
+	
 }

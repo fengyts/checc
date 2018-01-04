@@ -1,5 +1,7 @@
 package com.checc.service;
 
+import ng.bayue.exception.CommonServiceException;
+
 public interface RefundCurrencyService {
 	
 	/**
@@ -10,6 +12,6 @@ public interface RefundCurrencyService {
 	 * @return
 	 * @throws Exception
 	 */
-	int refundCurrency() throws Exception;
+	int refundCurrency() throws CommonServiceException;
 
 }
