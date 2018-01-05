@@ -59,6 +59,16 @@ public class UserCommonController {
 		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
 		return "/login/login";
 	}
+	
+	@RequestMapping({ "/loginNew" })
+	public String loginNew(HttpServletRequest request, HttpServletResponse response) {
+		CookieUtils cookieUtil = new CookieUtils();
+		TokenModel tk = new TokenModel();
+		String key = "checcUserLoginCkTk" + tk.getKey();
+		String value = tk.getBaseKey();
+		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
+		return "/login/login_new";
+	}
 
 	@RequestMapping({ "/loginAjax" })
 	public String loginAjaxIndex(HttpServletRequest request, HttpServletResponse response) {
@@ -248,6 +258,7 @@ public class UserCommonController {
 				} else {
 					model.addAttribute("password", dto.getPassword());
 					model.addAttribute("password1", dto.getPassword1());
+					model.addAttribute("errorCode", data);
 					model.addAttribute("errorMsg", crm.getMessage());
 					return "/login/fg_step3";
 				}

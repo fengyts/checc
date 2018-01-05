@@ -1,7 +1,5 @@
 package testdao;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,18 +30,5 @@ public class TestDao {
 		refundCurrencyService.refundCurrency();
 	}
 	
-	public static void main(String[] args) {
-		Map<Integer, String> map1 = new HashMap<Integer, String>();  
-        map1.put(11, "11");  
-        map1.put(22, "22");  
-        long key1 = 11;  
-        System.out.println(map1.get(key1));  // null  
-          
-        Map<Long, String> map2 = new HashMap<Long, String>();  
-        map2.put(11L, "11");  
-        map2.put(22L, "22");  
-        int key2 = 11;  
-        System.out.println(map1.get(key2));  // 11  
-	}
 
 }

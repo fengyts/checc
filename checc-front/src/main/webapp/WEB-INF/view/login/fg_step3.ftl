@@ -25,14 +25,14 @@
 	<div class="checc_form_item">
 		<label class="checc_form_label">新密码</label>
 		<div class="checc_input_block">
-    		<input class="checc_input" type="password" id="password" name="password" placeholder="请输入新密码">
+    		<input class="checc_input" type="password" id="password" name="password" placeholder="请输入新密码" value="${password}">
 		</div>
 		<div class="error_info" id="password_notice"></div>
 	</div>
 	<div class="checc_form_item">
 		<label class="checc_form_label">确认密码</label>
 		<div class="checc_input_block">
-    		<input class="checc_input" type="password" id="password1" name="password1" placeholder="请再次输入新密码">
+    		<input class="checc_input" type="password" id="password1" name="password1" placeholder="请再次输入新密码" value="${password1}">
 		</div>
 		<div class="error_info" id="password1_notice"></div>
 	</div>
@@ -121,6 +121,9 @@
 		$("#password").trigger('blur');
 		$("#password1").trigger('blur');
 		if(_v_p1 && _v_p2) {
+			var _pwd = $("#password").val(), _pwd1 = $("#password1").val();
+			$("#password").val(Crypto.encryptAES(_pwd));
+			$("#password1").val(Crypto.encryptAES(_pwd1));
 			$("#step_form").submit();
 		} else { // 表单验证不通过
 			return false;

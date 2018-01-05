@@ -186,7 +186,8 @@
 		 FROM
 		 	auction_record
 		 WHERE 
-		 	topic_item_id = #{topicItemId}
+		 	record_type = '01'
+		 AND topic_item_id = #{topicItemId}
  		 ORDER BY id DESC
  	 	 Limit 1
  	</select>
@@ -261,28 +262,28 @@
 				discount,
 				create_time
 		)values
-		(
 			<foreach collection="list" item="item" separator=",">
-				#{item.id},
-				#{item.topicItemId},
-				#{item.recordType},
-				#{item.depositType},
-				#{item.userId},
-				#{item.nickname},
-				#{item.mobile},
-				#{item.bidNum},
-				#{item.exchangeCount},
-				#{item.refundNum},
-				#{item.totalCurrency},
-				#{item.currentAuctPrice},
-				#{item.depositId},
-				#{item.cardNo},
-				#{item.depositAmount},
-				#{item.discountId},
-				#{item.discount},
-				#{item.createTime}
+				(
+					#{item.id},
+					#{item.topicItemId},
+					#{item.recordType},
+					#{item.depositType},
+					#{item.userId},
+					#{item.nickname},
+					#{item.mobile},
+					#{item.bidNum},
+					#{item.exchangeCount},
+					#{item.refundNum},
+					#{item.totalCurrency},
+					#{item.currentAuctPrice},
+					#{item.depositId},
+					#{item.cardNo},
+					#{item.depositAmount},
+					#{item.discountId},
+					#{item.discount},
+					#{item.createTime}
+				)
 			</foreach>
-		)
  	</insert>
  	
 

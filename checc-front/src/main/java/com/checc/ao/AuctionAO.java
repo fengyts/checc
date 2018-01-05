@@ -14,6 +14,7 @@ import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.dto.AuctionActionDTO;
 import com.checc.dto.AuctionListDTO;
+import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionActionService;
 import com.checc.service.AuctionRecordService;
 import com.checc.service.TopicItemService;
@@ -208,6 +209,7 @@ public class AuctionAO {
 		if (isOnlyMe) {
 			pr.setUserId(userId);
 		}
+		pr.setRecordType(AuctionRecordTypeEnum.AUCTION.code);
 		Integer pageNo = dto.getPageNo();
 		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(pr,
 				pageNo, dto.getPageSize());

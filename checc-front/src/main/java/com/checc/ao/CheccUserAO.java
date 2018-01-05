@@ -251,7 +251,7 @@ public class CheccUserAO {
 	 * </pre>
 	 *
 	 * @param dto
-	 * @return msg data值：-1-会话过期; 0-校验不通过; 1-校验通过; 2-参数校验错误
+	 * @return msg data值：-1-会话过期,非法请求; 0-校验不通过; 1-校验通过; 2-业务数据校验错误
 	 */
 	public CommonResultMessage recoveredPwd(HttpServletRequest request, Model model, FgPwdDTO dto)
 			throws Exception {
@@ -419,11 +419,17 @@ public class CheccUserAO {
 			// 校验新密码
 			String password = dto.getPassword();
 			String password1 = dto.getPassword1();
-
+			
 			if (StringUtils.isBlank(password) || StringUtils.isBlank(password1)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "密码不能为空", 2);
 			}
-			if (Validator.isPasswordStrong(password)) {
+			
+			password = aes.decrypt(password);
+			password1 = aes.decrypt(password1);
+			if(!password.equals(password1)){
+				return new CommonResultMessage(CommonResultMessage.Failure, "两次输入的密码不一致", 2);
+			}
+			if (!Validator.isPasswordStrong(password)) {
 				return new CommonResultMessage(CommonResultMessage.Failure, "密码6~18位且必须包含大小写字母和数字",
 						2);
 			}
@@ -507,7 +513,6 @@ public class CheccUserAO {
 		ud.setLastLoginTime(new Date());
 		userService.update(ud, false);
 		
-//		userDO.setMobile(StringUtils.securityMobile(userDO.getMobile()));
 		return new CommonResultMessage(userDO);
 	}
 

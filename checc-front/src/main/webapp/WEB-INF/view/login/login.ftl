@@ -35,7 +35,7 @@
 <div id="header">
     <div class="hd_bar" id="userinfo-bar">
         <div class="bd">
-            <div class="logo"><a href="index.php">车西西</a></div>
+            <div class="logo"><a href="${domain}/">车西西</a></div>
        	<div class="hd_lbar" style="display: block;">
                 <a href="/" rel="nofollow">网站首页</a>
             </div>

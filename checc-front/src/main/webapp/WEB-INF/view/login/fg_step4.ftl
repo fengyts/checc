@@ -9,7 +9,7 @@
 	}
 	p {
 		text-align: center;
-		color: #999999;
+		color: #666666;
 		line-height: 10px;
 		font-size: 15px;
 		min-width: 600px;

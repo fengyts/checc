@@ -84,8 +84,8 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.checc.*.service.*</value>
-				<value>com.checc.*.dao.*</value>
+				<value>com.checc.*.service.impl</value>
+				<value>com.checc.*.dao.mybatis</value>
 			</list>
 		</property>
 	</bean>
