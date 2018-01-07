@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.checc.ao.TopicItemAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
-import com.checc.enums.TopicTypeEnum;
 import com.checc.vo.front.TopicItemVO;
 
 @Controller
@@ -33,7 +32,7 @@ public class IndexController {
 		}
 		
 		// 获取竞拍商品列表
-		List<TopicItemVO> auctionList = topicItemAO.listAuction("01", TopicTypeEnum.TOPIC_AUCTION.getCode());
+		List<TopicItemVO> auctionList = topicItemAO.listAuction();
 		model.addAttribute("auctionList", auctionList);
 		
 		if (CollectionUtils.isNotEmpty(auctionList)){

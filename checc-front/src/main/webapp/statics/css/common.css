@@ -90,7 +90,6 @@ ul, ol {
 
 .userinfo_bar {
 	float: right;
-	margin-right: 100px;
 }
 
 .userinfo_bar a {
@@ -102,21 +101,21 @@ ul, ol {
 	margin: 0;
 	padding: 0;
 	background-color: #f5f5f5;
-	height: 70px;
+	height: 120px;
 }
 
 .checc_lg {
-	max-height: 70px;
+	max-height: 120px;
 }
 
 .checc_lg div {
+	vertical-align: middle;
 	display: inline-block;
-	max-height: 70px;
+	max-height: 120px;
 	min-height: 50px;
-	padding: 0;
+	padding-top: 20px;
 	margin: 0;
 	text-align: center;
-	vertical-align: middle;
 }
 
 .checc_lg .checc_clg {
@@ -155,7 +154,7 @@ ul, ol {
 }
 
 .checc_lg_t {
-	padding-top: 10px !important;
+	padding-top: 40px !important;
 }
 
 .checc_lg_ti {
@@ -165,15 +164,18 @@ ul, ol {
 
 .checc_qrcode {
 	float: right;
-	width: 120px;
-	heigth: 70px;
-	/* 	right: 100px; */
-	/* 	top: 45px; */
-	background-image: url("../images/checc_qr.jpg");
+	width: 80px;
+	heigth: 80px;
+	/* background-image: url("../images/checc_qr.jpg");
 	background-repeat: no-repeat;
-	background-size: contain;
-	margin-right: 100px !important;
-	margin-top: 10px !important
+	background-size: contain; 
+	margin-top: 20px !important
+	*/
+}
+
+.checc_qrcode img {
+	width: 100%;
+	height: 100%;
 }
 
 /**
@@ -222,7 +224,7 @@ ul, ol {
 	height: 35px;
 	padding-top: 5px;
 	line-height: 30px;
-/* 	border-bottom: solid 1px #aaeeee; */
+	/* 	border-bottom: solid 1px #aaeeee; */
 }
 
 .footer .about a {
@@ -236,9 +238,11 @@ ul, ol {
 }
 
 .footer .copyright {
+	vertical-align: middle;
+	padding-top: 20px;
 	padding-bottom: 8px;
 	text-align: center;
-	border-top: solid 1px #aaeeee;
+/* 	border-top: solid 1px #aaeeee; */
 }
 
 .footer .copyright p {
@@ -262,86 +266,21 @@ ul, ol {
 	margin: 0 0 0 0;
 }
 
-/*  竞拍流程图样式 */
-.flow_box {
-	overflow-wrap: normal;
-	white-space: nowrap;
-	word-break: normal;
-	max-height: 200px;
-}
-
-.flow_title {
-	width: 168px;
-	color: #0099cc;
-	max-height: 50px;
-	/*margin-top: 10px;*/
-	margin-left: 45%;
-	text-align: center;
-	font-size: 26px;
-	font-weight: 600;
-	letter-spacing: 6px;
-	white-space: nowrap;
-	word-break: normal;
-}
-
-.flow {
-	margin: 0;
-	padding: 0;
-	height: 150px;
-	overflow-wrap: normal;
-	width: 100%;
-	min-width: 1196px;
-	/*white-space: nowrap;
-    word-break: normal;*/
-}
-
-.flow ul {
-	margin: 0;
-	padding: 0;
-	overflow-wrap: normal;
-	/*padding-top: 4px;*/
-	vertical-align: middle;
-	text-align: center;
-	/*white-space: nowrap;
-    word-break: normal;*/
-	height: inherit;
-}
-
-.flow ul li {
-	display: inline-block;
-	max-width: 135px;
-	height: inherit;
-	line-height: 17px;
-	padding: 0 50px;
-}
-
-.flow span {
-	max-width: 150px;
-}
-
-.flow img {
-	width: 100%;
-	height: 100%;
-}
-
-.flow_arrows {
-	vertical-align: middle;
-}
-
 /* 竞拍商品style start */
 .topic {
 	
 }
 
 .topic_hd {
-	margin-top: 35px;
+	margin-top: 50px;
 }
 
 .topic_tab {
-	border-top: solid 1px #aee;
+	/* border-top: solid 1px #aee; */
+	text-align: center;
 }
 
-.topic_hd .topic_tab {
+.topic_current {
 	width: 100%;
 	height: 40px;
 	color: #0099cc;
@@ -354,17 +293,29 @@ ul, ol {
 	word-break: normal;
 }
 
-.topic_tab a:hover {
+.topic_previous {
+	width: 100px;
+	float: right;
+	margin-top: -30px;
+}
+
+.topic_previous a {
+	font-size: 14px;
+	color: #888;
+}
+
+.topic_previous a:hover {
+	color: #09c762;
+	opacity: .8;
+	filter: alpha(opacity = 80);
 	cursor: pointer;
 	text-decoration: underline;
+	filter: alpha(opacity = 80);
+	cursor: pointer;
 }
 
 .select_tab {
 	
-}
-
-.next_periods>a {
-	color: #666666;
 }
 
 .select_tab>a {
@@ -588,14 +539,15 @@ ul, ol {
 	.meta_exchange_eninfo {
 	margin-top: 12px;
 }
-.meta_item_currauctprice{
+
+.meta_item_currauctprice {
 	margin-top: 8px;
 }
 
 .meta_item_currauctprice>.currauctprice, .meta_item_exchangeprice>.exchangeprice
 	{
 	color: #ff0000 !important;
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: 600;
 }
 
@@ -611,8 +563,8 @@ ul, ol {
 	width: 500px;
 }
 
-.currauctperson, .curraucttime {
-	margin-left: 15px;
+.currauctprice, .currauctperson, .curraucttime {
+	margin-left: 6px;
 }
 
 .meta_currauctper>.auctall {
@@ -758,7 +710,7 @@ ul, ol {
 	font-family: "Arial Negreta", "Arial";
 	font-style: normal;
 	text-align: center;
-	margin: 0;
+	margin: 30px 0 0 0;
 }
 
 .center_title, .deposit_title {
@@ -944,15 +896,14 @@ ul, ol {
 
 .dpcheck_info, .dpckipt_info {
 	display: none;
-/* 	color: #ff0000; */
-/* 	font-size: 15px; */
+	/* 	color: #ff0000; */
+	/* 	font-size: 15px; */
 }
 
 /* .dpck_info>p {
 	color: #0099cc;
 	font-size: 15px;
 } */
-
 .dpckipt_info>p, .dpck_info>p {
 	color: #ff0000;
 	font-size: 15px;

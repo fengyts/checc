@@ -50,7 +50,7 @@ public class UserCommonController {
 	@Autowired
 	private CheccUserAO userAO;
 
-	@RequestMapping({ "/login" })
+	/*@RequestMapping({ "/login" })
 	public String loginIndex(HttpServletRequest request, HttpServletResponse response) {
 		CookieUtils cookieUtil = new CookieUtils();
 		TokenModel tk = new TokenModel();
@@ -58,9 +58,9 @@ public class UserCommonController {
 		String value = tk.getBaseKey();
 		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
 		return "/login/login";
-	}
+	}*/
 	
-	@RequestMapping({ "/loginNew" })
+	@RequestMapping({ "/login" })
 	public String loginNew(HttpServletRequest request, HttpServletResponse response) {
 		CookieUtils cookieUtil = new CookieUtils();
 		TokenModel tk = new TokenModel();

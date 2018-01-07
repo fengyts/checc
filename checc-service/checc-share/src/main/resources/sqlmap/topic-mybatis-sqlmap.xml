@@ -204,5 +204,20 @@
  		AND topic_type = '01'
  		AND end_time &lt;= #{timerTime}
  	</select>
+ 	
+ 	<select id="MybatisTopicDAO_selectPreviousOne" resultMap="TopicDOResultMap" parameterType="string">
+ 		SELECT
+ 			<include refid="MybatisTopicDAO_all_column_fields" />
+ 		FROM 
+ 			topic
+ 		WHERE
+ 			end_time &lt; now()
+ 			<if test="_parameter !=null and _parameter != '' ">
+ 				AND topic_type = #{_parameter}
+ 			</if>
+ 		ORDER BY end_time DESC, id DESC
+ 		LIMIT 1
+ 	
+ 	</select>
 
 </mapper>

@@ -3,6 +3,12 @@ var _smsFlag = true; // smscode 发送按钮开关,默认打开
 
 $(document).ready(function() {
 	
+	$('.login_span input').focus(function(){
+		$(this).parent().addClass('focus');
+	}).blur(function(){
+		$(this).parent().removeClass('focus');
+	});
+	
 	$("#mobile").on('blur', function() {
 		var _this = $(this);
 		var _mobile = _this.val();

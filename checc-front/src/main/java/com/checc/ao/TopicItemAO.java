@@ -1,6 +1,7 @@
 package com.checc.ao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -53,16 +54,13 @@ public class TopicItemAO {
 	 *            01-本期商品；02-下期预告
 	 * @return
 	 */
-	public List<TopicItemVO> listAuction(String type, String topicType) {
-		List<TopicDO> listTopic = topicService.selectTopicByProgress(topicType, TopicStatusEnum.InProgress);
+	public List<TopicItemVO> listAuction() {
+		TopicDO topicDO = getTopicDO(TopicTypeEnum.TOPIC_AUCTION.getCode());
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
-		if (CollectionUtils.isEmpty(listTopic)) {
-			return listResult;
+
+		if (null != topicDO) {
+			packageTopicItemVO(topicDO, listResult);
 		}
-
-		TopicDO topicDO = listTopic.get(0);
-		packageTopicItemVO(topicDO, listResult);
-
 		return listResult;
 	}
 
@@ -74,23 +72,50 @@ public class TopicItemAO {
 	 * @return
 	 */
 	public List<TopicItemVO> listExchange() {
+		TopicDO topicDO = getTopicDO(TopicTypeEnum.TOPIC_EXCHANGE.getCode());
 		List<TopicItemVO> listResult = new ArrayList<TopicItemVO>();
-		// 获取正在进行中的兑换专题，若为空则获取即将进行的兑换专题
-		List<TopicDO> listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(),
-				TopicStatusEnum.InProgress);
-		if (CollectionUtils.isEmpty(listTopic)) {
-			listTopic = topicService.selectTopicByProgress(TopicTypeEnum.TOPIC_EXCHANGE.getCode(),
-					TopicStatusEnum.NotStarted);
+
+		if (null != topicDO) {
+			packageTopicItemVO(topicDO, listResult);
 		}
-		if (CollectionUtils.isEmpty(listTopic)) {
-			return listResult;
-		}
-
-		TopicDO topicDO = listTopic.get(0);
-
-		packageTopicItemVO(topicDO, listResult);
-
 		return listResult;
+	}
+
+	private TopicDO getTopicDO(String topicType) {
+		List<TopicDO> listTopic = topicService.selectTopicByProgress(topicType,
+				TopicStatusEnum.InProgress);
+		TopicDO topicDO = null;
+		boolean isLatestTopic = false; // 是否显示最新往期
+		// 没有进行中的专题,如果是是当天20:00:00.000~23:59:59.999之间的时间则显示往期最新一期的,否则显示即将开始的一期
+		if (CollectionUtils.isEmpty(listTopic)) {
+			Calendar cal = Calendar.getInstance();
+			Date now = new Date();
+			cal.setTime(now);
+			cal.set(Calendar.HOUR_OF_DAY, 20);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.MILLISECOND, 0);
+			if (now.after(cal.getTime())) {
+				isLatestTopic = true;
+				topicDO = topicService.selectPreviousOne(topicType);
+			} else {
+				listTopic = topicService.selectTopicByProgress(topicType,
+						TopicStatusEnum.NotStarted);
+				if (CollectionUtils.isEmpty(listTopic)) {
+					isLatestTopic = true;
+					topicDO = topicService.selectPreviousOne(topicType);
+				}
+			}
+		}
+
+		if (isLatestTopic) {
+			return topicDO;
+		}
+		if (CollectionUtils.isNotEmpty(listTopic)) {
+			return listTopic.get(0);
+		}
+		return null;
+
 	}
 
 	private void packageTopicItemVO(TopicDO topicDO, List<TopicItemVO> listResult) {
@@ -102,10 +127,10 @@ public class TopicItemAO {
 			return;
 		}
 		List<Long> itemIds = new ArrayList<Long>();
-		//List<Long> topicItemIds = new ArrayList<Long>();
+		// List<Long> topicItemIds = new ArrayList<Long>();
 		for (TopicItemDO item : listItems) {
 			itemIds.add(item.getItemId());
-			//topicItemIds.add(item.getId());
+			// topicItemIds.add(item.getId());
 
 			TopicItemVO vo = new TopicItemVO();
 			vo.setTopicType(topicDO.getTopicType());
@@ -118,7 +143,8 @@ public class TopicItemAO {
 			vo.setInventory(item.getInventory());
 			vo.setItemId(item.getItemId());
 			vo.setItemTitle(item.getItemTitle());
-			vo.setItemStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
+			vo.setItemStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(),
+					topicDO.getEndTime()));
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
@@ -140,11 +166,12 @@ public class TopicItemAO {
 
 			// 竞拍专题获取当前竞拍价格
 			if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())) {
-				AuctionRecordDO latestAuction = auctionRecordService.selectLatestAuction(vo.getId());
-				if(null != latestAuction){
+				AuctionRecordDO latestAuction = auctionRecordService
+						.selectLatestAuction(vo.getId());
+				if (null != latestAuction) {
 					vo.setCurrentAuctionPrice(latestAuction.getCurrentAuctPrice().doubleValue());
 				}
-				
+
 			}
 		}
 
@@ -199,9 +226,9 @@ public class TopicItemAO {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
 				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
-			} else {
+			} /*else {
 				vo.setCurrentAuctionPrice(item.getFloorPrice());
-			}
+			}*/
 		}
 
 		ItemPictureDO pdo = new ItemPictureDO();

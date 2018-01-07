@@ -3,13 +3,13 @@ package com.checc.dao.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import ng.bayue.exception.CommonDAOException;
+
 import org.springframework.stereotype.Component;
 
 import com.checc.dao.TopicDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.TopicDO;
-
-import ng.bayue.exception.CommonDAOException;
 
 @Component(value="topicDAO")
 public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
@@ -76,6 +76,11 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 	@Override
 	public List<TopicDO> selectTopicNotRefund(Map<String, Object> params) {
 		return getSqlSession().selectList(getStatement("selectTopicNotRefund"), params);
+	}
+
+	@Override
+	public TopicDO selectPreviousOne(String topicType) {
+		return getSqlSession().selectOne(getStatement("selectPreviousOne"), topicType);
 	}
 	
 	

@@ -8,24 +8,23 @@
 	<div class="meta_item_info">
 		<div class="meta_item_title">${detailVO.itemTitle}</div>
 		<div class="auc_info_t">
+			<#--
 			<div class="item_floorprice_box">
 				<span class="floor_price_label">竞拍底价:</span>
 				<span class="floor_price">
 					￥${detailVO.floorPrice?string('#0.00')}
 				</span>
 			</div>
+			-->
 			<div class="meta_item_currauctprice">
 				<span class="curraucttile">当前价:</span>
+				<span class="currauctprice">
 					<#if detailVO.currentAuctionPrice??>
-						<span class="currauctprice">
-							<#if detailVO.currentAuctionPrice == detailVO.floorPrice>
-								￥${(detailVO.floorPrice!0.00)?string('#0.00')}
-							<#else>
-								￥${detailVO.currentAuctionPrice?string('#0.00')}
-							</#if>
-						</span>
+							￥${(detailVO.currentAuctionPrice!0.00)?string('#0.00')}
 					<#else>
+						无人出价
 					</#if>
+				</span> 
 				<span class="compare_marketPrice">市场价：￥${detailVO.marketPrice?string('0.00')}</span>
 			</div>
 			<div class="meta_currauctper">
@@ -47,17 +46,30 @@
 				<p>
 					<#if detailVO.currentBidder??>
 						<#if detailVO.status?? && detailVO.status=='03'>
-							恭喜<font style="color: #0099ff;">${detailVO.currentBidder}</font>以
-							<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
-							拍得本件商品
+							<#if (detailVO.currentAuctionPrice!0) &lt; (detailVO.floorPrice!0)>
+								该商品已经流拍，没有人拍得该商品
+							<#else>
+								恭喜<font style="color: #0099ff;">${detailVO.currentBidder}</font>以
+								<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
+								拍得本件商品
+							</#if>
 						<#else>
-							若接下来无人出价,
-							<span style="color:#0099cc;">${detailVO.currentBidder}</span>
-							将以<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
-							拍得本件商品
+							<#if (detailVO.currentAuctionPrice!0) &lt; (detailVO.floorPrice!0)>
+								当前竞拍价远远低于市场价噢，赶紧出价获得领先吧
+							<#else>
+								若接下来无人出价，
+								<span style="color:#0099cc;">${detailVO.currentBidder}</span>
+								将以<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
+								拍得本件商品
+							</#if>
 						</#if>
 					<#else>
-						(若一直无人出价,本商品将流拍)
+						<#if detailVO.status?? && detailVO.status=='03'>
+							该商品已经流拍，没有人拍得该商品
+						<#else>
+						${detailVO.status}
+							(若一直无人出价，本商品将流拍)
+						</#if>
 					</#if>
 				</p>
 			</div>

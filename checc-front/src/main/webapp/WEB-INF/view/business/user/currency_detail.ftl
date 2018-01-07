@@ -10,7 +10,7 @@
 		<div class="currency_info">
 			<div class="total_currency_box">
 				<div class="uc_box_t">
-					<span>充值的西币</span>
+					<span>西币余额</span>
 					<span class="uc_help_i" index="0"></span>
 				</div>
 				<div class="uc_ta_num">

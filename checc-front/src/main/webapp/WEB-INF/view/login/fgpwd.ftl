@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>${webtitle}</title>
+    
+    <link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
+    
     <link type="text/css" rel="stylesheet" href="${css}/checc_main.css">
     <link type="text/css" rel="stylesheet" href="${css}/my.css">
     

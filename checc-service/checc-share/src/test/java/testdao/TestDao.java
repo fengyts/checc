@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.checc.domain.TopicDO;
 import com.checc.service.RefundCurrencyService;
+import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,16 +20,13 @@ public class TestDao {
 	private UserCurrencyService currencyService;
 	@Autowired
 	private RefundCurrencyService refundCurrencyService;
+	@Autowired
+	private TopicService topicServie;
 
 	@Test
 	public void test() {
-//		Map<String, Integer> refundList = new HashMap<String, Integer>();
-//		refundList.put("1", 100);
-//		
-//		int res = currencyService.refundCurrency(refundList);
-//		System.out.println(res);
-		
-		refundCurrencyService.refundCurrency();
+		TopicDO topicDO = topicServie.selectPreviousOne("01");
+		System.out.println(topicDO.getId());
 	}
 	
 

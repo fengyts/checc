@@ -7,7 +7,10 @@
 		</div>
 		-->
 		<div class="topic_tab">
-			<span>正在竞拍中</span>
+			<div class="topic_current">本期竞拍</div>
+			<div class="topic_previous" id="viewPrevious">
+				<a href="javascript:void(0);">查看往期竞拍</a>
+			</div>
 		</div>
 		<div class="auction_time">
 			<span>竞拍时间:
@@ -59,7 +62,7 @@
 	<#-- 兑换商品 -->
 	<div class="topic_hd">
 		<div class="topic_tab">
-			<span class="current_periods select_tab">西币兑换</span>
+			<span class="topic_current select_tab">西币兑换</span>
 		</div>
 		<div class="auction_time">
 			<span>每天上午10:00开始兑换，数量有限先到先得</span>

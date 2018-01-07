@@ -239,6 +239,14 @@ public class TopicServiceImpl  implements TopicService{
 		
 		return list;
 	}
+
+	@Override
+	public TopicDO selectPreviousOne(String topicType) {
+		if(StringUtils.isBlank(topicType)){
+			return null;
+		}
+		return topicDAO.selectPreviousOne(topicType);
+	}
 	
 	
 	

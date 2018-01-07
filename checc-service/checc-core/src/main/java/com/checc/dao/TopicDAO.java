@@ -35,4 +35,14 @@ public interface TopicDAO extends GeneralDAO<TopicDO> {
 	 */
 	List<TopicDO> selectTopicNotRefund(Map<String, Object> params);
 	
+	/**
+	 * <pre>
+	 * 获取往期最近一期的专题
+	 * </pre>
+	 *
+	 * @param topicType
+	 * @return
+	 */
+	TopicDO selectPreviousOne(String topicType);
+	
 }

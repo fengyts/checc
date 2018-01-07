@@ -69,7 +69,8 @@ public class UserCenterAO {
 	}
 
 	public void ucAuctionList(Model model, CheccUserDO userDO, String recordType, Integer pageNo) {
-		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userDO.getId(),
+		Long userId = userDO.getId();
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userId,
 				recordType, pageNo, 10);
 
 		Page<UCAuctionListVO> pageRes = new Page<UCAuctionListVO>();
@@ -106,14 +107,29 @@ public class UserCenterAO {
 				vo.setItemId(itemId);
 				vo.setItemTitle(ti.getItemTitle());
 				vo.setItemStatus(topicStatus);
+				/*
 				for (AuctionRecordDO ar : listDb) {
 					if (tpId == ar.getTopicItemId().longValue()) {
 						vo.setCurrenctAuctPrice(ar.getCurrentAuctPrice() != null ? ar
 								.getCurrentAuctPrice().doubleValue() : 0);
 						if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
-							vo.setIsWinner(true);
+							AuctionRecordDO winner = auctionRecordService.selectLatestAuction(tpId);
+							if(winner.getUserId().longValue() == userId.longValue()){
+								vo.setIsWinner(true);
+							}
 						}
 						break;
+					}
+				}*/
+				
+				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
+				if(null != latest){
+					vo.setCurrenctAuctPrice(latest.getCurrentAuctPrice() != null ? latest
+							.getCurrentAuctPrice().doubleValue() : 0);
+					if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
+						if(latest.getUserId().longValue() == userId.longValue()){
+							vo.setIsWinner(true);
+						}
 					}
 				}
 

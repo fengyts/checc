@@ -13,9 +13,9 @@
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	<#--
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+	<link rel="stylesheet" type="text/css" href="${plugins}/layer/layui-v2.2.1/layui/css/layui.css" />
 	-->
 	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
-	<link rel="stylesheet" type="text/css" href="${plugins}/layer/layui-v2.2.1/layui/css/layui.css" />
 	
 	<#include "/common/common-js.ftl" />
 	

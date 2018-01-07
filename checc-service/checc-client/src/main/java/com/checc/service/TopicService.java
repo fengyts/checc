@@ -1,7 +1,6 @@
 package com.checc.service;
 
 import java.util.List;
-import java.util.Map;
 
 import ng.bayue.service.common.GeneralService;
 
@@ -45,5 +44,15 @@ public interface TopicService extends GeneralService<TopicDO, TopicDO> {
 	 * @return
 	 */
 	List<TopicDO> selectTopicNotRefund();
+	
+	/**
+	 * <pre>
+	 * 获取往期最近一期的专题
+	 * </pre>
+	 *
+	 * @param topicType
+	 * @return
+	 */
+	TopicDO selectPreviousOne(String topicType);
 
 }

@@ -24,11 +24,11 @@
 			<artifactId>weixin-popular</artifactId>
 			<version>2.8.15</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.jdom</groupId>
-		    <artifactId>jdom</artifactId>
-		    <version>1.1.3</version>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.3</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -40,6 +40,28 @@
 
 	<build>
 		<finalName>checc-front</finalName>
+
+		<!-- 
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-war-plugin</artifactId> 
+				<version>2.4</version> 
+
+				<configuration>
+					<warName>checc-front</warName>
+					<outputDirectory>target</outputDirectory>
+					排除
+					<packagingExcludes>
+						WEB-INF/classes/*jdbc.properties,
+						WEB-INF/classes/*config.properties,
+						%regex[WEB-INF/lib/(?!checc*|fastdfs*|common-util*).*.jar]
+					</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins> 
+		-->
+
 	</build>
 
 </project>

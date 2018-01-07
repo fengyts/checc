@@ -12,7 +12,7 @@
 
 .items {
 	position: relative;
-	相对定位 display: inline-block;
+	display: inline-block;
 	float: left;
 	height: 300px;
 	border: solid 1px #aaeeee;
@@ -86,7 +86,7 @@
 
 .uc_item_info>.uc_item_aucres>div {
 	display: inline-block;
-	float: left;
+/* 	float: left; */
 	vertical-align: top;
 }
 
@@ -99,6 +99,7 @@
 }
 
 .win_currauc2 {
-	margin: 0 0 0 80px;
+/* 	margin: 0 0 0 80px; */
+	float: right;
 	color: #1e9fff;
 }

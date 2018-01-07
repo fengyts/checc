@@ -9,6 +9,15 @@ $(document).ready(function() {
 	
 	//getLoginInfo();
 	
+	$("#viewPrevious").on('mouseover', function(){
+		layer.tips("请至车西西官方微信查看，微信扫描网站右上角二维码快速关注车西西。", this, {
+			time : 30000,
+			tips : [ 1, '#666' ]
+		});
+	}).on('mouseout', function() {
+		layer.closeAll('tips');
+	});;
+	
 	
 });
 

@@ -7,6 +7,8 @@
             </span>
         </div>
         <div class="checc_lg_t"><span class="checc_lg_ti">用极低的价格买到喜欢的车</span></div>
-        <div class="checc_qrcode"></div>
+        <div class="checc_qrcode">
+        	<img src="${images}/checc_qr.jpg">
+        </div>
     </div>
 </div>

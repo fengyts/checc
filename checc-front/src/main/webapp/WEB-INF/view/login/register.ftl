@@ -118,7 +118,7 @@
 					<label> 
 					<input id="agreement" name="agreement" type="checkbox" value="1" checked="checked" tabindex="5" class="remember-me" /> 
 						我已看过并接受《
-							<a href="article.php?cat_id=-1" style="color: blue" target="_blank">用户协议</a>
+							<a href="article.php?cat_id=-1" style="color: blue" target="_blank">车西西用户协议</a>
 						》
 					</label>
 				</li>

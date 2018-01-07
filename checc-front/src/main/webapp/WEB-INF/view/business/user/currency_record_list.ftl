@@ -30,7 +30,7 @@
 		  	</colgroup>
 		  	<thead>
 			    <tr>
-				    <th>出价时间</th>
+				    <th>交易时间</th>
 				    <th>交易类型</th>
 				    <th>交易描述</th>
 				    <th>西币数量(个)</th>
