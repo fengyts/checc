@@ -76,7 +76,7 @@ $(document).ready(function() {
 		        		move:false,
 		        		shade: 0.1,
 		        		anim: 5,
-		        		area: ['600px', '500px'],
+		        		area: ['500px', '400px'],
 		        		content: data
 		        	});
 		        }
