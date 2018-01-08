@@ -13,10 +13,6 @@
 	
 	<#include "/common/common-js.ftl" />
 	
-	<style type="text/css">
-	
-	</style>
-	
 </header>
 <body>
 
