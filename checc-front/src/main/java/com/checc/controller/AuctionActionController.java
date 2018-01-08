@@ -39,6 +39,17 @@ public class AuctionActionController {
 	@Autowired
 	private AuctionAO auctionAO;
 
+	/**
+	 * <pre>
+	 * 竞拍页面
+	 * </pre>
+	 *
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @param tpId
+	 * @return
+	 */
 	@RequestMapping("/auctionAction/{tpId}")
 	public String auctionPage(HttpServletRequest request, HttpServletResponse response,
 			Model model, @PathVariable Long tpId) {
@@ -56,6 +67,17 @@ public class AuctionActionController {
 		return "/business/auction_action";
 	}
 
+	/**
+	 * <pre>
+	 * 兑换页面
+	 * </pre>
+	 *
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @param tpId
+	 * @return
+	 */
 	@RequestMapping("/exchangeAction/{tpId}")
 	public String exchangePage(HttpServletRequest request, HttpServletResponse response,
 			Model model, @PathVariable Long tpId) {
@@ -119,6 +141,28 @@ public class AuctionActionController {
 		model.addAttribute("checcUser", userDO);
 		auctionAO.auctionList(model, dto, userDO.getId());
 		return "/business/auction_list";
+	}
+	
+	/**
+	 * <pre>
+	 * 商品兑换记录
+	 * </pre>
+	 *
+	 * @param request
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value = "/exchangeList")
+	public String exchangeList(HttpServletRequest request, Model model, AuctionListDTO dto) {
+		CheccUserDO userDO = (CheccUserDO) request.getSession().getAttribute(
+				UserConstants.USER_SESSION_KEY);
+		if (null == userDO) {
+			return "rederect: /usr/login";
+		}
+		model.addAttribute("checcUser", userDO);
+		auctionAO.exchangeList(model, dto, userDO.getId());
+		return "/business/exchange_list";
 	}
 
 }

@@ -115,6 +115,7 @@ function depositAct() {
 	});
 }
 
+/*
 function needLoginAjax(){
 	lgn_pg_ii = layer.open({
 		type: 2,
@@ -129,6 +130,7 @@ function needLoginAjax(){
 		content: domain + '/user/loginAjax'
 	});
 }
+*/
 
 function business(data){
 	lgn_pg_ii = layer.open({
@@ -144,5 +146,6 @@ function business(data){
 		content: data,
 	});
 }
+
 
 

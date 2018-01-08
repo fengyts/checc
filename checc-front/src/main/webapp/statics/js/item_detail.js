@@ -21,7 +21,6 @@ $(document).ready(function() {
 			_title = '兑换';
 		}
 		$.ajax({
-//			url : domain + '/topicItem/auctionAction/' + _auctionType + "/" + _tpId,
 			url : _url,
 			method : 'GET',
 			dataType : 'html',
@@ -31,18 +30,7 @@ $(document).ready(function() {
 			success: function(data, status, xhr) { 
 		        var errorCode = xhr.getResponseHeader("errorCode");
 		        if('999' == errorCode) { // 未登陆
-		        	lgn_pg_ii = layer.open({
-		        		type: 2,
-		        		title: '请先登录',
-		        		resize: false,
-		        		//scrollbar: false,
-		        		//fixed: false,
-		        		move:false,
-		        		shade: 0.1,
-		        		zIndex: 0,
-		        		content: domain + '/user/loginAjax',
-		        		area: ['700px', '500px']
-		        	});
+		        	needLoginAjax();
 		        } else { // 已经登陆
 		        	lgn_pg_ii = layer.open({
 		        		type: 2,
@@ -60,6 +48,42 @@ $(document).ready(function() {
 		    }
 
 		});
+	});
+	
+	
+	// 查看哪些人兑换了
+	$("#allExchange").on('click', function(){
+		var _url = domain + "/auction/exchangeList?tpId=" + $(this).attr('param');
+		
+		$.ajax({
+			url : _url,
+			method : 'GET',
+			dataType : 'html',
+			data : {reqTime: new Date().getTime()},
+			cache : false,
+
+			success: function(data, status, xhr) { 
+		        var errorCode = xhr.getResponseHeader("errorCode");
+		        if('999' == errorCode) { // 未登陆
+		        	needLoginAjax();
+		        } else { // 已经登陆
+		        	lgn_pg_ii = layer.open({
+		        		type: 1,
+		        		title: "哪些人兑换了",
+		        		resize: false,
+		        		//scrollbar: false,
+		        		//fixed: false,
+		        		move:false,
+		        		shade: 0.1,
+		        		anim: 5,
+		        		area: ['600px', '500px'],
+		        		content: data
+		        	});
+		        }
+		    }
+
+		});
+		
 	});
 
 });

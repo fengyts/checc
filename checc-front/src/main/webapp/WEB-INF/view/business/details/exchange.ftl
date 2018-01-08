@@ -65,7 +65,7 @@
 				<p class="auc_currency"><span></span></p>
 			</div>
 			<div class="auc_exchanged_list">
-				<a href="#">看看哪些人兑换了>></a>
+				<a href="#" id="allExchange" param="${detailVO.id}">看看哪些人兑换了>></a>
 			</div>
 		</div>
 	</div>

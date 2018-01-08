@@ -26,6 +26,22 @@
 	layui.use('layer', function(){
   		layer = layui.layer;
 	}); 
+	
+	function needLoginAjax(){
+		lgn_pg_ii = layer.open({
+			type: 2,
+			title: '请先登录',
+			resize: false,
+			//scrollbar: false,
+			//fixed: false,
+			move:false,
+			shade: 0.1,
+			zIndex: 0,
+			area: ['700px', '500px'],
+			content: domain + '/user/loginAjax'
+		});
+	}
+	
 </script>
 
 

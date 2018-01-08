@@ -139,15 +139,14 @@ public class AuctionAO {
 		Long tpId = dto.getTpId();
 		Integer auctionTimes = dto.getAuctionTimes();
 		Integer totalCurrency = dto.getTotalCurrency();
-		if (null == tpId || null == auctionTimes || null == totalCurrency || tpId < 0
-				|| auctionTimes < 1 || totalCurrency < 1) {
+		if (null == tpId || null == auctionTimes || null == totalCurrency || tpId < 0 || auctionTimes < 1
+				|| totalCurrency < 1) {
 			return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
 					CommonResultCode.SystemError.REQ_ERROR.desc);
 		}
 		String auctionTk = dto.getAuctactTK();
 		CommonResultMessage crm = validateTk(auctionTk,
-				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType(), dto
-						.getCheccUserDO().getId());
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_AUCTION.getCodeType(), dto.getCheccUserDO().getId());
 		if (CommonResultMessage.Success != crm.getResult()) {
 			return crm;
 		}
@@ -165,8 +164,7 @@ public class AuctionAO {
 		}
 		String auctionTk = dto.getAuctactTK();
 		CommonResultMessage crm = validateTk(auctionTk,
-				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType(), dto
-						.getCheccUserDO().getId());
+				TokenTypeConstant.BusinessTokenTypeEnum.AUCTION_EXCHANGE.getCodeType(), dto.getCheccUserDO().getId());
 		if (CommonResultMessage.Success != crm.getResult()) {
 			return crm;
 		}
@@ -211,8 +209,8 @@ public class AuctionAO {
 		}
 		pr.setRecordType(AuctionRecordTypeEnum.AUCTION.code);
 		Integer pageNo = dto.getPageNo();
-		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(pr,
-				pageNo, dto.getPageSize());
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(pr, pageNo,
+				dto.getPageSize());
 		pageRes.setPageNo(page.getPageNo());
 		pageRes.setPageSize(page.getPageSize());
 		pageRes.setTotalCount(page.getTotalCount());
@@ -257,6 +255,16 @@ public class AuctionAO {
 		pageRes.setList(tableList);
 		model.addAttribute("page", pageRes);
 
+	}
+
+	public void exchangeList(Model model, AuctionListDTO dto, Long userId) {
+		Long tpId = dto.getTpId();
+		AuctionRecordDO pr = new AuctionRecordDO();
+		pr.setTopicItemId(tpId);
+		pr.setRecordType(AuctionRecordTypeEnum.EXCHANGE.code);
+		List<AuctionRecordDO> list = auctionRecordService.selectDynamic(pr);
+		model.addAttribute("totalExchange", null == list ? 0 : list.size());
+		model.addAttribute("exchangeList", list);
 	}
 
 }
