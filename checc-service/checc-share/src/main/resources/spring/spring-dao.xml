@@ -84,14 +84,13 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.checc.*.service.impl</value>
+<!-- 				<value>com.checc.*.service.impl</value> -->
 				<value>com.checc.*.dao.mybatis</value>
 			</list>
 		</property>
 	</bean>
 	<aop:config proxy-target-class="true">
-		<aop:advisor advice-ref="druid-stat-interceptor"
-			pointcut-ref="druid-stat-pointcut" />
+		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
 	<!-- druid 监控spring配置 结束 -->
 
