@@ -98,9 +98,14 @@ public class UserCommonController {
 		return "redirect:" + returnUrl;
 	}
 
-	@RequestMapping({ "/register" })
+	/*@RequestMapping({ "/register" })
 	public String register() {
 		return "/login/register";
+	}*/
+	
+	@RequestMapping({ "/register" })
+	public String registerNew() {
+		return "/login/register_new";
 	}
 
 	@RequestMapping({ "/captcha" })

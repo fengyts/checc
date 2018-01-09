@@ -68,7 +68,7 @@
 			<div id="login_form_box">
 				<form name="formLogin" action="" method="get" onSubmit="">
 					<ul class="login_ul">
-						<li>
+						<li class="login_input_li">
 							<h2>
 								<div class="trig">
 									没有帐号？<a href="${domain}/user/register.htm" class="trigger-box">点击注册</a>
@@ -113,8 +113,7 @@
 							<input type="hidden" name="act" value="act_login" /> 
 							<input type="hidden" name="back_act" value="${domain}/index" /> 
 							<input type="button" name="submit" class="loginBtn" id="doLogin" value="登 录">
-							<div class="loginBtnBox">
-							</div>
+							<div class="loginBtnBox"></div>
 						</li>
 					</ul>
 				</form>
