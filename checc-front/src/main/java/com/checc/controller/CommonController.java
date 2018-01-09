@@ -1,6 +1,10 @@
 package com.checc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CommonController {
@@ -9,10 +13,10 @@ public class CommonController {
 	 * 找不到页面跳转到404
 	 * 
 	 */
-//	@RequestMapping(value = "/**")
-//	public String noFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		response.setStatus(HttpServletResponse.SC_FOUND);
-//		return "/error/404";
-//	}
+	@RequestMapping(value = "/**")
+	public String noFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setStatus(HttpServletResponse.SC_FOUND);
+		return "/error/404";
+	}
 
 }

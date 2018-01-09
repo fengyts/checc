@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class DepositOrderDO extends BaseDO {
 
+	private static final long serialVersionUID = 7326038048171146870L;
+
 	/** 主键 */
 	private Long id;
 

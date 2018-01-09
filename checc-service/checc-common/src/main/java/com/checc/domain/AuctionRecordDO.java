@@ -1,8 +1,8 @@
 package com.checc.domain;
 
-import ng.bayue.common.BaseDO;
-
 import java.util.Date;
+
+import ng.bayue.common.BaseDO;
 
 /**
  * 竞拍|兑换|充值记录
@@ -11,6 +11,8 @@ import java.util.Date;
  */
 
 public class AuctionRecordDO extends BaseDO {
+
+	private static final long serialVersionUID = 6581451799985523297L;
 
 	/** 主键 */
 	private Long id;

@@ -12,6 +12,9 @@ import java.util.Date;
 
 public class UserCurrencyDO extends BaseDO {
 
+	/**  */
+	private static final long serialVersionUID = 4549458385556716108L;
+
 	/** 主键 */
 	private Long id;
 

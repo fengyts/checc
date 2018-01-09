@@ -11,15 +11,12 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<mvc:annotation-driven />
+	<!-- <mvc:annotation-driven /> -->
 
 	<context:component-scan base-package="com.checc.*">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 
 	<bean id="stringHttpMessageConverter"
@@ -123,9 +120,11 @@
 		<property name="exceptionMappings">
 			<props>
 				<prop key="java.lang.Exception">error/404</prop>
+				<prop key="java.lang.Exception">error/500</prop>
 			</props>
 		</property>
 	</bean>
+	
 
 	<mvc:interceptors>
 		<mvc:interceptor>

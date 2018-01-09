@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class TopicDO extends BaseDO {
 
+	private static final long serialVersionUID = 2302286599035798274L;
+
 	/** 主键 */
 	private Long id;
 
