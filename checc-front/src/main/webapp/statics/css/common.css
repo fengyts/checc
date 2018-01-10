@@ -78,8 +78,8 @@ ul, ol {
 	padding: 5px 10px;
 }
 
-.hd_bar li s {
-	color: #ccc;
+s {
+	color: #cccccc;
 	margin: 0 10px;
 	text-decoration: none;
 }
@@ -608,6 +608,11 @@ ul, ol {
 .act_btn_box>div {
 	display: inline-block;
 }
+/* 
+.act_btn_box .to_recharge {
+	padding: 0 8px 0 0;
+	border-right: solid 2px #66a3ff;
+} */
 
 .act_btn_box>div>a {
 	color: #66a3ff;

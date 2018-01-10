@@ -18,8 +18,11 @@
 					<span class="num_unit">个</span>
 				</div>
 				<div class="act_btn_box">
-					<div><a href="javascript:window.open('${domain}/user/deposit/dplist');">去充值</a></div>
-					<div><a href="${domain}/">去竞拍</a></div>
+					<div class="to_recharge">
+						<a href="javascript:window.open('${domain}/user/deposit/dplist');">去充值</a>
+					<s>|</s>
+					</div>
+					<div class="to_auction"><a href="${domain}/">去竞拍</a></div>
 				</div>
 			</div>
 			<div class="refund_currency_box">
