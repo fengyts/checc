@@ -11,10 +11,10 @@
 	
 	<body>
 		<#include "/common/header_banner.ftl">
-	
+		
 		<div class="wrap content_pos">
 			<div class="error_box">
-				<div class="sorry">404很抱歉！您访问的页面不存在......</div>
+				<div class="sorry">500很抱歉！您访问的页面走丢了......</div>
 				<div class="lost"></div>
 				<div class="visit">
 					<div class="vst">您还可以访问：</div>

@@ -139,7 +139,7 @@
 	<!-- 尾部 -->
 	<div class="footer">
 		<div class="login-footer"> 皖ICP备17022956号-2    
-			Copyright&copy;2017-2018 
+			Copyright&copy;2017-${.now?date?string.yyyy} 
 			<a target="_blank" href="${domain}/">
 				<font style="color: #0099cc">车西西</font>
 			</a>

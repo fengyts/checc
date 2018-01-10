@@ -1,33 +1,33 @@
-<#include "/common/common.ftl"/> 
+<#include "/common/common.ftl">	
 
-<div class="page-error centered mt30">
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>${webtitle}</title>
+		<link type="text/css" rel="stylesheet" href="${static}/common/base.css">
+</head>
 	
-	<div class="error-symbol">
-		<i class="fa-warning"></i>
-	</div>
+	<body>
+		<#include "/common/header_banner.ftl">
 	
-	<h3>
-		错误 404
-		<small>页面未找到</small>
-	</h3>
-	<p>${exception.message!'很抱歉！您访问的页面不存在......'}</p>
-</div>
-
-<div class="page-error-search centered">
-	<a href="javascript:void(0);" class="go-back">
-		<i class="fa-angle-left"></i>
-		关闭
-	</a>
-</div>
-<script>
-	var tabId = $("iframe",window.parent.document).last().attr("id") || "";
-	$(function(){
-		$(".go-back").click(function(){
-			if("" != tabId) {
-				tabId = tabId.replace("mainIframe_","");
-				parent.window.closeTab(tabId);
-			}
-		});
-	});
-</script>
-   
+		<div class="wrap content_pos">
+			<div class="error_box">
+				<div class="sorry">500很抱歉！您访问的页面不存在......</div>
+				<div class="lost"></div>
+				<div class="visit">
+					<div class="vst">您还可以访问：</div>
+					<ul class="clearfix">
+						<li><a href="${domain}/">车西西首页</a></li>
+						<li class="last"><a href="${domain}/index/helper">帮助中心</a></li>
+					</ul>
+					<!--div class="hotline">免费客服热线：4000896600</div-->
+				</div>
+			</div>
+		</div>
+		
+		<#include "/common/footer_both.ftl" />
+	</body>
+</html>
+ 

@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<div class="ft_txt">
-				<p>&copy; 2005-2017 车西西 版权所有，并保留所有权利。ICP备案证书号：
+				<p>&copy; 2017-${.now?date?string.yyyy} 车西西 版权所有，并保留所有权利。ICP备案证书号：
 					<a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow">皖ICP备17022956号-2</a>
 				</p>
 				<br>

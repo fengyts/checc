@@ -1,5 +1,5 @@
 <#include "/common/common.ftl" />
-<link type="text/css" rel="stylesheet" href="${css}/checc_main.css">
+<link type="text/css" rel="stylesheet" href="${css}/fgpwd.css">
 <link type="text/css" rel="stylesheet" href="${css}/my.css">
 
 <style>

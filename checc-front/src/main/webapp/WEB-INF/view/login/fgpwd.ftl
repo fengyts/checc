@@ -7,7 +7,7 @@
     
     <link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
     
-    <link type="text/css" rel="stylesheet" href="${css}/checc_main.css">
+    <link type="text/css" rel="stylesheet" href="${css}/fgpwd.css">
     <link type="text/css" rel="stylesheet" href="${css}/my.css">
     
     <script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>

@@ -15,12 +15,7 @@
 <#assign imgbase=requestContextPath.contextPath>
 <#-- 版本号 -->
 <#--<#assign version="version=" + .now?string("yyyyMMddHHmmss")>-->
-<#assign version="version=201411291540">
-
-<#assign itemdetailjsVersion="20151128">
-<#assign itemNoStartdetailjsVersion="20151128">
-<#assign itemOvertimeDetailjsVersion="20151128">
-<#assign itemOverDetailjsVersion="20151128">
+<#assign version="version=201801081818">
 
 <#assign favicon=images + "/favicon.ico">
 <#assign webtitle="车西西-值得信赖的网上汽车商城">

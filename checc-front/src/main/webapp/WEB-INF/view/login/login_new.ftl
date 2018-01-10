@@ -14,26 +14,11 @@
 		
 		<link rel="stylesheet" type="text/css" href="${css}/login_new.css" />
 
-		<#--
-		<link href="//static.meitun.com/css/base.css?version=18651" rel="stylesheet"  type="text/css"/>
-		<link href="//static.meitun.com/center/css.css?version=18651" rel="stylesheet"  type="text/css"/>
-		<link href="//static.meitun.com/user/css/custom.css?version=18651" rel="stylesheet"  type="text/css"/>
-		<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
-		-->
 
 		<script type="text/javascript" src="${plugins}/crypto-js/rollups/aes.js"></script>
 		<script type="text/javascript" src="${static}/common/crypto.js"></script>
 		<script type="text/javascript" src="${static}/common/utils.js"></script>
 		<script type="text/javascript" src="${js}/login/user.js"></script>
-
-		<#--
-		<link rel="stylesheet" type="text/css" href="//static.meitun.com/account/css.css">
-		<script type="text/javascript" src="//static.meitun.com/user/js/user-static/remote/jquery.user.bindMobile.js?version=18651"></script>
-		<script type="text/javascript" src="//static.meitun.com/user/js/user-static/remote/jquery.user.captcha.3.0.js?version=18651"></script>
-		<script type="text/javascript" src="//static.meitun.com/user/js/user-static/remote/jquery.babytree.sync.js?version=18651"></script>
-		<script type="text/javascript" src="//static.meitun.com/user/js/custom/jquery.overlay.js?version=18651"></script>
-		-->
 
 		<style>
 		</style>
@@ -101,14 +86,6 @@
 								</a>
 							</div>
 						</li>
-						<#--
-						<li class="login_param">
-							<label> 
-								<input type="checkbox" value="1" name="remember" id="remember" class="remember-me">记住用户名
-							</label>
-							<a class="forget_psd" href="fgpwd">忘记密码?</a>
-						</li>
-						-->
 						<li class="last">
 							<input type="hidden" name="act" value="act_login" /> 
 							<input type="hidden" name="back_act" value="${domain}/index" /> 
@@ -123,7 +100,7 @@
 		<!-- 尾部 -->
 		<div class="footer">
 			<div class="login-footer"> 皖ICP备17022956号-2    
-				Copyright&copy;2017-2018 
+				Copyright&copy;2017-${.now?date?string.yyyy}
 				<a target="_blank" href="${domain}/">
 					<font style="color: #0099cc">车西西</font>
 				</a>
