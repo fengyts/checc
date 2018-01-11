@@ -57,7 +57,7 @@ css=[
 	<div class="form-group">
 		<label class="col-md-2 control-label">专题排序值</label>
 		<div class="col-md-4">
-			<input type="text" class="form-control id="sort" name="sort" value="${topicDO.sort!0}" />
+			<input type="text" class="form-control" id="sort" name="sort" value="${topicDO.sort!0}" />
 		</div>
 	</div>
 	<div class="form-group">

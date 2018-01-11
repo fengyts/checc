@@ -18,7 +18,7 @@ public class SmsRecordDO extends BaseDO {
 	/** 主键 */
 	private Long id;
 
-	/** 短信类型：01-注册；02-充值密码；03-其他 */
+	/** 短信类型：01-注册；02-找回密码；03-其他 */
 	private String smsType;
 
 	/** 用户手机号 */

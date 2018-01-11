@@ -1,19 +1,19 @@
 package com.checc.domain;
 
-import java.util.Date;
-
 import ng.bayue.common.BaseDO;
+
+import java.util.Date;
 
 /**
  * 车西西用户
  * 
- * @author fengyts Mon Nov 27 12:40:43 CST 2017
+ * @author fengyts Thu Jan 11 12:03:07 CST 2018
  */
 
 public class CheccUserDO extends BaseDO {
 
 	/**  */
-	private static final long serialVersionUID = -6482119385569726761L;
+	private static final long serialVersionUID = -7257212599278475260L;
 
 	/** 主键 */
 	private Long id;
@@ -23,6 +23,9 @@ public class CheccUserDO extends BaseDO {
 
 	/** 手机号 */
 	private String mobile;
+
+	/** 用户类型：01-虚拟账号;02-客户 */
+	private String type;
 
 	/** 密码 */
 	private String password;
@@ -64,6 +67,15 @@ public class CheccUserDO extends BaseDO {
 	 */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	/**
+	 * 设置 用户类型：01-虚拟账号;02-客户
+	 * 
+	 * @param type
+	 */
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**
@@ -136,6 +148,15 @@ public class CheccUserDO extends BaseDO {
 	 */
 	public String getMobile() {
 		return mobile;
+	}
+
+	/**
+	 * 获取 用户类型：01-虚拟账号;02-客户
+	 * 
+	 * @return type
+	 */
+	public String getType() {
+		return type;
 	}
 
 	/**

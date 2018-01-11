@@ -3,13 +3,7 @@ package com.checc.ao;
 import java.util.ArrayList;
 import java.util.List;
 
-import ng.bayue.common.Page;
-import ng.bayue.fastdfs.ImageUrlUtil;
-import ng.bayue.util.StringUtils;
-
 import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -31,10 +25,14 @@ import com.checc.vo.UCAuctionListVO;
 import com.checc.vo.front.CurrencyRecordVO;
 import com.checc.vo.front.UserCenterVO;
 
+import ng.bayue.common.Page;
+import ng.bayue.fastdfs.ImageUrlUtil;
+import ng.bayue.util.StringUtils;
+
 @Service
 public class UserCenterAO {
 
-	private Logger logger = LoggerFactory.getLogger(UserCenterAO.class);
+//	private Logger logger = LoggerFactory.getLogger(UserCenterAO.class);
 
 	@Autowired
 	private UserCurrencyService userCurrencyService;

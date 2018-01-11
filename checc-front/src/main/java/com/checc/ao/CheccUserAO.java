@@ -192,7 +192,7 @@ public class CheccUserAO {
 		}
 
 		if (isExistMobile(mobile)) {
-			return CommonResultMessage.failure("手机号已经存在");
+			return CommonResultMessage.failure("该用户已经注册过");
 		}
 
 		// 校验验证码

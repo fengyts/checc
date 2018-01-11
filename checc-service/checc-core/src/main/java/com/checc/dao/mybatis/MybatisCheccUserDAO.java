@@ -1,11 +1,15 @@
 package com.checc.dao.mybatis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import com.checc.dao.CheccUserDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.CheccUserDO;
+import com.checc.vo.CheccUserVO;
+
 import ng.bayue.exception.CommonDAOException;
 
 @Component(value="checcUserDAO")
@@ -68,6 +72,14 @@ public class MybatisCheccUserDAO extends MybatisBaseDAO implements CheccUserDAO 
 	@Override
 	public int updateByMobile(CheccUserDO checcUserDO) {
 		return getSqlSession().update(getStatement("updateByMobile"), checcUserDO);
+	}
+
+	@Override
+	public List<CheccUserVO> selectAllVMAccount(Long userId, String mobile) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("mobile", mobile);
+		params.put("userId", userId);
+		return getSqlSession().selectList(getStatement("select_all_vmAccount"), params);
 	}
 
 }

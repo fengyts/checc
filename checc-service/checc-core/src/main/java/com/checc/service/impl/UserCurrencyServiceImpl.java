@@ -1,5 +1,6 @@
 package com.checc.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.checc.dao.UserCurrencyDAO;
 import com.checc.domain.UserCurrencyDO;
@@ -139,18 +141,32 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 			return userCurrencyDAO.freezeCurrency(userId, currency);
 		} catch (CommonDAOException e) {
 			logger.error("冻结用户西币异常:{}", e);
+			return -1;
 		}
-		return -1;
 	}
 
 	@Override
+	@Transactional
 	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonServiceException {
 		try {
-			return userCurrencyDAO.increaseTotalCurrency(userId, currency);
+			UserCurrencyDO uc = this.selectByUserId(userId);
+			if(null == uc){
+				uc = new UserCurrencyDO();
+				uc.setUserId(userId);
+				uc.setTotalCurrency(currency);
+				uc.setFreeze(0);
+				uc.setRefund(0);
+				uc.setModifyTime(new Date());
+				uc.setCreateTime(new Date());
+				return this.insert(uc).intValue();
+			} else {
+				return userCurrencyDAO.increaseTotalCurrency(userId, currency);
+			}
+			
 		} catch (CommonDAOException e) {
 			logger.error("用户充值西币异常：{}", e);
+			return -1;
 		}
-		return -1;
 	}
 
 	@Override
@@ -159,8 +175,8 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 			return userCurrencyDAO.reduceExchangeCurrency(userId, currency);
 		} catch (CommonDAOException e) {
 			logger.error("兑换商品扣减西币异常：{}", e);
+			return -1;
 		}
-		return -1;
 	}
 
 	@Override
@@ -172,8 +188,8 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 			return userCurrencyDAO.selectByUserId(userId);
 		} catch (CommonDAOException e) {
 			logger.error("", e);
+			return null;
 		}
-		return null;
 
 	}
 

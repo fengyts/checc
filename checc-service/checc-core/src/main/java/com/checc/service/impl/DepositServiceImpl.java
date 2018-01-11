@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.CheccUserDO;
-import com.checc.domain.UserCurrencyDO;
 import com.checc.dto.DepositInsertDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionRecordService;
@@ -47,6 +46,7 @@ public class DepositServiceImpl implements DepositService {
 			logger.info("用户充值失败,用户不存在");
 			return -1;
 		}
+		Integer depositAmount = dto.getDepositAmount();
 
 		AuctionRecordDO ar = new AuctionRecordDO();
 		ar.setUserId(userDO.getId());
@@ -54,7 +54,7 @@ public class DepositServiceImpl implements DepositService {
 		ar.setMobile(userDO.getMobile());
 		ar.setDepositId(dto.getDepositId());
 		ar.setDepositType(dto.getDepositType());
-		ar.setDepositAmount(dto.getDepositAmount());
+		ar.setDepositAmount(depositAmount);
 		ar.setDiscountId(dto.getDiscountId());
 		ar.setDiscount(dto.getDiscount());
 
@@ -63,11 +63,11 @@ public class DepositServiceImpl implements DepositService {
 		
 		long res = 0;
 		// 校验用户西币表是否存在该用户信息
-		UserCurrencyDO uc = userCurrencyService.selectByUserId(userId);
+		/*UserCurrencyDO uc = userCurrencyService.selectByUserId(userId);
 		if(null == uc){
 			uc = new UserCurrencyDO();
 			uc.setUserId(userId);
-			uc.setTotalCurrency(dto.getDepositAmount());
+			uc.setTotalCurrency(depositAmount);
 			uc.setFreeze(0);
 			uc.setRefund(0);
 			uc.setModifyTime(new Date());
@@ -75,7 +75,8 @@ public class DepositServiceImpl implements DepositService {
 			res = userCurrencyService.insert(uc);
 		} else {
 			res = userCurrencyService.increaseTotalCurrency(userDO.getId(), dto.getDepositAmount());
-		}
+		}*/
+		res = userCurrencyService.increaseTotalCurrency(userDO.getId(), depositAmount);
 		if (res <= 0l) {
 			logger.info("user deposit failure: insert deposit record exception");
 			throw new CommonServiceException("用户充值异常：用户增加西币值失败");
