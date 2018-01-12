@@ -25,6 +25,7 @@ import com.checc.service.TopicService;
 import com.checc.vo.front.TopicItemDetailVO;
 import com.checc.vo.front.TopicItemVO;
 
+import ng.bayue.common.Page;
 import ng.bayue.constants.CommonConstant;
 import ng.bayue.fastdfs.ImageUrlUtil;
 import ng.bayue.util.StringUtils;
@@ -66,6 +67,40 @@ public class TopicItemAO {
 
 	/**
 	 * <pre>
+	 * 首页获取往期竞拍数据，只获取5条
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public List<TopicItemVO> listPrevious() {
+		List<TopicItemVO> list = queryPrevioucAuctions(1, 5).getList();
+		return list;
+	}
+
+	public Long totalPreviousNum() {
+		return topicService.totalPreviousNum();
+	}
+
+	/**
+	 * <pre>
+	 * 获取往期竞拍数据
+	 * </pre>
+	 *
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public Page<TopicItemVO> queryPrevioucAuctions(Integer pageNo, Integer pageSize) {
+		Page<TopicItemVO> page = topicService.queryPreviousAuctions(pageNo, pageSize);
+		List<TopicItemVO> list = page.getList();
+		for (TopicItemVO ti : list) {
+			ti.setPicture(imageUrlUtil.getFileFullUrl(ti.getPicture()));
+		}
+		return page;
+	}
+
+	/**
+	 * <pre>
 	 * 获取所有兑换商品
 	 * </pre>
 	 *
@@ -82,8 +117,7 @@ public class TopicItemAO {
 	}
 
 	private TopicDO getTopicDO(String topicType) {
-		List<TopicDO> listTopic = topicService.selectTopicByProgress(topicType,
-				TopicStatusEnum.InProgress);
+		List<TopicDO> listTopic = topicService.selectTopicByProgress(topicType, TopicStatusEnum.InProgress);
 		TopicDO topicDO = null;
 		boolean isLatestTopic = false; // 是否显示最新往期
 		// 没有进行中的专题,如果是是当天20:00:00.000~23:59:59.999之间的时间则显示往期最新一期的,否则显示即将开始的一期
@@ -99,8 +133,7 @@ public class TopicItemAO {
 				isLatestTopic = true;
 				topicDO = topicService.selectPreviousOne(topicType);
 			} else {
-				listTopic = topicService.selectTopicByProgress(topicType,
-						TopicStatusEnum.NotStarted);
+				listTopic = topicService.selectTopicByProgress(topicType, TopicStatusEnum.NotStarted);
 				if (CollectionUtils.isEmpty(listTopic)) {
 					isLatestTopic = true;
 					topicDO = topicService.selectPreviousOne(topicType);
@@ -143,8 +176,7 @@ public class TopicItemAO {
 			vo.setInventory(item.getInventory());
 			vo.setItemId(item.getItemId());
 			vo.setItemTitle(item.getItemTitle());
-			vo.setItemStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(),
-					topicDO.getEndTime()));
+			vo.setItemStatus(AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime()));
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
@@ -166,8 +198,7 @@ public class TopicItemAO {
 
 			// 竞拍专题获取当前竞拍价格
 			if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())) {
-				AuctionRecordDO latestAuction = auctionRecordService
-						.selectLatestAuction(vo.getId());
+				AuctionRecordDO latestAuction = auctionRecordService.selectLatestAuction(vo.getId());
 				if (null != latestAuction) {
 					vo.setCurrentAuctionPrice(latestAuction.getCurrentAuctPrice().doubleValue());
 				}
@@ -226,9 +257,9 @@ public class TopicItemAO {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
 				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
-			} /*else {
-				vo.setCurrentAuctionPrice(item.getFloorPrice());
-			}*/
+			} /*
+				 * else { vo.setCurrentAuctionPrice(item.getFloorPrice()); }
+				 */
 		}
 
 		ItemPictureDO pdo = new ItemPictureDO();

@@ -6,6 +6,7 @@ import java.util.Map;
 import ng.bayue.service.common.GeneralDAO;
 
 import com.checc.domain.TopicDO;
+import com.checc.vo.front.TopicItemVO;
 
  /**
  * 专题 DAO
@@ -44,5 +45,34 @@ public interface TopicDAO extends GeneralDAO<TopicDO> {
 	 * @return
 	 */
 	TopicDO selectPreviousOne(String topicType);
+	
+	/**
+	 * <pre>
+	 * 获取往期竞拍商品数量
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	Long countPreviousAuctions(Map<String, Object> params);
+	
+	/**
+	 * <pre>
+	 * 获取往期竞拍商品列表
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	List<TopicItemVO> queryPreviousAuctions(Map<String, Object> params);
+	
+	/**
+	 * <pre>
+	 * 获取往期竞拍成功数量(成交价>=底价的才算成功,否则算流拍)
+	 * </pre>
+	 *
+	 * @return
+	 */
+	Long totalPreviousNum();
 	
 }

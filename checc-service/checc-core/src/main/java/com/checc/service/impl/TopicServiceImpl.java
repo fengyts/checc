@@ -17,13 +17,15 @@ import com.checc.dao.TopicDAO;
 import com.checc.domain.TopicDO;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.service.TopicService;
+import com.checc.vo.front.TopicItemVO;
 
+import ng.bayue.common.BaseDO;
 import ng.bayue.common.Page;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
 
-@Service(value="topicService")
-public class TopicServiceImpl  implements TopicService{
+@Service(value = "topicService")
+public class TopicServiceImpl implements TopicService {
 
 	private Log logger = LogFactory.getLog(this.getClass());
 
@@ -34,33 +36,33 @@ public class TopicServiceImpl  implements TopicService{
 	public Long insert(TopicDO topicDO) throws CommonServiceException {
 		try {
 			return topicDAO.insert(topicDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
-//	@Override
-//	public int updateById(TopicDO topicDO) throws CommonServiceException {
-//		try {
-//			return (Integer) topicDAO.updateById(topicDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
+	// @Override
+	// public int updateById(TopicDO topicDO) throws CommonServiceException {
+	// try {
+	// return (Integer) topicDAO.updateById(topicDO);
+	// }catch(CommonDAOException e){
+	// logger.error(e);
+	// throw new CommonServiceException(e);
+	// }
+	// }
 
 	@Override
-	public int update(TopicDO topicDO,boolean isAllField) throws CommonServiceException {
+	public int update(TopicDO topicDO, boolean isAllField) throws CommonServiceException {
 		try {
-			if(isAllField){
+			if (isAllField) {
 				return (Integer) topicDAO.update(topicDO);
-			}else{
+			} else {
 				return (Integer) topicDAO.updateDynamic(topicDO);
 			}
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
@@ -68,29 +70,29 @@ public class TopicServiceImpl  implements TopicService{
 	public int deleteById(Long id) throws CommonServiceException {
 		try {
 			return (Integer) topicDAO.deleteById(id);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
-//	@Override
-//	public int updateDynamic(TopicDO topicDO) throws CommonServiceException {
-//		try {
-//			return (Integer) topicDAO.updateDynamic(topicDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
+	// @Override
+	// public int updateDynamic(TopicDO topicDO) throws CommonServiceException {
+	// try {
+	// return (Integer) topicDAO.updateDynamic(topicDO);
+	// }catch(CommonDAOException e){
+	// logger.error(e);
+	// throw new CommonServiceException(e);
+	// }
+	// }
 
 	@Override
 	public TopicDO selectById(Long id) throws CommonServiceException {
 		try {
 			return topicDAO.selectById(id);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
@@ -98,9 +100,9 @@ public class TopicServiceImpl  implements TopicService{
 	public Long selectCountDynamic(TopicDO topicDO) throws CommonServiceException {
 		try {
 			return topicDAO.selectCountDynamic(topicDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
@@ -108,24 +110,23 @@ public class TopicServiceImpl  implements TopicService{
 	public List<TopicDO> selectDynamic(TopicDO topicDO) throws CommonServiceException {
 		try {
 			return topicDAO.selectDynamic(topicDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
-	
 
 	private List<TopicDO> selectDynamicPageQuery(TopicDO topicDO) throws CommonServiceException {
 		try {
 			return topicDAO.selectDynamicPageQuery(topicDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
-	
+
 	@Override
-	public Page<TopicDO> queryPageListDynamic(TopicDO topicDO) throws CommonServiceException{
+	public Page<TopicDO> queryPageListDynamic(TopicDO topicDO) throws CommonServiceException {
 		if (topicDO != null) {
 			Long totalCount = this.selectCountDynamic(topicDO);
 
@@ -133,8 +134,8 @@ public class TopicServiceImpl  implements TopicService{
 			page.setPageNo(topicDO.getStartPage());
 			page.setPageSize(topicDO.getPageSize());
 			page.setTotalCount(totalCount.intValue());
-			
-			if(null != totalCount && totalCount.longValue() > 0){
+
+			if (null != totalCount && totalCount.longValue() > 0) {
 				List<TopicDO> resultList = this.selectDynamicPageQuery(topicDO);
 				page.setList(resultList);
 			}
@@ -142,10 +143,11 @@ public class TopicServiceImpl  implements TopicService{
 		}
 		return new Page<TopicDO>();
 	}
-	
+
 	@Override
-	public Page<TopicDO> queryPageListDynamicAndStartPageSize(TopicDO topicDO, Integer startPage, Integer pageSize) throws CommonServiceException {
-		if (topicDO != null && startPage>0 && pageSize>0) {
+	public Page<TopicDO> queryPageListDynamicAndStartPageSize(TopicDO topicDO, Integer startPage, Integer pageSize)
+			throws CommonServiceException {
+		if (topicDO != null && startPage > 0 && pageSize > 0) {
 			topicDO.setStartPage(startPage);
 			topicDO.setPageSize(pageSize);
 			return this.queryPageListDynamic(topicDO);
@@ -153,56 +155,6 @@ public class TopicServiceImpl  implements TopicService{
 		return new Page<TopicDO>();
 	}
 
-//	@Override
-//	@Deprecated
-//	public List<TopicDO> selectAllDynamic(String type, String topicType) {
-//		List<TopicDO> list = new ArrayList<TopicDO>();
-//		if (StringUtils.isBlank(topicType)) {
-//			return list;
-//		}
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicType)) { // 竞拍专题
-//			if (StringUtils.isBlank(type)) {
-//				return list;
-//			}
-//			if ("01".equals(type)) { // 本期进行中
-//				params.put("currentPeriods", true);
-//				//params.put("status", TopicStatusEnum.InProgress.getCode());
-//			} else { // 下期预告
-//				params.put("nextPeriods", true);
-//				//params.put("status", TopicStatusEnum.NotStarted.getCode());
-//			}
-//			params.put("topicType", topicType);
-//			// params.put("startTime", now);
-//			params.put("currentTime", new Date());
-//
-//			list = topicDAO.selectAllDynamic(params);
-//		} else { // 获取兑换专题
-//			Date now = new Date();
-//			params.put("topicType", topicType);
-//			params.put("exchangeStartTime", DateUtils.getDayBegin(now));
-//			params.put("exchangeEndTime", DateUtils.getDayEnd(now));
-//			
-//			list = topicDAO.selectAllDynamic(params);
-//			
-//			Calendar cal = Calendar.getInstance();
-//			cal.setTime(now);
-//			int hour = cal.get(Calendar.HOUR_OF_DAY);
-//			if(10 > hour){ // 是否是当天10点钟
-//				String code = TopicStatusEnum.NotStarted.getCode();
-//				for(TopicDO t : list){
-//					t.setStatus(code);
-//				}
-//			} else {
-//				String code = TopicStatusEnum.InProgress.getCode();
-//				for(TopicDO t : list){
-//					t.setStatus(code);
-//				}
-//			}
-//		}
-//		return list;
-//	}
-	
 	@Override
 	public List<TopicDO> selectTopicByProgress(String topicType, TopicStatusEnum status) {
 		List<TopicDO> list = new ArrayList<TopicDO>();
@@ -211,15 +163,15 @@ public class TopicServiceImpl  implements TopicService{
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("topicType", topicType);
-		if(TopicStatusEnum.NotStarted == status){
+		if (TopicStatusEnum.NotStarted == status) {
 			params.put("notStart", status.getCode());
 		}
-		if(TopicStatusEnum.InProgress == status){
+		if (TopicStatusEnum.InProgress == status) {
 			params.put("inProgress", status.getCode());
 		}
-		
+
 		list = topicDAO.selectTopicByProgress(params);
-		
+
 		return list;
 	}
 
@@ -231,23 +183,52 @@ public class TopicServiceImpl  implements TopicService{
 		cal.set(Calendar.HOUR_OF_DAY, 20);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("timerTime", cal.getTime());
-		
+
 		List<TopicDO> list = topicDAO.selectTopicNotRefund(params);
-		
+
 		return list;
 	}
 
 	@Override
 	public TopicDO selectPreviousOne(String topicType) {
-		if(StringUtils.isBlank(topicType)){
+		if (StringUtils.isBlank(topicType)) {
 			return null;
 		}
 		return topicDAO.selectPreviousOne(topicType);
 	}
+
+	@Override
+	public Page<TopicItemVO> queryPreviousAuctions(Integer pageNo, Integer pageSize) {
+		Page<TopicItemVO> page = new Page<TopicItemVO>();
+		List<TopicItemVO> list = null;
+
+		BaseDO baseDO = new BaseDO();
+		baseDO.setStartPage(pageNo);
+		baseDO.setPageSize(pageSize);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("start", baseDO.getStart());
+		params.put("pageSize", baseDO.getPageSize());
+		Long totalCount = topicDAO.countPreviousAuctions(params);
+
+		if (null != totalCount && totalCount.longValue() > 0) {
+			list = topicDAO.queryPreviousAuctions(params);
+		}
+		page.setList(null != list ? list : new ArrayList<TopicItemVO>());
+		page.setPageNo(pageNo);
+		page.setPageSize(pageSize);
+		page.setTotalCount(totalCount.intValue());
+
+		return page;
+	}
+
+	@Override
+	public Long totalPreviousNum() {
+		return topicDAO.totalPreviousNum();
+	}
 	
 	
-	
+
 }

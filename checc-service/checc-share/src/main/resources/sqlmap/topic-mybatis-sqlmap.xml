@@ -201,8 +201,8 @@
  			topic
  		WHERE
  			refund_currency_status = 0
- 		AND topic_type = '01'
- 		AND end_time &lt;= #{timerTime}
+ 			AND topic_type = '01'
+ 			AND end_time &lt;= #{timerTime}
  	</select>
  	
  	<select id="MybatisTopicDAO_selectPreviousOne" resultMap="TopicDOResultMap" parameterType="string">
@@ -217,7 +217,65 @@
  			</if>
  		ORDER BY end_time DESC, id DESC
  		LIMIT 1
+ 	</select>
  	
+ 	<select id="MybatisTopicDAO_countPreviousAuctions" resultType="long">
+ 		SELECT 
+ 			COUNT(1)
+ 		FROM topic tp
+ 		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		WHERE 
+			tp.topic_type = '01' 
+			AND tp.end_time &lt; NOW()
+ 	</select>
+ 	
+ 	<select id="MybatisTopicDAO_queryPreviousAuctions" parameterType="map" resultType="com.checc.vo.front.TopicItemVO">
+		SELECT 
+			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime, tp.`status` `status`, tp.`status` itemStatus,
+			ti.id id, ti.item_id itemId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice, ti.inventory inventory, 
+			ti.exchange_amount exchangeAmount, ti.residue residue, (SELECT ti.residue &lt;= 0) hasExchangeOut, 
+			pic.picture picture, art.current_auct_price currentAuctionPrice, art.mobile mobile
+		FROM topic tp
+		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		LEFT JOIN item_picture pic ON pic.item_id = ti.item_id AND pic.`type` = '01' AND pic.`status` = '1'
+		LEFT JOIN 
+		(
+			SELECT ar1.id, ar1.topic_item_id, ar1.current_auct_price, ar1.mobile
+			FROM auction_record ar1
+			INNER JOIN 
+			(
+				SELECT MAX(ar.id) id, ar.topic_item_id
+				FROM auction_record ar
+				WHERE ar.record_type = '01'
+				GROUP BY ar.topic_item_id
+			) arm ON arm.id = ar1.id
+		) art ON art.topic_item_id = ti.id
+		WHERE 
+			tp.topic_type = '01' 
+			AND tp.end_time &lt; NOW()
+		ORDER BY tp.id DESC, ti.id DESC
+		Limit #{start}, #{pageSize}
+ 	</select>
+ 	
+ 	<select id="MybatisTopicDAO_totalPreviousNum" resultType="long">
+ 		SELECT 
+ 			COUNT(1)
+		FROM topic tp
+		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		LEFT JOIN 
+		(
+			SELECT ar1.id, ar1.topic_item_id, ar1.current_auct_price, ar1.mobile
+			FROM auction_record ar1
+			INNER JOIN 
+			(
+				SELECT MAX(ar.id) id, ar.topic_item_id
+				FROM auction_record ar
+				WHERE ar.record_type = '01'
+				GROUP BY ar.topic_item_id
+			) arm ON arm.id = ar1.id
+		) art ON art.topic_item_id = ti.id
+		WHERE tp.topic_type = '01' AND tp.end_time &lt; NOW() AND art.current_auct_price &gt;= ti.floor_price
+ 		
  	</select>
 
 </mapper>

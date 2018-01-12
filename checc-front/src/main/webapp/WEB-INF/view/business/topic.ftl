@@ -1,4 +1,5 @@
 <div class="topic">
+	<#-- 本期竞拍 -->
 	<div class="topic_hd">
 		<#--
 		<div class="topic_tab">
@@ -59,6 +60,59 @@
 		</#if>
 	</div>
 	
+	<#-- 往期竞拍 -->
+	<div class="topic_hd">
+		<div class="topic_tab">
+			<span class="topic_current select_tab">往期竞拍</span>
+		</div>
+		<div class="auction_time">
+			<span>累计${totalPreviousNum}位用户竞拍成功</span>
+		</div>
+		<div class="previousViewAll">
+			<a href="#">更多往期竞拍>></a>
+		</div>
+	</div>
+	<div id="auction_items" class="topic_items">
+		<#if previousList?default([])?size!=0>
+			<#assign req_url="${domain}/topicItem/itemDetails/auction" >
+			<#list previousList as auc>
+				<div id="items" class="items">
+					<div class="item_img">
+						<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}"><img src="${auc.picture}"></a>
+					</div>
+					<div class="item_info">
+						<div class="item_title">
+							<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
+						</div>
+						<div class="pr_box">
+							<div class="basic_price">
+								<span class="lbtitle">成交价:</span>
+								<span class="prc">
+									<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
+										￥${auc.currentAuctionPrice?string('0.00')}
+									<#else>
+										流拍
+									</#if>
+								</span>
+							</div>
+							<div class="auc_price">
+								<span class="lbtitle">拍得者:</span>
+								<span class="prc prc_curr">
+									<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
+										${auc.mobile[0..2] + '****' + auc.mobile[7..]}
+									<#else>
+										流拍
+									</#if>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</#list>
+		</#if>
+	</div>
+	
 	<#-- 兑换商品 -->
 	<div class="topic_hd">
 		<div class="topic_tab">
@@ -95,8 +149,8 @@
 								<span>
 							</div>
 						</div>
-						
 					</div>
+					
 				</div>
 			</#list>
 		</#if>

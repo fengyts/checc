@@ -33,7 +33,7 @@ public class TopicItemVO extends BaseVO {
 	private Integer residue;
 	/** 商品状态,竞拍、兑换是否结束 */
 	private String itemStatus;
-	/** 兑换商品是否已经兑光 */
+	/** 兑换商品是否已经兑光,true-已经兑光；false-未兑光 */
 	private Boolean hasExchangeOut;
 
 	/** 商品图片地址 */
@@ -41,8 +41,12 @@ public class TopicItemVO extends BaseVO {
 
 	/** 市场价 */
 	private Double marketPrice;
+	/** 竞拍底价 */
+	private Double floorPrice;
 	/** 当前竞拍价 */
 	private Double currentAuctionPrice;
+	/** 当前出价人 */
+	private String mobile;
 
 	public Long getId() {
 		return id;
@@ -156,6 +160,14 @@ public class TopicItemVO extends BaseVO {
 		this.marketPrice = marketPrice;
 	}
 
+	public Double getFloorPrice() {
+		return floorPrice;
+	}
+
+	public void setFloorPrice(Double floorPrice) {
+		this.floorPrice = floorPrice;
+	}
+
 	public Double getCurrentAuctionPrice() {
 		return currentAuctionPrice;
 	}
@@ -170,6 +182,14 @@ public class TopicItemVO extends BaseVO {
 
 	public void setHasExchangeOut(Boolean hasExchangeOut) {
 		this.hasExchangeOut = hasExchangeOut;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 }

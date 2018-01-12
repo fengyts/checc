@@ -41,6 +41,11 @@ public class IndexController {
 			model.addAttribute("topicEndTime", vo.getEndTime());
 		}
 		
+		// 获取5个往期竞拍商品
+		List<TopicItemVO> previousList = topicItemAO.listPrevious();
+		model.addAttribute("previousList", previousList);
+		model.addAttribute("totalPreviousNum", topicItemAO.totalPreviousNum());
+		
 		// 获取兑换商品列表
 		List<TopicItemVO> exchangeList = topicItemAO.listExchange();
 		model.addAttribute("exchangeList", exchangeList);

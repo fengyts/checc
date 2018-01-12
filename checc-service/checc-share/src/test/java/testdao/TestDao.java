@@ -17,6 +17,8 @@ import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
 import com.checc.vo.CheccUserVO;
 
+import ng.bayue.common.Page;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/spring-context-checcshare.xml" })
 public class TestDao {
@@ -26,8 +28,9 @@ public class TestDao {
 
 	@Test
 	public void test() {
-		List<CheccUserVO> list = userService.selectAllVMAccount(null, null);
-		System.out.println(list.size());
+		CheccUserDO t = new CheccUserDO();
+		Page<CheccUserDO> page = userService.queryPageListDynamicAndStartPageSize(t, 1, 5);
+		System.out.println(page.getTotalCount());
 	}
 	
 
