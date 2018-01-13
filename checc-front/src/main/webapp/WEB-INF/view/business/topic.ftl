@@ -9,9 +9,11 @@
 		-->
 		<div class="topic_tab">
 			<div class="topic_current">本期竞拍</div>
+			<#--
 			<div class="topic_previous" id="viewPrevious">
 				<a href="javascript:void(0);">查看往期竞拍</a>
 			</div>
+			-->
 		</div>
 		<div class="auction_time">
 			<span>竞拍时间:
@@ -68,8 +70,8 @@
 		<div class="auction_time">
 			<span>累计${totalPreviousNum}位用户竞拍成功</span>
 		</div>
-		<div class="previousViewAll">
-			<a href="#">更多往期竞拍>></a>
+		<div class="previousViewAll topic_previous">
+			<a href="javascript:window.open('${domain}/index/previous');">更多往期竞拍>></a>
 		</div>
 	</div>
 	<div id="auction_items" class="topic_items">

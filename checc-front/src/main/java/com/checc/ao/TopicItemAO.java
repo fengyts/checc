@@ -67,13 +67,13 @@ public class TopicItemAO {
 
 	/**
 	 * <pre>
-	 * 首页获取往期竞拍数据，只获取5条
+	 * 首页获取往期竞拍数据，只获取4条
 	 * </pre>
 	 *
 	 * @return
 	 */
 	public List<TopicItemVO> listPrevious() {
-		List<TopicItemVO> list = queryPrevioucAuctions(1, 5).getList();
+		List<TopicItemVO> list = queryPrevioucAuctions(1, 4).getList();
 		return list;
 	}
 

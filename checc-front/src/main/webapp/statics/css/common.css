@@ -22,11 +22,6 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li,
 	margin: 0;
 	padding: 0;
 }
-/* 
-.content_pos {
-	width: 65%;
-	margin-left: 15%;
-} */
 
 /* 头部样式开始 */
 a {
@@ -102,6 +97,10 @@ s {
 	margin: 0 0 0 0;
 }
 
+.pager_act {
+	margin: 20px 20px 0 0;
+}
+
 /* 竞拍商品style start */
 .topic {
 	
@@ -129,9 +128,9 @@ s {
 }
 
 .topic_previous {
-	width: 100px;
+	width: 130px;
 	float: right;
-	margin-top: -30px;
+	margin-top: -50px;
 }
 
 .topic_previous a {
@@ -170,7 +169,7 @@ s {
 }
 
 .topic_items {
-	margin: 10px 0px 0px 15px;
+	margin: 10px 0px 0px 0px;
 	width: 100%;
 	overflow: hidden;
 }
@@ -186,6 +185,7 @@ s {
 
 .items:hover {
 	border: solid 1px #ff0000;
+	box-shadow: 0 0 5px #ff0000;
 }
 
 .item_img {
@@ -194,11 +194,17 @@ s {
 	max-width: inherit;
 	cursor: pointer;
 	border-bottom: 1px solid #aaeeee;
+	overflow: hidden;
 }
 
 .item_img img {
 	width: 100%;
 	height: 100%;
+	transition: all 0.6s;
+}
+
+.item_img img:hover {
+	transform: scale(1.1); 
 }
 
 .item_info {
@@ -284,7 +290,7 @@ s {
 	/* 	margin: 0px 0px 0px -50px; */
 	margin: 0px 0px 0px -10px;
 	min-height: 50px;
-	border-bottom: solid 1px #aaeeee;
+/* 	border-bottom: solid 1px #aaeeee; */
 }
 
 .checc_pos>span {

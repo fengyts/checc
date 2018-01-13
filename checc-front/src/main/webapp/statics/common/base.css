@@ -52,7 +52,7 @@ body, button, input, select, textarea {
 	max-width: 150px;
 }
 
-.checc_clg a {
+.checc_clg a, .checc_clg a:hover {
 	text-decoration: none;
 	text-decoration-line: none;
 	color: #0099cc;
