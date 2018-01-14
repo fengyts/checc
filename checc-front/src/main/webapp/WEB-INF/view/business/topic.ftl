@@ -9,11 +9,9 @@
 		-->
 		<div class="topic_tab">
 			<div class="topic_current">本期竞拍</div>
-			<#--
-			<div class="topic_previous" id="viewPrevious">
-				<a href="javascript:void(0);">查看往期竞拍</a>
+			<div class="previousViewAll topic_previous">
+				<a href="javascript:window.open('${domain}/index/previous');">往期竞拍>></a>
 			</div>
-			-->
 		</div>
 		<div class="auction_time">
 			<span>竞拍时间:
@@ -49,11 +47,13 @@
 								<span class="lbtitle">当前竞拍价:</span>
 								<span class="prc prc_curr">￥${auc.currentAuctionPrice?string('#0.00')}</span>
 							</div>
+							<#--
 							<div class="auc_btn">
 								<span>
 									<a class="btn itemsal" href="${req_url}/${auc.id}" reqTime="${.now?long}">我要竞拍</a>
 								<span>
 							</div>
+							-->
 						</div>
 						
 					</div>
@@ -63,6 +63,7 @@
 	</div>
 	
 	<#-- 往期竞拍 -->
+	<#--
 	<div class="topic_hd">
 		<div class="topic_tab">
 			<span class="topic_current select_tab">往期竞拍</span>
@@ -114,14 +115,14 @@
 			</#list>
 		</#if>
 	</div>
-	
+	-->
 	<#-- 兑换商品 -->
 	<div class="topic_hd">
 		<div class="topic_tab">
 			<span class="topic_current select_tab">西币兑换</span>
 		</div>
 		<div class="auction_time">
-			<span>每天上午10:00开始兑换，数量有限先到先得</span>
+			<span>每周一上午10:00开始兑换，数量有限先到先得</span>
 		</div>
 	</div>
 	<div id="auction_items" class="topic_items">
@@ -145,11 +146,13 @@
 								<span class="lbtitle">兑换价:</span>
 								<span class="prc prc_curr">${excg.exchangeAmount?string['0']!0}西币</span>
 							</div>
+							<#--
 							<div class="auc_btn">
 								<span>
 									<a class="btn itemsal" href="${req_url}/${excg.id}" reqTime="${.now?long}">我要兑换</a>
 								<span>
 							</div>
+							-->
 						</div>
 					</div>
 					

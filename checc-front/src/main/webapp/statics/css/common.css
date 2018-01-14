@@ -130,7 +130,7 @@ s {
 .topic_previous {
 	width: 130px;
 	float: right;
-	margin-top: -50px;
+	margin-top: -30px;
 }
 
 .topic_previous a {
@@ -177,15 +177,15 @@ s {
 .items {
 	display: inline-block;
 	float: left;
-	height: 380px;
-	border: solid 1px #aaeeee;
+	height: 320px;
+/* 	border: solid 1px #aaeeee; */
 	width: 22%;
 	margin: 15px 0 0 18px;
 }
 
 .items:hover {
-	border: solid 1px #ff0000;
-	box-shadow: 0 0 5px #ff0000;
+/* 	border: solid 1px #ff0000; */
+/* 	box-shadow: 0 0 5px #ff0000; */
 }
 
 .item_img {
@@ -193,7 +193,7 @@ s {
 	max-height: 200px;
 	max-width: inherit;
 	cursor: pointer;
-	border-bottom: 1px solid #aaeeee;
+/* 	border-bottom: 1px solid #aaeeee; */
 	overflow: hidden;
 }
 
@@ -351,17 +351,22 @@ s {
 .meta_item_title {
 	font-size: 18px;
 	color: #333333;
+	font-weight: 600;
 }
 
 .auc_info_t {
 	font-size: 16px;
 	color: #666666;
+	margin-top: 25px;
 }
 
 .item_floorprice_box, .meta_currauctper, .meta_curraucttime,
 	.meta_auction_eninfo, .meta_item_exchangeprice, .meta_inventory,
 	.meta_exchange_eninfo {
-	margin-top: 12px;
+	margin-top: 20px;
+}
+.curraucttile{
+	color: #333;
 }
 
 .meta_item_currauctprice {
@@ -448,7 +453,7 @@ s {
 }
 
 .auc_currency {
-	font-size: 14px;
+	font-size: 16px;
 }
 
 .auc_act_btn {
@@ -473,7 +478,7 @@ s {
 }
 
 .auc_exchanged_list {
-	margin: 45px 0px 0px 10px;
+	margin-top: 15px;
 }
 
 .auc_exchanged_list>a {
@@ -550,10 +555,11 @@ s {
 	font-size: 32px;
 	font-weight: 400;
 	line-height: 48px;
+	margin-top: 40px;
 }
 
 .currency_info {
-	margin: 30px 0 0 0;
+	margin: 20px 0 0 0;
 }
 
 .currency_info>div {
@@ -685,13 +691,13 @@ s {
 	height: 30px;
 	display: inline-block;
 	vertical-align: top;
-	border: solid 1px #0000ff;
+	border: solid 1px #1e9fff;
 	text-align: center;
 	cursor: pointer;
 }
 
 .dpl_d_box_checked {
-	background-color: #4d4dff;
+	background-color: #1e9fff;
 	color: #ffffff;
 }
 

@@ -42,7 +42,7 @@ $(document).ready(function() {
 		        		shade: 0.1,
 		        		anim: 5,
 		        		content: _url,
-		        		area: ['600px', '400px']
+		        		area: ['600px', '350px']
 		        	});
 		        }
 		    }

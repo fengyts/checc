@@ -68,7 +68,7 @@
 							<#--
 							<span class="iconfont">Œ</span>
 							-->
-							<input type="text" autocomplete="off" placeholder="用户名/手机号" name="mobile" id="mobile" value="" />
+							<input type="text" autocomplete="off" placeholder="手机号" name="mobile" id="mobile" value="" />
 							<span class="error_icon"></span>
 						</div>
 					</li>
@@ -127,7 +127,7 @@
 						</div>
 					</li>
 					<li class="error_box" id="agreement_notice"></li>
-					<li class="rg_input_li">
+					<li class="rgbtnbox">
 						<input type="button" name="registerBtn" class="registerBtn" id="registerBtn" value="同意协议并注册">
 						<div class="loginBtnBox"></div>
 					</li>

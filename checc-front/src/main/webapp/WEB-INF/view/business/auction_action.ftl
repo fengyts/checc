@@ -26,7 +26,7 @@
 				<div class="act_title_ins">(出价后不可撤销)</div>
 			</div>
 			<div class="act_item_title_box">
-				<span class="act_label">商品名称：</span>			
+				<span class="act_label">拍品名称：</span>			
 				<span class="act_item_title">${auctionVO.itemTitle}</span>			
 			</div>
 			
@@ -42,7 +42,9 @@
 							<input type="text" class="auct_times_text" maxlength="8" value="1" title="请输入出价次数" id="auctionTimes" name="auctionTimes">
 							<a href="javascript:void(0);" title="加1" hidefocus class="auct_increase tb-iconfont" id="auct_increase">+</a>次
 						</span>
+						<#--
 						<span class="act_max_nums">(最多出价${auctionVO.auctionMaxTimes!10}次)</span>
+						-->
 					</dd>
 	        	</dl>
 			</div>

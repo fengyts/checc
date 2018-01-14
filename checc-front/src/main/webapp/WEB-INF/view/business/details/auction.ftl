@@ -1,3 +1,8 @@
+<div class="checc_pos">
+	<span><a href="${domain}/index">首页</a></span>
+	<span class="pos_arrows">>></span>
+	<span>竞拍详情</span>
+</div>
 <div class="detail_meta">
 	<div class="item_detail_imgs">
 		<div class="meta_item_img">
@@ -17,7 +22,11 @@
 			</div>
 			-->
 			<div class="meta_item_currauctprice">
-				<span class="curraucttile">当前价:</span>
+				<#if detailVO.status?? && detailVO.status=='03'>
+					<span class="curraucttile">竞拍成交价 :</span>
+				<#else>
+					<span class="curraucttile">当前竞拍价 :</span>
+				</#if>
 				<span class="currauctprice">
 					<#if detailVO.currentAuctionPrice??>
 							￥${(detailVO.currentAuctionPrice!0.00)?string('#0.00')}
@@ -25,15 +34,23 @@
 						无人出价
 					</#if>
 				</span> 
-				<span class="compare_marketPrice">市场价：￥${detailVO.marketPrice?string('0.00')}</span>
+				<span class="compare_marketPrice">市场价 ：￥${detailVO.marketPrice?string('0.00')}</span>
 			</div>
 			<div class="meta_currauctper">
-				<span class="curraucttile">当前出价人:</span>
+				<#if detailVO.status?? && detailVO.status=='03'>
+					<span class="curraucttile">最后出价人 :</span>
+				<#else>
+					<span class="curraucttile">当前出价人 :</span>
+				</#if>
 				<span class="currauctperson">${detailVO.currentBidder!'暂时无人出价'}</span>
 				<span class="auctall"><a href="${domain}/auction/auctionList?tpId=${detailVO.id}">查看全部出价记录>></a></span>
 			</div>
 			<div class="meta_curraucttime">
-				<span class="curraucttile">当前出价时间:</span>
+				<#if detailVO.status?? && detailVO.status=='03'>
+					<span class="curraucttile">最后出价时间 :</span>
+				<#else>
+					<span class="curraucttile">当前出价时间 :</span>
+				</#if>
 				<span class="curraucttime">
 					<#if detailVO.currentBidTime??>
 						${detailVO.currentBidTime?string('yyyy-MM-dd HH:mm:ss')}
@@ -88,7 +105,7 @@
 				</div>
 				<div class="meta_auct_timedown">
 					<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
-					<span>剩余时间:</span>
+					<span>剩余时间：</span>
 					<span id="countDownTime" class="auct_timedown"></span>
 				</div>
 			<#elseif detailVO.status?? && detailVO.status=='03'>

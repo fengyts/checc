@@ -1,3 +1,8 @@
+<div class="checc_pos">
+	<span><a href="${domain}/index">首页</a></span>
+	<span class="pos_arrows">>></span>
+	<span>兑换详情</span>
+</div>
 <div class="detail_meta">
 	<div class="item_detail_imgs">
 		<div class="meta_item_img">
@@ -9,11 +14,11 @@
 		<div class="meta_item_title">${detailVO.itemTitle}</div>
 		<div class="auc_info_t">
 			<div class="meta_item_exchangeprice">
-				<span>价值:</span>
+				<span class="curraucttile">价值 : </span>
 				<span class="exchangeprice">${detailVO.exchangeAmount!0}西币</span>
 			</div>
 			<div class="meta_inventory">
-				<span>数量:</span>
+				<span class="curraucttile">数量 : </span>
 				<span>剩${detailVO.residue!0}份/共${detailVO.inventory}份</span>
 			</div>
 			<div class="meta_exchange_eninfo">
@@ -44,8 +49,16 @@
 					<div id="auc_action" class="auc_exchange auc_action auc_act_btn_p">
 						<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
 						<p class="auc_act_btn"><a href="#">立即兑换</a></p>
+						<#--
 						<p class="auc_currency">
 							(剩余时间:<span id="countDownTime">${detailVO.timeCountDown}</span>)
+						</p>
+						-->
+					</div>
+					<div class="meta_auct_timedown">
+						<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
+						<p class="auc_currency auct_timedown">
+							剩余时间：<span id="countDownTime">${detailVO.timeCountDown}</span>
 						</p>
 					</div>
 				</#if>
@@ -64,9 +77,9 @@
 				<p class="exchange_act_btn">已经结束</p>
 				<p class="auc_currency"><span></span></p>
 			</div>
-			<div class="auc_exchanged_list">
-				<a href="#" id="allExchange" param="${detailVO.id}">看看哪些人兑换了>></a>
-			</div>
+		</div>
+		<div class="auc_exchanged_list">
+			<a href="#" id="allExchange" param="${detailVO.id}">看看哪些人兑换了>></a>
 		</div>
 	</div>
 </div>

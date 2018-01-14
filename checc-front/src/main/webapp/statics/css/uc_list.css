@@ -15,7 +15,7 @@
 	display: inline-block;
 	float: left;
 	height: 300px;
-	border: solid 1px #aaeeee;
+/* 	border: solid 1px #aaeeee; */
 	width: 22%;
 /* 		width: 220px;  */
 	margin : 15px 0 0 18px;
@@ -32,7 +32,7 @@
 	max-height: 200px;
 	max-width: inherit;
 	cursor: pointer;
-	border-bottom: 1px solid #aaeeee;
+/* 	border-bottom: 1px solid #aaeeee; */
 	text-align: center;
 	background-color: #333333;
 }
@@ -69,6 +69,7 @@
 }
 
 .uc_item_info {
+	margin: 10px 0 0 5px;
 	color: #666666;
 	font-size: 14px;
 	margin: 10px 0 0 0;

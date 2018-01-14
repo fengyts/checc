@@ -189,6 +189,10 @@ input {
 	transform-origin: 108px 19px 0;
 }
 
+#act_bid_btn {
+	margin-left: 20px;
+}
+
 .act_btn_box>.act_abandon_btn, .act_btn_box>.act_abandon_btn>a {
 	background-color: #f0f0f0;
 	color: #1e9fff;

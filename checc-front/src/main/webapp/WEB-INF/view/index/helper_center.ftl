@@ -17,6 +17,7 @@
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	
+	
 	<#include "/common/common-js.ftl" />
 	
 	<style type="text/css">
@@ -145,7 +146,7 @@
 		</div>
 	</div>
 	</div>
-
+	
 </body>
 
 </html>

@@ -27,7 +27,7 @@
 			</div>
 			<div class="refund_currency_box">
 				<div class="uc_box_t">
-					<span>已退回的西币</span>
+					<span>退回的西币</span>
 					<span class="uc_help_i" index="1"></span>
 				</div>
 				<div class="uc_ta_num">

@@ -64,7 +64,7 @@
 						<li class="login_input_li">
 							<div class="login_span">
 								<span class="iconfont">Œ</span> 
-								<input type="text" autocomplete="off" placeholder="用户名/手机号" value="" name="mobile" id="mobile" />
+								<input type="text" autocomplete="off" placeholder="手机号" value="" name="mobile" id="mobile" />
 								<span class="error_icon"></span>
 							</div>							
 						</li>

@@ -69,7 +69,7 @@ public class UserCenterAO {
 	public void ucAuctionList(Model model, CheccUserDO userDO, String recordType, Integer pageNo) {
 		Long userId = userDO.getId();
 		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userId,
-				recordType, pageNo, 10);
+				recordType, pageNo, 8);
 
 		Page<UCAuctionListVO> pageRes = new Page<UCAuctionListVO>();
 		pageRes.setPageNo(page.getPageNo());

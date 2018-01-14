@@ -60,7 +60,8 @@
 					<option <#if pagination.getPageSize()=='50'>selected='selected'</#if> value='50'>50</option>
 					</select>
 				</li>
-				-->		
+				-->
+				<#--		
 				<#if isNeedPageTo>
 					<li class="pageTo">
 							转到第&nbsp;<input type="text" id="pageToNum"  value="" class="pageToNum">&nbsp;页
@@ -113,6 +114,7 @@
 						</script>
 					</li>
 				</#if>
+				-->
 			</ul>
 		</#if>
 	</#if>
