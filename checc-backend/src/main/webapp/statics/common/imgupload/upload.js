@@ -580,8 +580,7 @@
 				return false;
 			}
 //			$('#' + file.id).find('.progress').fadeOut(); // 隐藏上传进度条
-//			var res = JSON.parse(response);
-			var res = response;
+			var res = JSON.parse(response);
 			/*
 			var pics = $("#imgReturnUrls").text();
 			pics += res.path + ",";

@@ -105,11 +105,14 @@ css=[]
 								<td class="td_center">${obj.exchangeLimitNum}</td>
 							</#if>
 			    			<td class="td_center">
+		    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>
+		    					<#--
 			    				<#if obj.status == '01'>
 			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}">[编辑]</a>
 			    				<#else>
 			    					<a href="javascript:void(0);" class="editcatabtn editTopicItemBtn" param="${obj.id}" style="cursor:not-allowed;color:gray;" disabled='true'>[编辑]</a>
 			    				</#if>
+								-->
 			    			</td>
 			    		</tr>
 			    	</#list>

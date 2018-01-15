@@ -64,9 +64,11 @@ $(function(){
 	
 	// 查看关联商品
 	$(".associateItemBtn").on('click', function(){
-		var topicId = $(this).attr("param"), 
-		    name = $(this).attr("param1");
-		addTab("topic_associateItem", "专题商品列表" , "/topicItem/list?topicId=" + topicId 
+		var _this = $(this);
+		var topicId = _this.attr("param"), 
+		    name = _this.attr("param1")
+		    topicType = _this.attr("param2");
+		addTab("topic_associateItem_" + topicId, "专题商品列表" , "/topicItem/list?topicId=" + topicId 
 				+ "&name=" + name + "&iframeName=" + window.name);
 	});
 	

@@ -44,7 +44,7 @@
 	    <!-- 上传成功后文件url路径 -->
 	    <div id="imgReturnUrls" style="display:none;">
 	    	<input type="hidden" id="hasNewPic" name="hasNewPic" value="0"/> <!-- 是否有新的图片加入,默认没有 -->
-	    	<input type="hidden" name="picUrls" id="picUrlsInput"/>
+	    	<input type="hidden" name="picUrls" id="picUrlsInput" value="" />
 	    </div>
 	    
 	</div>

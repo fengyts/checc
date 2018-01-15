@@ -80,10 +80,8 @@ css=[]
 							<td class="td_center">${obj.startTime?datetime}</td>
 							<td class="td_center">${obj.endTime?datetime}</td>
 			    			<td class="td_center">
-			    				<#if obj.status == '01'>
-			    					<a href="javascript:void(0);" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
-			    				</#if>
-			    				<a href="javascript:void(0);" class="editcatabtn associateItemBtn" param="${obj.id}" param1="${obj.name}">[查看关联商品]</a>
+		    					<a href="javascript:void(0);" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
+			    				<a href="javascript:void(0);" class="editcatabtn associateItemBtn" param="${obj.id}" param1="${obj.name}" param2="${obj.topicType}">[查看关联商品]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>
