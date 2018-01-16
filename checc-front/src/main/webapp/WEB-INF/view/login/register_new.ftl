@@ -100,7 +100,7 @@
 							<#--
 							<span class="iconfont">÷</span> 
 							--> 
-							<input type="password" name="password" id="password" placeholder="密码必须至少6位且包含大小写字母和数字">
+							<input type="password" name="password" id="password" placeholder="密码至少6位且包含大小写字母和数字">
 							<span class="error_icon"></span>
 						</div>
 					</li>

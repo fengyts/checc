@@ -23,7 +23,7 @@
 			-->
 			<div class="meta_item_currauctprice">
 				<#if detailVO.status?? && detailVO.status=='03'>
-					<span class="curraucttile">竞拍成交价 :</span>
+					<span class="curraucttile">最终竞拍价 :</span>
 				<#else>
 					<span class="curraucttile">当前竞拍价 :</span>
 				</#if>
