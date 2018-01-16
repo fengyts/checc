@@ -50,16 +50,6 @@ public class UserCommonController {
 	@Autowired
 	private CheccUserAO userAO;
 
-	/*@RequestMapping({ "/login" })
-	public String loginIndex(HttpServletRequest request, HttpServletResponse response) {
-		CookieUtils cookieUtil = new CookieUtils();
-		TokenModel tk = new TokenModel();
-		String key = "checcUserLoginCkTk" + tk.getKey();
-		String value = tk.getBaseKey();
-		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
-		return "/login/login";
-	}*/
-	
 	@RequestMapping({ "/login" })
 	public String loginNew(HttpServletRequest request, HttpServletResponse response) {
 		CookieUtils cookieUtil = new CookieUtils();
@@ -69,6 +59,16 @@ public class UserCommonController {
 		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
 		return "/login/login_new";
 	}
+	
+	/*@RequestMapping({ "/login1" })
+	public String loginNew1(HttpServletRequest request, HttpServletResponse response) {
+		CookieUtils cookieUtil = new CookieUtils();
+		TokenModel tk = new TokenModel();
+		String key = "checcUserLoginCkTk" + tk.getKey();
+		String value = tk.getBaseKey();
+		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
+		return "/login/login_new1";
+	}*/
 
 	@RequestMapping({ "/loginAjax" })
 	public String loginAjaxIndex(HttpServletRequest request, HttpServletResponse response) {
@@ -98,15 +98,15 @@ public class UserCommonController {
 		return "redirect:" + returnUrl;
 	}
 
-	/*@RequestMapping({ "/register" })
-	public String register() {
-		return "/login/register";
-	}*/
-	
 	@RequestMapping({ "/register" })
 	public String registerNew() {
 		return "/login/register_new";
 	}
+	
+	/*@RequestMapping({ "/register1" })
+	public String registerNew1() {
+		return "/login/register_new1";
+	}*/
 
 	@RequestMapping({ "/captcha" })
 	public void captcha(HttpServletRequest request, HttpServletResponse response) {

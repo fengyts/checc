@@ -204,7 +204,7 @@ public class TopicItemAO {
 			if (list.size() > 1) {
 				return ResultMessage.failure("该专题已经存在此商品");
 			}
-			if (list.get(0).getId().longValue() != itemId.longValue()) {
+			if (list.get(0).getId().longValue() != topicItemDO.getId().longValue()) {
 				return ResultMessage.failure("该专题已经存在此商品");
 			}
 		}
