@@ -69,14 +69,14 @@ $(document).ready(function() {
 		        } else { // 已经登陆
 		        	lgn_pg_ii = layer.open({
 		        		type: 1,
-		        		title: "哪些人兑换了",
+		        		title: "兑换记录列表",
 		        		resize: false,
 		        		//scrollbar: false,
 		        		//fixed: false,
 		        		move:false,
 		        		shade: 0.1,
 		        		anim: 5,
-		        		area: ['500px', '400px'],
+		        		area: ['550px', '400px'],
 		        		content: data
 		        	});
 		        }

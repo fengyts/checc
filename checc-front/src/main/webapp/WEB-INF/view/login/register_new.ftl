@@ -46,10 +46,19 @@
 	<!-- 正文 -->
 	<!--登录开始-->
 	<div class="main">
-		<div class="login_bg">
-			<a data-url="" href="javascript:void(0);">
-				<img src="${images}/loginBg1.jpg" class="" />
-			</a>
+		<div class="rg_left">
+			<div class="login_bg">
+				<a data-url="" href="javascript:void(0);">
+					<img src="${images}/loginBg1.jpg" class="" />
+				</a>
+			</div>
+			<div class="rg_footer"> 
+				皖ICP备17022956号-2 Copyright&copy;2017-${.now?date?string.yyyy} 
+				<a target="_blank" href="${domain}/">
+					<font style="color: #0099cc">车西西</font>
+				</a>
+				. All rights reserved.
+			</div>
 		</div>
 		<div id="login_form_box">
 			<form id="registerForm" name="registerForm" action="" method="post">
@@ -137,6 +146,7 @@
 	</div>
 	<!--登录结束-->
 	<!-- 尾部 -->
+	<!--
 	<div class="footer">
 		<div class="login-footer"> 皖ICP备17022956号-2    
 			Copyright&copy;2017-${.now?date?string.yyyy} 
@@ -146,7 +156,7 @@
 			. All rights reserved.
 		</div>
 	</div>
-
+	-->
 </body>
 <script type="text/javascript">
 	var process_request = "正在处理您的请求...";

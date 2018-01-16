@@ -45,9 +45,9 @@ public class IndexController {
 		}
 
 		// 获取4个往期竞拍商品
-		List<TopicItemVO> previousList = topicItemAO.listPrevious();
-		model.addAttribute("previousList", previousList);
-		model.addAttribute("totalPreviousNum", topicItemAO.totalPreviousNum());
+//		 List<TopicItemVO> previousList = topicItemAO.listPrevious();
+//		 model.addAttribute("previousList", previousList);
+//		 model.addAttribute("totalPreviousNum", topicItemAO.totalPreviousNum());
 
 		// 获取兑换商品列表
 		List<TopicItemVO> exchangeList = topicItemAO.listExchange();

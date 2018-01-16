@@ -143,6 +143,7 @@
  			item_picture
  		WHERE 
  			type = '01'
+		AND status = 1
  		AND item_id	IN	
  			(
 	 		<foreach collection="list" index="index" item="itemId" separator=",">

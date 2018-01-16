@@ -63,5 +63,73 @@
 		-->
 
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<!-- 默认为该环境 -->
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<build>
+				<!-- 在本地打包构建时的文件路径 -->
+				<resources>
+					<resource>
+						<directory>src/main/java</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+
+		<profile>
+			<id>uat</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>uat</value>
+				</property>
+			</activation>
+			<!-- 打包构建时的文件路径 -->
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/java</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>**/config/*</exclude>
+						</excludes>
+						<includes>
+							<include>**/*</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>src/main/uatResources</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+
+	</profiles>
 
 </project>
