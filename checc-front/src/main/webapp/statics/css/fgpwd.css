@@ -442,7 +442,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 } */
 .step_ifa {
 	top: 50px;
-	left: 320px;
+	left: 280px;
 	position: absolute;
 	width: 500px;
 	min-height: 350px;
