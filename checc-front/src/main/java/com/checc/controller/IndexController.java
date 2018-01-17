@@ -60,6 +60,11 @@ public class IndexController {
 	public String helperCenter() {
 		return "/index/helper_center";
 	}
+	
+	@RequestMapping({ "/index/agreement" })
+	public String agreement() {
+		return "/index/agreement";
+	}
 
 	@RequestMapping({ "/index/previous" })
 	public String previouTopic(Model model,
