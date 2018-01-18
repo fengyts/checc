@@ -37,7 +37,7 @@
 			<param-name>detectAllHandlerExceptionResolvers</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
@@ -50,17 +50,16 @@
 	</servlet-mapping>
 	<!-- springMVC前端控制器配置结束 -->
 	
-	
-	
-	<!-- url过滤器配置 -->
-	<!-- <filter>
-		<filter-name>urlFilter</filter-name>
-		<filter-class>com.checc.filter.UrlFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>urlFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<!-- XSS攻击过滤器 -->
+	<filter>  
+        <filter-name>XSSEscape</filter-name>  
+        <filter-class>com.checc.interceptor.XSSFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>XSSEscape</filter-name>  
+        <url-pattern>/*</url-pattern>  
+        <dispatcher>REQUEST</dispatcher>  
+    </filter-mapping> 
 	
 	<!-- POST中文乱码过滤器配置开始 -->
 	<filter>
@@ -85,15 +84,6 @@
 	</filter-mapping>
 	<!-- POST中文乱码过滤器配置结束 -->
 	
-	<error-page>
-		<error-code>500</error-code>
-		<location>/error/error.htm?statusCode=500</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error/error.htm?statusCode=404</location>
-	</error-page>
-
 	<!-- 配置druid监控 -->
 	<filter>
 		<filter-name>DruidWebStatFilter</filter-name>
@@ -116,5 +106,14 @@
 		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/error.htm?statusCode=500</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/error.htm?statusCode=404</location>
+	</error-page>
 
 </web-app>
