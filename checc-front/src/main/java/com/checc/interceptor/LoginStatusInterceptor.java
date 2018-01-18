@@ -1,5 +1,7 @@
 package com.checc.interceptor;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +9,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
+
+import ng.bayue.constants.CharsetConstant;
 
 /**
  * <pre>
@@ -36,8 +40,13 @@ public class LoginStatusInterceptor extends HandlerInterceptorAdapter {
 				response.addHeader("errorMessage", "用户未登陆");
 				response.addHeader(contextPath +"returnUrl", "/user/login?returnUrl=");
 			} else {
-				request.getSession().setAttribute("returnUrl", request.getRequestURL().toString());
-				response.sendRedirect(contextPath + "/user/login?returnUrl=" + request.getRequestURL());
+				StringBuffer requestURL = request.getRequestURL();
+				String rturnURL = contextPath + "/";
+				if(null != requestURL) {
+					rturnURL = requestURL.toString();
+				}
+				request.getSession().setAttribute("returnUrl", rturnURL);
+				response.sendRedirect(contextPath + "/user/login?returnUrl=" + URLEncoder.encode(rturnURL, CharsetConstant.UTF8));
 			}
 			return false;
 		}

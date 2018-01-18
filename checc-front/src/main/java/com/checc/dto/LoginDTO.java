@@ -7,6 +7,7 @@ public class LoginDTO extends BaseDTO {
 
 	private String mobile;
 	private String password;
+	private String returnUrl;
 
 	public String getMobile() {
 		return mobile;
@@ -22,6 +23,14 @@ public class LoginDTO extends BaseDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getReturnUrl() {
+		return returnUrl;
+	}
+
+	public void setReturnUrl(String returnUrl) {
+		this.returnUrl = returnUrl;
 	}
 
 }

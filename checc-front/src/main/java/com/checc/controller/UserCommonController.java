@@ -51,12 +51,13 @@ public class UserCommonController {
 	private CheccUserAO userAO;
 
 	@RequestMapping({ "/login" })
-	public String loginNew(HttpServletRequest request, HttpServletResponse response) {
+	public String loginNew(Model model, HttpServletRequest request, HttpServletResponse response, String returnUrl) {
 		CookieUtils cookieUtil = new CookieUtils();
 		TokenModel tk = new TokenModel();
 		String key = "checcUserLoginCkTk" + tk.getKey();
 		String value = tk.getBaseKey();
 		cookieUtil.setCookie(request, response, key, value, cookieUtil.getCheccDomain(), 1800);
+		model.addAttribute("returnUrl", returnUrl);
 		return "/login/login_new";
 	}
 	
@@ -92,10 +93,12 @@ public class UserCommonController {
 	@RequestMapping({ "/logout" })
 	public String logout(HttpServletRequest request, HttpServletResponse response, String returnUrl) {
 		request.getSession().removeAttribute(UserConstants.USER_SESSION_KEY);
-		if(StringUtils.isBlank(returnUrl)){
+		/*if(StringUtils.isBlank(returnUrl)){
 			returnUrl = "/";
 		}
-		return "redirect:" + returnUrl;
+		return "redirect:" + returnUrl;*/
+		
+		return "redirect:/";
 	}
 
 	@RequestMapping({ "/register" })
@@ -174,7 +177,13 @@ public class UserCommonController {
 	public CommonResultMessage doLogin(HttpServletRequest request, HttpServletResponse response,
 			LoginDTO dto) {
 		CommonResultMessage crm = userAO.login(request, dto);
-		return crm;
+		if(CommonResultMessage.Failure == crm.getResult()){
+			return crm;
+		} else {
+			String returnUrl = dto.getReturnUrl();
+			return new CommonResultMessage(returnUrl);
+		}
+		
 	}
 
 	/**

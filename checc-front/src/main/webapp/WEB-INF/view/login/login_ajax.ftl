@@ -97,6 +97,7 @@
 				</div>
 			</div>
 		</div>
+		<#--
 		<ul class="form other-form">
 			<li>
 				<h5>使用第三方帐号登录</h5>
@@ -108,6 +109,7 @@
 				<a href="#" class="weixin"></a>
 			</li>
 		</ul>
+		-->
 	</div>
 </div>
  

@@ -87,8 +87,8 @@ css=[
 			    		<tr class="tr">
 			    			<td class="td_center">${obj.userId}</td>
 			    			<td class="td_center">${obj.mobile}</td>
-			    			<td class="td_center">${obj.totalCurrency}</td>
-			    			<td class="td_center">${obj.freeze}</td>
+			    			<td class="td_center">${obj.totalCurrency!0}</td>
+			    			<td class="td_center">${obj.freeze!0}</td>
 			    			<td class="td_center">${obj.modifyTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 			    			<td class="td_center">
 			    				<a href="javascript:void(0);" style="color:blue;" class="editcatabtn editBtn" param="${obj.userId}">[编辑]</a>

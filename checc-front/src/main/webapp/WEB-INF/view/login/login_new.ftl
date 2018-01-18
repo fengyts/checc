@@ -88,7 +88,8 @@
 						</li>
 						<li class="last">
 							<input type="hidden" name="act" value="act_login" /> 
-							<input type="hidden" name="back_act" value="${domain}/index" /> 
+							<input type="hidden" name="back_act" value="${domain}/" /> 
+							<input type="hidden" name="returnUrl" id="returnUrl" value="${returnUrl}" /> 
 							<input type="button" name="submit" class="loginBtn" id="doLogin" value="登 录">
 							<div class="loginBtnBox"></div>
 						</li>

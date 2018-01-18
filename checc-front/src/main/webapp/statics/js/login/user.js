@@ -253,6 +253,7 @@ function doLogin(){
 	var _params = {};
 	_params.mobile = _mobile;
 	_params.password = Crypto.encryptAES(_password);
+	_params.returnUrl = $("#returnUrl").val();
 	
 	$.ajax({
 		url: 'doLogin',
@@ -262,17 +263,16 @@ function doLogin(){
 		async: false,
 		cache : false,
 		success : function(res) {
-			var data = res;
-			if (1 == data.result) {// 成功
-//				top.window.location.href = domain + '/index';
-				window.location.href = domain + "/";
-//				layer.msg("注册成功,请登录", {icon: 1, time:3000}, function() {
-//					parent.window.location.href= 'login';
-//					layer.close(layer.index); // 再执行关闭
-//				});
+			if (1 == res.result) {// 成功
+				var _returnUrl = res.data;
+				if(undefined != _returnUrl && null != _returnUrl && '' != _returnUrl){
+					window.location.href = res.data;
+				} else {
+					window.location.href = domain + "/";
+				}
 			} else {// 失败
 				$("#captchaImg").trigger('click');
-				layer.alert(data.message);
+				layer.alert(res.message);
 			}
 		}
 	});
