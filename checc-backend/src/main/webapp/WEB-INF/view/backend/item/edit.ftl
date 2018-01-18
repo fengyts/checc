@@ -3,7 +3,6 @@
 <@backend title="商品编辑spu" 
 js=[
 '/statics/common/common-js/jquery-1.9.1.min.js',
-'/statics/plugins/My97DatePicker/WdatePicker.js',
 '/statics/plugins/editor/kindeditor-all-min.js',
 '/statics/common/common-js/editorUtil.js',
 '/statics/plugins/baidu_webuploader/webuploader.min.js',

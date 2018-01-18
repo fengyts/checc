@@ -67,6 +67,7 @@ public class ItemAO {
 		itemDTO.setRemark(itemDO.getRemark());
 		itemDTO.setDescription(descDO.getDescription());
 		itemDTO.setListPictures(listPics);
+		itemDTO.setMarketPrice(itemDO.getMarketPrice());
 		
 		return itemDTO;
 	}

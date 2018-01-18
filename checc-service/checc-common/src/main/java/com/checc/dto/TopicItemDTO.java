@@ -36,6 +36,8 @@ public class TopicItemDTO implements Serializable {
 	private Integer auctionCurrency;
 	/** 竞拍商品单次最大限次 */
 	private Integer auctionMaxTimes;
+	/** 竞拍底价 */
+	private Double floorPrice;
 
 	public Long getId() {
 		return id;
@@ -157,4 +159,12 @@ public class TopicItemDTO implements Serializable {
 		this.auctionMaxTimes = auctionMaxTimes;
 	}
 
+	public Double getFloorPrice() {
+		return floorPrice;
+	}
+
+	public void setFloorPrice(Double floorPrice) {
+		this.floorPrice = floorPrice;
+	}
+	
 }

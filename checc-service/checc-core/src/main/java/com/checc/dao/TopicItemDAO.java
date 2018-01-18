@@ -16,6 +16,16 @@ public interface TopicItemDAO extends GeneralDAO<TopicItemDO> {
 	
 	/**
 	 * <pre>
+	 * 根据商品id更新专题商品冗余字段
+	 * </pre>
+	 *
+	 * @param topicItemDO
+	 * @return
+	 */
+	public int updateItemRedundance(TopicItemDO topicItemDO);
+	
+	/**
+	 * <pre>
 	 * 扣减兑换商品剩余数量
 	 * </pre>
 	 *

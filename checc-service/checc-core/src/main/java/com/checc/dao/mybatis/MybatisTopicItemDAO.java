@@ -76,6 +76,11 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds) {
 		return getSqlSession().selectList(getStatement("select_by_topicIds"), topicIds);
 	}
+
+	@Override
+	public int updateItemRedundance(TopicItemDO topicItemDO) {
+		return getSqlSession().update(getStatement("update_item_redundance"), topicItemDO);
+	}
 	
 	
 }

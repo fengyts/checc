@@ -79,7 +79,7 @@ css=[
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="inventory" name="inventory" value="${topicItemDO.inventory}" />
 		</div>
-		<label class="col-md-2 control-label">兑换商品价格</label>
+		<label class="col-md-2 control-label">商品兑换价格</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" id="exchangeAmount" name="exchangeAmount" value="${topicItemDO.exchangeAmount}" />
 		</div>

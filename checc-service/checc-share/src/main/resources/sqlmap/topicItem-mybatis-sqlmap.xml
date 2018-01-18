@@ -225,5 +225,16 @@
 			#{item}
 		</foreach>
 	</select>
+	
+	<update id="MybatisTopicItemDAO_update_item_redundance" parameterType="com.checc.domain.TopicItemDO">
+		UPDATE topic_item
+		<set>
+			<if test="itemTitle != null  and itemTitle != '' ">item_title=#{itemTitle},</if>
+			<if test="marketPrice != null ">market_price=#{marketPrice},</if>
+			<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
+			<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE item_id = #{itemId}
+	</update>
 
 </mapper>

@@ -155,6 +155,7 @@ public class TopicItemAO {
 		Long topicId = topicDO.getId();
 		TopicItemDO topicItemDO = new TopicItemDO();
 		topicItemDO.setTopicId(topicId);
+		topicItemDO.setStatus(CommonConstant.STATUS.TRUE);
 		List<TopicItemDO> listItems = topicItemService.selectDynamic(topicItemDO);
 		if (CollectionUtils.isEmpty(listItems)) {
 			return;

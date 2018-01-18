@@ -95,7 +95,7 @@ css=[]
 							</td>
 							-->
 							<#if '01' == topicType>
-								<td class="td_center">${obj.floorPrices!0?string('#0.00')}</td>
+								<td class="td_center">${(obj.floorPrice!0)?string('#0.00')}</td>
 								<td class="td_center">${obj.auctionCurrency}</td>
 								<td class="td_center">${obj.auctionMaxTimes}</td>
 							<#else>

@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.checc.dao.ItemDAO;
 import com.checc.dao.ItemDescDAO;
 import com.checc.dao.ItemPictureDAO;
+import com.checc.dao.TopicItemDAO;
 import com.checc.domain.ItemDO;
 import com.checc.domain.ItemDescDO;
 import com.checc.domain.ItemPictureDO;
+import com.checc.domain.TopicItemDO;
 import com.checc.dto.ItemDTO;
 import com.checc.enums.ItemPictureTypeEnum;
 import com.checc.service.ItemService;
@@ -39,6 +41,8 @@ public class ItemServiceImpl  implements ItemService{
 	private ItemDescDAO itemDescDAO;
 	@Autowired
 	private ItemPictureDAO pictureDAO;
+	@Autowired
+	private TopicItemDAO topicItemDAO;
 
 	@Override
 	public Long insert(ItemDO itemDO) throws CommonServiceException {
@@ -238,6 +242,15 @@ public class ItemServiceImpl  implements ItemService{
 			itemDO.setModifyUserId(userId);
 			
 			this.update(itemDO, false);
+			
+			// 更新专题关联商品冗余数据
+			TopicItemDO titemDO = new TopicItemDO();
+			titemDO.setItemId(itemId);
+			titemDO.setItemTitle(itemDTO.getItemTitle());
+			titemDO.setMarketPrice(itemDTO.getMarketPrice());
+			titemDO.setModifyTime(date);
+			titemDO.setModifyUserId(userId);
+			topicItemDAO.updateItemRedundance(titemDO);
 			
 			String description = itemDTO.getDescription();
 			if(StringUtils.isNotBlank(description)){
