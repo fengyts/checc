@@ -15,8 +15,6 @@
 	<title>车西西-用户协议及隐私政策</title>
 	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
-	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
-	
 	
 	<#include "/common/common-js.ftl" />
 	
@@ -96,10 +94,10 @@
 			</p>
 		</div>
 		<div class="hp_content_c">
-			<p class="bold">
+			<p class="bold inhent">
 				重要须知：车西西网站（网址：<span class="declar_lk"><a href="${domain}/" target="_blank">www.checc.cc</a></span>）及车西西微信公众号（微信号：chexixi666）的所有权人及其关联方（下称“车西西”）在此特别提醒您仔细阅读（未成年人应在其法定监护人的陪同下阅读）本《车西西用户协议》（下称“本协议”）中的各个条款，包括但不限于免除或者限制车西西责任的条款、对用户权利进行限制的条款以及约定争议解决方式、司法管辖的条款。您有权选择同意或者不同意本协议。</br>
-				您与车西西均应当严格履行本协议及其补充协议所约定的各项义务，如发生争议或者纠纷，双方可以友好协商解决；协商不成的，任何一方均可提以诉讼方式解决。</br>
-				无论您注册车西西网站或者关注车西西微信公众号，即视为您完全同意本协议，愿意接受本协议所有及任何条款的约束。</br>
+				<span class="inhent_all">您与车西西均应当严格履行本协议及其补充协议所约定的各项义务，如发生争议或者纠纷，双方可以友好协商解决；协商不成的，任何一方均可提以诉讼方式解决。</span></br>
+				<span class="inhent_all">无论您注册车西西网站或者关注车西西微信公众号，即视为您完全同意本协议，愿意接受本协议所有及任何条款的约束。</span>
 			</p>
 			<p class="hp_title">
 				<strong><span class="t3">1.名词解释</span></strong>

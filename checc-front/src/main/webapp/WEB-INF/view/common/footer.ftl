@@ -17,11 +17,13 @@
 		<div class="ft_main">
 			<div class="ft_links">
 				<div class="ft_nav">
+					<#--
 					<a href="article.php?cat_id=-1" class="noborder" rel="nofollow">用户协议</a>
 					<a href="article.php?id=1" rel="nofollow">免责条款</a>
 					<a href="article.php?id=2" rel="nofollow">隐私保护</a>
 					<a href="article.php?id=5" rel="nofollow">关于我们</a>
 					<a href="myship.php" rel="nofollow">配送方式</a>
+					-->
 				</div>
 			</div>
 			<div class="ft_txt">

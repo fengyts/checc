@@ -135,7 +135,7 @@ public class UploadController {
 	 */
 	@RequestMapping(value="/uploadItemEditor",method=RequestMethod.POST, produces ="text/html;charset=UTF-8")
 	@ResponseBody
-	public String uploadItemEditor(HttpServletRequest request){
+	public JSONObject uploadItemEditor(HttpServletRequest request){
 		String savePath = request.getSession().getServletContext().getRealPath(uploadTempPath);
 		if(StringUtils.isBlank(savePath)){
 			logger.error("图片上传路径配置错误");
@@ -153,7 +153,8 @@ public class UploadController {
 				JSONObject json = new JSONObject();
 				Long size=itemPictureMaxSize/1024L;
 				json.put("message", "上传图片最大:".concat(size.toString().concat("Kb")));
-				return json.toJSONString();
+//				return json.toJSONString();
+				return json;
 			}
 			fileName = mf.getOriginalFilename();
 			if (fileName.lastIndexOf(".") >= 0){
@@ -182,7 +183,8 @@ public class UploadController {
 		json.put("url",imageUrlUtil.getFileFullUrl(dfsPath));
 //		json.put("url", "C:\\Users\\Public\\Pictures\\Sample Pictures\\tx4.jpg");
 //		json.put("url", "http://pic56.nipic.com/file/20141227/19674963_215052431000_2.jpg");
-		return json.toJSONString();
+//		return json.toJSONString();
+		return json;
 	}
 
 }

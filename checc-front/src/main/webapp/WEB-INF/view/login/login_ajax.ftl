@@ -12,7 +12,6 @@
 	<title>${webtitle}</title>
 	
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
-	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	<link rel="stylesheet" type="text/css" href="${css}/login_ajax.css" />
 	
 	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>

@@ -15,8 +15,6 @@
 	<title>车西西-帮助中心</title>
 	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
-	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
-	
 	
 	<#include "/common/common-js.ftl" />
 	
@@ -115,7 +113,7 @@
 			<p class="hp_title"><strong><span class="t3">西币充值</span></strong></p>
 			<p>	
 				在车西西网站参与竞拍时，每次出价需使用一定数额的西币，您需要提前进行西币充值。
-				在网站右上角点击<strong>西币充值</strong>，选择充值数额，然后选择支付方式（目前仅支持微信支付）并提交。支付成功后，您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 充值的西币</a></span></strong> 里查看。
+				在网站右上角点击<strong>西币充值</strong>，选择充值数额，然后选择支付方式（目前仅支持微信支付）并提交。支付成功后，您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 西币余额</a></span></strong> 里查看。
 			</p>
 			<p class="hp_title"><strong><span class="t3">西币退还</span></strong></p>
 			<p>	
@@ -141,7 +139,7 @@
 				</br>
 			</p>
 			<p class="hp_declaration">
-				以上帮助说明具有与<strong><span class="declar_lk"><a href="${domain}/index/agreement" target="_blank">《车西西用户服务协议》</a></span></strong>同等的法律效力，车西西官方在法律允许的范围内拥有最终解释权。
+				以上帮助说明具有与<strong><span class="declar_lk"><a href="${domain}/index/agreement" target="_blank">《车西西用户协议》</a></span></strong>同等的法律效力，车西西官方在法律允许的范围内拥有最终解释权。
 			</p>
 			
 		</div>
