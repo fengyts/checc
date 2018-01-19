@@ -63,7 +63,11 @@ css=[
 			    			<td class="td_center">
 			    				<#list itemTypes as itemType>
 									<#if itemType.code == obj.itemType>
-										${itemType.desc}
+										<#if itemType.code == '02'>
+											<font color='#1ab3ff'>${itemType.desc}</font>
+										<#else>
+											${itemType.desc}
+										</#if>
 									</#if>
 			    				</#list>
 							</td>
@@ -74,7 +78,7 @@ css=[
 									</#if>
 								</#list>	
 							</td>
-			    			<td class="td_center">${obj.marketPrice}</td>
+			    			<td class="td_center">${(obj.marketPrice!0)?string('#0.00')}</td>
 			    			<td class="td_center">
 			    				<a href="javascript:void(0);" style="color:blue;" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
 			    			</td>

@@ -53,13 +53,18 @@
 						<p class="auc_currency">
 							(剩余时间:<span id="countDownTime">${detailVO.timeCountDown}</span>)
 						</p>
+						<div class="meta_auct_timedown">
+							<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
+							<p class="auc_currency auct_timedown">
+								剩余时间：<span id="countDownTime">${detailVO.timeCountDown}</span>
+							</p>
+						</div>
 						-->
 					</div>
 					<div class="meta_auct_timedown">
 						<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>
-						<p class="auc_currency auct_timedown">
-							剩余时间：<span id="countDownTime">${detailVO.timeCountDown}</span>
-						</p>
+						<span>剩余时间：</span>
+						<span id="countDownTime" class="auct_timedown"></span>
 					</div>
 				</#if>
 			<#elseif detailVO.status?? && detailVO.status=='03'>

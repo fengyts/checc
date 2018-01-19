@@ -31,7 +31,7 @@
 					<#if detailVO.currentAuctionPrice??>
 							￥${(detailVO.currentAuctionPrice!0.00)?string('#0.00')}
 					<#else>
-						无人出价
+						￥0.00
 					</#if>
 				</span> 
 				<span class="compare_marketPrice">市场价 ：￥${detailVO.marketPrice?string('0.00')}</span>
@@ -84,7 +84,6 @@
 						<#if detailVO.status?? && detailVO.status=='03'>
 							该商品已经流拍，没有人拍得该商品
 						<#else>
-						${detailVO.status}
 							(若一直无人出价，本商品将流拍)
 						</#if>
 					</#if>

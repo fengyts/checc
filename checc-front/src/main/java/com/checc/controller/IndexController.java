@@ -55,6 +55,7 @@ public class IndexController {
 
 		return "index/index";
 	}
+	
 
 	@RequestMapping({ "/index/helper" })
 	public String helperCenter() {

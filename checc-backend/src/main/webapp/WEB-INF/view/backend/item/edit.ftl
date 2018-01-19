@@ -45,15 +45,15 @@ css=[
 		<div class="col-md-4">
 			<select class="form-control" id="itemType" name="itemType">
 				<#list itemTypes as itemType>
-					<option value="${itemType.code}">${itemType.desc}</option>
+					<option value="${itemType.code}" <#if itemDO.itemType == itemType.code>selected</#if> >${itemType.desc}</option>
 				</#list>
 			</select>
 		</div>
 		<label class="col-md-2 control-label">商品状态<span class="dr-asterisk requiredField">*</span></label>
 		<div class="col-md-4">
 			<select class="form-control" id="status" name="status">
-				<#list itemStatus as itemStatus>
-					<option value="${itemStatus.code}">${itemStatus.desc}</option>
+				<#list itemStatus as itemSt>
+					<option value="${itemSt.code}" <#if itemDO.status == itemSt.code>selected</#if> >${itemSt.desc}</option>
 				</#list>
 			</select>
 		</div>

@@ -15,8 +15,8 @@
 	<link rel="icon" href="animated_favicon.gif" type="image/gif" />
 	-->
 	
-	<link type="text/css" rel="stylesheet" href="${static}/common/base_new.css">
-	<link rel="stylesheet" type="text/css" href="${css}/common_new.css" />
+	<link type="text/css" rel="stylesheet" href="${static}/common/base.css">
+	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
 	
 	<#include "/common/common-js.ftl" />
 	
@@ -38,10 +38,7 @@
 		}
 	</style>
 	
-	<div class="header">
-		<#include "/common/header_topbar.ftl" />
-		<#include "/common/header_banner.ftl" />
-	</div>
+	<#include "/common/header.ftl" />
 	
 	<div class="content_box">
 			<#--

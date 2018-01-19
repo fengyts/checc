@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+
+
+/* 竞拍商品style start */
+.topic {
+	
+}
+
+.topic_hd {
+	margin-top: 50px;
+}
+
+.topic_tab {
+	text-align: center;
+}
+
+.topic_current {
+	width: 100%;
+	height: 40px;
+	color: #0099cc;
+	max-height: 50px;
+	text-align: center;
+	font-size: 26px;
+	font-weight: 600;
+	letter-spacing: 6px;
+	white-space: nowrap;
+	word-break: normal;
+}
+
+.topic_previous {
+	width: 130px;
+	float: right;
+	margin-top: -30px;
+}
+
+.topic_previous a {
+	font-size: 14px;
+	color: #888;
+}
+
+.topic_previous a:hover {
+	color: #09c762;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	cursor: pointer;
+	text-decoration: underline;
+	filter: alpha(opacity = 80);
+	cursor: pointer;
+}
+
+.select_tab {
+	
+}
+
+.select_tab>a {
+	color: #0099cc !important;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.topic_hd .auction_time {
+	color: #666666;
+	width: 100%;
+	max-height: 50px;
+	text-align: center;
+	font-size: 16px;
+	white-space: nowrap;
+	word-break: normal;
+	margin-top: 15px;
+}
+
+.topic_items {
+	margin: 30px 0px 0px 0px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.items_box {
+/* 	display: block; */
+	float: left;
+	height: 400px;
+/* 	border: solid 1px #aaeeee; */
+	width: 270px;
+	margin: 15px 0 20px 0;
+	padding-top: 10px;
+	vertical-align: top;
+}
+
+.items{
+	width:250px;
+	height:400px;
+	margin:auto;
+	padding:0;
+}
+
+.items_box:nth-child(4n){
+	float:right;
+}
+
+.items_box:hover {
+/* 		border: solid 1px #ff0000; */
+/* 		box-shadow: 0 0 5px #ff0000; */
+}
+
+.item_img {
+	height: 250px;
+	width: 250px;
+	cursor: pointer;
+	/* 	border-bottom: 1px solid #aaeeee; */
+	overflow: hidden;
+}
+
+.item_img img {
+	width: 100%;
+	height: 100%;
+	transition: all 0.6s;
+}
+
+.item_img img:hover {
+	transform: scale(1.1);
+}
+
+.item_info {
+	font-size: 14px;
+	color: #666666;
+	margin-left: 5px;
+}
+
+.item_title {
+	margin: 10px 0 0 0;
+	font-size: 14px;
+	color: #333333;
+	min-height: 55px;
+	overflow-wrap: break-word;
+	word-break: normal;
+	word-wrap: normal;
+}
+
+.item_title>a {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+/* 	height: 70px; */
+	color: #ff8c1a;
+}
+
+.item_title>a:hover {
+	color: #ffb366;
+}

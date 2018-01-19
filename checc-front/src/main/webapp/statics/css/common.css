@@ -180,7 +180,7 @@ s {
 	height: 320px;
 	border: solid 1px #aaeeee;
 	width: 22%;
-	margin: 15px 0 50px 18px;
+	margin: 15px 0 80px 18px;
 	vertical-align: top;
 }
 
@@ -191,9 +191,9 @@ s {
 }
 
 .item_img {
-	height: 200px;
-	max-height: 200px;
-	max-width: inherit;
+	height: 250px;
+	max-height: 250px;
+	max-width: 250px;
 	cursor: pointer;
 	/* 	border-bottom: 1px solid #aaeeee; */
 	overflow: hidden;

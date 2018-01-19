@@ -181,7 +181,6 @@ public class TopicItemAO {
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
-			vo.setCurrentAuctionPrice(item.getFloorPrice());
 
 			listResult.add(vo);
 		}
