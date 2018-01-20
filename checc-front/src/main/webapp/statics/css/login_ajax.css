@@ -962,7 +962,7 @@ canvas {
 	min-height:400px;
 	box-shadow:0 0 15px rgba(204,204,204,0.5);
 	padding:15px 30px */
-	min-height:355px;
+	height:350px;
 }
 #register_box h2 {
 	font-size:18px;
