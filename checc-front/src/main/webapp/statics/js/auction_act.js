@@ -121,7 +121,7 @@ function getTotalCurrency(_t) {
 		$("#act_bid_btn, #act_exchange_btn").attr('disabled', false);
 		if (_typeFlag) {
 			$("#act_bid_btn").addClass('act_bid_btn');
-			$("#act_bid_btn a").text("竞拍");
+			$("#act_bid_btn a").text("出价");
 		} else {
 			$("#act_exchange_btn").addClass('act_exchange_btn');
 			$("#act_exchange_btn a").text("兑换");
@@ -134,7 +134,7 @@ function getTotalCurrency(_t) {
 		$("#act_bid_btn a, #act_exchange_btn a").text("西币不足");
 		if (_typeFlag) {
 			$("#act_bid_btn").removeClass('act_bid_btn');
-			$("#act_bid_btn a").text("竞拍");
+			$("#act_bid_btn a").text("出价");
 		} else {
 			$("#act_exchange_btn").removeClass('act_exchange_btn');
 			$("#act_exchange_btn a").text("兑换");

@@ -14,11 +14,11 @@
 		<div class="meta_item_title">${detailVO.itemTitle}</div>
 		<div class="auc_info_t">
 			<div class="meta_item_exchangeprice">
-				<span class="curraucttile">价值 : </span>
+				<span class="curraucttile">兑换价 : </span>
 				<span class="exchangeprice">${detailVO.exchangeAmount!0}西币</span>
 			</div>
 			<div class="meta_inventory">
-				<span class="curraucttile">数量 : </span>
+				<span class="curraucttile">数&nbsp;&nbsp;&nbsp;&nbsp;量 : </span>
 				<span>剩${detailVO.residue!0}份/共${detailVO.inventory}份</span>
 			</div>
 			<div class="meta_exchange_eninfo">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.checc.service.CheccUserService;
 import com.checc.service.UserCurrencyService;
+import com.checc.util.Messages;
 import com.checc.util.ResultMessage;
 import com.checc.vo.CheccUserVO;
 
@@ -43,7 +44,10 @@ public class StrategyAO {
 	}
 
 	public ResultMessage updateVmAccount(Long userId, Integer totalCurrency) {
-		if (null == userId || null == totalCurrency || totalCurrency.intValue() <= 0) {
+		if (null == userId) {
+			return ResultMessage.failure(Messages.ServerInnerError);
+		}
+		if (null == totalCurrency || totalCurrency.intValue() <= 0) {
 			return ResultMessage.failure("西币值必须大于0");
 		}
 		try {

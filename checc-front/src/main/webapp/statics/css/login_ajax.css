@@ -697,7 +697,7 @@ canvas {
 }
 #login-box{
 	max-width: 300px;
-	margin-left: 160px;
+	margin-left: 147px;
 	padding-top: 20px;
 }
 #login-box h2 {
@@ -962,7 +962,7 @@ canvas {
 	min-height:400px;
 	box-shadow:0 0 15px rgba(204,204,204,0.5);
 	padding:15px 30px */
-	min-height:455px;
+	min-height:355px;
 }
 #register_box h2 {
 	font-size:18px;
@@ -1251,4 +1251,24 @@ canvas {
     background-image: url("../images/loginBg1.jpg");
     background-position: 50% 0;
     background-repeat: round;
+}
+
+.loginBtn {
+	background-color: #1e9fff;
+	border: 0 none;
+	color: #fff;
+	cursor: pointer;
+	font-size: 18px;
+	height: 40px;
+	letter-spacing: 5px;
+	text-align: center;
+	width: 100%;
+	border-radius: 8px;
+}
+
+.loginBtn:hover {
+	color: #ffffff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	text-decoration: none;
 }

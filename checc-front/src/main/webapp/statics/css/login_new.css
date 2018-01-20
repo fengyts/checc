@@ -89,33 +89,6 @@ a:focus {
 	margin: 0 auto;
 	width: 980px;
 }
-/* 
-.header {
-	background-color: #fff;
-	font-size: 16px;
-	position: relative;
-	width: 100%;
-	z-index: 3;
-}
-
-.header .logo {
-	height: 90px;
-	margin: 0 auto;
-	position: relative;
-	width: 1180px;
-	z-index: 2;
-}
-
-.header .logo .lcon {
-	float: left;
-	padding-top: 10px;
-}
-
-.header .logo .adver {
-	float: left;
-	margin-top: 10px;
-} 
-*/
 .header {
 	background: #fff none repeat scroll 0 0;
 	margin: 10px auto 0;
@@ -171,13 +144,6 @@ a:focus {
 	word-break: normal;
 }
 
-/* .checc_lg_t:before {
-	content: '';
-	display: inline-block;
-	height: 100%;
-	vertical-align: middle;
-	margin-right: -0.25em;
-} */
 .checc_lg_ti {
 	padding-top: 20px;
 	font-size: 22px;
@@ -188,7 +154,6 @@ a:focus {
 
 .checc_qrcode {
 	float: right;
-	/* 	margin-left:580px; */
 	width: 80px;
 	heigth: 70px;
 }
@@ -239,11 +204,6 @@ h2 {
 	color: #666;
 	font-size: 18px;
 	padding: 15px 0;
-
-	/* font-size:18px;
-	font-style:normal;
-	font-weight:300;
-	letter-spacing:5px */
 }
 
 .h30 {
@@ -344,21 +304,6 @@ h2 {
 	text-align: left;
 	width: 320px;
 }
-/* 
-#agreement_notice{
-	line-height: 24px;
-	height: 18px;
-	line-height: 20px;
-	color: #fe564b;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	float: left;
-	margin-left: 32px;
-	font-size: 14px;
-	text-align: left;
-	width: 320px;
-} */
 .login_ul .login_input_li {
 	margin-top: 5px;
 	height: 65px;

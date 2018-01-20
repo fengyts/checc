@@ -58,7 +58,7 @@
 						    <th>出价次数(次)</th>
 						    <th>出价西币(个)</th>
 						    <th>当前状态</th>
-						    <th>当前竞拍价</th>
+						    <th>当前/最终竞拍价(￥)</th>
 						</tr> 
 					</thead>
 					<tbody>
@@ -76,7 +76,7 @@
 											出局
 										</#if>
 									</td>
-					  				<td>${auct.currenctAuctPrice}</td>
+					  				<td>${auct.currenctAuctPrice?string('#0.00')}</td>
 					  			</tr>
 					  		</#list>
 						<#else>

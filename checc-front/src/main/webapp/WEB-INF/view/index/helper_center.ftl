@@ -93,7 +93,7 @@
 			</p>
 			<p class="hp_title"><strong><span class="t3">竞拍成功</span></strong></p>
 			<p>
-				当竞拍时间结束后，并且<strong><span class="declar">最终竞拍价≥竞拍底价</span></strong>，则最后一名出价用户将成功拍得该台车（即：该用户享有以<strong><span class="declar">最终竞拍成交价</span></strong>购买该台车的权益）。
+				当竞拍时间结束后，并且<strong><span class="declar">最终竞拍价≥竞拍底价</span></strong>，则最后一名出价用户将成功拍得该台车（即：该用户享有以<strong><span class="declar">最终竞拍价</span></strong>购买该台车的权益）。
 			</p>
 			<p class="hp_title"><strong><span class="t3">竞拍失败（流拍）</span></strong></p>
 			<p>	
@@ -108,16 +108,17 @@
 			<p class="hp_title"><strong><span class="t3">竞拍后放弃购车</span></strong></p>
 			<p>	
 				如果您成功拍得了某台车，但是自竞拍成功之日起<strong><span class="declar">60</span></strong>天内，您没有按照规则到车西西指定的汽车经销商处完成购车手续，则车西西官方视为您<strong><span class="declar">放弃购车</span></strong>，同时您不再享有购买该台车的权益。此后若您想购车，请重新参与其它车辆的竞拍。</br>
-				当车西西官方确认您已放弃购车后，会给您发放一定数额的竞拍补贴。关于竞拍补贴的详细说明，您可以在车西西官方微信里查看。
+				当车西西官方确认您已放弃购车后，会给您发放一定数额的竞拍补贴。关于竞拍补贴的详细说明，您可以在车西西官方微信里查看。</br>
+				我们不建议您放弃购车，因为最终竞拍价肯定是远远低于市场价的，您买下后再转让出去，也能赚一大笔差价。
 			</p>
 			<p class="hp_title"><strong><span class="t3">西币充值</span></strong></p>
 			<p>	
 				在车西西网站参与竞拍时，每次出价需使用一定数额的西币，您需要提前进行西币充值。
 				在网站右上角点击<strong>西币充值</strong>，选择充值数额，然后选择支付方式（目前仅支持微信支付）并提交。支付成功后，您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 西币余额</a></span></strong> 里查看。
 			</p>
-			<p class="hp_title"><strong><span class="t3">西币退还</span></strong></p>
+			<p class="hp_title"><strong><span class="t3">西币退回</span></strong></p>
 			<p>	
-				每台车竞拍结束后，无论成功或失败，所有参与出价的用户，其出价的全部西币均会退还至各自账户里，请至 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 退回的西币</a></span></strong> 里查看。
+				每台车竞拍结束后，无论成功或失败，所有参与出价的用户，其出价的全部西币均会退回至各自账户里，请至 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 退回的西币</a></span></strong> 里查看。
 			</p>
 			<p class="hp_title"><strong><span class="t3">西币兑换</span></strong></p>
 			<p>	

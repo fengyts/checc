@@ -100,7 +100,9 @@
 				</div>
 				<div id="auc_action" class="auc_action auc_act_btn_p">
 					<p class="auc_act_btn"><a href="#">我要出价</a></p>
+					<#--
 					<p class="auc_currency"><span>(${detailVO.auctionCurrency!1}西币每次)</span></p>
+					-->
 				</div>
 				<div class="meta_auct_timedown">
 					<span style="display:none;" id="countDownTimeOrigin">${countDownTime}</span>

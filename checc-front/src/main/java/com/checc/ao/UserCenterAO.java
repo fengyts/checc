@@ -52,7 +52,13 @@ public class UserCenterAO {
 		UserCenterVO vo = new UserCenterVO();
 		UserCurrencyDO uc = userCurrencyService.selectByUserId(userId);
 		if (null != uc) {
-			vo.setTotalCurrency(uc.getTotalCurrency());
+			Integer totalCurrency = uc.getTotalCurrency();
+			Integer freeze = uc.getFreeze();
+			if(null == freeze){
+				freeze = 0;
+			}
+			Integer usable = totalCurrency - freeze;
+			vo.setTotalCurrency(usable);
 			vo.setRefund(uc.getRefund());
 			vo.setUserId(userId);
 			vo.setMobile(StringUtils.securityMobile(userDO.getMobile()));

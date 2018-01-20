@@ -147,7 +147,7 @@
  	
  	<select id="MybatisCheccUserDAO_select_all_vmAccount" resultType="com.checc.vo.CheccUserVO" parameterType="map">
  		SELECT
- 			cu.mobile mobile, cu.nickname nickname, cu.modify_time modifyTime, ucur.user_id userId, 
+ 			cu.mobile mobile, cu.nickname nickname, cu.modify_time modifyTime, cu.id userId, 
  			ucur.total_currency totalCurrency, ucur.freeze freeze
 		FROM
 			checc_user cu

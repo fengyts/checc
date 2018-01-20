@@ -237,3 +237,7 @@ input {
 	color: #ff0000;
 	/* 	display: none; */
 }
+
+.auct_deposit_now a {
+	color: #0099cc;
+}

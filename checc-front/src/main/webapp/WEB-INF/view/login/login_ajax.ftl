@@ -86,8 +86,8 @@
 							</li>
 							<li class="last">
 								<input type="hidden" name="act" value="act_login" /> 
-								<input type="hidden" name="back_act" value="${domain}/index" /> 
-								<input type="button" name="submit" class="btn" id="doLoginAjax" value="登 录">
+								<input type="hidden" name="back_act" value="${domain}/" /> 
+								<input type="button" name="submit" class="loginBtn" id="doLoginAjax" value="登 录">
 								<#--
 								<a href="#" class="btn" id="doLogin" >登 录</a>
 								-->
