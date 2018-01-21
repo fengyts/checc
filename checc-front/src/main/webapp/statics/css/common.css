@@ -178,9 +178,9 @@ s {
 	display: inline-block;
 	float: left;
 	height: 320px;
-	border: solid 1px #aaeeee;
+/* 	border: solid 1px #aaeeee; */
 	width: 22%;
-	margin: 15px 0 80px 18px;
+	margin: 15px 0 10px 18px;
 	vertical-align: top;
 }
 

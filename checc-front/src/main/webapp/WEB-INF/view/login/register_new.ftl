@@ -15,8 +15,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="${css}/login_new.css" />
 	
-	<script type="text/javascript" src="${plugins}/jquery/jquery-1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="${plugins}/layer/layui-v2.2.1/layui/layui.js"></script>
+	<#include "/common/common-js.ftl" />
+	
 	<script type="text/javascript" src="${plugins}/crypto-js/rollups/aes.js"></script>
 	<script type="text/javascript" src="${static}/common/crypto.js"></script>
 	<script type="text/javascript" src="${static}/common/utils.js"></script>

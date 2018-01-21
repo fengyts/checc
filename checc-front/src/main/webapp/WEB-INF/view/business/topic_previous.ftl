@@ -59,6 +59,7 @@
 									<div class="item_title">
 										<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
 									</div>
+									<#--
 									<div class="pr_box">
 										<div class="basic_price">
 											<span class="lbtitle">成交价:</span>
@@ -81,6 +82,7 @@
 											</span>
 										</div>
 									</div>
+									-->
 								</div>
 								
 							</div>

@@ -236,7 +236,7 @@
 			ti.exchange_amount exchangeAmount, ti.residue residue, (SELECT ti.residue &lt;= 0) hasExchangeOut, 
 			pic.picture picture, art.current_auct_price currentAuctionPrice, art.mobile mobile
 		FROM topic tp
-		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		LEFT JOIN topic_item ti ON ti.topic_id = tp.id AND ti.status = 1
 		LEFT JOIN item_picture pic ON pic.item_id = ti.item_id AND pic.`type` = '01' AND pic.`status` = '1'
 		LEFT JOIN 
 		(
