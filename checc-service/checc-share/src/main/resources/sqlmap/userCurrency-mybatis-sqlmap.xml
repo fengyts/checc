@@ -124,9 +124,12 @@
  		UPDATE 
  			user_currency 
 		SET 
-			freeze = freeze + #{currency}, modify_time = now()
+			freeze = freeze + #{currency}, 
+			total_currency = total_currency - #{currency},
+			modify_time = now()
  		WHERE 
  			user_id = #{userId}
+		AND total_currency - #{currency} &gt;= 0
  	</update>
  	
  	<update id="MybatisUserCurrencyDAO_increase_total_currency" parameterType="map">

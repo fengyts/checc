@@ -60,8 +60,10 @@
 			  						<#assign plusOrMinus='+'>
 			  						充值
 			  					<#else>
+			  						<#--
 			  						<#assign plusOrMinus='+'>
 			  						${arc.itemTitle}(总计出价${arc.auctNum!1}次)
+			  						-->
 			  					</#if>
 			  				</td>
 			  				<td>

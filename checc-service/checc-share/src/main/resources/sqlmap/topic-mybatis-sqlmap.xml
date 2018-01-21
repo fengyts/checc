@@ -261,7 +261,7 @@
  		SELECT 
  			COUNT(1)
 		FROM topic tp
-		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		LEFT JOIN topic_item ti ON ti.topic_id = tp.id AND ti.status = 1
 		LEFT JOIN 
 		(
 			SELECT ar1.id, ar1.topic_item_id, ar1.current_auct_price, ar1.mobile
