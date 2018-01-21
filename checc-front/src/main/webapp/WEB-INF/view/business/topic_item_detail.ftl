@@ -31,6 +31,7 @@
 	<#include "/common/footer_both.ftl" />
 	
 <script type="text/javascript" src="${js}/item_detail.js"></script>
+<script type="text/javascript" src="${js}/img_magnify.js"></script>
 
 </body>
 
