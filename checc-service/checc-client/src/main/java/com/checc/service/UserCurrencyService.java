@@ -67,5 +67,15 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	 * @return
 	 */
 	public int refundCurrency(Map<String, Integer> refundMap);
+	
+	/**
+	 * <pre>
+	 * 竞拍成功的用户西币直接扣减掉，不回退
+	 * </pre>
+	 *
+	 * @param auctSuccessMap
+	 * @return
+	 */
+	public int reduceAuctionSuccess(Map<String, Integer> auctSuccessMap);
 
 }

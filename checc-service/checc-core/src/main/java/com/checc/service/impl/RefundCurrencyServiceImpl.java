@@ -61,25 +61,70 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 		}
 		List<AuctionRecordDO> listArs = auctionRecordService.selectByTopicItemIds(tpIds);
 
-		// 回退列表：key-userId;value-refundCurrency
+		// 获取竞拍成功的记录
+		List<AuctionRecordDO> listAuctSuccess = new ArrayList<AuctionRecordDO>();
+		for (TopicItemDO ti : tpItems) {
+			double floorPrice = ti.getFloorPrice();
+			long tpItemId = ti.getId();
+			double maxAuctionPrice = 0d; // 该商品最终竞拍价
+			AuctionRecordDO temp = null;
+			for (AuctionRecordDO ar : listArs) {
+				long tpItemId1 = ar.getTopicItemId();
+				if (tpItemId == tpItemId1) {
+					Integer currentAuctPrice = ar.getCurrentAuctPrice();
+					if (currentAuctPrice.doubleValue() > maxAuctionPrice) {
+						maxAuctionPrice = currentAuctPrice;
+						temp = ar;
+					}
+				}
+			}
+			if (null != temp && floorPrice <= maxAuctionPrice) {
+				listAuctSuccess.add(temp);
+			}
+
+		}
+
+		// 用户西币回退列表：key-userId;value-refundCurrency
 		Map<String, Integer> refundMap = new HashMap<String, Integer>();
+		// 竞拍成功的用户西币不回退
+		Map<String, Integer> auctSuccessMap = new HashMap<String, Integer>();
 		// 插入回退记录
 		List<AuctionRecordDO> listRecords = new ArrayList<AuctionRecordDO>();
 		for (AuctionRecordDO ar : listArs) {
 			// 计算回退列表,这里以用户为基准,不管用户参与了多少商品的竞拍
 			Long userId = ar.getUserId();
+			long topicItemId = ar.getTopicItemId();
 			String userIdStr = String.valueOf(userId);
 			Integer totalCurrency = ar.getTotalCurrency();
 			Integer refundCurrency = totalCurrency;
+
+			boolean isSuccessUser = false; // 是否是竞拍成功用户,默认不是
+			// 处理竞拍成功的用户
+			for (AuctionRecordDO arSuccess : listAuctSuccess) {
+				long topicItemId1 = arSuccess.getTopicItemId();
+				long userIdSuccess = arSuccess.getUserId();
+				if (userId.longValue() == userIdSuccess && topicItemId == topicItemId1) {
+					isSuccessUser = true;
+					if (auctSuccessMap.containsKey(userIdStr)) {
+						refundCurrency += auctSuccessMap.get(userIdStr);
+					}
+					auctSuccessMap.put(userIdStr, refundCurrency);
+				}
+			}
+
+			if (isSuccessUser) {
+				continue;
+			}
+
+			// 处理非竞拍成功用户西币回退
 			if (refundMap.containsKey(userIdStr)) {
 				refundCurrency += refundMap.get(userIdStr);
 			}
 			refundMap.put(userIdStr, refundCurrency);
 
 			// 获取用户回退记录，这里以用户为基准：每一件竞拍商品不同用户各有一条回退记录,同一用户可能参与多个商品竞拍
-			boolean hasRecord = false; // 是否有该用户的记录了
-			int refundNum = 1; //回退次数(即该用户在该商品总共出价了多少次)
-			long topicItemId = ar.getTopicItemId();
+			boolean hasRecord = false; // 是否有该用户的记录了，默认没有
+			int refundNum = 1; // 回退次数(即该用户在该商品总共出价了多少次)
 			for (AuctionRecordDO record : listRecords) {
 				long recordUid = record.getUserId();
 				long tpId = record.getTopicItemId();
@@ -107,7 +152,7 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 				arNew.setRefundNum(refundNum);
 				arNew.setTotalCurrency(totalCurrency);
 				arNew.setCreateTime(new Date());
-				
+
 				listRecords.add(arNew);
 			}
 
@@ -115,10 +160,18 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 
 		if (refundMap.isEmpty() || CollectionUtils.isEmpty(listRecords)) {
 			logger.info("refund user currency exception: refund list or refund record list is empty");
-			throw new CommonServiceException("用户西币值回退异常,回退列表数据获取异常");
+			throw new CommonServiceException("用户西币值回退异常,回退列表数据获取异常,--服务器内部处理错误");
 		}
-
+		
 		int res = 0;
+		if (!auctSuccessMap.isEmpty()) {
+			res = userCurrencyService.reduceAuctionSuccess(auctSuccessMap);
+			if (res <= 0) {
+				logger.info("reduce auction success user currency failure: reduce operation exception");
+				throw new CommonServiceException("竞拍成功用户西币值扣减异常");
+			}
+		}
+		
 		// 回退西币
 		res = userCurrencyService.refundCurrency(refundMap);
 		if (res <= 0) {
@@ -131,9 +184,9 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 			logger.info("refund user currency failure: refund operation exception");
 			throw new CommonServiceException("用户西币值回退异常,插入回退记录异常");
 		}
-		
+
 		// 更新专题回退状态为已回退
-		for(TopicDO topic : listTopics){
+		for (TopicDO topic : listTopics) {
 			topic.setRefundCurrencyStatus(true);
 			topic.setModifyTime(new Date());
 			res = topicService.update(topic, false);
@@ -145,6 +198,5 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 
 		return res;
 	}
-
 
 }

@@ -810,9 +810,11 @@ s {
 
 .deposit_btn_box {
 	/* 	text-align: center; */
-	
 }
-
+.dpt_info {
+	font-size: 14px;
+	color: #aaa;
+}
 .deposit_btn {
 	display: inline-block;
 	width: 200px;

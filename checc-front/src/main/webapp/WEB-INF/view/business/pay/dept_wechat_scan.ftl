@@ -62,7 +62,7 @@ $(function() {
 
 function pay_status() {
 	 var dpOrderNo = $("#dpOrderNo").val();
-//	var dpOrderNo = '877249130680001470';
+	//var dpOrderNo = '885507520040002945';
 	if (null == dpOrderNo || "" == dpOrderNo) {
 		return;
 	}
@@ -77,6 +77,7 @@ function pay_status() {
 			var statusCode = xhr.getResponseHeader("statusCode");
 			if('8001' == statusCode || 8008 == statusCode){
 				window.clearInterval(timer); // 销毁定时器
+				window.top.layer.close(lgn_pg_ii);
 				var index = layer.open({
 					type : 1,
 					title : '',

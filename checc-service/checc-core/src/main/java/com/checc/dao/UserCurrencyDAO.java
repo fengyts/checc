@@ -72,5 +72,15 @@ public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
 	 */
 	public int refundCurrency(Map<String, Object> refundList) throws CommonDAOException;
 	
+	/**
+	 * <pre>
+	 * 竞拍成功的用户西币直接扣减掉，不回退
+	 * </pre>
+	 *
+	 * @param auctSuccessMap
+	 * @return
+	 */
+	public int reduceAuctionSuccess(Map<String, Object> params) throws CommonDAOException;
+	
 	
 }

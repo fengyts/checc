@@ -208,6 +208,21 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 		return -1;
 	}
 
+	@Override
+	public int reduceAuctionSuccess(Map<String, Integer> auctSuccessMap) {
+		if(null == auctSuccessMap || auctSuccessMap.isEmpty()){
+			return 0;
+		}
+		try {
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("params", auctSuccessMap);
+			return userCurrencyDAO.reduceAuctionSuccess(params);
+		} catch (CommonDAOException e) {
+			logger.error("用户回退竞拍西币接口异常", e);
+		}
+		return -1;
+	}
+
 	
 	
 	

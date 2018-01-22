@@ -125,11 +125,9 @@
  			user_currency 
 		SET 
 			freeze = freeze + #{currency}, 
-			total_currency = total_currency - #{currency},
 			modify_time = now()
  		WHERE 
  			user_id = #{userId}
-		AND total_currency - #{currency} &gt;= 0
  	</update>
  	
  	<update id="MybatisUserCurrencyDAO_increase_total_currency" parameterType="map">
@@ -165,6 +163,22 @@
 	 		WHERE 
 	 			user_id = #{key}
 	 		AND freeze - #{params[${key}]} &gt;= 0
+ 		</foreach>
+ 		
+ 	</update>
+ 	
+ 	<update id="MybatisUserCurrencyDAO_reduce_currency_success" parameterType="map">
+ 		<foreach collection="params.keys" item="key" separator=";" >
+ 			UPDATE
+				user_currency 
+			SET 
+				freeze = freeze - #{params[${key}]},
+				total_currency = total_currency - #{params[${key}]},
+				modify_time = now()
+	 		WHERE 
+	 			user_id = #{key}
+	 		AND freeze - #{params[${key}]} &gt;= 0
+	 		AND total_currency - #{params[${key}]} &gt;= 0
  		</foreach>
  		
  	</update>

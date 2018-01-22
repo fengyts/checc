@@ -40,7 +40,7 @@ public class WechatPayTestController {
 		String qrCode = generateQRCode("www.baidu.com");
 		model.addAttribute("qrcode", qrCode);
 		model.addAttribute("dpOrderNo", "877249130680001470");
-		return "/business/test/pay_qrcode_scan";
+		return "/business/pay/dept_wechat_scan";
 	}
 
 	@RequestMapping("/paysuccess")

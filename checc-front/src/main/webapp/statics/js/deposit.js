@@ -64,9 +64,9 @@ $(function() {
 		
 	});
 	
-	
+	// 测试支付按钮
 	$("#testPaySuccess").on('click', function(){
-		lgn_pg_ii = layer.open({
+		/*lgn_pg_ii = layer.open({
     		type: 2,
     		title: '',
     		resize: false,
@@ -77,7 +77,37 @@ $(function() {
     		zIndex: 0,
     		area: ['600px', '350px'],
     		content: domain + '/paytest/payQRCode?dpOrderNo=877249130680001470'
+		});*/
+		
+		var _param = {};
+		_param.depositTk = $("#depositTk").val();
+		_param.discountId = $("#discountId").val(); 
+		_param.discount = $("#discount").val();
+		_param.depositAmt = $("#depositAmt").val();
+		_param.otherAmount = $("#otherAmount").val();
+		
+		var _url = domain + '/paytest/payQRCode?dpOrderNo=885507520040002945'
+		var lindex = layer.msg('正在请求支付平台...', {icon: 16, shade: 0.2, time: 20*1000});
+		
+		$.ajax({
+			url : _url,
+			method : 'GET',
+			dataType : 'html',
+			data : _param,
+			cache : false,
+
+			success: function(data, status, xhr) { 
+				parent.layer.close(lindex);
+		        var errorCode = xhr.getResponseHeader("errorCode");
+		        if('999' == errorCode) { // 未登陆
+		        	needLoginAjax();
+		        } else { // 已经登陆
+		        	business(data);
+		        }
+		    }
+
 		});
+		
 	});
 		
 })

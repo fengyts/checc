@@ -24,7 +24,7 @@ public final class PayConfigUtil {
 	// 企业向个人账号付款的URL
 	public final static String SEND_EED_PACK_URL = "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
 	// 微信支付回调接口地址
-	public final static String NOTIFY_URL = "http://47.94.199.26:8080/checc-front/pay/wechat/payCallback";
+//	public final static String NOTIFY_URL = "http://47.94.199.26:8080/checc-front/pay/wechat/payCallback";
 
 	public final static String CREATE_IP = "192.168.0.107";// 发起支付ip（改为自己实际的）
 

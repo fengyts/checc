@@ -25,8 +25,8 @@
 		  	<colgroup>
 		    	<col width="165px">
 			    <col width="100px">
-			    <col>
-			    <col>
+			    <col width="auto">
+			    <col width="140px">
 		  	</colgroup>
 		  	<thead>
 			    <tr>
@@ -60,9 +60,10 @@
 			  						<#assign plusOrMinus='+'>
 			  						充值
 			  					<#else>
-			  						<#--
 			  						<#assign plusOrMinus='+'>
-			  						${arc.itemTitle}(总计出价${arc.auctNum!1}次)
+			  						${arc.itemTitle}
+									<#--
+									(总计出价${arc.auctNum!1}次)
 			  						-->
 			  					</#if>
 			  				</td>

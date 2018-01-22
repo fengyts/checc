@@ -66,6 +66,7 @@
 			<div class="deposit_btn" id="depositBtnAct">
 				<a href="#">立即支付</a>
 			</div>
+			<div class="dpt_info">温馨提示：西币为虚拟物品，充值成功后不可退款。</div>
 			<form id="depositListForm" action="">
 				<input type="hidden" id="depositTk" name="depositTk" value="${depositTk}">
 				<input type="hidden" id="discountId" value="-1">

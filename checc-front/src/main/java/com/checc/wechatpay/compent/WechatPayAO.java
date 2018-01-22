@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.checc.domain.DepositOrderDO;
 import com.checc.dto.DepositInsertDTO;
@@ -51,7 +52,9 @@ public class WechatPayAO {
 	// String appsecret = PayConfigUtil.APP_SECRET; // appsecret
 	private static final String MCH_ID = PayConfigUtil.MCH_ID; // 商业号
 	// private static final String API_KEY = PayConfigUtil.API_KEY; // key
-	private static final String NOTIFY_URL = PayConfigUtil.NOTIFY_URL; // 回调接口
+//	private static final String NOTIFY_URL = PayConfigUtil.NOTIFY_URL; // 回调接口
+	@Value("#{metaf['wechat_notify_url']}")
+	private String notify_url;
 
 	@Resource(name = "redisCacheService1")
 	private RedisCacheService redisCacheService;
@@ -91,7 +94,7 @@ public class WechatPayAO {
 		SortedMap<String, String> packageParams = new TreeMap<String, String>();
 		packageParams.put("appid", APPID);
 		packageParams.put("mch_id", MCH_ID);
-		packageParams.put("notify_url", NOTIFY_URL);
+		packageParams.put("notify_url", notify_url);
 		packageParams.put("nonce_str", nonce_str);
 		packageParams.put("trade_type", PayConfigUtil.PayTradeTypeEnum.NATIVE.code);
 		packageParams.put("body", PayConfigUtil.BODY + "(" + dpOrder.getDepositAmount() + "个)");
