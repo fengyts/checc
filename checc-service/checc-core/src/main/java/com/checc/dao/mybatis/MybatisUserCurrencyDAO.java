@@ -103,4 +103,11 @@ public class MybatisUserCurrencyDAO extends MybatisBaseDAO implements UserCurren
 		return getSqlSession().update(getStatement("reduce_currency_success"), params);
 	}
 
+	@Override
+	public int refund(Map<String, Map<String, Integer>> params) throws CommonDAOException {
+		return getSqlSession().update(getStatement("refundCurrency"), params);
+	}
+	
+	
+
 }

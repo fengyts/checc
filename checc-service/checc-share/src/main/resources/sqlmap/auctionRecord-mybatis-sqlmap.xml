@@ -286,5 +286,32 @@
 			</foreach>
  	</insert>
  	
+ 	
+ 	<resultMap type="com.checc.dto.refund.RefundTopicDTO" id="refundTopicDTOResultMap">
+ 		<id column="tId" property="tId"/>
+ 		<result column="topic_type" property="topicType"/>
+ 		<result column="end_time" property="endTime"/>
+ 		<result column="refund_currency_status" property="refundCurrencyStatus"/>
+ 		<collection property="topicItems" ofType="com.checc.dto.refund.RefundTopicItemDTO">
+ 			<id column="tiId" property="tiId"/>
+ 			<result column="topic_id" property="topicId"/>
+ 			<result column="floor_price" property="floorPrice"/>
+ 			<collection property="auctionRecords" resultMap="AuctionRecordDOResultMap" />
+ 		</collection>
+ 	</resultMap>
+ 	
+ 	<select id="MybatisAuctionRecordDAO_select_refund_topic_records" resultMap="refundTopicDTOResultMap">
+ 		SELECT 
+ 			tp.id tId, tp.topic_type,tp.end_time,tp.refund_currency_status,
+ 			ti.id tiId, ti.topic_id, ti.floor_price,
+ 			ar.id,ar.topic_item_id,ar.record_type,ar.deposit_type,ar.user_id,ar.nickname,ar.mobile,ar.bid_num,ar.exchange_count,ar.refund_num,
+ 			ar.total_currency,ar.current_auct_price,ar.deposit_id,ar.card_no,ar.deposit_amount,ar.discount_id,ar.discount,ar.create_time
+		FROM topic tp
+		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+		LEFT JOIN auction_record ar ON ti.id = ar.topic_item_id
+		WHERE tp.topic_type='01' AND tp.end_time &lt; NOW() AND tp.refund_currency_status = 0
+		ORDER BY ar.id DESC
+ 	</select>
+ 	
 
 </mapper>

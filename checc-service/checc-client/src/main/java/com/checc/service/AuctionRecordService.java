@@ -3,6 +3,7 @@ package com.checc.service;
 import java.util.List;
 
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.common.Page;
 import ng.bayue.exception.CommonServiceException;
@@ -70,5 +71,14 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 * @throws CommonServiceException
 	 */
 	int insertBatch(List<AuctionRecordDO> list) throws CommonServiceException;
+	
+	/**
+	 * <pre>
+	 * 查询所有未回退专题的所有商品的竞拍记录
+	 * </pre>
+	 *
+	 * @return
+	 */
+	List<RefundTopicDTO> selectRefundTopicRecords();
 
 }

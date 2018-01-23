@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.exception.CommonDAOException;
 
@@ -86,6 +87,11 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 	@Override
 	public int insertBatch(List<AuctionRecordDO> list) throws CommonDAOException {
 		return getSqlSession().insert(getStatement("insert_batch"), list);
+	}
+
+	@Override
+	public List<RefundTopicDTO> selectRefundTopicRecords() {
+		return getSqlSession().selectList(getStatement("select_refund_topic_records"));
 	}
 	
 	

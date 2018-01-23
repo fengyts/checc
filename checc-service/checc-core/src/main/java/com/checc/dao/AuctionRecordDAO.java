@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
@@ -58,5 +59,14 @@ public interface AuctionRecordDAO extends GeneralDAO<AuctionRecordDO> {
 	 * @throws CommonServiceException
 	 */
 	int insertBatch(List<AuctionRecordDO> list) throws CommonDAOException;
+	
+	/**
+	 * <pre>
+	 * 查询所有未回退专题的所有商品的竞拍记录
+	 * </pre>
+	 *
+	 * @return
+	 */
+	List<RefundTopicDTO> selectRefundTopicRecords();
 	
 }

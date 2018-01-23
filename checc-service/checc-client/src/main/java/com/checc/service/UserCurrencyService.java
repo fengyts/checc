@@ -66,6 +66,7 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	 *
 	 * @return
 	 */
+	@Deprecated
 	public int refundCurrency(Map<String, Integer> refundMap);
 	
 	/**
@@ -76,6 +77,17 @@ public interface UserCurrencyService extends GeneralService<UserCurrencyDO, User
 	 * @param auctSuccessMap
 	 * @return
 	 */
+	@Deprecated
 	public int reduceAuctionSuccess(Map<String, Integer> auctSuccessMap);
+	
+	/**
+	 * <pre>
+	 * 用户西币回退新接口：分流拍回退和非流拍回退
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	public int refund(Map<String, Map<String, Integer>> params) throws CommonServiceException;
 
 }

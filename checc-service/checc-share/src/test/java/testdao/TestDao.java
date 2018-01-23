@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.checc.domain.CheccUserDO;
 import com.checc.domain.TopicDO;
+import com.checc.dto.refund.RefundTopicDTO;
+import com.checc.service.AuctionRecordService;
 import com.checc.service.CheccUserService;
 import com.checc.service.RefundCurrencyService;
 import com.checc.service.TopicService;
@@ -25,12 +27,14 @@ public class TestDao {
 
 	@Autowired
 	private CheccUserService userService;
+	@Autowired
+	private AuctionRecordService auctionRecordService;
+	@Autowired
+	private RefundCurrencyService refundService;
 
 	@Test
 	public void test() {
-		CheccUserDO t = new CheccUserDO();
-		Page<CheccUserDO> page = userService.queryPageListDynamicAndStartPageSize(t, 1, 5);
-		System.out.println(page.getTotalCount());
+		refundService.refundCurrency();
 	}
 	
 

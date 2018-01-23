@@ -1,6 +1,7 @@
 package com.checc.interceptor;
 
 import java.net.URLEncoder;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +32,8 @@ public class LoginStatusInterceptor extends HandlerInterceptorAdapter {
 				UserConstants.USER_SESSION_KEY);
 		if (null == userDO) { // 未登陆
 			String contextPath = request.getContextPath();
+			String uri = request.getRequestURI();
+//			Enumeration<String> headerNames = request.getHeaderNames();
 			// 如果是ajax请求响应头会有，x-requested-with
 			if (request.getHeader("x-requested-with") != null
 					&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
@@ -40,11 +43,12 @@ public class LoginStatusInterceptor extends HandlerInterceptorAdapter {
 				response.addHeader("errorMessage", "用户未登陆");
 				response.addHeader(contextPath +"returnUrl", "/user/login?returnUrl=");
 			} else {
-				StringBuffer requestURL = request.getRequestURL();
-				String rturnURL = contextPath + "/";
-				if(null != requestURL) {
-					rturnURL = requestURL.toString();
-				}
+//				StringBuffer requestURL = request.getRequestURL();
+//				String rturnURL = contextPath + "/";
+//				if(null != requestURL) {
+//					rturnURL = requestURL.toString();
+//				}
+				String rturnURL = uri;
 				request.getSession().setAttribute("returnUrl", rturnURL);
 				response.sendRedirect(contextPath + "/user/login?returnUrl=" + URLEncoder.encode(rturnURL, CharsetConstant.UTF8));
 			}

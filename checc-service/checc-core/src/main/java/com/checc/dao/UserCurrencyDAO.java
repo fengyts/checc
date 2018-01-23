@@ -70,6 +70,7 @@ public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
 	 *
 	 * @return
 	 */
+	@Deprecated
 	public int refundCurrency(Map<String, Object> refundList) throws CommonDAOException;
 	
 	/**
@@ -80,7 +81,18 @@ public interface UserCurrencyDAO extends GeneralDAO<UserCurrencyDO> {
 	 * @param auctSuccessMap
 	 * @return
 	 */
+	@Deprecated
 	public int reduceAuctionSuccess(Map<String, Object> params) throws CommonDAOException;
+	
+	/**
+	 * <pre>
+	 * 用户西币回退新接口：分流拍回退和非流拍回退
+	 * </pre>
+	 *
+	 * @param params
+	 * @return
+	 */
+	public int refund(Map<String, Map<String, Integer>> params) throws CommonDAOException;
 	
 	
 }

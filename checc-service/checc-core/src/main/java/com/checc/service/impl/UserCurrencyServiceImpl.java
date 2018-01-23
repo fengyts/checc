@@ -38,8 +38,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 	}
 
 	@Override
-	public int update(UserCurrencyDO userCurrencyDO, boolean isAllField)
-			throws CommonServiceException {
+	public int update(UserCurrencyDO userCurrencyDO, boolean isAllField) throws CommonServiceException {
 		try {
 			if (isAllField) {
 				return (Integer) userCurrencyDAO.update(userCurrencyDO);
@@ -84,8 +83,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 	}
 
 	@Override
-	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO)
-			throws CommonServiceException {
+	public List<UserCurrencyDO> selectDynamic(UserCurrencyDO userCurrencyDO) throws CommonServiceException {
 		try {
 			return userCurrencyDAO.selectDynamic(userCurrencyDO);
 		} catch (CommonDAOException e) {
@@ -94,8 +92,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 		}
 	}
 
-	private List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO)
-			throws CommonServiceException {
+	private List<UserCurrencyDO> selectDynamicPageQuery(UserCurrencyDO userCurrencyDO) throws CommonServiceException {
 		try {
 			return userCurrencyDAO.selectDynamicPageQuery(userCurrencyDO);
 		} catch (CommonDAOException e) {
@@ -105,8 +102,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 	}
 
 	@Override
-	public Page<UserCurrencyDO> queryPageListDynamic(UserCurrencyDO userCurrencyDO)
-			throws CommonServiceException {
+	public Page<UserCurrencyDO> queryPageListDynamic(UserCurrencyDO userCurrencyDO) throws CommonServiceException {
 		if (userCurrencyDO != null) {
 			Long totalCount = this.selectCountDynamic(userCurrencyDO);
 
@@ -125,8 +121,8 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 	}
 
 	@Override
-	public Page<UserCurrencyDO> queryPageListDynamicAndStartPageSize(UserCurrencyDO userCurrencyDO,
-			Integer startPage, Integer pageSize) throws CommonServiceException {
+	public Page<UserCurrencyDO> queryPageListDynamicAndStartPageSize(UserCurrencyDO userCurrencyDO, Integer startPage,
+			Integer pageSize) throws CommonServiceException {
 		if (userCurrencyDO != null && startPage > 0 && pageSize > 0) {
 			userCurrencyDO.setStartPage(startPage);
 			userCurrencyDO.setPageSize(pageSize);
@@ -150,7 +146,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 	public int increaseTotalCurrency(Long userId, Integer currency) throws CommonServiceException {
 		try {
 			UserCurrencyDO uc = this.selectByUserId(userId);
-			if(null == uc){
+			if (null == uc) {
 				uc = new UserCurrencyDO();
 				uc.setUserId(userId);
 				uc.setTotalCurrency(currency);
@@ -162,7 +158,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 			} else {
 				return userCurrencyDAO.increaseTotalCurrency(userId, currency);
 			}
-			
+
 		} catch (CommonDAOException e) {
 			logger.error("用户充值西币异常：{}", e);
 			return -1;
@@ -195,7 +191,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 
 	@Override
 	public int refundCurrency(Map<String, Integer> refundMap) {
-		if(null == refundMap || refundMap.isEmpty()){
+		if (null == refundMap || refundMap.isEmpty()) {
 			return 0;
 		}
 		try {
@@ -210,7 +206,7 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 
 	@Override
 	public int reduceAuctionSuccess(Map<String, Integer> auctSuccessMap) {
-		if(null == auctSuccessMap || auctSuccessMap.isEmpty()){
+		if (null == auctSuccessMap || auctSuccessMap.isEmpty()) {
 			return 0;
 		}
 		try {
@@ -223,9 +219,14 @@ public class UserCurrencyServiceImpl implements UserCurrencyService {
 		return -1;
 	}
 
-	
-	
-	
-	
-	
+	@Override
+	public int refund(Map<String, Map<String, Integer>> params) throws CommonServiceException {
+		try {
+			return userCurrencyDAO.refund(params);
+		} catch (CommonDAOException e) {
+			logger.error("用户回退竞拍西币接口异常", e);
+			return -1;
+		}
+	}
+
 }
