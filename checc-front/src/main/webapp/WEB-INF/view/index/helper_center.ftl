@@ -62,7 +62,9 @@
 			opacity: .8;
 			filter: alpha(opacity = 80);
 	    }
-	    
+	    .inhent {
+	    	padding-left: 2em;
+	    }
 	    
 	</style>
 	
@@ -85,7 +87,7 @@
 			</p>
 			<p class="hp_title"><strong><span class="t3">汽车竞拍</span></strong></p>
 			<p>
-				竞拍周期：周一8:00~周日20:00，每周一期。</br>
+				竞拍周期：周一10:00~周日20:00，每周一期。</br>
 				每一台竞拍车辆的初始竞拍价均为 <strong><span class="declar">0</span></strong> 元，但有一个 <strong><span class="declar">竞拍底价</span></strong>。
 				在竞拍时间结束之前，所有用户均可以对这台车进行出价。每次出价需要花费一定数额的西币，出价次数不限。每出价1个西币，这台车的当前竞拍价会增加1元，同时当前出价的用户处于领先位置，上一位出价的用户出局。
 				整个竞拍过程就是不同用户之间竞争领先的位置。</br>
@@ -114,15 +116,19 @@
 			<p class="hp_title"><strong><span class="t3">西币充值</span></strong></p>
 			<p>	
 				在车西西网站参与竞拍时，每次出价需使用一定数额的西币，您需要提前进行西币充值。
-				在网站右上角点击<strong>西币充值</strong>，选择充值数额，然后选择支付方式（目前仅支持微信支付）并提交。支付成功后，您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 西币余额</a></span></strong> 里查看。
+				在网站右上角点击<strong>西币充值</strong>，选择充值数额，然后选择支付方式（目前仅支持微信支付）并提交。支付成功后，您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 竞拍账户</a></span></strong> 里查看。
 			</p>
 			<p class="hp_title"><strong><span class="t3">西币退回</span></strong></p>
-			<p>	
-				每台车竞拍结束后，无论成功或失败，所有参与出价的用户，其出价的全部西币均会退回至各自账户里，请至 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心 --> 退回的西币</a></span></strong> 里查看。
+			<p>
+				西币退回分以下两种情况：</br>
+				1、当某台车的竞拍最终流拍时，您参与该台车竞拍所出价的西币会全部退回至竞拍账户，可以用来继续参与其它车辆的竞拍，不能兑换礼品、提现或兑换现金。</span></br>
+				2、当某台车的竞拍最终竞拍成功时：</span></br>
+				<span class="inhent">2.1是其它人所拍得，那么您参与该台车竞拍所出价的西币会全部退回到兑换账户里，并且只能用来兑换礼品，不能参与竞拍、提现或兑换现金。您可以在 <strong><span class="declar_lk"><a href="${domain}/user/bis/membercenter">个人中心-->兑换账户</a></span></strong> 里查看。</span></br>
+				<span class="inhent">2.2是您所拍得，那么您参与该台车竞拍所出价的全部西币均不予退回。</span>
 			</p>
 			<p class="hp_title"><strong><span class="t3">西币兑换</span></strong></p>
 			<p>	
-				您可以使用退回的西币在车西西网站上兑换礼品。数量有限，先到先得。</br>
+				您可以使用兑换账户的西币在车西西网站上兑换礼品。数量有限，先到先得。</br>
 				兑换周期：周一10:00~周日20:00，每周一期。</br>
 				兑换成功后不可撤销。兑换的商品不支持退换货。</br>
 				车西西官方会按照兑换的时间先后顺序进行发货，同时会将物流单号发送给您的手机上，请及时跟踪物流状态并签收礼品。

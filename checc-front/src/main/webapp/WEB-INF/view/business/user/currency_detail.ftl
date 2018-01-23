@@ -3,15 +3,17 @@
 		<div class="center_title">
 			<span>会员中心</span>
 		</div>
+		<#--
 		<div class="center_user_mc">
 			<span>${userDetailVO.mobile}</span>
 		</div>
+		-->
 		
 		<div class="currency_info">
 			<div class="cinfo">
 				<div class="total_currency_box">
 					<div class="uc_box_t">
-						<span>西币余额</span>
+						<span>竞拍账户</span>
 					</div>
 					<div class="uc_ta_num">
 						<span>${userDetailVO.totalCurrency!0}</span>
@@ -30,7 +32,7 @@
 			<div class="cinfo">
 				<div class="refund_currency_box">
 					<div class="uc_box_t">
-						<span>退回的西币</span>
+						<span>兑换账户</span>
 					</div>
 					<div class="uc_ta_num">
 						<span>${userDetailVO.refund!0}</span>

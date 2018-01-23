@@ -10,16 +10,18 @@
 		<input type="hidden" id="ucExchangeActNum" value="${page.totalCount!0}" />
 		<#if page.list?default([])?size!=0>
 			<#list page.list as ucItem>
-				<div class="items">
-					<div class="uc_ld_items">
-						<div class="item_img">
-							<a href="javascript:parent.window.location.href='${domain}/topicItem/itemDetails/auction/${ucItem.tpId}';" class="itemsal" reqTime="${.now?long}">
-								<img src="${ucItem.picture}">
-							</a>
+				<div class="items_box">
+					<div id="items" class="items">
+						<div class="uc_ld_items">
+							<div class="item_img">
+								<a href="javascript:parent.window.location.href='${domain}/topicItem/itemDetails/auction/${ucItem.tpId}';" class="itemsal" reqTime="${.now?long}">
+									<img src="${ucItem.picture}">
+								</a>
+							</div>
 						</div>
-					</div>
-					<div class="uc_item_info">
-						<div class="uc_item_title">${ucItem.itemTitle}</div>
+						<div class="uc_item_info">
+							<div class="uc_item_title">${ucItem.itemTitle}</div>
+						</div>
 					</div>
 				</div>
 			</#list>

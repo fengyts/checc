@@ -12,8 +12,8 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 		
-	<link type="text/css" rel="stylesheet" href="${static}/common/base.css">
-	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
+	<link type="text/css" rel="stylesheet" href="${static}/common/base_new.css">
+	<link rel="stylesheet" type="text/css" href="${css}/common_new.css" />
 	
 	<#include "/common/common-js.ftl" />
 	
@@ -47,44 +47,46 @@
 					<span>往期竞拍(${totalAuctNum})</span>
 				</div>
 				
-				<div id="auction_items" class="topic_items">
+				<div id="auction_items" class="topic_items1">
 					<#if page.list?default([])?size!=0>
 						<#assign req_url="${domain}/topicItem/itemDetails/auction" >
 						<#list page.list as auc>
-							<div id="items" class="items">
-								<div class="item_img">
-									<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}"><img src="${auc.picture}"></a>
-								</div>
-								<div class="item_info">
-									<div class="item_title">
-										<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
+							<div class="items_box1">
+								<div id="items" class="items">
+									<div class="item_img">
+										<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}"><img src="${auc.picture}"></a>
 									</div>
-									<#--
-									<div class="pr_box">
-										<div class="basic_price">
-											<span class="lbtitle">成交价:</span>
-											<span class="prc">
-												<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
-													￥${auc.currentAuctionPrice?string('0.00')}
-												<#else>
-													流拍
-												</#if>
-											</span>
+									<div class="item_info">
+										<div class="item_title">
+											<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
 										</div>
-										<div class="auc_price">
-											<span class="lbtitle">拍得者:</span>
-											<span class="prc prc_curr">
-												<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
-													${auc.mobile[0..2] + '****' + auc.mobile[7..]}
-												<#else>
-													流拍
-												</#if>
-											</span>
+										<#--
+										<div class="pr_box">
+											<div class="basic_price">
+												<span class="lbtitle">成交价:</span>
+												<span class="prc">
+													<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
+														￥${auc.currentAuctionPrice?string('0.00')}
+													<#else>
+														流拍
+													</#if>
+												</span>
+											</div>
+											<div class="auc_price">
+												<span class="lbtitle">拍得者:</span>
+												<span class="prc prc_curr">
+													<#if auc.currentAuctionPrice &gt;= auc.floorPrice>
+														${auc.mobile[0..2] + '****' + auc.mobile[7..]}
+													<#else>
+														流拍
+													</#if>
+												</span>
+											</div>
 										</div>
+										-->
 									</div>
-									-->
+									
 								</div>
-								
 							</div>
 						</#list>
 					</#if>

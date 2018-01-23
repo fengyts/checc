@@ -68,9 +68,15 @@ public class IndexController {
 	}
 
 	@RequestMapping({ "/index/previous" })
-	public String previouTopic(Model model,
+	public String previouTopic(Model model, HttpServletRequest request,
 			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize) {
+		HttpSession session = request.getSession();
+		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
+		if (null != userDO) {
+			model.addAttribute("checcUser", userDO);
+		}
+		
 		Page<TopicItemVO> page = topicItemAO.queryPrevioucAuctions(pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("totalAuctNum", page.getTotalCount());

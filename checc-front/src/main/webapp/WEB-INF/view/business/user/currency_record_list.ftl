@@ -55,7 +55,7 @@
 			  						${arc.itemTitle}(出价${arc.auctNum!1}次)
 			  					<#elseif arc.recordType == '02'>
 			  						<#assign plusOrMinus='-'>
-			  						${arc.itemTitle}(兑换${arc.auctNum!1}次)
+			  						${arc.itemTitle}(兑换${arc.auctNum!1}份)
 			  					<#elseif arc.recordType == '03'>
 			  						<#assign plusOrMinus='+'>
 			  						充值

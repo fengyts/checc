@@ -551,7 +551,8 @@ s {
 	margin: 50px 0 0 0;
 }
 
-.center_title, .deposit_title {
+/* .center_title,  */
+.deposit_title {
 	/* 个人 中心,充值中心 标题样式*/
 	margin: 20px 0 0 0;
 	color: #0099cc;
@@ -559,6 +560,11 @@ s {
 	font-weight: 700;
 	line-height: normal;
 	letter-spacing: 6px;
+}
+
+.center_title {
+	color: #666666;
+    font-size: 18px;
 }
 
 .center_user_mc {
