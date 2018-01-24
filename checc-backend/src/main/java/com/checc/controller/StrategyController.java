@@ -67,15 +67,5 @@ public class StrategyController {
 		return strategyAO.updateVmAccount(userId, totalCurrency);
 	}
 	
-	@RequestMapping("/agreementAndHelper")
-	public String agreementAndHelper(Model model){
-		return "/index/agreement_helper";
-	}
-	
-	@RequestMapping("/preview")
-	public String preview(Model model, String content){
-		model.addAttribute("content", content);
-		return "/index/preview";
-	}
 	
 }

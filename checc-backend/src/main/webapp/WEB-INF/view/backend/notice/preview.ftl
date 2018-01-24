@@ -1,28 +1,15 @@
-<#include "/common/common.ftl" />
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<#include "/common/common.ftl"/>
+<!doctype html>
+<html lang="zh-CN">
 <head>
-	<meta name="Generator" content="ECSHOP v2.7.3" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=640, minimum-scale=0.5, maximum-scale=0.5, initial-scale=0.5, user-scalable=1" />
-
-	<meta name="Keywords" content="车西西-帮助中心" />
-	<meta name="Description" content="车西西-帮助中心" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-	
-	<title>车西西-帮助中心</title>
-	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
-	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
-	
-	<#include "/common/common-js.ftl" />
-	
-	 <style type="text/css">
+  <meta charset="UTF-8">
+  <title>预览</title>
+  <style type="text/css">
 		body{
 	        margin: auto;
 	        padding: 10px;
 	        max-width: 900px;
+	        font-family: 新宋体,SimSun;
 	        font-size: 14px;
 	    }
 	    .t3{
@@ -81,10 +68,13 @@
 	    }
 	    
 	</style>
-	
+  
 </head>
 <body>
-	${content}	
+
+${content}
 </body>
 
 </html>
+   
+ 

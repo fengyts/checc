@@ -183,7 +183,7 @@
  	
  	<update id="MybatisUserCurrencyDAO_refundCurrency" parameterType="map">
  		<if test="refundFlowMap != null">
-	 		<foreach collection="refundFlowMap.keys" item="key" separator=";" >
+	 		<foreach collection="refundFlowMap.keys" item="key">
 	 			UPDATE
 					user_currency 
 				SET 
@@ -191,11 +191,11 @@
 					modify_time = now()
 		 		WHERE 
 		 			user_id = #{key}
-		 		AND freeze - #{refundFlowMap[${key}]} &gt;= 0
+		 		AND freeze - #{refundFlowMap[${key}]} &gt;= 0;
 	 		</foreach>
  		</if>
  		<if test="refundSuccessMap != null">
-	 		<foreach collection="refundSuccessMap.keys" item="key" separator=";" >
+	 		<foreach collection="refundSuccessMap.keys" item="key">
 	 			UPDATE
 					user_currency 
 				SET 
@@ -205,20 +205,22 @@
 		 		WHERE 
 		 			user_id = #{key}
 		 		AND freeze - #{refundSuccessMap[${key}]} &gt;= 0
-		 		AND total_currency - #{refundSuccessMap[${key}]} &gt;= 0
+		 		AND total_currency - #{refundSuccessMap[${key}]} &gt;= 0;
 	 		</foreach>
  		</if>
  		<if test="refundNotFlowMap != null">
- 			<foreach collection="refundNotFlowMap.keys" item="key" separator=";" >
+ 			<foreach collection="refundNotFlowMap.keys" item="key">
 	 			UPDATE
 					user_currency 
 				SET 
+					total_currency = total_currency - #{refundNotFlowMap[${key}]},
 					freeze = freeze - #{refundNotFlowMap[${key}]},
 					refund = refund + #{refundNotFlowMap[${key}]},
 					modify_time = now()
 		 		WHERE 
 		 			user_id = #{key}
-		 		AND freeze - #{refundNotFlowMap[${key}]} &gt;= 0
+		 		AND total_currency - #{refundNotFlowMap[${key}]} &gt;= 0
+		 		AND freeze - #{refundNotFlowMap[${key}]} &gt;= 0;
 	 		</foreach>
  		</if>
  	</update>

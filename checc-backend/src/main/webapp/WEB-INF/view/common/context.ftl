@@ -6,6 +6,7 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/msgbox.css">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/common.css">
 	<link rel="stylesheet" href="${domain}/statics/common/common-css/main.css">

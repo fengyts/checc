@@ -32,7 +32,7 @@ import ng.bayue.util.StringUtils;
 @Service
 public class UserCenterAO {
 
-//	private Logger logger = LoggerFactory.getLogger(UserCenterAO.class);
+	// private Logger logger = LoggerFactory.getLogger(UserCenterAO.class);
 
 	@Autowired
 	private UserCurrencyService userCurrencyService;
@@ -54,7 +54,7 @@ public class UserCenterAO {
 		if (null != uc) {
 			Integer totalCurrency = uc.getTotalCurrency();
 			Integer freeze = uc.getFreeze();
-			if(null == freeze){
+			if (null == freeze) {
 				freeze = 0;
 			}
 			Integer usable = totalCurrency - freeze;
@@ -74,8 +74,7 @@ public class UserCenterAO {
 
 	public void ucAuctionList(Model model, CheccUserDO userDO, String recordType, Integer pageNo) {
 		Long userId = userDO.getId();
-		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userId,
-				recordType, pageNo, 8);
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListUCAuction(userId, recordType, pageNo, 8);
 
 		Page<UCAuctionListVO> pageRes = new Page<UCAuctionListVO>();
 		pageRes.setPageNo(page.getPageNo());
@@ -88,7 +87,7 @@ public class UserCenterAO {
 			List<Long> tpIds = new ArrayList<Long>();
 			for (AuctionRecordDO ar : listDb) {
 				Long tpId = ar.getTopicItemId();
-				if(!tpIds.contains(tpId)){
+				if (!tpIds.contains(tpId)) {
 					tpIds.add(tpId);
 				}
 			}
@@ -96,14 +95,13 @@ public class UserCenterAO {
 			List<Long> itemIds = new ArrayList<Long>();
 			for (TopicItemDO ti : tiList) {
 				Long itemId = ti.getItemId();
-				if(!itemIds.contains(itemId)){
+				if (!itemIds.contains(itemId)) {
 					itemIds.add(itemId);
 				}
 
 				// 获取商品进度状态
 				TopicDO topicDO = topicService.selectById(ti.getTopicId());
-				String topicStatus = AuctionCommonAO.getTopicStatus(topicDO.getStartTime(),
-						topicDO.getEndTime());
+				String topicStatus = AuctionCommonAO.getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
 
 				UCAuctionListVO vo = new UCAuctionListVO();
 				long tpId = ti.getId();
@@ -112,26 +110,24 @@ public class UserCenterAO {
 				vo.setItemTitle(ti.getItemTitle());
 				vo.setItemStatus(topicStatus);
 				/*
-				for (AuctionRecordDO ar : listDb) {
-					if (tpId == ar.getTopicItemId().longValue()) {
-						vo.setCurrenctAuctPrice(ar.getCurrentAuctPrice() != null ? ar
-								.getCurrentAuctPrice().doubleValue() : 0);
-						if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
-							AuctionRecordDO winner = auctionRecordService.selectLatestAuction(tpId);
-							if(winner.getUserId().longValue() == userId.longValue()){
-								vo.setIsWinner(true);
-							}
-						}
-						break;
-					}
-				}*/
-				
+				 * for (AuctionRecordDO ar : listDb) { if (tpId ==
+				 * ar.getTopicItemId().longValue()) {
+				 * vo.setCurrenctAuctPrice(ar.getCurrentAuctPrice() != null ? ar
+				 * .getCurrentAuctPrice().doubleValue() : 0); if
+				 * (TopicStatusEnum.End.getCode().equals(topicStatus)) {
+				 * AuctionRecordDO winner =
+				 * auctionRecordService.selectLatestAuction(tpId);
+				 * if(winner.getUserId().longValue() == userId.longValue()){
+				 * vo.setIsWinner(true); } } break; } }
+				 */
+
 				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
-				if(null != latest){
-					vo.setCurrenctAuctPrice(latest.getCurrentAuctPrice() != null ? latest
-							.getCurrentAuctPrice().doubleValue() : 0);
+				if (null != latest) {
+					Integer currentAuctPrice = latest.getCurrentAuctPrice();
+					vo.setCurrenctAuctPrice(currentAuctPrice != null ? currentAuctPrice.doubleValue() : 0);
 					if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
-						if(latest.getUserId().longValue() == userId.longValue()){
+						if (latest.getUserId().longValue() == userId.longValue()
+								&& ti.getFloorPrice().doubleValue() <= currentAuctPrice.doubleValue()) {
 							vo.setIsWinner(true);
 						}
 					}
@@ -166,8 +162,7 @@ public class UserCenterAO {
 	public void currencyRecList(Model model, Long userId, Integer pageNo, Integer pageSize) {
 		AuctionRecordDO t = new AuctionRecordDO();
 		t.setUserId(userId);
-		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(t,
-				pageNo, pageSize);
+		Page<AuctionRecordDO> page = auctionRecordService.queryPageListDynamicAndStartPageSize(t, pageNo, pageSize);
 
 		Page<CurrencyRecordVO> pageRes = new Page<CurrencyRecordVO>();
 		pageRes.setPageNo(page.getPageNo());

@@ -134,7 +134,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public AuctionRecordDO selectLatestAuction(Long topicItemId) {
+	public synchronized AuctionRecordDO selectLatestAuction(Long topicItemId) {
 		if (null == topicItemId) {
 			return null;
 		}

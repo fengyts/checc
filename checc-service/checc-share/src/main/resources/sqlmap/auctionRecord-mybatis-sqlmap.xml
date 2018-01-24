@@ -308,7 +308,7 @@
  			ar.total_currency,ar.current_auct_price,ar.deposit_id,ar.card_no,ar.deposit_amount,ar.discount_id,ar.discount,ar.create_time
 		FROM topic tp
 		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
-		LEFT JOIN auction_record ar ON ti.id = ar.topic_item_id
+		LEFT JOIN auction_record ar ON ti.id = ar.topic_item_id AND ar.record_type = '01'
 		WHERE tp.topic_type='01' AND tp.end_time &lt; NOW() AND tp.refund_currency_status = 0
 		ORDER BY ar.id DESC
  	</select>

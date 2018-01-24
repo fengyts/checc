@@ -14,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.checc.ao.CheccNoticeAO;
 import com.checc.ao.TopicItemAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
+import com.checc.enums.CheccNoticeTypeEnum;
 import com.checc.vo.front.TopicItemVO;
 
 @Controller
@@ -25,6 +27,8 @@ public class IndexController {
 
 	@Autowired
 	private TopicItemAO topicItemAO;
+	@Autowired
+	private CheccNoticeAO noticeAO;
 
 	@RequestMapping({ "/index", "/" })
 	public String index(HttpServletRequest request, Model model) {
@@ -58,12 +62,14 @@ public class IndexController {
 	
 
 	@RequestMapping({ "/index/helper" })
-	public String helperCenter() {
+	public String helperCenter(Model model) {
+		model.addAttribute("content", noticeAO.selectByType(CheccNoticeTypeEnum.HELPER_CENTER.code).getContent());
 		return "/index/helper_center";
 	}
 	
 	@RequestMapping({ "/index/agreement" })
-	public String agreement() {
+	public String agreement(Model model) {
+		model.addAttribute("content", noticeAO.selectByType(CheccNoticeTypeEnum.AGREEMENT.code).getContent());
 		return "/index/agreement";
 	}
 

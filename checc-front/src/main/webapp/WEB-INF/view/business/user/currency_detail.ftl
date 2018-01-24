@@ -21,7 +21,7 @@
 					</div>
 					<div class="act_btn_box">
 						<div class="to_recharge">
-							<a href="javascript:window.open('${domain}/user/deposit/dplist');">去充值</a>
+							<a href="${domain}/user/deposit/dplist" target="_blank">去充值</a>
 						<s>|</s>
 						</div>
 						<div class="to_auction"><a href="${domain}/">去竞拍</a></div>

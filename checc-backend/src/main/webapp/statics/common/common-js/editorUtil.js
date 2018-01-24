@@ -40,7 +40,7 @@ $(function(){
 	KindEditor.ready(function(K) {
 		K.DEBUG=true;
 		editor = K.create("#kindEditor", {
-			height: "300px",
+			height: "400px",
 			items: [
 					"source","|", "justifyleft", "justifycenter", "justifyright",
 					"justifyfull", "insertorderedlist", "insertunorderedlist", 

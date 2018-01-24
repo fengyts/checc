@@ -13,17 +13,15 @@
 		<mapper resource="sqlmap/sysUserRole-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/sysRoleMenu-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/checcUser-mybatis-sqlmap.xml" />
-		<mapper resource="sqlmap/depositRecord-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/sysMenu-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/topicItem-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/item-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/itemDesc-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/itemPicture-mybatis-sqlmap.xml" />
-		<mapper resource="sqlmap/exchangeRecord-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/sysUser-mybatis-sqlmap.xml" />
-		<mapper resource="sqlmap/depositCard-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/smsRecord-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/depositOrder-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/depositConfig-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/checcNotice-mybatis-sqlmap.xml" />
 	</mappers>
 </configuration>

@@ -223,7 +223,7 @@
  		SELECT 
  			COUNT(1)
  		FROM topic tp
- 		LEFT JOIN topic_item ti ON ti.topic_id = tp.id
+ 		LEFT JOIN topic_item ti ON ti.topic_id = tp.id AND ti.status = 1
 		WHERE 
 			tp.topic_type = '01' 
 			AND tp.end_time &lt; NOW()
