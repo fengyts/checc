@@ -1,7 +1,7 @@
 <div class="user_currency_box">
 	<div class="user_currency_detail">
 		<div class="center_title">
-			<span>会员中心</span>
+			<span>我的西币账户</span>
 		</div>
 		<#--
 		<div class="center_user_mc">

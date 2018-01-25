@@ -12,8 +12,8 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS|${webtitle}" href="javascript:void(0);" />
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon" />
 	
-	<link type="text/css" rel="stylesheet" href="${static}/common/base.css">
-	<link rel="stylesheet" type="text/css" href="${css}/common.css" />
+	<link type="text/css" rel="stylesheet" href="${static}/common/base_new.css">
+	<link rel="stylesheet" type="text/css" href="${css}/common_new.css" />
 	
 	<#include "/common/common-js.ftl" />
 	
@@ -31,7 +31,6 @@
 	<#include "/common/footer_both.ftl" />
 	
 <script type="text/javascript" src="${js}/item_detail.js"></script>
-<script type="text/javascript" src="${js}/img_magnify.js"></script>
 
 </body>
 

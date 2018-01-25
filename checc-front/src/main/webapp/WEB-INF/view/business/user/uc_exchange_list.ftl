@@ -27,7 +27,7 @@
 			</#list>
 		<#else>
 			<div style="font-size:16px; margin-top:20px; color: #cfcfcf;text-align:center;">
-				<span>尚未参与兑换</spa>
+				<span>尚未参与兑换&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</spa>
 			</div>
 		</#if>
 	</div>

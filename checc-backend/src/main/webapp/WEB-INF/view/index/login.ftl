@@ -53,7 +53,7 @@
 				<div style="float: left; width: 100%;">
 					<div class="input-group">
 		  				<span class="input-group-addon" ><span class="glyphicon glyphicon-lock"></span></span>
-						<input type="password" id="password" name="password" placeholder="密码" class="form-control" maxlength="12" />
+						<input type="password" id="password" name="password" placeholder="密码" class="form-control" maxlength="50" />
 					</div>
 				</div>
 			</div>

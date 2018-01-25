@@ -1,4 +1,4 @@
-<div class="main_box">
+<div class="main_box detail_box">
 	<#--
 	<div class="checc_pos">
 		<span><a href="${domain}/index">首页</a></span>

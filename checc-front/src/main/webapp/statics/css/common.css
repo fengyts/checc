@@ -308,6 +308,7 @@ s {
 	letter-spacing: -3px;
 }
 
+/* 商品详情 */
 .detail_meta_box {
 	margin: 0;
 	padding: 0;
@@ -330,10 +331,8 @@ s {
 }
 
 .meta_item_img {
-	min-height: 300px;
-	min-width: 330px;
-	height: 300px;
-	width: 320px;
+	height: 310px;
+	width: 310px;
 	border: solid 1px #eeeeee;
 }
 
@@ -344,8 +343,8 @@ s {
 
 .meta_item_info {
 	position: relative;
-	margin: -300px 0px 0px 380px;
-	height: 350px;
+	margin: -315px 0px 0px 370px;
+	height: 315px;
 	min-width: 500px;
 	max-width: 660px;
 }
@@ -359,13 +358,13 @@ s {
 .auc_info_t {
 	font-size: 16px;
 	color: #666666;
-	margin-top: 25px;
+	margin-top: 30px;
 }
 
 .item_floorprice_box, .meta_currauctper, .meta_curraucttime,
 	.meta_auction_eninfo, .meta_item_exchangeprice, .meta_inventory,
 	.meta_exchange_eninfo {
-	margin-top: 20px;
+	margin-top: 25px;
 }
 
 .curraucttile {
@@ -411,8 +410,7 @@ s {
 
 .meta_auction_action {
 	margin-top: 10px;
-	min-width: inherit;
-	height: 80px;
+	height: 70px;
 }
 
 .meta_auction_action>div {
@@ -470,7 +468,7 @@ s {
 }
 
 .exchange_act_btn {
-	margin-top: 15px;
+	line-height: 55px;
 }
 
 .meta_auction_action>.meta_auct_timedown {
@@ -785,8 +783,8 @@ s {
 }
 
 .pay_type_box {
-	margin: 20px 0 0 0;
-	padding: 20px 0 0 0;
+	margin: 45px 0 0;
+	padding: 30px 0 0;
 	border-top: dashed 1px #999999;
 }
 
@@ -820,6 +818,7 @@ s {
 .dpt_info {
 	font-size: 14px;
 	color: #aaa;
+	padding-top: 20px;
 }
 .deposit_btn {
 	display: inline-block;

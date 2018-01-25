@@ -173,15 +173,18 @@ function auctionAction() {
 		dataType : 'json',
 		data : _params,
 		success : function(data, status, xhr) {
-			var _tic = 2;
+			var _tic = 1;
 			if (data.result != 1) {
 				layer.msg("出价失败：" + data.message, {
-					time : 3000
+					time : 1500
 				});
 				countDownTime(_tic);
 			} else {
-				layer.msg('您已成功出价该商品! 当前处于领先状态');
-				countDownTime(_tic);
+				layer.msg('您已成功出价该商品! 当前处于领先状态', {time: 1500}, function(){
+					window.parent.location.reload();
+					window.parent.layer.close(parent.lgn_pg_ii);
+				});
+//				countDownTime(_tic);
 			}
 		}
 	});
@@ -205,16 +208,19 @@ function exchangeAction() {
 		dataType : 'json',
 		data : _params,
 		success : function(data, status, xhr) {
-			var _tic = 2;
+			var _tic = 1;
 			if (data.result != 1) {
 				//window.parent.layer.close(parent.lgn_pg_ii);
 				parent.layer.msg("兑换失败：" + data.message, {
-					time : 3000
+					time : 1500
 				});
 				countDownTime(_tic);
 			} else {
-				layer.msg('您已成功兑换该商品! 请至个人中心查看');
-				countDownTime(_tic);
+				layer.msg('您已成功兑换该商品! 请至个人中心查看', {time: 1500}, function() {
+					window.parent.location.reload();
+					window.parent.layer.close(parent.lgn_pg_ii);
+				});
+//				countDownTime(_tic);
 			}
 		}
 	});

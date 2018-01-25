@@ -28,16 +28,16 @@
 	
 	<div id="topic_items" class="topic_items">
 		<#if auctionList?default([])?size!=0>
-			<#assign req_url="${domain}/topicItem/itemDetails/auction" >
+			<#assign req_url="${domain}/topicItem/itemDetails/auction/" >
 			<#list auctionList as auc>
 				<div class="items_box">
 					<div id="items" class="items">
 						<div class="item_img">
-							<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}"><img src="${auc.picture}"></a>
+							<a href="${req_url}${auc.id}" class="itemsal" reqTime="${.now?long}"><img src="${auc.picture}"></a>
 						</div>
 						<div class="item_info">
 							<div class="item_title">
-								<a href="${req_url}/${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
+								<a href="${req_url}${auc.id}" class="itemsal" reqTime="${.now?long}">${auc.itemTitle}</a>
 							</div>
 							<div class="pr_box">
 								<div class="basic_price">

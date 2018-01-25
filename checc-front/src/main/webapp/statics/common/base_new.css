@@ -54,6 +54,10 @@ ul, ol {
 	padding: 0;
 }
 
+.detail_box {
+	padding-left: 10px;
+}
+
 .ft_box {
 	width: 100%;
 	bottom: 0;
@@ -76,7 +80,6 @@ ul, ol {
 	padding: 0;
 	margin: auto;
 }
-
 /** 全局布局样式结束  **/
 
 /** 头部header_bar样式  **/

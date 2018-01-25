@@ -5,7 +5,7 @@
     display: inline-block;
     font-size: 15px;
     line-height: 50px;
-    margin: 15px 0 0 10px;
+    margin: 15px 0 0;
 }
 
 /* 竞拍商品style start */
@@ -165,7 +165,6 @@
 	display: block;
 	overflow: hidden;
 	width: 100%;
-/* 	height: 70px; */
 	color: #ff8c1a;
 }
 
@@ -190,7 +189,8 @@
 	font-family: "Arial Negreta", "Arial";
 	font-style: normal;
 	text-align: center;
-	margin: 50px 0 0 0;
+	padding: 50px 0 0 0;
+	height: 220px;
 }
 
 /* .center_title,  */
@@ -205,7 +205,7 @@
 }
 
 .center_title {
-	color: #666666;
+	color: #0099cc;
     font-size: 18px;
 }
 
@@ -219,24 +219,13 @@
 .currency_info {
 	margin: 20px 0 0 0;
 }
-/* 
-.currency_info>div {
-	display: inline-block;
-	float: left;
-	vertical-align: top;
-	text-align: center;
-	height: 200px;
-	width: 33.33%;
-	margin: 0 0 0 15%;
-} */
+
 .cinfo {
 	display: inline-block;
 	float: left;
 	vertical-align: top;
 	text-align: center;
-	height: 200px;
 	width: 33.33%;
-	/* 	margin: 0 0 0 15%; */
 }
 
 .cinfo>div {
@@ -328,12 +317,12 @@
 }
 
 .uc_auct_box {
-	margin: 180px 0 0 0;
+/* 	margin: 180px 0 0 0; */
 	border-top: 1px dashed #999999;
 }
 
 .uc_auct_data, .uc_exchange_data {
-	margin: 20px 0 0 0;
+	margin: 50px 0 0 0;
 }
 
 .uc_exchange_box {
@@ -348,5 +337,204 @@
 .uc_auct_t {
 	font-size: 18px;
 	color: #666666;
+}
+
+
+/* 商品详情 */
+.detail_meta_box {
+	margin: 0;
+	padding: 0;
+	height: 450px;
+}
+
+.detail_meta {
+	margin-top: 20px;;
+	height: inherit;
+	min-width: 100%;
+}
+
+.detail_meta>div {
+	
+}
+
+.item_detail_imgs {
+	position: relative;
+	min-height: inherit;
+}
+
+.meta_item_img {
+	height: 310px;
+	width: 310px;
+	border: solid 1px #eeeeee;
+}
+
+.meta_item_img>img {
+	width: 100%;
+	height: 100%;
+}
+
+.meta_item_info {
+	position: relative;
+	margin: -315px 0px 0px 370px;
+	height: 315px;
+	min-width: 500px;
+	max-width: 660px;
+}
+
+.meta_item_title {
+	font-size: 18px;
+	color: #333333;
+	font-weight: 600;
+}
+
+.auc_info_t {
+	font-size: 16px;
+	color: #666666;
+	margin-top: 30px;
+}
+
+.item_floorprice_box, .meta_currauctper, .meta_curraucttime,
+	.meta_auction_eninfo, .meta_item_exchangeprice, .meta_inventory,
+	.meta_exchange_eninfo {
+	margin-top: 25px;
+}
+
+.curraucttile {
+	color: #333;
+}
+
+.meta_item_currauctprice {
+	margin-top: 8px;
+}
+
+.meta_item_currauctprice>.currauctprice, .meta_item_exchangeprice>.exchangeprice
+	{
+	color: #ff0000 !important;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.meta_item_currauctprice>.compare_marketPrice {
+	margin-left: 10px;
+	font-size: 14px;
+	color: #aaaaaa !important;
+	text-decoration: line-through;
+}
+
+.meta_currauctper {
+	/* 	margin-top: 15px; */
+	width: 500px;
+}
+
+.currauctprice, .currauctperson, .curraucttime {
+	margin-left: 6px;
+}
+
+.meta_currauctper>.auctall {
+	margin-left: 100px;
+	font-size: 12px;
+}
+
+.meta_auction_eninfo>p>.eninfo_price {
+	color: #ff0000;
+	font-weight: 600;
+}
+
+.meta_auction_action {
+	margin-top: 10px;
+	height: 70px;
+}
+
+.meta_auction_action>div {
+	display: inline-block;
+}
+
+.auc_action, .auc_action_over {
+	margin-top: 10px;
+	width: 220px;
+	height: 55px;
+	font-size: 18px;
+	font-weight: 500;
+	overflow-wrap: normal;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 230%;
+	border-radius: 6px;
+}
+
+.meta_auction_action>.auc_action {
+	float: left;
+	background-color: #1e9fff;
+	cursor: pointer;
+}
+
+.meta_auction_action>.has_exchanged {
+	line-height: 40px;
+	color: #eeeeee;
+}
+
+.meta_auction_action>.auc_act_btn_p {
+	line-height: 30px;
+	color: #eeeeee;
+}
+
+.meta_auction_action>.auc_action>p>a {
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.meta_auction_action>#auc_action:hover {
+	color: #ffffff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	text-decoration: none;
+}
+
+.auc_currency {
+	font-size: 12px;
+	line-height: 5px;
+}
+
+.auc_act_btn {
+	margin-top: 10px;
+}
+
+.exchange_act_btn {
+	line-height: 55px;
+}
+
+.meta_auction_action>.meta_auct_timedown {
+	margin: 25px 0px 0px 30px;
+	font-size: 16px;
+	color: #ff0000;
+}
+
+.meta_auction_action>.auc_action_over, .meta_auction_action>.auc_action_over:hover
+	{
+	background-color: #d9d9d9;
+	cursor: not-allowed;
+	color: #999999;
+}
+
+.auc_exchanged_list {
+	margin-top: 15px;
+}
+
+.auc_exchanged_list>a {
+	color: #333333 !important;
+	font-size: 12px;
+}
+
+.auc_exchanged_list>a:hover {
+	color: #666666 !important;
+	font-size: 12px;
+}
+
+/* 商品详情描述 */
+.detail_desc {
+	clear: none;
+	text-align: center;
+	position: relative;
+	padding-top: 30px;
 }
 

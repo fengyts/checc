@@ -23,11 +23,13 @@
 					</#list>
 				</#if>
 			</div>
+			<#--
 			<div class="other_amount">
 				<span>其他数量:</span>
 				<input type="text" id="otherAmount" name="otherAmount" value="">
 				<span id="dpamtInputErr" style="font-size:14px;color:#ff0000;">(数量必须是正整数,不接受其他类型)</span>
 			</div>
+			-->
 		</div>
 		<div class="pay_type_box">
 			<div class="pay_type_t">
