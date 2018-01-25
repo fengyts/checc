@@ -13,14 +13,17 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.CheccUserDO;
+import com.checc.domain.PurchaseApplyDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.dto.AuctionActionDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
+import com.checc.enums.ShipmentsStatusEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.service.AuctionActionService;
 import com.checc.service.AuctionRecordService;
+import com.checc.service.PurchaseApplyService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
@@ -51,6 +54,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 	private AuctionRecordService auctionRecordService;
 	@Autowired
 	private UserCurrencyService userCurrencyService;
+	@Autowired
+	private PurchaseApplyService purchaseApplyService;
 
 	@Override
 	@Transactional
@@ -272,6 +277,18 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 					// return new
 					// CommonResultMessage(CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
 					// CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+				}
+				
+				// 生成兑换订单(发货)
+				PurchaseApplyDO purchaseApplyDO = new PurchaseApplyDO();
+				purchaseApplyDO.setTopicItemId(tpId);
+				purchaseApplyDO.setPurchaseStatus(ShipmentsStatusEnum.NOT_SHIPMENTS.code);
+				purchaseApplyDO.setApplyTime(new Date());
+				purchaseApplyDO.setModifyUserId(userId);
+				purchaseApplyDO.setModifyTime(new Date());
+				res = purchaseApplyService.insert(purchaseApplyDO);
+				if(res <= 0){
+					throw new CommonServiceException("生成兑换订单失败,兑换失败");
 				}
 			} else {
 				return new CommonResultMessage(CommonResultCode.BusinessError.ONCE_EVERY_TIME.code,

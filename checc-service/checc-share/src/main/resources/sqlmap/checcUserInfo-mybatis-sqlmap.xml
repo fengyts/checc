@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.CheccUserInfoMapper">
+
+	<resultMap type="com.checc.domain.CheccUserInfoDO" id="CheccUserInfoDOResultMap">
+		<id column="user_id" property="userId" />
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="identity_no" property="identityNo"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="MybatisCheccUserInfoDAO_all_column_fields">
+	      user_id,mobile,real_name,identity_no,create_time,modify_time
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisCheccUserInfoDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="mobile != null  and mobile != '' "> AND mobile=#{mobile} </if>
+			<if test="realName != null  and realName != '' "> AND real_name=#{realName} </if>
+			<if test="identityNo != null  and identityNo != '' "> AND identity_no=#{identityNo} </if>
+		</where>
+ 	</sql>
+
+	<select id="MybatisCheccUserInfoDAO_selectById" parameterType="long" resultMap="CheccUserInfoDOResultMap">
+	SELECT
+		<include refid="MybatisCheccUserInfoDAO_all_column_fields" />
+	FROM
+		checc_user_info
+	WHERE
+		 user_id = #{userId}
+	</select>
+
+    <insert id="MybatisCheccUserInfoDAO_insert" parameterType="com.checc.domain.CheccUserInfoDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="userId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS user_id
+        </selectKey>
+        INSERT INTO checc_user_info(
+				user_id,
+				mobile,
+				real_name,
+				identity_no,
+				create_time,
+				modify_time
+		)values(
+				#{userId},
+				#{mobile},
+				#{realName},
+				#{identityNo},
+				#{createTime},
+				#{modifyTime}
+		)
+    </insert>
+
+	<update id="MybatisCheccUserInfoDAO_updateById" parameterType="com.checc.domain.CheccUserInfoDO">
+		UPDATE checc_user_info
+		SET
+					mobile = #{mobile},
+					real_name = #{realName},
+					identity_no = #{identityNo},
+					modify_time = #{modifyTime}
+		WHERE
+			user_id = #{userId}
+	</update>
+
+	<delete id="MybatisCheccUserInfoDAO_deleteById" parameterType="long">
+		DELETE FROM checc_user_info WHERE user_id = #{userId}
+	</delete>
+
+	<update id="MybatisCheccUserInfoDAO_update_dynamic" parameterType="com.checc.domain.CheccUserInfoDO">
+		UPDATE checc_user_info
+		<set>
+					<if test="mobile != null  and mobile != '' ">mobile=#{mobile},</if>
+					<if test="realName != null  and realName != '' ">real_name=#{realName},</if>
+					<if test="identityNo != null  and identityNo != '' ">identity_no=#{identityNo},</if>
+					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+
+ 	<select id="MybatisCheccUserInfoDAO_select_dynamic" resultMap="CheccUserInfoDOResultMap" parameterType="com.checc.domain.CheccUserInfoDO">
+	     SELECT
+	     	<include refid="MybatisCheccUserInfoDAO_all_column_fields" />
+		 FROM
+		 	checc_user_info
+			<include refid="MybatisCheccUserInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccUserInfoDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.CheccUserInfoDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	checc_user_info
+	 	<include refid="MybatisCheccUserInfoDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccUserInfoDAO_select_dynamic_page_query" resultMap="CheccUserInfoDOResultMap" parameterType="com.checc.domain.CheccUserInfoDO">
+	     SELECT
+	     	<include refid="MybatisCheccUserInfoDAO_all_column_fields" />
+		 FROM
+		 	checc_user_info
+	 	<include refid="MybatisCheccUserInfoDAO_dynamic_where_fields" />
+	 	ORDER BY checc_user_info.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

@@ -23,5 +23,7 @@
 		<mapper resource="sqlmap/depositOrder-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/depositConfig-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/checcNotice-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/purchaseApply-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/checcUserInfo-mybatis-sqlmap.xml" />
 	</mappers>
 </configuration>

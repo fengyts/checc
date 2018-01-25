@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.checc.domain.ItemDO;
+import com.checc.domain.PurchaseApplyDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.dto.TopicItemDTO;
+import com.checc.enums.PurchaseStatusEnum;
+import com.checc.enums.ShipmentsStatusEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
 import com.checc.service.ItemService;
+import com.checc.service.PurchaseApplyService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.util.ResultMessage;
@@ -33,6 +37,8 @@ public class TopicItemAO {
 	private TopicService topicService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private PurchaseApplyService purchaseApplyService;
 
 	private void topicStatus(TopicDO topicDO) {
 		Date startTime = topicDO.getStartTime();
@@ -47,9 +53,11 @@ public class TopicItemAO {
 		topicDO.setStatus(status);
 	}
 
-	public Page<TopicItemDTO> queryPageList(Model model, TopicItemDO topicItemDO, Integer pageNo, Integer pageSize) {
+	public Page<TopicItemDTO> queryPageList(Model model, TopicItemDO topicItemDO, Integer pageNo,
+			Integer pageSize) {
 		Page<TopicItemDTO> pageResult = new Page<TopicItemDTO>();
-		Page<TopicItemDO> page = topicItemService.queryPageListDynamicAndStartPageSize(topicItemDO, pageNo, pageSize);
+		Page<TopicItemDO> page = topicItemService.queryPageListDynamicAndStartPageSize(topicItemDO,
+				pageNo, pageSize);
 		List<TopicItemDO> list = page.getList();
 
 		Long topicId = topicItemDO.getTopicId();
@@ -95,7 +103,8 @@ public class TopicItemAO {
 	}
 
 	public Page<ItemDO> queryPageItemList(ItemDO itemDO, Integer pageNo, Integer pageSize) {
-		Page<ItemDO> page = itemService.queryPageListDynamicAndStartPageSize(itemDO, pageNo, pageSize);
+		Page<ItemDO> page = itemService.queryPageListDynamicAndStartPageSize(itemDO, pageNo,
+				pageSize);
 		return page;
 	}
 
@@ -144,7 +153,22 @@ public class TopicItemAO {
 		topicItemDO.setModifyTime(date);
 		topicItemDO.setModifyUserId(userId);
 
-		topicItemService.insert(topicItemDO);
+		Long tid = topicItemService.insert(topicItemDO);
+
+		if (null == tid || tid.longValue() <= 0) {
+			return ResultMessage.failure("关联专题商品失败");
+		}
+		
+		// 插入竞拍购买状态数据
+		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())) {
+			PurchaseApplyDO purchaseApplyDO = new PurchaseApplyDO();
+			purchaseApplyDO.setShipmentsStatus(ShipmentsStatusEnum.NOT_SHIPMENTS.code);
+			purchaseApplyDO.setTopicItemId(tid);
+			purchaseApplyDO.setApplyTime(date);
+			purchaseApplyDO.setModifyTime(date);
+			purchaseApplyDO.setModifyUserId(userId);
+			purchaseApplyService.insert(purchaseApplyDO);
+		}
 
 		return ResultMessage.success();
 	}
