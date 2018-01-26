@@ -16,6 +16,7 @@ import com.checc.ao.UserCenterAO;
 import com.checc.constants.UserConstants;
 import com.checc.domain.CheccUserDO;
 import com.checc.enums.AuctionRecordTypeEnum;
+import com.checc.vo.PurchaseDetailVO;
 
 /**
  * <pre>
@@ -65,8 +66,7 @@ public class UserBusinessController {
 	 */
 	@RequestMapping(value = "/ucAuctionList/{auctionType}")
 	public String ucAuctionList(HttpServletRequest request, Model model,
-			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
-			@PathVariable String auctionType) {
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo, @PathVariable String auctionType) {
 		HttpSession session = request.getSession();
 		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
 		String returnUrl = "";
@@ -83,7 +83,7 @@ public class UserBusinessController {
 
 	/**
 	 * <pre>
-	 * 用户中心-->西币交易详细记录列表
+	 * 用户中心-- > 西币交易详细记录列表
 	 * </pre>
 	 *
 	 * @param request
@@ -102,5 +102,23 @@ public class UserBusinessController {
 		return "/business/user/currency_record_list";
 	}
 
+	@RequestMapping(value = { "/auctionSuccess/{auctionType}/{tiId}" }, method = { RequestMethod.GET })
+	public String auctionSuccess(HttpServletRequest request, Model model, @PathVariable String auctionType,
+			@PathVariable Long tiId) {
+		Long userId = null;
+		HttpSession session = request.getSession();
+		CheccUserDO userDO = (CheccUserDO) session.getAttribute(UserConstants.USER_SESSION_KEY);
+		if(null != userDO){
+			userId = userDO.getId();
+		}
+		
+		if(null == userId){
+			return "redirect:/user/login";
+		}
+		
+		PurchaseDetailVO winVO = userCenterAO.auctionSuccessInfo(userId, tiId);
+		model.addAttribute("winnerVO", winVO);
+		return "/business/user/winner_detail";
+	}
 
 }

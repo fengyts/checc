@@ -16,12 +16,15 @@ import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.enums.TopicStatusEnum;
+import com.checc.enums.TopicTypeEnum;
 import com.checc.service.AuctionRecordService;
 import com.checc.service.ItemPictureService;
+import com.checc.service.PurchaseApplyService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
 import com.checc.vo.UCAuctionListVO;
+import com.checc.vo.PurchaseDetailVO;
 import com.checc.vo.front.CurrencyRecordVO;
 import com.checc.vo.front.UserCenterVO;
 
@@ -46,6 +49,8 @@ public class UserCenterAO {
 	private ItemPictureService pictureService;
 	@Autowired
 	private ImageUrlUtil imageUrlUtils;
+	@Autowired
+	private PurchaseApplyService purchaseApplyService;
 
 	public void userCurrencyInfo(Model model, CheccUserDO userDO) {
 		Long userId = userDO.getId();
@@ -221,6 +226,23 @@ public class UserCenterAO {
 		pageRes.setList(listRes);
 		model.addAttribute("page", pageRes);
 		model.addAttribute("arcTypes", AuctionRecordTypeEnum.values());
-
 	}
+
+	public PurchaseDetailVO auctionSuccessInfo(Long userId, Long tiId) {
+		if (null == userId || null == tiId) {
+			return null;
+		}
+		PurchaseDetailVO winVO = topicItemService.selectWinnerDetailInifo(tiId);
+		if (null == winVO) {
+			return null;
+		}
+		String topicType = winVO.getTopicType();
+		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicType)) {
+			AuctionRecordDO auctionRecord = auctionRecordService.selectLatestAuction(tiId);
+		} else {
+			
+		}
+		return winVO;
+	}
+
 }

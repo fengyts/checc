@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.checc.dao.TopicItemDAO;
 import com.checc.domain.TopicItemDO;
 import com.checc.service.TopicItemService;
+import com.checc.vo.PurchaseDetailVO;
 
 @Service(value="topicItemService")
 public class TopicItemServiceImpl  implements TopicItemService{
@@ -153,6 +154,11 @@ public class TopicItemServiceImpl  implements TopicItemService{
 			return new ArrayList<TopicItemDO>();
 		}
 		return topicItemDAO.selectByTopicIds(topicIds);
+	}
+
+	@Override
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) {
+		return null;
 	}
 	
 	

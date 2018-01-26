@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.TopicItemDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.TopicItemDO;
+import com.checc.vo.PurchaseDetailVO;
 
 import ng.bayue.exception.CommonDAOException;
 
@@ -80,6 +81,11 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	@Override
 	public int updateItemRedundance(TopicItemDO topicItemDO) {
 		return getSqlSession().update(getStatement("update_item_redundance"), topicItemDO);
+	}
+
+	@Override
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) {
+		return getSqlSession().selectOne(getStatement("select_winner_details"), topicItemId);
 	}
 	
 	

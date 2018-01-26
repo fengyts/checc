@@ -2,10 +2,10 @@
 
 .checc_pos {
 	color: #666666;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 50px;
-    margin: 15px 0 0;
+	display: inline-block;
+	font-size: 15px;
+	line-height: 50px;
+	margin: 15px 0 0;
 }
 
 /* 竞拍商品style start */
@@ -85,6 +85,7 @@
 	width: 100%;
 	overflow: hidden;
 }
+
 .topic_items1 {
 	margin: 10px 0 0;
 	width: 100%;
@@ -92,10 +93,10 @@
 }
 
 .items_box {
-/* 	display: block; */
+	/* 	display: block; */
 	float: left;
 	height: 380px;
-/* 	border: solid 1px #aaeeee; */
+	/* 	border: solid 1px #aaeeee; */
 	width: 270px;
 	margin: 15px 0 10px 0;
 	padding-top: 10px;
@@ -111,20 +112,21 @@
 	vertical-align: top;
 }
 
-.items{
+.items {
 	width: 250px;
-/* 	height: 400px; */
+	/* 	height: 400px; */
 	margin: auto;
 	padding: 0;
 }
 
-.items_box:nth-child(4n), .items_box1:nth-child(4n){
+.items_box:nth-child(4n), .items_box1:nth-child(4n) {
 	float: right;
 }
 
 .items_box:hover, .items_box1:hover {
-/* 		border: solid 1px #ff0000; */
-/* 		box-shadow: 0 0 5px #ff0000; */
+	/* 		border: solid 1px #ff0000; */
+	/* 		box-shadow: 0 0 5px #ff0000; */
+	
 }
 
 .item_img {
@@ -173,10 +175,12 @@
 }
 
 .basic_price, .auc_price {
+	
 }
+
 .basic_price span, .auc_price span {
-    display: -moz-inline-box; /* css注释：for ff2 */ 
-    display: inline-block; 
+	display: -moz-inline-box; /* css注释：for ff2 */
+	display: inline-block;
 }
 
 .lbtitle {
@@ -206,7 +210,7 @@
 
 .center_title {
 	color: #0099cc;
-    font-size: 18px;
+	font-size: 18px;
 }
 
 .center_user_mc {
@@ -317,7 +321,7 @@
 }
 
 .uc_auct_box {
-/* 	margin: 180px 0 0 0; */
+	/* 	margin: 180px 0 0 0; */
 	border-top: 1px dashed #999999;
 }
 
@@ -338,7 +342,6 @@
 	font-size: 18px;
 	color: #666666;
 }
-
 
 /* 商品详情 */
 .detail_meta_box {
@@ -422,7 +425,6 @@
 }
 
 .meta_currauctper {
-	/* 	margin-top: 15px; */
 	width: 500px;
 }
 
@@ -440,9 +442,10 @@
 	font-weight: 600;
 }
 
+/** 竞拍/兑换 按钮样式开始 */
 .meta_auction_action {
-	margin-top: 10px;
-	height: 70px;
+	margin-top: 20px;
+	height: 55px;
 }
 
 .meta_auction_action>div {
@@ -450,7 +453,6 @@
 }
 
 .auc_action, .auc_action_over {
-	margin-top: 10px;
 	width: 220px;
 	height: 55px;
 	font-size: 18px;
@@ -469,8 +471,14 @@
 }
 
 .meta_auction_action>.has_exchanged {
-	line-height: 40px;
+	line-height: 55px;
 	color: #eeeeee;
+}
+
+.has_exchange_act_btn, .exchange_act_btn {
+	margin: 0;
+	padding: 0;
+	line-height: 55px;
 }
 
 .meta_auction_action>.auc_act_btn_p {
@@ -499,14 +507,11 @@
 	margin-top: 10px;
 }
 
-.exchange_act_btn {
-	line-height: 55px;
-}
-
 .meta_auction_action>.meta_auct_timedown {
-	margin: 25px 0px 0px 30px;
+	margin-left: 25px;
 	font-size: 16px;
 	color: #ff0000;
+	line-height: 55px;
 }
 
 .meta_auction_action>.auc_action_over, .meta_auction_action>.auc_action_over:hover
@@ -515,6 +520,7 @@
 	cursor: not-allowed;
 	color: #999999;
 }
+/** 竞拍/兑换 按钮样式结束*/
 
 .auc_exchanged_list {
 	margin-top: 15px;
@@ -537,4 +543,3 @@
 	position: relative;
 	padding-top: 30px;
 }
-

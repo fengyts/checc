@@ -3,6 +3,7 @@ package com.checc.dao;
 import java.util.List;
 
 import com.checc.domain.TopicItemDO;
+import com.checc.vo.PurchaseDetailVO;
 
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.common.GeneralDAO;
@@ -53,5 +54,14 @@ public interface TopicItemDAO extends GeneralDAO<TopicItemDO> {
 	 * @return
 	 */
 	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds);
+	
+	/**
+	 * <pre>
+	 * 获取兑换成功/竞拍成功 专题商品信息以及购车状态、发货状态信息
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId);
 
 }

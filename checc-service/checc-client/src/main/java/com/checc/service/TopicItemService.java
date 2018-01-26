@@ -6,6 +6,7 @@ import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralService;
 
 import com.checc.domain.TopicItemDO;
+import com.checc.vo.PurchaseDetailVO;
 
 /**
  * 专题商品 Service
@@ -43,5 +44,14 @@ public interface TopicItemService extends GeneralService<TopicItemDO, TopicItemD
 	 * @return
 	 */
 	public List<TopicItemDO> selectByTopicIds(List<Long> topicIds);
+	
+	/**
+	 * <pre>
+	 * 获取兑换成功/竞拍成功 专题商品信息以及购车状态、发货状态信息
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId);
 
 }

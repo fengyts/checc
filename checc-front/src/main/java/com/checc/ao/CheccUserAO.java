@@ -505,7 +505,7 @@ public class CheccUserAO {
 
 		HttpSession session = request.getSession();
 		session.setAttribute(UserConstants.USER_SESSION_KEY, userDO);
-		//session.setMaxInactiveInterval(10); // 测试用，有效期10秒
+//		session.setMaxInactiveInterval(10); // 测试用，有效期10秒
 		
 		// 更新登录时间
 		CheccUserDO ud = new CheccUserDO();

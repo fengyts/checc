@@ -37,7 +37,9 @@
 					<#-- 已经兑换过-->
 					<div class="auc_action_over has_exchanged">
 						<p class="has_exchange_act_btn">已经兑换</p>
+						<#--
 						<p class="auc_currency"><span>(每人限兑换${detailVO.exchangeLimitNum!1}份)</span></p>
+						-->
 					</div>
 				<#else>
 					<div>

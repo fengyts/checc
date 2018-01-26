@@ -236,5 +236,16 @@
 		</set>
 		WHERE item_id = #{itemId}
 	</update>
+	
+	<select id="MybatisTopicItemDAO_select_winner_details" parameterType="long" resultType="com.checc.vo.PurchaseDetailVO">
+		SELECT 
+			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
+			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice,
+			pa.purchase_status purchaseStatus, pa.shipments_status shipmentsStatus, pa.apply_time applyTime
+		FROM topic_item ti
+		INNER JOIN topic tp ON tp.id = ti.topic_id
+		LEFT JOIN purchase_apply pa ON pa.topic_item_id = ti.id
+		WHERE ti.id = #{topicItemId}
+	</select>
 
 </mapper>
