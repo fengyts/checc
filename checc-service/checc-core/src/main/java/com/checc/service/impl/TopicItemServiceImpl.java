@@ -158,7 +158,12 @@ public class TopicItemServiceImpl  implements TopicItemService{
 
 	@Override
 	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) {
-		return null;
+		try {
+			return topicItemDAO.selectWinnerDetailInifo(topicItemId);
+		} catch (CommonDAOException e) {
+			logger.error("", e);
+			return null;
+		}
 	}
 	
 	

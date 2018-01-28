@@ -8,10 +8,20 @@ package com.checc.vo;
  * @author fengyts
  * @version $Id: UCAuctionListVO.java, v 0.1 2017年12月21日 下午9:34:24 fengyts Exp $
  */
+/**
+ * <pre>
+ * 
+ * </pre>
+ *
+ * @author fengyts
+ * @version $Id: UCAuctionListVO.java, v 0.1 2018年1月28日 下午5:10:06 fengyts Exp $
+ */
 public class UCAuctionListVO extends BaseVO {
 
 	private static final long serialVersionUID = -6805631115875665165L;
-
+	
+	/** 记录id */
+	private Long recordId;
 	/** topicItem主键id */
 	private Long tpId;
 	/** 商品id */
@@ -28,6 +38,15 @@ public class UCAuctionListVO extends BaseVO {
 	private Double currenctAuctPrice;
 	/** 是否本人拍得 */
 	private Boolean isWinner;
+
+	
+	public Long getRecordId() {
+		return recordId;
+	}
+
+	public void setRecordId(Long recordId) {
+		this.recordId = recordId;
+	}
 
 	public Long getTpId() {
 		return tpId;

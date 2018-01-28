@@ -1,0 +1,136 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover {
+	color: #0099cc;
+}
+
+/** 我拍得/兑换的弹框样式 */
+.main_box {
+	/* width: 560px;
+	height: 320px; */
+/* 	margin: 0; */
+/* 	padding: 0; */
+}
+
+.winner_detail_box {
+	width: 420px;
+	margin: auto;
+	padding: 0;
+}
+
+.win_title {
+	text-align: center;
+	color: #999999;
+	font-size: 20px;
+	padding-top: 20px;
+	font-weight: 600;
+}
+
+.win_ti_title {
+	margin-top: 20px;
+	font-size: 22px;
+}
+
+.win_tinfo_box {
+	margin-top: 25px;
+}
+
+.win_tinfo_box>div {
+	margin-top: 10px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 18px;
+}
+
+.win_price_box>span, .auct_num_box>span, .auct_time_box>span, .purchase_status_box>span {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.label_title {
+	display: inline-block;
+	width: 90px;
+	color: #333333;
+	font-size: 16px;
+	text-align: justify;
+	vertical-align: top;
+}
+
+.label_title>s{
+	display: inline-block;
+	padding-left: 100%;
+	vertical-align: top;
+}
+
+.final_price {
+	color: #ff0000 !important;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.compare_marketPrice {
+	margin-left: 10px;
+	font-size: 14px;
+	color: #aaaaaa !important;
+	text-decoration: line-through;
+}
+
+.auct_num, .auct_time {
+	color: #666666;
+	font-size: 16px;
+}
+
+.purchase_status {
+	color: #0099cc;
+}
+
+.purchase_apply_btn {
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	background: #0099cc;
+	border-radius: 5px;
+	margin-left: 20px;
+	text-align: center;
+	color: #f2f2f2;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.purchase_apply_btn:hover {
+	color: #ffffff;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+	text-decoration: none;
+}
+
+.promopt_info_box {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: dashed 1px #aaa;
+}
+
+.promopt_info_box>p {
+	font-size: 12px;
+	color: #999;
+	line-height: 20px;
+    margin: 0;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+.exchange_promopt_box>span {
+	font-size: 12px;
+	color: #999;
+	line-height: 20px;
+    margin: 0;
+}
+

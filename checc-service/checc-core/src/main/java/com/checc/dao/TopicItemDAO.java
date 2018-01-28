@@ -62,6 +62,6 @@ public interface TopicItemDAO extends GeneralDAO<TopicItemDO> {
 	 *
 	 * @return
 	 */
-	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId);
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) throws CommonDAOException;
 
 }

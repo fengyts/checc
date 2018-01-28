@@ -1,58 +1,69 @@
 package com.checc.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 
-import com.checc.dao.PurchaseApplyDAO;
-import com.checc.domain.PurchaseApplyDO;
-import com.checc.service.PurchaseApplyService;
+import ng.bayue.common.CommonMessages;
+import ng.bayue.common.CommonResultCode;
+import ng.bayue.common.CommonResultMessage;
+import ng.bayue.common.Page;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
-import ng.bayue.common.Page;
+import ng.bayue.service.RedisCacheService;
 
-@Service(value="purchaseApplyService")
-public class PurchaseApplyServiceImpl  implements PurchaseApplyService{
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.checc.dao.PurchaseApplyDAO;
+import com.checc.domain.AuctionRecordDO;
+import com.checc.domain.PurchaseApplyDO;
+import com.checc.enums.PurchaseStatusEnum;
+import com.checc.service.AuctionRecordService;
+import com.checc.service.PurchaseApplyService;
+
+@Service(value = "purchaseApplyService")
+public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 
 	private Log logger = LogFactory.getLog(this.getClass());
 
+	private static final String LOCK_PURCHASE_APPLY_KEY = "AUCTION_SUCCESS_PURCHASE_APPLY_";
+
+	@Resource(name = "redisCacheService1")
+	private RedisCacheService redisCacheService;
+
 	@Autowired
 	private PurchaseApplyDAO purchaseApplyDAO;
+	@Autowired
+	private AuctionRecordService auctionRecordService;
 
 	@Override
 	public Long insert(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
 		try {
 			return purchaseApplyDAO.insert(purchaseApplyDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
-//	@Override
-//	public int updateById(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
-//		try {
-//			return (Integer) purchaseApplyDAO.updateById(purchaseApplyDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
-
 	@Override
-	public int update(PurchaseApplyDO purchaseApplyDO,boolean isAllField) throws CommonServiceException {
+	public int update(PurchaseApplyDO purchaseApplyDO, boolean isAllField)
+			throws CommonServiceException {
 		try {
-			if(isAllField){
+			if (isAllField) {
 				return (Integer) purchaseApplyDAO.update(purchaseApplyDO);
-			}else{
+			} else {
 				return (Integer) purchaseApplyDAO.updateDynamic(purchaseApplyDO);
 			}
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
@@ -60,29 +71,19 @@ public class PurchaseApplyServiceImpl  implements PurchaseApplyService{
 	public int deleteById(Long id) throws CommonServiceException {
 		try {
 			return (Integer) purchaseApplyDAO.deleteById(id);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
-
-//	@Override
-//	public int updateDynamic(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
-//		try {
-//			return (Integer) purchaseApplyDAO.updateDynamic(purchaseApplyDO);
-//		}catch(CommonDAOException e){
-//			logger.error(e);
-//            throw new CommonServiceException(e);
-//		}
-//	}
 
 	@Override
 	public PurchaseApplyDO selectById(Long id) throws CommonServiceException {
 		try {
 			return purchaseApplyDAO.selectById(id);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
@@ -90,34 +91,36 @@ public class PurchaseApplyServiceImpl  implements PurchaseApplyService{
 	public Long selectCountDynamic(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
 		try {
 			return purchaseApplyDAO.selectCountDynamic(purchaseApplyDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
 
 	@Override
-	public List<PurchaseApplyDO> selectDynamic(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
+	public List<PurchaseApplyDO> selectDynamic(PurchaseApplyDO purchaseApplyDO)
+			throws CommonServiceException {
 		try {
 			return purchaseApplyDAO.selectDynamic(purchaseApplyDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
-	
 
-	private List<PurchaseApplyDO> selectDynamicPageQuery(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException {
+	private List<PurchaseApplyDO> selectDynamicPageQuery(PurchaseApplyDO purchaseApplyDO)
+			throws CommonServiceException {
 		try {
 			return purchaseApplyDAO.selectDynamicPageQuery(purchaseApplyDO);
-		}catch(CommonDAOException e){
+		} catch (CommonDAOException e) {
 			logger.error(e);
-            throw new CommonServiceException(e);
+			throw new CommonServiceException(e);
 		}
 	}
-	
+
 	@Override
-	public Page<PurchaseApplyDO> queryPageListDynamic(PurchaseApplyDO purchaseApplyDO) throws CommonServiceException{
+	public Page<PurchaseApplyDO> queryPageListDynamic(PurchaseApplyDO purchaseApplyDO)
+			throws CommonServiceException {
 		if (purchaseApplyDO != null) {
 			Long totalCount = this.selectCountDynamic(purchaseApplyDO);
 
@@ -125,8 +128,8 @@ public class PurchaseApplyServiceImpl  implements PurchaseApplyService{
 			page.setPageNo(purchaseApplyDO.getStartPage());
 			page.setPageSize(purchaseApplyDO.getPageSize());
 			page.setTotalCount(totalCount.intValue());
-			
-			if(null != totalCount && totalCount.longValue() > 0){
+
+			if (null != totalCount && totalCount.longValue() > 0) {
 				List<PurchaseApplyDO> resultList = this.selectDynamicPageQuery(purchaseApplyDO);
 				page.setList(resultList);
 			}
@@ -134,16 +137,66 @@ public class PurchaseApplyServiceImpl  implements PurchaseApplyService{
 		}
 		return new Page<PurchaseApplyDO>();
 	}
-	
+
 	@Override
-	public Page<PurchaseApplyDO> queryPageListDynamicAndStartPageSize(PurchaseApplyDO purchaseApplyDO, Integer startPage, Integer pageSize) throws CommonServiceException {
-		if (purchaseApplyDO != null && startPage>0 && pageSize>0) {
+	public Page<PurchaseApplyDO> queryPageListDynamicAndStartPageSize(
+			PurchaseApplyDO purchaseApplyDO, Integer startPage, Integer pageSize)
+			throws CommonServiceException {
+		if (purchaseApplyDO != null && startPage > 0 && pageSize > 0) {
 			purchaseApplyDO.setStartPage(startPage);
 			purchaseApplyDO.setPageSize(pageSize);
 			return this.queryPageListDynamic(purchaseApplyDO);
 		}
 		return new Page<PurchaseApplyDO>();
 	}
-	
-	
+
+	@Override
+	@Transactional
+	public CommonResultMessage successAuctPurchaseApply(Long userId, Long tiId)
+			throws CommonServiceException {
+		if (null == userId || null == tiId) {
+			return CommonResultMessage.failure(CommonMessages.ReqException);
+		}
+
+		String applyLock = LOCK_PURCHASE_APPLY_KEY + userId + "_" + tiId;
+		try {
+			boolean lockFlag = redisCacheService.lock(applyLock);
+			if (lockFlag) {
+				// 校验是否是拍得者
+				AuctionRecordDO ar = auctionRecordService.selectLatestAuction(tiId);
+				if (null == ar) {
+					return CommonResultMessage.failure(CommonMessages.ReqException);
+				}
+				if (ar.getUserId().longValue() != userId.longValue()) {
+					return CommonResultMessage.failure("请求异常：您不是拍得者");
+				}
+				// 校验购车申请状态是否是待购车
+				PurchaseApplyDO purchaseDO = new PurchaseApplyDO();
+				purchaseDO.setPurchaseStatus(PurchaseStatusEnum.NOT_APPLY.code);
+				purchaseDO.setTopicItemId(tiId);
+				List<PurchaseApplyDO> list = this.selectDynamic(purchaseDO);
+				if (CollectionUtils.isEmpty(list) || list.size() != 1) {
+					return CommonResultMessage.failure("请求异常：竞拍信息存在异常");
+				}
+				
+				Long purchaseId = list.get(0).getId();
+				purchaseDO.setId(purchaseId);
+				purchaseDO.setPurchaseStatus(PurchaseStatusEnum.WAIT_BUY.code);
+				purchaseDO.setApplyTime(new Date());
+				
+				this.update(purchaseDO, false);
+				return CommonResultMessage.success();
+			} else {
+				return CommonResultMessage
+						.failure(CommonResultCode.BusinessError.BUSINESS_IS_BUSY.desc);
+			}
+		} catch (CommonServiceException e) {
+			logger.error("申请购车异常", e);
+			throw e;
+		} finally {
+			redisCacheService.unLock(applyLock);
+		}
+
+	}
+
 }

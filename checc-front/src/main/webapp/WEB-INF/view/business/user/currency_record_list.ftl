@@ -2,7 +2,16 @@
 <#include "/common/common-js.ftl" />
 <#include "/common/page.ftl" />
 
-<link rel="stylesheet" type="text/css" href="${plugins}/layer/layui-v2.2.1/layui/css/layui.css" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="Generator" content="ECSHOP v2.7.3" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" type="text/css" href="${plugins}/layer/layui-v2.2.1/layui/css/layui.css" />
+</head>
+
 
 <style>
 	th,td {
@@ -88,8 +97,12 @@
 		</table>
 	</div>
 	<div class="pager_act">
-		<form id="currencyRecList" method="GET" action="${domain}/user/bis/currencyRecList">
-			<@pager  pagination=page  formId="currencyRecList" />
+		<form id="currencyRecListForm" method="POST" action="${domain}/user/bis/currencyRecList">
+			<@pager  pagination=page  formId="currencyRecListForm" />
 		</form>
 	</div>
 </div>
+
+</body>
+
+</html>

@@ -61,11 +61,12 @@
 					</select>
 				</li>
 				-->
-				<#--		
 				<#if isNeedPageTo>
 					<li class="pageTo">
-							转到第&nbsp;<input type="text" id="pageToNum"  value="" class="pageToNum">&nbsp;页
-							<input type="button" id="submitButton4Page" class="formButton" value="确定" onclick="pageNoSelect();" hidefocus=""> 
+						<#--
+						转到第&nbsp;<input type="text" id="pageToNum"  value="" class="pageToNum">&nbsp;页
+						<input type="button" id="submitButton4Page" class="formButton" value="确定" onclick="pageNoSelect();" hidefocus=""> 
+						-->
 						<script type="text/javascript">
 							 jQuery(document).ready(function(){   
 							  $('.vvssso').on('click',function(){
@@ -114,7 +115,6 @@
 						</script>
 					</li>
 				</#if>
-				-->
 			</ul>
 		</#if>
 	</#if>

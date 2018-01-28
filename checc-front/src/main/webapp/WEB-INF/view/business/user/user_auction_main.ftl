@@ -3,8 +3,8 @@
 	iframe{
 		/**
 		width: 1237px;
-		*/
 		min-height: 50px;
+		*/
 	}
 </style>
 <#-- 我参与的竞拍 -->
@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="uc_auct_data_list">
-			<iframe id="auct_data_list" frameborder=0 scrolling=no height="80" src="${domain}/user/bis/ucAuctionList/auction">
+			<iframe id="auct_data_list" frameborder=0 scrolling=no min-height="80" src="${domain}/user/bis/ucAuctionList/auction">
 			</iframe>
 		</div>
 		
@@ -38,7 +38,7 @@
 		</div>
 		
 		<div class="uc_auct_data_list">
-			<iframe id="exchange_data_list" frameborder=0 scrolling=no height="80" src="${domain}/user/bis/ucAuctionList/exchange">
+			<iframe id="exchange_data_list" frameborder=0 scrolling=no min-height="80" src="${domain}/user/bis/ucAuctionList/exchange">
 			</iframe>
 		</div>
 		
@@ -46,8 +46,8 @@
 </div>
 
 <script type="text/javascript">
-	var _ifh = $("#auct_data_list").height();
 	<#--
+	var _ifh = $("#auct_data_list").height();
 	
 	function reinitIframe(){
 		try{

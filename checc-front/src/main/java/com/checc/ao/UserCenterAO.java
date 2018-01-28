@@ -125,19 +125,21 @@ public class UserCenterAO {
 				 * if(winner.getUserId().longValue() == userId.longValue()){
 				 * vo.setIsWinner(true); } } break; } }
 				 */
-
-				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
-				if (null != latest) {
-					Integer currentAuctPrice = latest.getCurrentAuctPrice();
-					vo.setCurrenctAuctPrice(currentAuctPrice != null ? currentAuctPrice.doubleValue() : 0);
-					if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
-						if (latest.getUserId().longValue() == userId.longValue()
-								&& ti.getFloorPrice().doubleValue() <= currentAuctPrice.doubleValue()) {
-							vo.setIsWinner(true);
+				
+				if(TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())){
+					AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
+					if (null != latest) {
+						Integer currentAuctPrice = latest.getCurrentAuctPrice();
+						vo.setCurrenctAuctPrice(currentAuctPrice != null ? currentAuctPrice.doubleValue() : 0);
+						if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
+							if (latest.getUserId().longValue() == userId.longValue()
+									&& ti.getFloorPrice().doubleValue() <= currentAuctPrice.doubleValue()) {
+								vo.setIsWinner(true);
+							}
 						}
 					}
 				}
-
+				
 				listResult.add(vo);
 			}
 
@@ -153,6 +155,7 @@ public class UserCenterAO {
 								break;
 							}
 						}
+						al.setRecordId(ar.getId());
 						break;
 					}
 				}
@@ -239,6 +242,11 @@ public class UserCenterAO {
 		String topicType = winVO.getTopicType();
 		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicType)) {
 			AuctionRecordDO auctionRecord = auctionRecordService.selectLatestAuction(tiId);
+			if(null != auctionRecord){
+				winVO.setAuctNum(1);
+				winVO.setAuctTime(auctionRecord.getCreateTime());
+				winVO.setFinalAuctionPrice(auctionRecord.getCurrentAuctPrice().doubleValue());
+			}
 		} else {
 			
 		}

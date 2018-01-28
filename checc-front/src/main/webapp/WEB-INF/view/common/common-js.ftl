@@ -28,11 +28,11 @@
 	}); 
 	
 	function needLoginAjax(){
-		lgn_pg_ii = layer.open({
+		lgn_pg_ii = window.top.layer.open({
 			type: 2,
 			title: '请先登录',
 			resize: false,
-			scrollbar: false,
+			//scrollbar: false,
 			//fixed: false,
 			move:false,
 			shade: 0.1,

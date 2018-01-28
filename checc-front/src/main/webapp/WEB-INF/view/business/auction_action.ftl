@@ -67,7 +67,7 @@
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">
-				<span>您的账户里，西币余额为${auctionVO.useableCurrency!0}个，不够本次出价！</span>
+				<span>您的竞拍账户里，西币数量${auctionVO.useableCurrency!0}**个，不够本次出价！</span>
 				<span class="auct_deposit_now">
 					<a href="#" onclick="javascript:window.open('${domain}/user/bis/membercenter');">&nbsp;点击查看详情>></a>
 				</span>

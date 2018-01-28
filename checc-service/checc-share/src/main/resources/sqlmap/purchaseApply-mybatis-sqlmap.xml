@@ -7,7 +7,6 @@
 		<id column="id" property="id" />
         <result column="topic_item_id" property="topicItemId"/>
         <result column="purchase_status" property="purchaseStatus"/>
-        <result column="shipments_status" property="shipmentsStatus"/>
         <result column="apply_time" property="applyTime"/>
         <result column="remark" property="remark"/>
         <result column="modify_time" property="modifyTime"/>
@@ -15,14 +14,13 @@
 	</resultMap>
 
 	<sql id="MybatisPurchaseApplyDAO_all_column_fields">
-	      id,topic_item_id,purchase_status,shipments_status,apply_time,remark,modify_time,modify_user_id
+	      id,topic_item_id,purchase_status,apply_time,remark,modify_time,modify_user_id
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisPurchaseApplyDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="topicItemId != null "> AND topic_item_id=#{topicItemId} </if>
 			<if test="purchaseStatus != null  and purchaseStatus != '' "> AND purchase_status=#{purchaseStatus} </if>
-			<if test="shipmentsStatus != null  and shipmentsStatus != '' "> AND shipments_status=#{shipmentsStatus} </if>
 			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
@@ -45,7 +43,6 @@
 				id,
 				topic_item_id,
 				purchase_status,
-				shipments_status,
 				apply_time,
 				remark,
 				modify_time,
@@ -54,7 +51,6 @@
 				#{id},
 				#{topicItemId},
 				#{purchaseStatus},
-				#{shipmentsStatus},
 				#{applyTime},
 				#{remark},
 				#{modifyTime},
@@ -67,7 +63,6 @@
 		SET
 					topic_item_id = #{topicItemId},
 					purchase_status = #{purchaseStatus},
-					shipments_status = #{shipmentsStatus},
 					apply_time = #{applyTime},
 					remark = #{remark},
 					modify_time = #{modifyTime},
@@ -85,7 +80,6 @@
 		<set>
 					<if test="topicItemId != null ">topic_item_id=#{topicItemId},</if>
 					<if test="purchaseStatus != null  and purchaseStatus != '' ">purchase_status=#{purchaseStatus},</if>
-					<if test="shipmentsStatus != null  and shipmentsStatus != '' ">shipments_status=#{shipmentsStatus},</if>
 					<if test="applyTime != null ">apply_time=#{applyTime},</if>
 					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
 					<if test="modifyTime != null ">modify_time=#{modifyTime},</if>

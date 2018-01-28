@@ -84,7 +84,7 @@ public class MybatisTopicItemDAO extends MybatisBaseDAO implements TopicItemDAO 
 	}
 
 	@Override
-	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) {
+	public PurchaseDetailVO selectWinnerDetailInifo(Long topicItemId) throws CommonDAOException{
 		return getSqlSession().selectOne(getStatement("select_winner_details"), topicItemId);
 	}
 	

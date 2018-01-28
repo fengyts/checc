@@ -4,6 +4,11 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import ng.bayue.common.CommonResultCode;
+import ng.bayue.common.CommonResultMessage;
+import ng.bayue.exception.CommonServiceException;
+import ng.bayue.service.RedisCacheService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +18,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.CheccUserDO;
-import com.checc.domain.PurchaseApplyDO;
+import com.checc.domain.ExchangeOrderStatusDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
@@ -23,15 +28,10 @@ import com.checc.enums.ShipmentsStatusEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.service.AuctionActionService;
 import com.checc.service.AuctionRecordService;
-import com.checc.service.PurchaseApplyService;
+import com.checc.service.ExchangeOrderStatusService;
 import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
-
-import ng.bayue.common.CommonResultCode;
-import ng.bayue.common.CommonResultMessage;
-import ng.bayue.exception.CommonServiceException;
-import ng.bayue.service.RedisCacheService;
 
 @Service
 public class AuctionActionServiceImpl implements AuctionActionService {
@@ -55,7 +55,8 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 	@Autowired
 	private UserCurrencyService userCurrencyService;
 	@Autowired
-	private PurchaseApplyService purchaseApplyService;
+//	private PurchaseApplyService purchaseApplyService;
+	private ExchangeOrderStatusService orderStatusService;
 
 	@Override
 	@Transactional
@@ -258,8 +259,10 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				}
 				// 扣减用户西币
 				res = userCurrencyService.reduceExchangeCurrency(userId, totalCurrency);
+				Long recordId = 0l;
 				if (res > 0l) { // 扣减用户西币成功
 					res = auctionRecordService.insert(auctRecord);
+					recordId = res;
 					if (res <= 0l) {
 						// // 手动回滚事务
 						// TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -280,13 +283,13 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				}
 				
 				// 生成兑换订单(发货)
-				PurchaseApplyDO purchaseApplyDO = new PurchaseApplyDO();
-				purchaseApplyDO.setTopicItemId(tpId);
-				purchaseApplyDO.setPurchaseStatus(ShipmentsStatusEnum.NOT_SHIPMENTS.code);
-				purchaseApplyDO.setApplyTime(new Date());
-				purchaseApplyDO.setModifyUserId(userId);
-				purchaseApplyDO.setModifyTime(new Date());
-				res = purchaseApplyService.insert(purchaseApplyDO);
+				ExchangeOrderStatusDO orderStatus = new ExchangeOrderStatusDO();
+				orderStatus.setModifyUserId(userId);
+				orderStatus.setRecordId(recordId);
+				orderStatus.setShipmentsStatus(ShipmentsStatusEnum.NOT_SHIPMENTS.code);
+				orderStatus.setShipmentsTime(new Date());
+				res = orderStatusService.insert(orderStatus);
+				
 				if(res <= 0){
 					throw new CommonServiceException("生成兑换订单失败,兑换失败");
 				}

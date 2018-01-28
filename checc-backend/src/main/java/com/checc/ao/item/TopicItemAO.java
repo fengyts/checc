@@ -16,7 +16,6 @@ import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.dto.TopicItemDTO;
 import com.checc.enums.PurchaseStatusEnum;
-import com.checc.enums.ShipmentsStatusEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
 import com.checc.service.ItemService;
@@ -162,7 +161,7 @@ public class TopicItemAO {
 		// 插入竞拍购买状态数据
 		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())) {
 			PurchaseApplyDO purchaseApplyDO = new PurchaseApplyDO();
-			purchaseApplyDO.setShipmentsStatus(ShipmentsStatusEnum.NOT_SHIPMENTS.code);
+			purchaseApplyDO.setPurchaseStatus(PurchaseStatusEnum.NOT_APPLY.code);
 			purchaseApplyDO.setTopicItemId(tid);
 			purchaseApplyDO.setApplyTime(date);
 			purchaseApplyDO.setModifyTime(date);

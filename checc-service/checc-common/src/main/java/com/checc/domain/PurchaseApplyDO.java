@@ -5,14 +5,14 @@ import ng.bayue.common.BaseDO;
 import java.util.Date;
 
 /**
- * 竞拍商品购买状态，兑换商品发货状态
+ * 竞拍商品购买状态
  * 
- * @author fengyts Thu Jan 25 21:49:50 CST 2018
+ * @author fengyts Sun Jan 28 13:52:44 CST 2018
  */
 
 public class PurchaseApplyDO extends BaseDO {
 
-	private static final long serialVersionUID = -8779451062670642180L;
+	private static final long serialVersionUID = -3518638583944879517L;
 
 	/** 主键 */
 	private Long id;
@@ -23,10 +23,7 @@ public class PurchaseApplyDO extends BaseDO {
 	/** 竞拍商品购买状态，01-待申请；02-待购车；03-已购车；04-放弃购车 */
 	private String purchaseStatus;
 
-	/** 兑换商品发货状态，01-待发货；02-已发货；03-已签收 */
-	private String shipmentsStatus;
-
-	/** 申请购车&发货  时间 */
+	/** 申请购车&发货 时间 */
 	private Date applyTime;
 
 	/** 备注 */
@@ -66,16 +63,7 @@ public class PurchaseApplyDO extends BaseDO {
 	}
 
 	/**
-	 * 设置 兑换商品发货状态，01-待发货；02-已发货；03-已签收
-	 * 
-	 * @param shipmentsStatus
-	 */
-	public void setShipmentsStatus(String shipmentsStatus) {
-		this.shipmentsStatus = shipmentsStatus;
-	}
-
-	/**
-	 * 设置 申请购车时间
+	 * 设置 申请购车&发货 时间
 	 * 
 	 * @param applyTime
 	 */
@@ -138,16 +126,7 @@ public class PurchaseApplyDO extends BaseDO {
 	}
 
 	/**
-	 * 获取 兑换商品发货状态，01-待发货；02-已发货；03-已签收
-	 * 
-	 * @return shipmentsStatus
-	 */
-	public String getShipmentsStatus() {
-		return shipmentsStatus;
-	}
-
-	/**
-	 * 获取 申请购车时间
+	 * 获取 申请购车&发货 时间
 	 * 
 	 * @return applyTime
 	 */

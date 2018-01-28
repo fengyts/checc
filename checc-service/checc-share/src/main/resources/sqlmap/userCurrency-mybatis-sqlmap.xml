@@ -143,12 +143,10 @@
  		UPDATE
 			user_currency 
 		SET 
-			total_currency = total_currency - #{currency}, 
 			refund = refund - #{currency}, 
 			modify_time = now()
  		WHERE 
  			user_id = #{userId}
- 		AND total_currency - #{currency} &gt;= 0
  		AND refund - #{currency} &gt;= 0
  	</update>
  	

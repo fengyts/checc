@@ -209,15 +209,20 @@
 }
 
 .center_title {
+	/* color: #0099cc;
+	font-size: 18px; */
 	color: #0099cc;
-	font-size: 18px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    line-height: normal;
+    margin: 20px 0 0;
 }
 
 .center_user_mc {
-	font-size: 32px;
-	font-weight: 400;
-	line-height: 48px;
+	font-size: 18px;
 	margin-top: 40px;
+	color: #666666;
 }
 
 .currency_info {
@@ -543,3 +548,4 @@
 	position: relative;
 	padding-top: 30px;
 }
+
