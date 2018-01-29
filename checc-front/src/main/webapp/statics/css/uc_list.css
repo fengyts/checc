@@ -94,16 +94,14 @@ body {
 	color: #ffb366;
 }
 
-
 .uc_my_win {
-/* 	position: relative; */
-	position: absolute;
+	position: relative;
 	display: block;
-    top: 110px;
-    left: 85px;
+/*     top: 110px; */
+/*     left: 85px; */
 	text-align: center;
 	vertical-align: middle;
-/* 	margin: -180px auto; */
+	margin: -180px auto;
 	width: 100px;
 	height: 100px;
 	border: 0px solid #999999;
@@ -113,8 +111,6 @@ body {
 
 .uc_my_win>span {
 	display: block;
-/* 	margin-top: 10px; */
-/* 	padding-top: 30px; */
 	font-size: 20px;
 	color: #f2f2f2;
 	font-weight: 700;

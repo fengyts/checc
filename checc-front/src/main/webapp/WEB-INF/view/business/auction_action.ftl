@@ -59,7 +59,7 @@
 				<div class="act_abandon_btn" id="act_abandon_btn">
 					<a href="#">放弃</a>
 				</div>
-				<div class="act_bid_btn" id="act_bid_btn" disabled='false'>
+				<div class="act_bid_btn" id="act_bid_btn" disabled='false' dclick="1">
 					<a href="#">出价</a>
 				</div>
 				<input type="hidden" id="tpId" name="tpId" value="${auctionVO.id}" />
@@ -67,7 +67,7 @@
 			</div>
 			<div class="user_currency_info" id="user_currency_info">
 				<input type="hidden" id="useableCurrency" value="${auctionVO.useableCurrency!0}">
-				<span>您的竞拍账户里，西币数量${auctionVO.useableCurrency!0}**个，不够本次出价！</span>
+				<span>您的竞拍账户里，西币数量${auctionVO.useableCurrency!0}个，不够本次出价！</span>
 				<span class="auct_deposit_now">
 					<a href="#" onclick="javascript:window.open('${domain}/user/bis/membercenter');">&nbsp;点击查看详情>></a>
 				</span>

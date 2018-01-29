@@ -65,65 +65,66 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 		Long userId = userDO.getId();
 		String auctKeyLock = LOCK_AUCTION_KEY + userId;
 		try {
-			Long tpId = dto.getTpId();
-			TopicItemDO topicItemDO = topicItemService.selectById(tpId);
-			if (null == topicItemDO) {
-				return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
-						CommonResultCode.SystemError.REQ_ERROR.desc);
-			}
-			// 校验竞拍次数和总西比值
-			Integer auctionTimes = dto.getAuctionTimes();
-			int dbAuctionMaxTimes = topicItemDO.getAuctionMaxTimes();
-			if (dbAuctionMaxTimes < auctionTimes) {
-				return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
-						CommonResultCode.SystemError.REQ_ERROR.desc);
-			}
-			Integer totalCurrency = dto.getTotalCurrency();
-			int plusTotalCur = auctionTimes * topicItemDO.getAuctionCurrency();
-			if (plusTotalCur != totalCurrency) { // 校验前端输入和后台是否匹配
-				return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
-						CommonResultCode.SystemError.REQ_ERROR.desc);
-			}
-
-			Long topicId = topicItemDO.getTopicId();
-			TopicDO topicDO = topicService.selectById(topicId);
-			// 校验专题状态
-			String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
-			if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
-				return new CommonResultMessage(
-						CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
-						CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
-			}
-
-			// 校验用户西币是否足够
-			UserCurrencyDO userCurrencyDO = userCurrencyService.selectByUserId(userDO.getId());
-			if (null == userCurrencyDO) {
-				return new CommonResultMessage(
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
-			}
-			int userUseable = userCurrencyDO.getTotalCurrency() - userCurrencyDO.getFreeze();
-			if (plusTotalCur > userUseable) {
-				return new CommonResultMessage(
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
-						CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
-			}
-
-			AuctionRecordDO auctRecord = new AuctionRecordDO();
-			auctRecord.setRecordType(AuctionRecordTypeEnum.AUCTION.code);
-			auctRecord.setTopicItemId(tpId);
-			auctRecord.setCreateTime(new Date());
-			auctRecord.setBidNum(auctionTimes);
-			auctRecord.setTotalCurrency(totalCurrency);
-
-			auctRecord.setUserId(userDO.getId());
-			auctRecord.setMobile(userDO.getMobile());
-			auctRecord.setNickname(userDO.getNickname());
-
-			// 扣减用户西币
 			// 锁用户，每个用户同一时间只能请求一次
-			long res = 0l;
-			if (redisCacheService.lock(auctKeyLock)) {
+			boolean lock = redisCacheService.lock(auctKeyLock);
+			if (lock) {
+				Long tpId = dto.getTpId();
+				TopicItemDO topicItemDO = topicItemService.selectById(tpId);
+				if (null == topicItemDO) {
+					return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+							CommonResultCode.SystemError.REQ_ERROR.desc);
+				}
+				// 校验竞拍次数和总西比值
+				Integer auctionTimes = dto.getAuctionTimes();
+				int dbAuctionMaxTimes = topicItemDO.getAuctionMaxTimes();
+				if (dbAuctionMaxTimes < auctionTimes) {
+					return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+							CommonResultCode.SystemError.REQ_ERROR.desc);
+				}
+				Integer totalCurrency = dto.getTotalCurrency();
+				int plusTotalCur = auctionTimes * topicItemDO.getAuctionCurrency();
+				if (plusTotalCur != totalCurrency) { // 校验前端输入和后台是否匹配
+					return new CommonResultMessage(CommonResultCode.SystemError.REQ_ERROR.code,
+							CommonResultCode.SystemError.REQ_ERROR.desc);
+				}
+				
+				Long topicId = topicItemDO.getTopicId();
+				TopicDO topicDO = topicService.selectById(topicId);
+				// 校验专题状态
+				String topicStatus = getTopicStatus(topicDO.getStartTime(), topicDO.getEndTime());
+				if (!TopicStatusEnum.InProgress.getCode().equals(topicStatus)) {
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.PROMOTION_HAS_END.code,
+							CommonResultCode.BusinessError.PROMOTION_HAS_END.desc);
+				}
+				
+				// 校验用户西币是否足够
+				UserCurrencyDO userCurrencyDO = userCurrencyService.selectByUserId(userDO.getId());
+				if (null == userCurrencyDO) {
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+				}
+				int userUseable = userCurrencyDO.getTotalCurrency() - userCurrencyDO.getFreeze();
+				if (plusTotalCur > userUseable) {
+					return new CommonResultMessage(
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.code,
+							CommonResultCode.BusinessError.USEABLE_CURRENCY_NOT_ENOUGH.desc);
+				}
+				
+				AuctionRecordDO auctRecord = new AuctionRecordDO();
+				auctRecord.setRecordType(AuctionRecordTypeEnum.AUCTION.code);
+				auctRecord.setTopicItemId(tpId);
+				auctRecord.setCreateTime(new Date());
+				auctRecord.setBidNum(auctionTimes);
+				auctRecord.setTotalCurrency(totalCurrency);
+				
+				auctRecord.setUserId(userDO.getId());
+				auctRecord.setMobile(userDO.getMobile());
+				auctRecord.setNickname(userDO.getNickname());
+				
+				// 扣减用户西币
+				long res = 0l;
 				res = userCurrencyService.freezeCurrency(userId, plusTotalCur);
 				if (res <= 0l) {
 					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
@@ -150,7 +151,7 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 							CommonResultCode.BusinessError.BUSINESS_PROCESS_ERROR.desc);
 				}
 			} else {
-				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
+				//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务
 				return new CommonResultMessage(CommonResultCode.BusinessError.ONCE_EVERY_TIME.code,
 						CommonResultCode.BusinessError.ONCE_EVERY_TIME.desc);
 			}

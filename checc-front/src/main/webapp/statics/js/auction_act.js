@@ -79,10 +79,13 @@ $(document).ready(function() {
 
 	// 竞拍
 	$("#act_bid_btn").on('click', function() {
-		var _disabled = $(this).attr('disabled');
-		if (_disabled == 'disabled') {
+		var _this = $(this);
+		var _disabled = _this.attr('disabled'), _dclick = _this.attr("dclick");
+		console.log(_dclick);
+		if (_disabled == 'disabled' || _dclick == '0') {
 			return;
 		}
+		_this.attr("dclick", '0');
 		auctionAction();
 	});
 
@@ -181,6 +184,7 @@ function auctionAction() {
 				countDownTime(_tic);
 			} else {
 				layer.msg('您已成功出价该商品! 当前处于领先状态', {time: 1500}, function(){
+					$("#act_bid_btn").attr('dclick', '1');
 					window.parent.location.reload();
 					window.parent.layer.close(parent.lgn_pg_ii);
 				});

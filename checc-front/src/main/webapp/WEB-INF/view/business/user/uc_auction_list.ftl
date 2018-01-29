@@ -26,14 +26,16 @@
 								<a href="#" class="itemsal" reqTime="${.now?long}" tiId="${ucItem.tpId}" preClickTime="">
 									<img src="${ucItem.picture}" <#if ucItem.isWinner?? && ucItem.isWinner == 'true'>style="opacity: 0.5;"</#if>>
 									<#if ucItem.isWinner?? && ucItem.isWinner == 'true'>
-										<div class="uc_my_win">
-											<span>我已拍得</span>
-										</div>
 										<input type="hidden" value="1" class="tiIdInp">
 									<#else>
 										<input type="hidden" value="0" class="tiIdInp">
 									</#if>
 								</a>
+								<#if ucItem.isWinner?? && ucItem.isWinner == 'true'>
+									<div class="uc_my_win">
+										<span>我已拍得</span>
+									</div>
+								</#if>
 							</div>
 						</div>
 						<div class="uc_item_info">

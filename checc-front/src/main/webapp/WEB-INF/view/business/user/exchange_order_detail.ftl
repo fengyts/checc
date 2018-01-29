@@ -31,7 +31,7 @@
 			<div class="win_tinfo_box">
 				<div class="auct_num_box">
 					<span class="label_title">兑换数量:<s></s></span>
-					<span class="auct_num">${exchangeOrderVO.auctNum!1}辆</span>
+					<span class="auct_num">${exchangeOrderVO.auctNum!1}份</span>
 				</div>
 				<div class="win_price_box">
 					<span class="label_title">花费西币:<s></s></span>
