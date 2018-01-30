@@ -113,5 +113,20 @@
 	 	ORDER BY purchase_apply.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<select id="MybatisPurchaseApplyDAO_select_auction_count" parameterType="com.checc.dto.PurchaseExchangeStatusDTO" resultType="int">
+ 		
+ 	</select>
+ 	
+ 	<select id="MybatisPurchaseApplyDAO_select_auction_page" parameterType="com.checc.dto.PurchaseExchangeStatusDTO" resultType="com.checc.vo.PurchaseApplyVO">
+ 		SELECT 
+			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
+			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice,
+			pa.purchase_status purchaseStatus, pa.apply_time applyTime, pa.remark remark
+		FROM purchase_apply pa
+		INNER JOIN topic_item ti ON ti.id = pa.topic_item_id
+		INNER JOIN topic tp ON tp.id = ti.topic_id
+		LEFT JOIN auction_record ar ON ar.topic_item_id = ti.id
+ 	</select>
 
 </mapper>

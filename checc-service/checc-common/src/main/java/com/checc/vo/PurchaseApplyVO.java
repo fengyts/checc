@@ -1,12 +1,10 @@
-package com.checc.vo.front;
+package com.checc.vo;
 
 import java.util.Date;
 
-import com.checc.vo.BaseVO;
+public class PurchaseApplyVO extends BaseVO {
 
-public class PurchaseDetailVO extends BaseVO {
-
-	private static final long serialVersionUID = 4980215099821930430L;
+	private static final long serialVersionUID = -8643912105345155523L;
 
 	/** 专题主键id */
 	private Long topicId;
@@ -29,16 +27,27 @@ public class PurchaseDetailVO extends BaseVO {
 	private Double floorPrice;
 	/** 最终成交价 */
 	private Double finalAuctionPrice;
-	/** 拍得数量*/
+	/** 拍得数量 */
 	private Integer auctNum;
+
+	/** 购车申请单id */
+	private Long purchaseId;
 	/** 拍得时间(最后出价时间) */
 	private Date auctTime;
-	/** 申请购 时间 */
+	/** 申请购车 时间 */
 	private Date applyTime;
 	/** 购车状态 */
 	private String purchaseStatus;
+	/** 购车状态备注 */
+	private String purchaseRemark;
 
-	
+	/** 竞拍参与的人数 */
+	private Integer countNum;
+	/** 竞拍得主用户id */
+	private Long successUserId;
+	/** 竞拍得主用户手机号 */
+	private String successUserMobile;
+
 	public Long getTopicId() {
 		return topicId;
 	}
@@ -127,6 +136,14 @@ public class PurchaseDetailVO extends BaseVO {
 		this.auctNum = auctNum;
 	}
 
+	public Long getPurchaseId() {
+		return purchaseId;
+	}
+
+	public void setPurchaseId(Long purchaseId) {
+		this.purchaseId = purchaseId;
+	}
+
 	public Date getAuctTime() {
 		return auctTime;
 	}
@@ -151,5 +168,36 @@ public class PurchaseDetailVO extends BaseVO {
 		this.purchaseStatus = purchaseStatus;
 	}
 
-	
+	public String getPurchaseRemark() {
+		return purchaseRemark;
+	}
+
+	public void setPurchaseRemark(String purchaseRemark) {
+		this.purchaseRemark = purchaseRemark;
+	}
+
+	public Integer getCountNum() {
+		return countNum;
+	}
+
+	public void setCountNum(Integer countNum) {
+		this.countNum = countNum;
+	}
+
+	public Long getSuccessUserId() {
+		return successUserId;
+	}
+
+	public void setSuccessUserId(Long successUserId) {
+		this.successUserId = successUserId;
+	}
+
+	public String getSuccessUserMobile() {
+		return successUserMobile;
+	}
+
+	public void setSuccessUserMobile(String successUserMobile) {
+		this.successUserMobile = successUserMobile;
+	}
+
 }

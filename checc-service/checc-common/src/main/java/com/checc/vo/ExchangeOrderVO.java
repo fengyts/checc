@@ -1,12 +1,13 @@
-package com.checc.vo.front;
+package com.checc.vo;
 
 import java.util.Date;
 
-import com.checc.vo.BaseVO;
+public class ExchangeOrderVO extends BaseVO {
 
-public class PurchaseDetailVO extends BaseVO {
+	private static final long serialVersionUID = 937001729418902875L;
 
-	private static final long serialVersionUID = 4980215099821930430L;
+	/** 兑换记录id */
+	private Long recordId;
 
 	/** 专题主键id */
 	private Long topicId;
@@ -25,20 +26,30 @@ public class PurchaseDetailVO extends BaseVO {
 	private String itemTitle;
 	/** 市场价 */
 	private Double marketPrice;
-	/** 竞拍底价 */
-	private Double floorPrice;
-	/** 最终成交价 */
-	private Double finalAuctionPrice;
-	/** 拍得数量*/
+	/** 兑换花费的西币 */
+	private Double exchangeAmount;
+	/** 兑换数量 */
 	private Integer auctNum;
-	/** 拍得时间(最后出价时间) */
+	/** 兑换时间 */
 	private Date auctTime;
-	/** 申请购 时间 */
-	private Date applyTime;
-	/** 购车状态 */
-	private String purchaseStatus;
+	/** 兑换人手机号 */
+	private String moible;
 
-	
+	/** 兑换订单id */
+	private Long exchangeOrderId;
+	/** 发货状态 */
+	private String shipmentsStatus;
+	/** 发货备注 */
+	private String remark;
+
+	public Long getRecordId() {
+		return recordId;
+	}
+
+	public void setRecordId(Long recordId) {
+		this.recordId = recordId;
+	}
+
 	public Long getTopicId() {
 		return topicId;
 	}
@@ -103,20 +114,12 @@ public class PurchaseDetailVO extends BaseVO {
 		this.marketPrice = marketPrice;
 	}
 
-	public Double getFloorPrice() {
-		return floorPrice;
+	public Double getExchangeAmount() {
+		return exchangeAmount;
 	}
 
-	public void setFloorPrice(Double floorPrice) {
-		this.floorPrice = floorPrice;
-	}
-
-	public Double getFinalAuctionPrice() {
-		return finalAuctionPrice;
-	}
-
-	public void setFinalAuctionPrice(Double finalAuctionPrice) {
-		this.finalAuctionPrice = finalAuctionPrice;
+	public void setExchangeAmount(Double exchangeAmount) {
+		this.exchangeAmount = exchangeAmount;
 	}
 
 	public Integer getAuctNum() {
@@ -135,21 +138,36 @@ public class PurchaseDetailVO extends BaseVO {
 		this.auctTime = auctTime;
 	}
 
-	public Date getApplyTime() {
-		return applyTime;
+	public String getMoible() {
+		return moible;
 	}
 
-	public void setApplyTime(Date applyTime) {
-		this.applyTime = applyTime;
+	public void setMoible(String moible) {
+		this.moible = moible;
 	}
 
-	public String getPurchaseStatus() {
-		return purchaseStatus;
+	public String getShipmentsStatus() {
+		return shipmentsStatus;
 	}
 
-	public void setPurchaseStatus(String purchaseStatus) {
-		this.purchaseStatus = purchaseStatus;
+	public void setShipmentsStatus(String shipmentsStatus) {
+		this.shipmentsStatus = shipmentsStatus;
 	}
 
-	
+	public Long getExchangeOrderId() {
+		return exchangeOrderId;
+	}
+
+	public void setExchangeOrderId(Long exchangeOrderId) {
+		this.exchangeOrderId = exchangeOrderId;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 }
