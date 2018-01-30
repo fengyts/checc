@@ -1,10 +1,15 @@
-package com.checc.vo;
+package com.checc.vo.front;
 
 import java.util.Date;
 
-public class PurchaseDetailVO extends BaseVO {
+import com.checc.vo.BaseVO;
 
-	private static final long serialVersionUID = 4980215099821930430L;
+public class ExchangeOrderStatusVO extends BaseVO {
+
+	private static final long serialVersionUID = -2585923078551129142L;
+
+	/** 兑换记录id */
+	private Long recordId;
 
 	/** 专题主键id */
 	private Long topicId;
@@ -23,20 +28,23 @@ public class PurchaseDetailVO extends BaseVO {
 	private String itemTitle;
 	/** 市场价 */
 	private Double marketPrice;
-	/** 竞拍底价 */
-	private Double floorPrice;
-	/** 最终成交价 */
-	private Double finalAuctionPrice;
-	/** 拍得数量*/
+	/** 兑换花费的西币 */
+	private Double exchangeAmount;
+	/** 兑换数量 */
 	private Integer auctNum;
-	/** 拍得时间(最后出价时间) */
+	/** 兑换时间  */
 	private Date auctTime;
-	/** 申请购车/兑换商品发货 时间 */
-	private Date applyTime;
-	/** 购车状态 */
-	private String purchaseStatus;
+	/** 发货状态 */
+	private String shipmentsStatus;
 
-	
+	public Long getRecordId() {
+		return recordId;
+	}
+
+	public void setRecordId(Long recordId) {
+		this.recordId = recordId;
+	}
+
 	public Long getTopicId() {
 		return topicId;
 	}
@@ -101,20 +109,12 @@ public class PurchaseDetailVO extends BaseVO {
 		this.marketPrice = marketPrice;
 	}
 
-	public Double getFloorPrice() {
-		return floorPrice;
+	public Double getExchangeAmount() {
+		return exchangeAmount;
 	}
 
-	public void setFloorPrice(Double floorPrice) {
-		this.floorPrice = floorPrice;
-	}
-
-	public Double getFinalAuctionPrice() {
-		return finalAuctionPrice;
-	}
-
-	public void setFinalAuctionPrice(Double finalAuctionPrice) {
-		this.finalAuctionPrice = finalAuctionPrice;
+	public void setExchangeAmount(Double exchangeAmount) {
+		this.exchangeAmount = exchangeAmount;
 	}
 
 	public Integer getAuctNum() {
@@ -133,21 +133,12 @@ public class PurchaseDetailVO extends BaseVO {
 		this.auctTime = auctTime;
 	}
 
-	public Date getApplyTime() {
-		return applyTime;
+	public String getShipmentsStatus() {
+		return shipmentsStatus;
 	}
 
-	public void setApplyTime(Date applyTime) {
-		this.applyTime = applyTime;
+	public void setShipmentsStatus(String shipmentsStatus) {
+		this.shipmentsStatus = shipmentsStatus;
 	}
 
-	public String getPurchaseStatus() {
-		return purchaseStatus;
-	}
-
-	public void setPurchaseStatus(String purchaseStatus) {
-		this.purchaseStatus = purchaseStatus;
-	}
-
-	
 }

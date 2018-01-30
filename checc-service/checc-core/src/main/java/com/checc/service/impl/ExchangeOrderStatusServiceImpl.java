@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.checc.dao.ExchangeOrderStatusDAO;
 import com.checc.domain.ExchangeOrderStatusDO;
 import com.checc.service.ExchangeOrderStatusService;
-import com.checc.vo.ExchangeOrderStatusVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;

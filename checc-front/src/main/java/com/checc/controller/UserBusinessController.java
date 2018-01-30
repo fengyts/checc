@@ -24,8 +24,8 @@ import com.checc.domain.CheccUserDO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.enums.PurchaseStatusEnum;
 import com.checc.enums.ShipmentsStatusEnum;
-import com.checc.vo.ExchangeOrderStatusVO;
-import com.checc.vo.PurchaseDetailVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
+import com.checc.vo.front.PurchaseDetailVO;
 
 /**
  * <pre>

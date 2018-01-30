@@ -6,7 +6,7 @@ import ng.bayue.exception.CommonServiceException;
 import ng.bayue.service.common.GeneralService;
 
 import com.checc.domain.TopicItemDO;
-import com.checc.vo.PurchaseDetailVO;
+import com.checc.vo.front.PurchaseDetailVO;
 
 /**
  * 专题商品 Service

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.TopicItemDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.TopicItemDO;
-import com.checc.vo.PurchaseDetailVO;
+import com.checc.vo.front.PurchaseDetailVO;
 
 import ng.bayue.exception.CommonDAOException;
 

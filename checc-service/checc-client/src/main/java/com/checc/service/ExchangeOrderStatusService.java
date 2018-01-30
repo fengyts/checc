@@ -3,7 +3,7 @@ package com.checc.service;
 import ng.bayue.service.common.GeneralService;
 
 import com.checc.domain.ExchangeOrderStatusDO;
-import com.checc.vo.ExchangeOrderStatusVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
  /**
  * 兑换商品发货状态 Service

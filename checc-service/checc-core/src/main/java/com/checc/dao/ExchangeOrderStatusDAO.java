@@ -1,7 +1,7 @@
 package com.checc.dao;
 
 import com.checc.domain.ExchangeOrderStatusDO;
-import com.checc.vo.ExchangeOrderStatusVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.service.common.GeneralDAO;
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.checc.service.ExchangeOrderStatusService;
-import com.checc.vo.ExchangeOrderStatusVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
 @Service
 public class ExchangeOrderStatusAO {

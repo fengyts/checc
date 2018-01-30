@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.ExchangeOrderStatusDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.ExchangeOrderStatusDO;
-import com.checc.vo.ExchangeOrderStatusVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.exception.CommonDAOException;
 

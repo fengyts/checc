@@ -24,8 +24,8 @@ import com.checc.service.TopicItemService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
 import com.checc.vo.UCAuctionListVO;
-import com.checc.vo.PurchaseDetailVO;
 import com.checc.vo.front.CurrencyRecordVO;
+import com.checc.vo.front.PurchaseDetailVO;
 import com.checc.vo.front.UserCenterVO;
 
 import ng.bayue.common.Page;

@@ -3,7 +3,7 @@ package com.checc.dao;
 import java.util.List;
 
 import com.checc.domain.TopicItemDO;
-import com.checc.vo.PurchaseDetailVO;
+import com.checc.vo.front.PurchaseDetailVO;
 
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.service.common.GeneralDAO;

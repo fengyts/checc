@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.checc.service.ExchangeOrderStatusService;
 import com.checc.service.PurchaseApplyService;
-import com.checc.vo.ExchangeOrderStatusVO;
-import com.checc.vo.PurchaseDetailVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
+import com.checc.vo.front.PurchaseDetailVO;
 
 import ng.bayue.common.Page;
 
