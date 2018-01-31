@@ -63,6 +63,11 @@ public class MybatisPurchaseApplyDAO extends MybatisBaseDAO implements PurchaseA
 	public List<PurchaseApplyDO> selectDynamicPageQuery(PurchaseApplyDO purchaseApplyDO) throws CommonDAOException {
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), purchaseApplyDO);
 	}
+	
+	@Override
+	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds) throws CommonDAOException {
+		return getSqlSession().update(getStatement("update_success_auct_purchase"), topicItemIds);
+	}
 
 	@Override
 	public Integer countAuctionBackend(PurchaseExchangeStatusDTO dto) {

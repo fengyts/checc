@@ -19,6 +19,7 @@ import com.checc.dto.refund.RefundTopicDTO;
 import com.checc.dto.refund.RefundTopicItemDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionRecordService;
+import com.checc.service.PurchaseApplyService;
 import com.checc.service.RefundCurrencyService;
 import com.checc.service.TopicService;
 import com.checc.service.UserCurrencyService;
@@ -36,6 +37,8 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 	private AuctionRecordService auctionRecordService;
 	@Autowired
 	private UserCurrencyService userCurrencyService;
+	@Autowired
+	private PurchaseApplyService purchaseApplyService;
 
 	@Override
 	@Transactional
@@ -231,6 +234,13 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 		if (res <= 0) {
 			logger.info("refund user currency failure: refund operation exception");
 			throw new CommonServiceException("用户西币值回退异常,插入回退记录异常");
+		}
+		
+		// 更新竞拍成功专题商品购车状态为待申请
+		res = purchaseApplyService.updatePurchaseStatusToNotApply(topicItemIds);
+		if(res < 0){
+			logger.info("update auction success topic item purchase status exception");
+			throw new CommonServiceException("更新竞拍成功专题商品购车状态为待申请异常");
 		}
 
 		return res;

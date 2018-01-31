@@ -25,7 +25,7 @@ public interface PurchaseApplyService extends GeneralService<PurchaseApplyDO, Pu
 	 * @param topicItemIds
 	 * @return
 	 */
-	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds);
+	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds) throws CommonServiceException;
 
 	/**
 	 * <pre>

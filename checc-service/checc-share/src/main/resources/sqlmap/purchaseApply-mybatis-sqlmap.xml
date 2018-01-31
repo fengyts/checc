@@ -114,6 +114,16 @@
 	 	Limit #{start},#{pageSize}
  	</select>
  	
+ 	<update id="MybatisPurchaseApplyDAO_update_success_auct_purchase" parameterType="list">
+ 		UPDATE purchase_apply pa SET pa.purchase_status='01'
+		WHERE pa.topic_item_id IN 
+			(
+				<foreach collection="list" item="tiId" separator=",">
+					#{tiId}
+				</foreach>
+			)
+ 	</update>
+ 	
  	<select id="MybatisPurchaseApplyDAO_select_auction_count" parameterType="com.checc.dto.PurchaseExchangeStatusDTO" resultType="int">
  		SELECT 
 			COUNT(1)

@@ -154,11 +154,16 @@ public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 	}
 	
 	@Override
-	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds) {
-		if(CollectionUtils.isEmpty(topicItemIds)){
-			
+	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds) throws CommonServiceException {
+		if (CollectionUtils.isEmpty(topicItemIds)) {
+			return 0;
 		}
-		return 0;
+		try {
+			return purchaseApplyDAO.updatePurchaseStatusToNotApply(topicItemIds);
+		} catch (CommonDAOException e) {
+			logger.error(e);
+			throw new CommonServiceException(e);
+		}
 	}
 
 	@Override
