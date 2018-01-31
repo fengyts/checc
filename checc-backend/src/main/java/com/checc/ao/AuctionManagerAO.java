@@ -3,10 +3,11 @@ package com.checc.ao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.checc.dto.PurchaseExchangeStatusDTO;
 import com.checc.service.ExchangeOrderStatusService;
 import com.checc.service.PurchaseApplyService;
-import com.checc.vo.front.ExchangeOrderStatusVO;
-import com.checc.vo.front.PurchaseDetailVO;
+import com.checc.vo.ExchangeOrderVO;
+import com.checc.vo.PurchaseApplyVO;
 
 import ng.bayue.common.Page;
 
@@ -18,13 +19,13 @@ public class AuctionManagerAO {
 	@Autowired
 	private ExchangeOrderStatusService exchangeOrderStatusService;
 
-	public Page<PurchaseDetailVO> queryAuctionPageList(Integer pageNo, Integer pageSize) {
-		Page<PurchaseDetailVO> pageResult = null;
+	public Page<PurchaseApplyVO> queryAuctionPageList(PurchaseExchangeStatusDTO dto, Integer pageNo, Integer pageSize) {
+		Page<PurchaseApplyVO> pageResult = purchaseApplyService.queryPageBackend(dto, pageNo, pageSize);
 		return pageResult;
 	}
 
-	public Page<ExchangeOrderStatusVO> queryExchangePageList(Integer pageNo, Integer pageSize) {
-		Page<ExchangeOrderStatusVO> pageResult = null;
+	public Page<ExchangeOrderVO> queryExchangePageList(Integer pageNo, Integer pageSize) {
+		Page<ExchangeOrderVO> pageResult = null;
 		return pageResult;
 	}
 

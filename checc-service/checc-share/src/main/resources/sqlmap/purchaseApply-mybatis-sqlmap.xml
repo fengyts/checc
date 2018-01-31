@@ -115,18 +115,66 @@
  	</select>
  	
  	<select id="MybatisPurchaseApplyDAO_select_auction_count" parameterType="com.checc.dto.PurchaseExchangeStatusDTO" resultType="int">
- 		
+ 		SELECT 
+			COUNT(1)
+		FROM purchase_apply pa
+		INNER JOIN topic_item ti ON ti.id = pa.topic_item_id
+		LEFT JOIN
+		(
+			SELECT ar1.id, ar1.topic_item_id, ar1.current_auct_price, ar1.mobile, ar1.user_id
+			FROM auction_record ar1
+			INNER JOIN 
+			(
+				SELECT MAX(ar.id) id, ar.topic_item_id
+				FROM auction_record ar
+				WHERE ar.record_type = '01'
+				GROUP BY ar.topic_item_id
+			) arm ON arm.id = ar1.id
+		) art ON art.topic_item_id = ti.id
+		<where>
+			<if test="mobile !=null and mobile != '' ">AND art.mobile = #{mobile}</if>
+			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
+		</where>
  	</select>
  	
  	<select id="MybatisPurchaseApplyDAO_select_auction_page" parameterType="com.checc.dto.PurchaseExchangeStatusDTO" resultType="com.checc.vo.PurchaseApplyVO">
  		SELECT 
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice,
-			pa.purchase_status purchaseStatus, pa.apply_time applyTime, pa.remark remark
+			pa.purchase_status purchaseStatus, pa.apply_time applyTime, pa.remark remark,
+			art.user_id userId, art.mobile mobile, art.current_auct_price finalAuctionPrice,
+			(
+				SELECT COUNT(DISTINCT ar.user_id)
+				FROM auction_record ar
+				WHERE ar.topic_item_id = ti.id
+			) countAuctionNum
 		FROM purchase_apply pa
 		INNER JOIN topic_item ti ON ti.id = pa.topic_item_id
 		INNER JOIN topic tp ON tp.id = ti.topic_id
-		LEFT JOIN auction_record ar ON ar.topic_item_id = ti.id
+		LEFT JOIN
+		(
+			SELECT ar1.id, ar1.topic_item_id, ar1.current_auct_price, ar1.mobile, ar1.user_id
+			FROM auction_record ar1
+			INNER JOIN 
+			(
+				SELECT MAX(ar.id) id, ar.topic_item_id
+				FROM auction_record ar
+				WHERE ar.record_type = '01'
+				GROUP BY ar.topic_item_id
+			) arm ON arm.id = ar1.id
+		) art ON art.topic_item_id = ti.id
+		<where>
+			<if test="mobile !=null and mobile != '' ">AND art.mobile = #{mobile}</if>
+			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
+		</where>
+		ORDER BY ti.id DESC
+		LIMIT #{start},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="count_total_auction" parameterType="long" resultType="int">
+ 		SELECT COUNT(DISTINCT ar.user_id)
+		FROM auction_record ar
+		WHERE ar.topic_item_id=#{topicItemId}
  	</select>
 
 </mapper>

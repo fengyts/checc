@@ -109,7 +109,7 @@
 	 	Limit #{start},#{pageSize}
  	</select>
  	
- 	<select id="MybatisExchangeOrderStatusDAO_select_order_status_detail" parameterType="long" resultType="com.checc.vo.ExchangeOrderStatusVO">
+ 	<select id="MybatisExchangeOrderStatusDAO_select_order_status_detail" parameterType="long" resultType="com.checc.vo.front.ExchangeOrderStatusVO">
  		SELECT 
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.exchange_amount exchangeAmount,

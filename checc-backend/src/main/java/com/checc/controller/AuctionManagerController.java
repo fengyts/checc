@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.checc.ao.AuctionManagerAO;
 import com.checc.backend.constants.BackendConstant;
+import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.enums.PurchaseStatusEnum;
+import com.checc.enums.TopicProgressEnum;
+import com.checc.vo.PurchaseApplyVO;
 
 import ng.bayue.common.Page;
 
@@ -20,10 +24,14 @@ public class AuctionManagerController {
 	private AuctionManagerAO auctionManagerAO;
 
 	@RequestMapping("/auctionList")
-	public String auctionList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+	public String auctionList(Model model, PurchaseExchangeStatusDTO dto,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-		Page<?> page = null;
+		Page<PurchaseApplyVO> page = auctionManagerAO.queryAuctionPageList(dto, pageNo, pageSize);
 		model.addAttribute("page", page);
+		model.addAttribute("paramDto", dto);
+		model.addAttribute("topicProgress", TopicProgressEnum.values());
+		model.addAttribute("purchaseStatus", PurchaseStatusEnum.values());
 		if (CollectionUtils.isEmpty(page.getList())) {
 			model.addAttribute("noRecoders", "暂无数据");
 		}

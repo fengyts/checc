@@ -39,14 +39,14 @@ public class PurchaseApplyVO extends BaseVO {
 	/** 购车状态 */
 	private String purchaseStatus;
 	/** 购车状态备注 */
-	private String purchaseRemark;
+	private String remark;
 
 	/** 竞拍参与的人数 */
-	private Integer countNum;
+	private Integer countAuctionNum;
 	/** 竞拍得主用户id */
-	private Long successUserId;
+	private Long userId;
 	/** 竞拍得主用户手机号 */
-	private String successUserMobile;
+	private String mobile;
 
 	public Long getTopicId() {
 		return topicId;
@@ -168,36 +168,36 @@ public class PurchaseApplyVO extends BaseVO {
 		this.purchaseStatus = purchaseStatus;
 	}
 
-	public String getPurchaseRemark() {
-		return purchaseRemark;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setPurchaseRemark(String purchaseRemark) {
-		this.purchaseRemark = purchaseRemark;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public Integer getCountNum() {
-		return countNum;
+	public Integer getCountAuctionNum() {
+		return countAuctionNum;
 	}
 
-	public void setCountNum(Integer countNum) {
-		this.countNum = countNum;
+	public void setCountAuctionNum(Integer countAuctionNum) {
+		this.countAuctionNum = countAuctionNum;
 	}
 
-	public Long getSuccessUserId() {
-		return successUserId;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setSuccessUserId(Long successUserId) {
-		this.successUserId = successUserId;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getSuccessUserMobile() {
-		return successUserMobile;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setSuccessUserMobile(String successUserMobile) {
-		this.successUserMobile = successUserMobile;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 }

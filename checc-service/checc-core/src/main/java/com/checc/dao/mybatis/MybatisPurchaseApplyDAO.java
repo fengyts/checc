@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.PurchaseApplyDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.PurchaseApplyDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.vo.PurchaseApplyVO;
 
 import ng.bayue.exception.CommonDAOException;
 
@@ -62,4 +64,20 @@ public class MybatisPurchaseApplyDAO extends MybatisBaseDAO implements PurchaseA
 		return getSqlSession().selectList(getStatement("select_dynamic_page_query"), purchaseApplyDO);
 	}
 
+	@Override
+	public Integer countAuctionBackend(PurchaseExchangeStatusDTO dto) {
+		return getSqlSession().selectOne(getStatement("select_auction_count"), dto);
+	}
+
+	@Override
+	public List<PurchaseApplyVO> queryPageBackend(PurchaseExchangeStatusDTO dto) {
+		return getSqlSession().selectList(getStatement("select_auction_page"), dto);
+	}
+
+	@Override
+	public Integer countTotalAuction(Long topicItemId) {
+		return getSqlSession().selectOne(getStatement("count_total_auction"), topicItemId);
+	}
+
+	
 }

@@ -237,7 +237,7 @@
 		WHERE item_id = #{itemId}
 	</update>
 	
-	<select id="MybatisTopicItemDAO_select_winner_details" parameterType="long" resultType="com.checc.vo.PurchaseDetailVO">
+	<select id="MybatisTopicItemDAO_select_winner_details" parameterType="long" resultType="com.checc.vo.front.PurchaseDetailVO">
 		SELECT 
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice,

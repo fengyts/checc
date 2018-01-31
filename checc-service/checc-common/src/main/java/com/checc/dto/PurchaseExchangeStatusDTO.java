@@ -1,8 +1,10 @@
 package com.checc.dto;
 
-public class PurchaseExchangeStatusDTO extends BaseDTO {
+import ng.bayue.common.BaseDO;
 
-	private static final long serialVersionUID = -4555989604513461316L;
+public class PurchaseExchangeStatusDTO extends BaseDO {
+
+	private static final long serialVersionUID = 7381538220945229088L;
 
 	private String itemTitle;
 	private String mobile;

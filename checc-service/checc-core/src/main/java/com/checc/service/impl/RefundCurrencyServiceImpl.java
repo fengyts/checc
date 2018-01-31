@@ -37,7 +37,6 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 	@Autowired
 	private UserCurrencyService userCurrencyService;
 
-
 	@Override
 	@Transactional
 	public synchronized int refundCurrency() throws CommonServiceException {
@@ -49,9 +48,9 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 		Date nowDate = new Date();
 		// 退回的西币记录，每一个用户在同一件商品中只有一条退回记录
 		List<AuctionRecordDO> insertRecords = new ArrayList<AuctionRecordDO>();
-		// 流拍回退     所有参与的专题商品的    西币到余额账户(竞拍账户)
+		// 流拍回退 所有参与的专题商品的 西币到余额账户(竞拍账户)
 		Map<String, Integer> refundFlowMap = new HashMap<String, Integer>();
-		// 有人竞拍成功     所有非竞拍成功者 参与的专题商品的西币    回退到退回账户
+		// 有人竞拍成功 所有非竞拍成功者 参与的专题商品的西币 回退到退回账户
 		Map<String, Integer> refundNotFlowMap = new HashMap<String, Integer>();
 		// 竞拍成功者 扣减西币余额账户
 		Map<String, Integer> refundSuccessMap = new HashMap<String, Integer>();
@@ -59,6 +58,8 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 		Map<String, Map<String, Object>> auctionUserInfoMap = new HashMap<String, Map<String, Object>>();
 		// 封装某一竞拍商品下不同用户竞拍话费的西币
 		Map<String, Integer> recordItemMap = null;
+		// 竞拍成功的商品更新购车状态为待申请购车
+		List<Long> topicItemIds = new ArrayList<Long>();
 		for (RefundTopicDTO rt : refundTopicList) {
 			List<RefundTopicItemDTO> topicItemList = rt.getTopicItems();
 			if (CollectionUtils.isEmpty(topicItemList)) { // 该专题未关联商品
@@ -82,7 +83,7 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 				} else { // 该商品没有人出价，即没有用户需要回退处理
 					continue;
 				}
-				
+
 				recordItemMap = new HashMap<String, Integer>();
 
 				// 统计回退数据，并生成回退记录
@@ -99,7 +100,7 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 							refundFlowMap.put(userIdStr, countCurrency);
 						}
 						// 统计该商品下所有参与用户花费的西币值
-						if(recordItemMap.containsKey(userIdStr)){
+						if (recordItemMap.containsKey(userIdStr)) {
 							totalCurrency += recordItemMap.get(userIdStr);
 							recordItemMap.put(userIdStr, totalCurrency);
 						} else {
@@ -155,7 +156,7 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 							refundNotFlowMap.put(userIdStr, countCurrency);
 						}
 						// 统计该商品下所有参与用户花费的西币值
-						if(recordItemMap.containsKey(userIdStr)){
+						if (recordItemMap.containsKey(userIdStr)) {
 							totalCurrency += recordItemMap.get(userIdStr);
 							recordItemMap.put(userIdStr, totalCurrency);
 						} else {
@@ -186,6 +187,9 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 
 						insertRecords.add(insertRecord);
 					}
+					
+					topicItemIds.add(tiId);
+					
 				}
 
 			}

@@ -7,7 +7,7 @@ css=[]
 >
 
 <div class="box">
-<form class="jqtransform" method="post" id="auctionListForm" action="${domain}/item/list.htm">
+<form class="jqtransform" method="post" id="auctionListForm" action="${domain}/auctionManager/auctionList.htm">
 		<#-- 搜索表单模块 -->
 		<div id="search_bar" class="box mt10">
 			<div class="box_border">
@@ -19,25 +19,19 @@ css=[]
 					<tr>
 						<td>商品名称</td>
 						<td>
-				  			<input type="text" id="itemTitle" name="itemTitle" value="${itemDO.itemTitle}" class="input-text lh25" size="20">
+				  			<input type="text" id="itemTitle" name="itemTitle" value="${paramDto.itemTitle}" class="input-text lh25" size="20">
 						</td>
-						<td>商品状态</td>
+						<td>竞拍者手机号</td>
 						<td>
-				  			<select class="select" id="status" name="status" style="width:80px;">
-				  				<option value="">--全部--</option>
-				  				<option value='0'>未上架</option>
-				  				<option value='1'>已上架</option>
-				  				<option value='2'>已作废</option>
-				  			</select>
+							<input type="text" id="mobile" name="mobile" value="${paramDto.mobile}" class="input-text lh25" size="20">
 						</td>
 					</tr>
 					</table>
 				</div>
 				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
-				    	<input class="btn btn82 btn_search" onclick="$('#itemInfoForm').submit();" type="button" value="查询" name="button" />
+				    	<input class="ml10 btn btn82 btn_search" onclick="$('#auctionListForm').submit();" type="button" value="查询" name="button" />
 				    </a>
-				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addItemInfo" />
 				</div>
 			</div>
 		</div>
@@ -48,38 +42,49 @@ css=[]
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th style="width:3%">ID</th>
-			    		<th>商品名称</th>
-			    		<th>商品类型</th>
-			    		<th>商品状态</th>
-			    		<th>市场价</th>
+			    		<th style="width:200px">商品名称</th>
+			    		<th style="width:160px">竞拍周期</th>
+			    		<th>竞拍状态</th>
+			    		<th>参与人数</th>
+			    		<th>拍得者</th>
+			    		<th>当前/最终竞拍价</th>
+			    		<th>购车状态</th>
+			    		<th>备注</th>
 			    		<th>操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
 			    		<tr class="tr">
-			    			<td class="td_center">${obj.id}</td>
+			    			<td class="td_center">${obj.tiId}</td>
 			    			<td class="td_center">${obj.itemTitle}</td>
+			    			<td class="td_center">${obj.startTime?string('yyyy-MM-dd HH:mm:ss')}~</br>${obj.endTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 			    			<td class="td_center">
-			    				<#list itemTypes as itemType>
-									<#if itemType.code == obj.itemType>
-										<#if itemType.code == '02'>
-											<font color='#1ab3ff'>${itemType.desc}</font>
-										<#else>
-											${itemType.desc}
-										</#if>
-									</#if>
+			    				<#list topicProgress as tps>
+			    					<#if obj.status == tps.code>${tps.desc}</#if>
 			    				</#list>
 							</td>
-			    			<td class="td_center">
-								<#list itemStatus as status>
-									<#if status.code == obj.status>
-										${status.desc}
-									</#if>
-								</#list>	
+							<td>${((obj.countAuctionNum!0)==0)?string('--',obj.countAuctionNum)}</td>
+							<td>
+								<#if obj.status == '04'>${obj.mobile}<#else>--</#if>
 							</td>
-			    			<td class="td_center">${(obj.marketPrice!0)?string('#0.00')}</td>
+			    			<td class="td_center">${((obj.finalAuctionPrice!0)==0)?string('--',(obj.finalAuctionPrice!0)?string('#0.00'))}</td>
+			    			<td>
+			    				<#if obj.status == '04'>
+			    					<#if obj.purchaseStatus??>
+										<#list purchaseStatus as pst>
+											<#if obj.purchaseStatus == pst.code>${pst.desc}</#if>
+										</#list>
+									<#else>
+										${"待申请"}
+			    					</#if>
+								<#else>
+									--
+			    				</#if>
+							</td>
+			    			<td>${obj.remark}</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" style="color:blue;" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
+			    				<a href="javascript:void(0);" style="color:blue;" class="purchaseStatus" param="${obj.purchaseId}">[编辑购车状态]</a></br>
+			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.purchaseId}">[修改备注]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>

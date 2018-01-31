@@ -23,9 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.checc.dao.PurchaseApplyDAO;
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.PurchaseApplyDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
 import com.checc.enums.PurchaseStatusEnum;
+import com.checc.enums.TopicProgressEnum;
 import com.checc.service.AuctionRecordService;
 import com.checc.service.PurchaseApplyService;
+import com.checc.vo.PurchaseApplyVO;
 
 @Service(value = "purchaseApplyService")
 public class PurchaseApplyServiceImpl implements PurchaseApplyService {
@@ -149,6 +152,14 @@ public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 		}
 		return new Page<PurchaseApplyDO>();
 	}
+	
+	@Override
+	public int updatePurchaseStatusToNotApply(List<Long> topicItemIds) {
+		if(CollectionUtils.isEmpty(topicItemIds)){
+			
+		}
+		return 0;
+	}
 
 	@Override
 	@Transactional
@@ -198,5 +209,52 @@ public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 		}
 
 	}
+
+	@Override
+	public Page<PurchaseApplyVO> queryPageBackend(PurchaseExchangeStatusDTO dto, Integer pageNo, Integer pageSize) {
+		Page<PurchaseApplyVO> page = new Page<PurchaseApplyVO>();
+		dto.setStartPage(pageNo);
+		dto.setPageSize(pageSize);
+		Integer totalCount = purchaseApplyDAO.countAuctionBackend(dto);
+		if (null == totalCount || totalCount <= 0) {
+			return page;
+		}
+		List<PurchaseApplyVO> list = purchaseApplyDAO.queryPageBackend(dto);
+		for (PurchaseApplyVO vo : list) {
+			// Long topicItemId = vo.getTiId();
+			// Integer countAuctionNum = purchaseApplyDAO.countTotalAuction(topicItemId);
+			// vo.setCountAuctionNum(countAuctionNum);
+			// 获取专题状态
+			String status = "";
+			Date startTime = vo.getStartTime();
+			Date endTime = vo.getEndTime();
+			Date now = new Date();
+			if (endTime.before(now)) {
+				double floorPrice = vo.getFloorPrice();
+				Double finalAuctionPrice = vo.getFinalAuctionPrice();
+				if (null == finalAuctionPrice || finalAuctionPrice.doubleValue() < floorPrice) {
+					status = TopicProgressEnum.AUCTION_FLOW.code;
+				} else {
+					status = TopicProgressEnum.AUCTION_SUCCESS.code;
+				}
+			} else {
+				if (startTime.before(now)) {
+					status = TopicProgressEnum.InProgress.code;
+				} else {
+					status = TopicProgressEnum.NotStarted.code;
+				}
+			}
+			vo.setStatus(status);
+		}
+
+		page.setList(list);
+		page.setPageNo(pageNo);
+		page.setPageSize(pageSize);
+		page.setTotalCount(totalCount);
+
+		return page;
+	}
+	
+	
 
 }
