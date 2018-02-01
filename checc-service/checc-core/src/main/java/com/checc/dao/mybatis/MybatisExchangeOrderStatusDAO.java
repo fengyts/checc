@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.ExchangeOrderStatusDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.ExchangeOrderStatusDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.vo.ExchangeOrderVO;
 import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -66,6 +68,16 @@ public class MybatisExchangeOrderStatusDAO extends MybatisBaseDAO implements Exc
 	@Override
 	public ExchangeOrderStatusVO selectExchangeOrderDetails(Long recordId) {
 		return getSqlSession().selectOne(getStatement("select_order_status_detail"), recordId);
+	}
+
+	@Override
+	public Integer countExchange(PurchaseExchangeStatusDTO dto) {
+		return  getSqlSession().selectOne(getStatement("count_exchange"), dto);
+	}
+
+	@Override
+	public List<ExchangeOrderVO> selectExchangeListBackend(PurchaseExchangeStatusDTO dto) {
+		return  getSqlSession().selectList(getStatement("query_page_exchange"), dto);
 	}
 	
 	

@@ -1,6 +1,10 @@
 package com.checc.dao;
 
+import java.util.List;
+
 import com.checc.domain.ExchangeOrderStatusDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.vo.ExchangeOrderVO;
 import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.service.common.GeneralDAO;
@@ -21,6 +25,18 @@ public interface ExchangeOrderStatusDAO extends GeneralDAO<ExchangeOrderStatusDO
 	 * @return
 	 */
 	public ExchangeOrderStatusVO selectExchangeOrderDetails(Long recordId);
+	
+	Integer countExchange(PurchaseExchangeStatusDTO dto);
+	
+	/**
+	 * <pre>
+	 * 后台兑换管理分页查询列表
+	 * </pre>
+	 *
+	 * @param dto
+	 * @return
+	 */
+	List<ExchangeOrderVO> selectExchangeListBackend(PurchaseExchangeStatusDTO dto);
 	
 	
 }

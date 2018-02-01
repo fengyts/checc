@@ -15,6 +15,8 @@ import com.checc.service.AuctionRecordService;
 import com.checc.service.CheccUserService;
 import com.checc.service.RefundCurrencyService;
 
+import ng.bayue.exception.CommonDAOException;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/spring-context-checcshare.xml" })
 public class TestDao {
@@ -29,7 +31,7 @@ public class TestDao {
 	private PurchaseApplyDAO purchaseDao;
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		List<Long> ids = new ArrayList<Long>();
 		ids.add(12L);
 		ids.add(13L);

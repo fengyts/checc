@@ -218,6 +218,9 @@ public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 	@Override
 	public Page<PurchaseApplyVO> queryPageBackend(PurchaseExchangeStatusDTO dto, Integer pageNo, Integer pageSize) {
 		Page<PurchaseApplyVO> page = new Page<PurchaseApplyVO>();
+		page.setPageNo(pageNo);
+		page.setPageSize(pageSize);
+		
 		dto.setStartPage(pageNo);
 		dto.setPageSize(pageSize);
 		Integer totalCount = purchaseApplyDAO.countAuctionBackend(dto);
@@ -253,8 +256,6 @@ public class PurchaseApplyServiceImpl implements PurchaseApplyService {
 		}
 
 		page.setList(list);
-		page.setPageNo(pageNo);
-		page.setPageSize(pageSize);
 		page.setTotalCount(totalCount);
 
 		return page;

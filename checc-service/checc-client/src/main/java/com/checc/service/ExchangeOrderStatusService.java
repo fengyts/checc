@@ -1,8 +1,11 @@
 package com.checc.service;
 
+import ng.bayue.common.Page;
 import ng.bayue.service.common.GeneralService;
 
 import com.checc.domain.ExchangeOrderStatusDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.vo.ExchangeOrderVO;
 import com.checc.vo.front.ExchangeOrderStatusVO;
 
  /**
@@ -20,5 +23,14 @@ public interface ExchangeOrderStatusService extends GeneralService<ExchangeOrder
 	 * @return
 	 */
 	public ExchangeOrderStatusVO selectExchangeOrderDetails(Long recordId);
+	
+	/**
+	 * <pre>
+	 * 后台兑换管理分页查询
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public Page<ExchangeOrderVO> queryPageExchangeBackend(PurchaseExchangeStatusDTO dto, Integer pageNo, Integer pageSize);
 	
 }

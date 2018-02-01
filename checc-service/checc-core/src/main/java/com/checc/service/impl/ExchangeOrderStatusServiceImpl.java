@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.checc.dao.ExchangeOrderStatusDAO;
 import com.checc.domain.ExchangeOrderStatusDO;
+import com.checc.dto.PurchaseExchangeStatusDTO;
 import com.checc.service.ExchangeOrderStatusService;
+import com.checc.vo.ExchangeOrderVO;
 import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -133,6 +135,23 @@ public class ExchangeOrderStatusServiceImpl  implements ExchangeOrderStatusServi
 			return null;
 		}
 		return exchangeOrderStatusDAO.selectExchangeOrderDetails(recordId);
+	}
+
+	@Override
+	public Page<ExchangeOrderVO> queryPageExchangeBackend(PurchaseExchangeStatusDTO dto, Integer pageNo, Integer pageSize) {
+		Page<ExchangeOrderVO> page = new Page<ExchangeOrderVO>();
+		page.setPageNo(pageNo);
+		page.setPageSize(pageSize);
+		
+		dto.setStartPage(pageNo);
+		dto.setPageSize(pageSize);
+		Integer totalCount = exchangeOrderStatusDAO.countExchange(dto);
+		if(null == totalCount || totalCount.intValue() <= 0){
+			return page;
+		}
+		List<ExchangeOrderVO> list = exchangeOrderStatusDAO.selectExchangeListBackend(dto);
+		
+		return page;
 	}
 	
 	

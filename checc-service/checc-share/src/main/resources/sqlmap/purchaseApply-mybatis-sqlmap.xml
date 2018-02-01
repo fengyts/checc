@@ -144,6 +144,9 @@
 		<where>
 			<if test="mobile !=null and mobile != '' ">AND art.mobile = #{mobile}</if>
 			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
+			<if test="purchaseApplyStatus !=null and purchaseApplyStatus != '' ">
+				AND pa.purchase_status = #{purchaseApplyStatus} AND tp.end_time &lt; NOW() AND ti.floor_price &lt;= art.current_auct_price 
+			</if>
 		</where>
  	</select>
  	
@@ -151,7 +154,7 @@
  		SELECT 
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.floor_price floorPrice,
-			pa.purchase_status purchaseStatus, pa.apply_time applyTime, pa.remark remark,
+			pa.id purchaseId, pa.purchase_status purchaseStatus, pa.apply_time applyTime, pa.remark remark,
 			art.user_id userId, art.mobile mobile, art.current_auct_price finalAuctionPrice,
 			(
 				SELECT COUNT(DISTINCT ar.user_id)
@@ -176,8 +179,11 @@
 		<where>
 			<if test="mobile !=null and mobile != '' ">AND art.mobile = #{mobile}</if>
 			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
+			<if test="purchaseApplyStatus !=null and purchaseApplyStatus != '' ">
+				AND pa.purchase_status = #{purchaseApplyStatus} AND tp.end_time &lt; NOW() AND ti.floor_price &lt;= art.current_auct_price 
+			</if>
 		</where>
-		ORDER BY ti.id DESC
+		ORDER BY pa.id DESC
 		LIMIT #{start},#{pageSize}
  	</select>
  	

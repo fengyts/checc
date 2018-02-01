@@ -39,6 +39,8 @@ public class ExchangeOrderVO extends BaseVO {
 	private Long exchangeOrderId;
 	/** 发货状态 */
 	private String shipmentsStatus;
+	/** 发货时间 */
+	private Date shipmentsTime;
 	/** 发货备注 */
 	private String remark;
 
@@ -168,6 +170,14 @@ public class ExchangeOrderVO extends BaseVO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Date getShipmentsTime() {
+		return shipmentsTime;
+	}
+
+	public void setShipmentsTime(Date shipmentsTime) {
+		this.shipmentsTime = shipmentsTime;
 	}
 
 }

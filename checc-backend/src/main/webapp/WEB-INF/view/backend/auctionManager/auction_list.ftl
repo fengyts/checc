@@ -1,7 +1,7 @@
 <#include "/common/common.ftl" />
 <@backend title="竞拍管理列表"
 js=[
-'/statics/backend/auctionManager/auction.js'
+'/statics/backend/auctionManager/auctionManager.js'
 ]
 css=[]
 >
@@ -17,13 +17,22 @@ css=[]
 				<div class="box_center pt10 pb10">
 					<table class="form_table" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td>商品名称</td>
+						<td>商品名称:</td>
 						<td>
 				  			<input type="text" id="itemTitle" name="itemTitle" value="${paramDto.itemTitle}" class="input-text lh25" size="20">
 						</td>
-						<td>竞拍者手机号</td>
+						<td>竞拍者手机号:</td>
 						<td>
 							<input type="text" id="mobile" name="mobile" value="${paramDto.mobile}" class="input-text lh25" size="20">
+						</td>
+						<td>购车状态</td>
+						<td>
+							<select class="select" id="purchaseApplyStatus" name="purchaseApplyStatus">
+								<option value="">--全部--</option>
+								<#list purchaseStatus as pst>
+									<option value="${pst.code}" <#if paramDto.purchaseApplyStatus == pst.code>selected</#if>>${pst.desc}</option>
+								</#list>
+							</select>
 						</td>
 					</tr>
 					</table>
@@ -39,7 +48,7 @@ css=[]
 		<#-- 数据显示块 -->
 		<div id="table" class="mt10">
 			<div class="box span10 oh">
-			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
+			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList" style="table-layout:fixed;">
 			    	<tr>
 			    		<th style="width:3%">ID</th>
 			    		<th style="width:200px">商品名称</th>
@@ -81,9 +90,17 @@ css=[]
 									--
 			    				</#if>
 							</td>
-			    			<td>${obj.remark}</td>
+			    			<td title="${obj.remark}" style="text-overflow:ellipsis;-moz-text-overflow:ellipsis;overflow:hidden;white-space:nowrap;text-align:left">
+								${obj.remark}
+							</td>
 			    			<td class="td_center">
-			    				<a href="javascript:void(0);" style="color:blue;" class="purchaseStatus" param="${obj.purchaseId}">[编辑购车状态]</a></br>
+			    				<#if obj.status == '04'>
+			    					<#if obj.purchaseStatus == '02'>
+			    						<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="03">[设置为已购车]</a></br>
+			    					<#elseif obj.purchaseStatus == '03'>
+			    						<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="04">[放弃购车]</a></br>
+			    					</#if>
+			    				</#if>
 			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.purchaseId}">[修改备注]</a>
 			    			</td>
 			    		</tr>
@@ -103,5 +120,9 @@ css=[]
 </form>
 </div>
 
-
+<div id="editRemarkBox" style="display:none;text-align:center;" class="pt15">
+	<input type="hidden" id="purchaseId" value="">
+	<textarea id="remark" name="remark" cols="50" rows="8" style="width:95%"></textarea>
+	<input type="button" value="保存" id="saveRemarkBtn" class="layui-btn layui-btn-normal mt15">
+</div>
 </@backend>
