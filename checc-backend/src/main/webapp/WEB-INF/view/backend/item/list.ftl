@@ -36,7 +36,7 @@ css=[
 				</div>
 				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
-				    	<input class="btn btn82 btn_search" onclick="$('#itemInfoForm').submit();" type="button" value="查询" name="button" />
+				    	<input class="ml10 btn btn82 btn_search" onclick="$('#itemInfoForm').submit();" type="button" value="查询" name="button" />
 				    </a>
 				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addItemInfo" />
 				</div>
@@ -49,11 +49,11 @@ css=[
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th style="width:3%">ID</th>
-			    		<th>商品名称</th>
+			    		<th style="width:230px;">商品名称</th>
 			    		<th>商品类型</th>
 			    		<th>商品状态</th>
 			    		<th>市场价</th>
-			    		<th>操作</th>
+			    		<th style="width:100px;">操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>

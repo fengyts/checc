@@ -33,7 +33,7 @@ public class ExchangeOrderVO extends BaseVO {
 	/** 兑换时间 */
 	private Date auctTime;
 	/** 兑换人手机号 */
-	private String moible;
+	private String mobile;
 
 	/** 兑换订单id */
 	private Long exchangeOrderId;
@@ -140,12 +140,12 @@ public class ExchangeOrderVO extends BaseVO {
 		this.auctTime = auctTime;
 	}
 
-	public String getMoible() {
-		return moible;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setMoible(String moible) {
-		this.moible = moible;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public String getShipmentsStatus() {

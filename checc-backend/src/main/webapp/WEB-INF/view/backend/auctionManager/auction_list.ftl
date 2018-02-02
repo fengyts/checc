@@ -90,18 +90,20 @@ css=[]
 									--
 			    				</#if>
 							</td>
-			    			<td title="${obj.remark}" style="text-overflow:ellipsis;-moz-text-overflow:ellipsis;overflow:hidden;white-space:nowrap;text-align:left">
+			    			<td title="${obj.remark}" style="text-overflow:ellipsis;-moz-text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
 								${obj.remark}
 							</td>
 			    			<td class="td_center">
 			    				<#if obj.status == '04'>
-			    					<#if obj.purchaseStatus == '02'>
-			    						<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="03">[设置为已购车]</a></br>
-			    					<#elseif obj.purchaseStatus == '03'>
-			    						<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="04">[放弃购车]</a></br>
-			    					</#if>
+									<#if obj.purchaseStatus??>
+				    					<#if obj.purchaseStatus == '02'>
+				    						<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="03">[设置为已购车]</a></br>
+										</#if>
+									<#else>
+										<a href="javascript:void(0);" style="color:blue;" class="viewPurchaseStatus" param="${obj.purchaseId}" pstatus="04">[设置为放弃购车]</a></br>
+									</#if>
 			    				</#if>
-			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.purchaseId}">[修改备注]</a>
+			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.purchaseId}" type="01">[修改备注]</a>
 			    			</td>
 			    		</tr>
 			    	</#list>
@@ -123,6 +125,6 @@ css=[]
 <div id="editRemarkBox" style="display:none;text-align:center;" class="pt15">
 	<input type="hidden" id="purchaseId" value="">
 	<textarea id="remark" name="remark" cols="50" rows="8" style="width:95%"></textarea>
-	<input type="button" value="保存" id="saveRemarkBtn" class="layui-btn layui-btn-normal mt15">
+	<a id="saveRemarkBtn" class="layui-btn layui-btn-normal mt15" type="01">保存</a>
 </div>
 </@backend>

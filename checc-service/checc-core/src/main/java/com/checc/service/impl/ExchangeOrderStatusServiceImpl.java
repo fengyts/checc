@@ -151,6 +151,8 @@ public class ExchangeOrderStatusServiceImpl  implements ExchangeOrderStatusServi
 		}
 		List<ExchangeOrderVO> list = exchangeOrderStatusDAO.selectExchangeListBackend(dto);
 		
+		page.setList(list);
+		page.setTotalCount(totalCount);
 		return page;
 	}
 	

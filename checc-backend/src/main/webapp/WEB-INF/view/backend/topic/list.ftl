@@ -40,7 +40,7 @@ css=[]
 				</div>
 				<div class="box_bottom pb5 pt5 pr10 search_bar_btn" style="padding-left:5px;border-top:1px solid #dadada;">
 				    <a href="javascript:void(0);">
-				    	<input class="btn btn82 btn_search" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
+				    	<input class="ml10 btn btn82 btn_search" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
 				    </a>
 				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addTopic" />
 				</div>
@@ -55,9 +55,10 @@ css=[]
 			    		<th width="5%">ID</th>
 			    		<th>专题类型</th>
 			    		<th>专题状态</th>
-			    		<th>开始时间</th>
-			    		<th>结束时间</th>
-			    		<th>操作</th>
+			    		<th style="width:160px;">开始时间</th>
+			    		<th style="width:160px;">结束时间</th>
+			    		<th>备注</th>
+			    		<th style="width:160px;">操作</th>
 			    	</tr>
 			    	<#if page.list?default([])?size!=0>
 			    	<#list page.list as obj>
@@ -79,6 +80,7 @@ css=[]
 							</td>
 							<td class="td_center">${obj.startTime?datetime}</td>
 							<td class="td_center">${obj.endTime?datetime}</td>
+							<td>${obj.remark}</td>
 			    			<td class="td_center">
 		    					<a href="javascript:void(0);" class="editcatabtn editBtn" param="${obj.id}">[编辑]</a>
 			    				<a href="javascript:void(0);" class="editcatabtn associateItemBtn" param="${obj.id}" param1="${obj.name}" param2="${obj.topicType}">[查看关联商品]</a>

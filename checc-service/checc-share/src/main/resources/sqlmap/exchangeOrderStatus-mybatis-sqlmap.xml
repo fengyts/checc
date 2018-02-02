@@ -131,7 +131,7 @@
 		<where>
 			<if test="mobile !=null and mobile != '' ">AND ar.mobile = #{mobile}</if>
 			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
-			<if test="exchangeOrderStatus !=null and exchangeOrderStatus != '' ">AND eos.shipments_status = #{exchangeOrderStatus}</if>
+			<if test="shipmentsStatus !=null and shipmentsStatus != '' ">AND eos.shipments_status = #{shipmentsStatus}</if>
 		</where>
  	</select>
  	
@@ -148,7 +148,7 @@
 		<where>
 			<if test="mobile !=null and mobile != '' ">AND ar.mobile = #{mobile}</if>
 			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>
-			<if test="exchangeOrderStatus !=null and exchangeOrderStatus != '' ">AND eos.shipments_status = #{exchangeOrderStatus}</if>
+			<if test="shipmentsStatus !=null and shipmentsStatus != '' ">AND eos.shipments_status = #{shipmentsStatus}</if>
 		</where>
 		ORDER BY eos.id DESC
 		LIMIT #{start},#{pageSize}

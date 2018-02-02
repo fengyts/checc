@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.checc.domain.ExchangeOrderStatusDO;
 import com.checc.domain.PurchaseApplyDO;
 import com.checc.dto.PurchaseExchangeStatusDTO;
 import com.checc.service.ExchangeOrderStatusService;
@@ -59,8 +60,27 @@ public class AuctionManagerAO {
 		return pageResult;
 	}
 
-	public ResultMessage saveShipmentsInfo(String type, Long purchaseId, String remark, String purchaseStatus) {
+	public ResultMessage saveShipmentsInfo(String type, Long exchangeOrderId, String remark, String shipmentsStatus) {
+		// type: 操作类型：01-修改备注；02-修改发货状态
+		if ("01".equals(type)) {
+			if (StringUtils.isBlank(remark)) {
+				return ResultMessage.validParameterNull("备注信息不能为空");
+			}
+		} else {
+			if (StringUtils.isBlank(shipmentsStatus)) {
+				return ResultMessage.validParameterNull("发货状态不能为空");
+			}
+		}
 		
+		ExchangeOrderStatusDO eosDO = new ExchangeOrderStatusDO();
+		eosDO.setId(exchangeOrderId);
+		eosDO.setRemark(remark);
+		eosDO.setShipmentsStatus(shipmentsStatus);
+		eosDO.setShipmentsTime(new Date());
+		eosDO.setModifyUserId(UserHandler.getUser().getId());
+		
+		exchangeOrderStatusService.update(eosDO, false);
+
 		return ResultMessage.success();
 	}
 

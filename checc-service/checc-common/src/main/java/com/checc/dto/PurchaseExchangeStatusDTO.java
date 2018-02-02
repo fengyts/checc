@@ -9,7 +9,7 @@ public class PurchaseExchangeStatusDTO extends BaseDO {
 	private String itemTitle;
 	private String mobile;
 	private String purchaseApplyStatus;
-	private String exchangeOrderStatus;
+	private String shipmentsStatus;
 
 	public String getItemTitle() {
 		return itemTitle;
@@ -35,12 +35,12 @@ public class PurchaseExchangeStatusDTO extends BaseDO {
 		this.purchaseApplyStatus = purchaseApplyStatus;
 	}
 
-	public String getExchangeOrderStatus() {
-		return exchangeOrderStatus;
+	public String getShipmentsStatus() {
+		return shipmentsStatus;
 	}
 
-	public void setExchangeOrderStatus(String exchangeOrderStatus) {
-		this.exchangeOrderStatus = exchangeOrderStatus;
+	public void setShipmentsStatus(String shipmentsStatus) {
+		this.shipmentsStatus = shipmentsStatus;
 	}
 
 }

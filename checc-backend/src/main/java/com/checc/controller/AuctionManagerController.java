@@ -61,7 +61,7 @@ public class AuctionManagerController {
 		Page<ExchangeOrderVO> page = auctionManagerAO.queryExchangePageList(dto, pageNo, pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("paramDto", dto);
-		model.addAttribute("exchangeOrderStatus", ShipmentsStatusEnum.values());
+		model.addAttribute("shipmentsOrderStatus", ShipmentsStatusEnum.values());
 		if (CollectionUtils.isEmpty(page.getList())) {
 			model.addAttribute("noRecoders", "暂无数据");
 		}
@@ -70,12 +70,12 @@ public class AuctionManagerController {
 	
 	@RequestMapping("/saveShipmentsInfo")
 	@ResponseBody
-	public ResultMessage saveShipmentsInfo(String type, Long exchangeOrderId, String remark, String purchaseStatus) {
+	public ResultMessage saveShipmentsInfo(String type, Long exchangeOrderId, String remark, String shipmentsStatus) {
 		if (StringUtils.isBlank(type) || null == exchangeOrderId) {
 			return ResultMessage.failure(Messages.ParameterError);
 		}
 
-		return auctionManagerAO.saveShipmentsInfo(type, exchangeOrderId, remark, purchaseStatus);
+		return auctionManagerAO.saveShipmentsInfo(type, exchangeOrderId, remark, shipmentsStatus);
 	}
 
 }
