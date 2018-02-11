@@ -85,6 +85,10 @@ $(function() {
 		var _discount = $("#discount").val();
 		if(_discount == 2 || _discount == '2'){
 			_discount = $("#discountCustom").val();
+			if(undefined == _discount || null == _discount || '' == _discount){
+				layer.msg("请输入合法的折扣值", {time: 1500});
+				return;
+			}
 		}
 		$.post('update.htm', {"id":$("#id").val(),"depositAmount":_depositAmt,"discount": _discount}, function(res){
 			if(res.result == 1){
