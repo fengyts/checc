@@ -1,6 +1,6 @@
 <#include "/common/common.ftl"/>
 
-<@backend title="虚拟账号列表"
+<@backend title="充值配置列表"
 js=[
 '/statics/backend/strategy/depositConfig.js'
 ]
