@@ -183,7 +183,7 @@ function auctionAction() {
 				});
 				countDownTime(_tic);
 			} else {
-				layer.msg('出价成功', {time: 1500}, function(){
+				layer.msg('您已成功出价该商品! 当前处于领先状态', {time: 1500}, function(){
 					$("#act_bid_btn").attr('dclick', '1');
 					window.parent.location.reload();
 					window.parent.layer.close(parent.lgn_pg_ii);

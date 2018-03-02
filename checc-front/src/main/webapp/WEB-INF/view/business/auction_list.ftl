@@ -57,8 +57,8 @@
 						    <th>出价人</th>
 						    <th>出价次数(次)</th>
 						    <th>出价西币(个)</th>
+						    <th>当前/最终状态</th>
 						    <th>当前/最终竞拍价(￥)</th>
-						    <th>当前/最终出价次数最多</th>
 						</tr> 
 					</thead>
 					<tbody>
@@ -69,7 +69,6 @@
 					  				<td>${auct.bidder}</td>
 					  				<td>${auct.bidNum}</td>
 					  				<td>${auct.totalCurrency}</td>
-					  				<td>${auct.currenctAuctPrice?string('#0.00')}</td>
 					  				<td>
 										<#if auct.isAhead == 'true'>
 											<font style="color:red;">领先</font>
@@ -77,6 +76,7 @@
 											出局
 										</#if>
 									</td>
+					  				<td>${auct.currenctAuctPrice?string('#0.00')}</td>
 					  			</tr>
 					  		</#list>
 						<#else>
