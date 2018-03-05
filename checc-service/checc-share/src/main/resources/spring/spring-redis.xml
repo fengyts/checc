@@ -20,6 +20,9 @@
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
 		<constructor-arg index="0" ref="jedisPoolConfig" />
 		<constructor-arg index="1" name="host" value="${redis.host}"/>
+		<constructor-arg index="2" name="port" value="${redis.port}"/>
+		<constructor-arg index="3" name="timeout" value="${redis.timeout}"/>
+		<constructor-arg index="4" name="auth" value="${redis.auth}"/>
 	</bean>
 
 	<bean id="redisCacheService" class="ng.bayue.service.impl.RedisCacheServiceImpl">
@@ -34,6 +37,7 @@
 		<constructor-arg name="port" value="#{share['redis.cache.01.port']}" type="int" /><!-- 端口 -->
 		<constructor-arg name="timeout" value="#{share['redis.cache.01.timeout']}" type="int" /><!-- 超时时间设置 默认2000 -->
 		<constructor-arg name="weight" value="#{share['redis.cache.01.weight']}" type="int" /><!-- 权重 默认为1-->
+		<property name="password" value="#{share['redis.auth']}" />
 	</bean>
 	<bean id="cacheShardJedisPool" class="ng.bayue.redis.CacheShardedJedisPool"
 		destroy-method="destroy">
