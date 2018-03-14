@@ -18,7 +18,7 @@ public class TestRedis {
 	
 	@Test
 	public void test(){
-//		redisCacheService.setRedisCache("test1", "test123Shar", 60);
+		redisCacheService.setRedisCache("test1", "test123Shar", 60);
 		String str = (String) redisCacheService.getRedisCache("test1");
 		System.out.println(str);
 	}
