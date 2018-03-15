@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.checc.domain.AuctionRecordDO;
 import com.checc.domain.TopicDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.dto.refund.RefundTopicDTO;
 import com.checc.dto.refund.RefundTopicItemDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
@@ -81,7 +82,9 @@ public class RefundCurrencyServiceImpl implements RefundCurrencyService {
 					AuctionRecordDO finalAuctionRecord = recordList.get(0);
 					if (floorPrice <= finalAuctionRecord.getCurrentAuctPrice().doubleValue()) {
 						isFlowAuction = false;
-						auctSuccessUserId = finalAuctionRecord.getUserId();
+//						auctSuccessUserId = finalAuctionRecord.getUserId();
+						LeadEdgeDTO leadEdgeDto = auctionRecordService.selectLeadEdge(tiId);
+						auctSuccessUserId = leadEdgeDto.getUserId();
 					}
 				} else { // 该商品没有人出价，即没有用户需要回退处理
 					continue;

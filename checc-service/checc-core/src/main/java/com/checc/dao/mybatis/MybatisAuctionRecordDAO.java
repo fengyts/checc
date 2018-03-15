@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.dao.base.MybatisBaseDAO;
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -92,6 +93,11 @@ public class MybatisAuctionRecordDAO extends MybatisBaseDAO implements AuctionRe
 	@Override
 	public List<RefundTopicDTO> selectRefundTopicRecords() {
 		return getSqlSession().selectList(getStatement("select_refund_topic_records"));
+	}
+
+	@Override
+	public LeadEdgeDTO selectLeadEdgeInfo(Long topicItemId) {
+		return getSqlSession().selectOne(getStatement("select_leadEdge_info"), topicItemId);
 	}
 	
 	

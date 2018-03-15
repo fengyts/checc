@@ -16,6 +16,7 @@
         <result column="refund_num" property="refundNum"/>
         <result column="total_currency" property="totalCurrency"/>
         <result column="current_auct_price" property="currentAuctPrice"/>
+        <result column="current_auct_count" property="currentAuctCount"/>
         <result column="deposit_id" property="depositId"/>
         <result column="card_no" property="cardNo"/>
         <result column="deposit_amount" property="depositAmount"/>
@@ -25,7 +26,7 @@
 	</resultMap>
 
 	<sql id="MybatisAuctionRecordDAO_all_column_fields">
-	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,refund_num,total_currency,current_auct_price,deposit_id,card_no,deposit_amount,discount_id,discount,create_time
+	      id,topic_item_id,record_type,deposit_type,user_id,nickname,mobile,bid_num,exchange_count,refund_num,total_currency,current_auct_price,current_auct_count,deposit_id,card_no,deposit_amount,discount_id,discount,create_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisAuctionRecordDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
@@ -41,6 +42,7 @@
 			<if test="refundNum != null "> AND refund_num=#{refundNum} </if>
 			<if test="totalCurrency != null "> AND total_currency=#{totalCurrency} </if>
 			<if test="currentAuctPrice != null "> AND current_auct_price=#{currentAuctPrice} </if>
+			<if test="currentAuctCount != null "> AND current_auct_count=#{currentAuctCount} </if>
 			<if test="depositId != null "> AND deposit_id=#{depositId} </if>
 			<if test="cardNo != null  and cardNo != '' "> AND card_no=#{cardNo} </if>
 			<if test="depositAmount != null "> AND deposit_amount=#{depositAmount} </if>
@@ -50,12 +52,12 @@
  	</sql>
 
 	<select id="MybatisAuctionRecordDAO_selectById" parameterType="long" resultMap="AuctionRecordDOResultMap">
-	SELECT
-		<include refid="MybatisAuctionRecordDAO_all_column_fields" />
-	FROM
-		auction_record
-	WHERE
-		 id = #{id}
+		SELECT
+			<include refid="MybatisAuctionRecordDAO_all_column_fields" />
+		FROM
+			auction_record
+		WHERE
+			 id = #{id}
 	</select>
 
     <insert id="MybatisAuctionRecordDAO_insert" parameterType="com.checc.domain.AuctionRecordDO" useGeneratedKeys="true">
@@ -75,6 +77,7 @@
 				refund_num,
 				total_currency,
 				current_auct_price,
+				current_auct_count,
 				deposit_id,
 				card_no,
 				deposit_amount,
@@ -94,6 +97,7 @@
 				#{refundNum},
 				#{totalCurrency},
 				#{currentAuctPrice},
+				#{currentAuctCount},
 				#{depositId},
 				#{cardNo},
 				#{depositAmount},
@@ -117,6 +121,7 @@
 					refund_num = #{refundNum},
 					total_currency = #{totalCurrency},
 					current_auct_price = #{currentAuctPrice},
+					current_auct_count = #{currentAuctCount},
 					deposit_id = #{depositId},
 					card_no = #{cardNo},
 					deposit_amount = #{depositAmount},
@@ -144,6 +149,7 @@
 					<if test="refundNum != null ">refund_num=#{refundNum},</if>
 					<if test="totalCurrency != null ">total_currency=#{totalCurrency},</if>
 					<if test="currentAuctPrice != null ">current_auct_price=#{currentAuctPrice},</if>
+					<if test="currentAuctCount != null ">current_auct_count=#{currentAuctCount},</if>
 					<if test="depositId != null ">deposit_id=#{depositId},</if>
 					<if test="cardNo != null  and cardNo != '' ">card_no=#{cardNo},</if>
 					<if test="depositAmount != null ">deposit_amount=#{depositAmount},</if>
@@ -175,9 +181,10 @@
 		 FROM
 		 	auction_record
 	 	<include refid="MybatisAuctionRecordDAO_dynamic_where_fields" />
-	 	ORDER BY id DESC
+	 	ORDER BY auction_record.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
 
 	<!-- 以下为自定义方法 -->
  	<select id="MybatisAuctionRecordDAO_select_latest" parameterType="long" resultMap="AuctionRecordDOResultMap">
@@ -313,5 +320,43 @@
 		ORDER BY ar.id DESC
  	</select>
  	
-
+ 	<select id="MybatisAuctionRecordDAO_select_leadEdge_info" parameterType="long" resultType="com.checc.dto.LeadEdgeDTO">
+		<!-- SELECT 
+			SUM(ar.current_auct_count) currentAuctTotalCount, ar.user_id userId, ar.mobile mobile, 
+			o1.current_auct_price currentAuctPrice, o1.create_time currentAuctTime
+		FROM auction_record ar
+		LEFT JOIN
+		(
+			SELECT ars.current_auct_price, ars.create_time, ars.topic_item_id tiId
+			FROM auction_record ars
+			WHERE ars.record_type = '01'
+			ORDER BY ars.id DESC
+			LIMIT 1
+		) o1 ON o1.tiId = #{topicItemId}
+		WHERE 
+			ar.record_type = '01' AND ar.topic_item_id = #{topicItemId}
+		GROUP BY ar.user_id
+		ORDER BY currentAuctTotalCount DESC, ar.id DESC
+		LIMIT 1 -->
+		
+		SELECT 
+			SUM(ar.current_auct_count) currentAuctTotalCount, ar.user_id userId, ar.mobile mobile, 
+			o1.current_auct_price currentAuctPrice, o1.create_time currentAuctTime
+		FROM auction_record ar
+		LEFT JOIN
+		(
+			SELECT ars.current_auct_price, ars.create_time, ars.topic_item_id tiId
+			FROM auction_record ars
+			WHERE ars.record_type = '01' AND ars.topic_item_id = #{topicItemId}
+			ORDER BY ars.id DESC
+			LIMIT 1
+		) o1 ON o1.tiId = #{topicItemId}
+		WHERE 
+			ar.record_type = '01' AND ar.topic_item_id = #{topicItemId}
+		GROUP BY ar.user_id,ar.mobile,ar.id,currentAuctPrice,currentAuctTime
+		ORDER BY currentAuctTotalCount DESC, ar.id DESC
+		LIMIT 1
+ 	</select>
+ 	
+ 	
 </mapper>

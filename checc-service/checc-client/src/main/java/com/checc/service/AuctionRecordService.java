@@ -3,6 +3,7 @@ package com.checc.service;
 import java.util.List;
 
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.common.Page;
@@ -80,5 +81,15 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 * @return
 	 */
 	List<RefundTopicDTO> selectRefundTopicRecords();
+	
+	/**
+	 * <pre>
+	 * 获取专题商品领先者数据
+	 * </pre>
+	 *
+	 * @param topicItemId
+	 * @return
+	 */
+	LeadEdgeDTO selectLeadEdge(Long topicItemId);
 
 }

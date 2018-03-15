@@ -40,8 +40,8 @@ public class WechatPayCallbackController {
 	// private static final String ERROR_VIEW_PATH =
 	// "/business/deposit/dept_act_err";
 
-	@Autowired
-	private PayOrderAO payOrderAO;
+//	@Autowired
+//	private PayOrderAO payOrderAO;
 	@Autowired
 	private WechatPayAO wechatPayAO;
 

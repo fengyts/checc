@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.dto.refund.RefundTopicDTO;
 
 import ng.bayue.exception.CommonDAOException;
@@ -68,5 +69,14 @@ public interface AuctionRecordDAO extends GeneralDAO<AuctionRecordDO> {
 	 * @return
 	 */
 	List<RefundTopicDTO> selectRefundTopicRecords();
+	
+	/**
+	 * <pre>
+	 * 获取商品领先者的信息
+	 * </pre>
+	 *
+	 * @return
+	 */
+	LeadEdgeDTO selectLeadEdgeInfo(Long topicItemId);
 	
 }

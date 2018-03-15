@@ -22,7 +22,7 @@ import com.checc.enums.CheccNoticeTypeEnum;
 import com.checc.vo.front.TopicItemVO;
 
 @Controller
-@RequestMapping({ "/" })
+//@RequestMapping({ "/" })
 public class IndexController {
 
 	@Autowired

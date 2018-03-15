@@ -14,6 +14,7 @@ import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
 import com.checc.dto.AuctionActionDTO;
 import com.checc.dto.AuctionListDTO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionActionService;
 import com.checc.service.AuctionRecordService;
@@ -220,7 +221,10 @@ public class AuctionAO {
 		AuctionListVO vo = new AuctionListVO();
 		vo.setIsOnlyMe(isOnlyMe);
 		vo.setTpId(tpId);
-		vo.setItemTitle(topicItemService.selectById(tpId).getItemTitle());
+		TopicItemDO tiDO = topicItemService.selectById(tpId);
+		if(null != tiDO){
+			vo.setItemTitle(tiDO.getItemTitle());
+		}
 
 		if (CollectionUtils.isEmpty(listDb)) {
 			model.addAttribute("auctlVO", vo);
@@ -232,7 +236,9 @@ public class AuctionAO {
 			return;
 		}
 
-		AuctionRecordDO ard = auctionRecordService.selectLatestAuction(tpId); // 获取领先者
+		// 获取领先者
+//		AuctionRecordDO ard = auctionRecordService.selectLatestAuction(tpId); 
+//		LeadEdgeDTO leadEdgeDto = auctionRecordService.selectLeadEdge(tpId);
 		List<ListTableVO> tableList = new ArrayList<ListTableVO>();
 		for (AuctionRecordDO aucr : listDb) {
 			ListTableVO tvo = vo.new ListTableVO();
@@ -242,7 +248,8 @@ public class AuctionAO {
 			tvo.setCurrenctAuctPrice(aucr.getCurrentAuctPrice().doubleValue());
 			tvo.setTotalCurrency(aucr.getTotalCurrency());
 
-			tvo.setIsAhead(aucr.getId().longValue() == ard.getId().longValue()); // 是否领先者
+//			tvo.setIsAhead(aucr.getId().longValue() == ard.getId().longValue()); // 是否领先者
+			tvo.setCurrentAuctCount(aucr.getCurrentAuctCount());
 			tableList.add(tvo);
 		}
 		vo.setAuctionList(tableList);

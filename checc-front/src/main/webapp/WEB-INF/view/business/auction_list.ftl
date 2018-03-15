@@ -64,19 +64,23 @@
 					<tbody>
 					  	<#if auctlVO.auctionList?default([])?size!=0>
 					  		<#list auctlVO.auctionList as auct>
-					  			<tr <#if auct.isAhead == 'true'>style="color:red;"</#if>>
+					  			<tr>
 					  				<td>${auct.bidTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 					  				<td>${auct.bidder}</td>
 					  				<td>${auct.bidNum}</td>
 					  				<td>${auct.totalCurrency}</td>
+					  				<td>${auct.currenctAuctPrice?string('#0.00')}</td>
 					  				<td>
+					  					<#--
 										<#if auct.isAhead == 'true'>
 											<font style="color:red;">领先</font>
 										<#else>
 											出局
 										</#if>
+										-->
+										${auct.bidder}<br/>
+										(当前累计${auct.currentAuctCount}次)
 									</td>
-					  				<td>${auct.currenctAuctPrice?string('#0.00')}</td>
 					  			</tr>
 					  		</#list>
 						<#else>

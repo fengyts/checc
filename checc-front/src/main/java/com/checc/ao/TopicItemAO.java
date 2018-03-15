@@ -14,6 +14,7 @@ import com.checc.domain.ItemDescDO;
 import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.enums.ItemPictureTypeEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
@@ -251,15 +252,18 @@ public class TopicItemAO {
 			}
 			vo.setHasExchanged(hasExchanged);
 		} else {
-			// vo.setHasExchangeOut(false);
-			AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
+			LeadEdgeDTO leadEdgeDto = auctionRecordService.selectLeadEdge(tpId);
+			if(null != leadEdgeDto){
+				vo.setCurrentBidder(StringUtils.securityMobile(leadEdgeDto.getMobile()));
+				vo.setCurrentAuctionPrice(leadEdgeDto.getCurrentAuctPrice());
+				vo.setCurrentBidTime(leadEdgeDto.getCurrentAuctTime());
+			}
+			/*AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
 			if (null != recordDO) {
 				vo.setCurrentBidder(StringUtils.securityMobile(recordDO.getMobile()));
 				vo.setCurrentBidTime(recordDO.getCreateTime());
 				vo.setCurrentAuctionPrice(recordDO.getCurrentAuctPrice().doubleValue());
-			} /*
-				 * else { vo.setCurrentAuctionPrice(item.getFloorPrice()); }
-				 */
+			} */
 		}
 
 		ItemPictureDO pdo = new ItemPictureDO();

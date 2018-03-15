@@ -33,6 +33,9 @@ public class AuctionListVO extends BaseVO {
 		private Double currenctAuctPrice;
 		/** 是否领先 */
 		private Boolean isAhead;
+		
+		/** 当前用户当前累计出价次数 */
+		private Integer currentAuctCount;
 
 		public Date getBidTime() {
 			return bidTime;
@@ -81,6 +84,15 @@ public class AuctionListVO extends BaseVO {
 		public void setIsAhead(Boolean isAhead) {
 			this.isAhead = isAhead;
 		}
+
+		public Integer getCurrentAuctCount() {
+			return currentAuctCount;
+		}
+
+		public void setCurrentAuctCount(Integer currentAuctCount) {
+			this.currentAuctCount = currentAuctCount;
+		}
+		
 
 	}
 

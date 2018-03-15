@@ -136,13 +136,16 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				// 获取最新出价
 				AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
 				int currentAuctPrice = plusTotalCur;
+				int currentAuctCount = dto.getAuctionTimes();
 				if (null != latest) {
 					currentAuctPrice += latest.getCurrentAuctPrice();
+					currentAuctCount += latest.getCurrentAuctCount();
 				} 
 				/*else { // 不是最新出价，即第一个人出价，需要加上底价
 					currentAuctPrice += topicItemDO.getFloorPrice();
 				}*/
 				auctRecord.setCurrentAuctPrice(currentAuctPrice);
+				auctRecord.setCurrentAuctCount(currentAuctCount);
 				res = auctionRecordService.insert(auctRecord);
 				if (res <= 0l) {
 					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); // 手动回滚事务

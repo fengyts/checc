@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.checc.dao.AuctionRecordDAO;
 import com.checc.domain.AuctionRecordDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.dto.refund.RefundTopicDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.service.AuctionRecordService;
@@ -202,6 +203,11 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	@Override
 	public List<RefundTopicDTO> selectRefundTopicRecords() {
 		return auctionRecordDAO.selectRefundTopicRecords();
+	}
+
+	@Override
+	public LeadEdgeDTO selectLeadEdge(Long topicItemId) {
+		return auctionRecordDAO.selectLeadEdgeInfo(topicItemId);
 	}
 	
 	

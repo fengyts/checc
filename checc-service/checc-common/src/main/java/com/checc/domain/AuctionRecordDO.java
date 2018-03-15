@@ -1,18 +1,19 @@
 package com.checc.domain;
 
-import java.util.Date;
-
 import ng.bayue.common.BaseDO;
+
+import java.util.Date;
 
 /**
  * 竞拍|兑换|充值记录
  * 
- * @author fengyts Sat Dec 30 21:56:48 CST 2017
+ * @author fengyts Thu Mar 15 11:16:16 CST 2018
  */
 
 public class AuctionRecordDO extends BaseDO {
 
-	private static final long serialVersionUID = 6581451799985523297L;
+	/**  */
+	private static final long serialVersionUID = -298642180886033442L;
 
 	/** 主键 */
 	private Long id;
@@ -49,6 +50,9 @@ public class AuctionRecordDO extends BaseDO {
 
 	/** 当前竞拍价(为本商品往次出价[包含本次]总和) */
 	private Integer currentAuctPrice;
+
+	/** 当前用户当前累计出价次数 */
+	private Integer currentAuctCount;
 
 	/** 充值订单id */
 	private Long depositId;
@@ -174,6 +178,15 @@ public class AuctionRecordDO extends BaseDO {
 	 */
 	public void setCurrentAuctPrice(Integer currentAuctPrice) {
 		this.currentAuctPrice = currentAuctPrice;
+	}
+
+	/**
+	 * 设置 当前用户当前累计出价次数
+	 * 
+	 * @param currentAuctCount
+	 */
+	public void setCurrentAuctCount(Integer currentAuctCount) {
+		this.currentAuctCount = currentAuctCount;
 	}
 
 	/**
@@ -336,6 +349,15 @@ public class AuctionRecordDO extends BaseDO {
 	 */
 	public Integer getCurrentAuctPrice() {
 		return currentAuctPrice;
+	}
+
+	/**
+	 * 获取 当前用户当前累计出价次数
+	 * 
+	 * @return currentAuctCount
+	 */
+	public Integer getCurrentAuctCount() {
+		return currentAuctCount;
 	}
 
 	/**
