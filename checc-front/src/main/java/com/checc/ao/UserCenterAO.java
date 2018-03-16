@@ -14,6 +14,7 @@ import com.checc.domain.ItemPictureDO;
 import com.checc.domain.TopicDO;
 import com.checc.domain.TopicItemDO;
 import com.checc.domain.UserCurrencyDO;
+import com.checc.dto.LeadEdgeDTO;
 import com.checc.enums.AuctionRecordTypeEnum;
 import com.checc.enums.TopicStatusEnum;
 import com.checc.enums.TopicTypeEnum;
@@ -127,10 +128,11 @@ public class UserCenterAO {
 				 */
 				
 				if(TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicDO.getTopicType())){
-					AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
+//					AuctionRecordDO latest = auctionRecordService.selectLatestAuction(tpId);
+					LeadEdgeDTO latest = auctionRecordService.selectLeadEdge(tpId);
 					if (null != latest) {
-						Integer currentAuctPrice = latest.getCurrentAuctPrice();
-						vo.setCurrenctAuctPrice(currentAuctPrice != null ? currentAuctPrice.doubleValue() : 0);
+						Double currentAuctPrice = latest.getCurrentAuctPrice();
+						vo.setCurrenctAuctPrice(currentAuctPrice != null ? currentAuctPrice : 0);
 						if (TopicStatusEnum.End.getCode().equals(topicStatus)) {
 							if (latest.getUserId().longValue() == userId.longValue()
 									&& ti.getFloorPrice().doubleValue() <= currentAuctPrice.doubleValue()) {

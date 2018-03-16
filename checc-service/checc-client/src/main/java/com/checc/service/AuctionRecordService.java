@@ -84,7 +84,7 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	
 	/**
 	 * <pre>
-	 * 获取专题商品领先者数据
+	 * 获取专题商品领先者数据或拍得者数据
 	 * </pre>
 	 *
 	 * @param topicItemId

@@ -321,24 +321,6 @@
  	</select>
  	
  	<select id="MybatisAuctionRecordDAO_select_leadEdge_info" parameterType="long" resultType="com.checc.dto.LeadEdgeDTO">
-		<!-- SELECT 
-			SUM(ar.current_auct_count) currentAuctTotalCount, ar.user_id userId, ar.mobile mobile, 
-			o1.current_auct_price currentAuctPrice, o1.create_time currentAuctTime
-		FROM auction_record ar
-		LEFT JOIN
-		(
-			SELECT ars.current_auct_price, ars.create_time, ars.topic_item_id tiId
-			FROM auction_record ars
-			WHERE ars.record_type = '01'
-			ORDER BY ars.id DESC
-			LIMIT 1
-		) o1 ON o1.tiId = #{topicItemId}
-		WHERE 
-			ar.record_type = '01' AND ar.topic_item_id = #{topicItemId}
-		GROUP BY ar.user_id
-		ORDER BY currentAuctTotalCount DESC, ar.id DESC
-		LIMIT 1 -->
-		
 		SELECT 
 			SUM(ar.current_auct_count) currentAuctTotalCount, ar.user_id userId, ar.mobile mobile, 
 			o1.current_auct_price currentAuctPrice, o1.create_time currentAuctTime
