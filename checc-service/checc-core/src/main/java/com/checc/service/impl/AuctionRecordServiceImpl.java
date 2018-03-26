@@ -209,6 +209,27 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	public LeadEdgeDTO selectLeadEdge(Long topicItemId) {
 		return auctionRecordDAO.selectLeadEdgeInfo(topicItemId);
 	}
+
+	@Override
+	public int selectUserCurrentAuctCount(Long userId) {
+		if(null == userId){
+			return 0;
+		}
+		int currentAuctCount = 0;
+		try {
+			AuctionRecordDO arDO = new AuctionRecordDO();
+			arDO.setUserId(userId);
+			arDO.setPageSize(1);
+			arDO.setStartPage(1);
+			List<AuctionRecordDO> list = auctionRecordDAO.selectDynamicPageQuery(arDO);
+			currentAuctCount = CollectionUtils.isEmpty(list) ? currentAuctCount : list.get(0).getCurrentAuctCount();
+		} catch (CommonDAOException e) {
+			logger.error("", e);
+		}
+		
+		return currentAuctCount;
+		
+	}
 	
 	
 	

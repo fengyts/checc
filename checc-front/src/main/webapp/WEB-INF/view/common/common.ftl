@@ -18,7 +18,7 @@
 <#assign version="version=201801081818">
 
 <#assign favicon=images + "/favicon.ico">
-<#assign bannerTitle="用极少的钱买到喜欢的车">
+<#assign bannerTitle="买新车，2折起">
 <#assign webtitle="车西西-" + bannerTitle>
 
 <#--

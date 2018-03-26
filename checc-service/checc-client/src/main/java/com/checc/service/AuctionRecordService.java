@@ -91,5 +91,15 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 * @return
 	 */
 	LeadEdgeDTO selectLeadEdge(Long topicItemId);
+	
+	/**
+	 * <pre>
+	 * 获取用户当前出价总次数
+	 * </pre>
+	 *
+	 * @param userId
+	 * @return
+	 */
+	int selectUserCurrentAuctCount(Long userId);
 
 }

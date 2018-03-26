@@ -182,6 +182,7 @@ public class TopicItemAO {
 			vo.setResidue(item.getResidue());
 			vo.setTopicId(topicId);
 			vo.setMarketPrice(item.getMarketPrice());
+			vo.setFloorPrice(item.getFloorPrice());
 
 			listResult.add(vo);
 		}
@@ -202,6 +203,8 @@ public class TopicItemAO {
 				AuctionRecordDO latestAuction = auctionRecordService.selectLatestAuction(vo.getId());
 				if (null != latestAuction) {
 					vo.setCurrentAuctionPrice(latestAuction.getCurrentAuctPrice().doubleValue());
+				} else {
+					vo.setCurrentAuctionPrice(vo.getFloorPrice());
 				}
 
 			}
@@ -257,6 +260,8 @@ public class TopicItemAO {
 				vo.setCurrentBidder(StringUtils.securityMobile(leadEdgeDto.getMobile()));
 				vo.setCurrentAuctionPrice(leadEdgeDto.getCurrentAuctPrice());
 				vo.setCurrentBidTime(leadEdgeDto.getCurrentAuctTime());
+			} else { // 没有人出价则当前价为底价
+				vo.setCurrentAuctionPrice(item.getFloorPrice());
 			}
 			/*AuctionRecordDO recordDO = auctionRecordService.selectLatestAuction(tpId);
 			if (null != recordDO) {
