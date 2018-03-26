@@ -98,8 +98,9 @@ public interface AuctionRecordService extends GeneralService<AuctionRecordDO, Au
 	 * </pre>
 	 *
 	 * @param userId
+	 * @param topicItemId
 	 * @return
 	 */
-	int selectUserCurrentAuctCount(Long userId);
+	int selectUserCurrentAuctCount(Long userId, Long topicItemId);
 
 }

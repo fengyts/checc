@@ -211,7 +211,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 	}
 
 	@Override
-	public int selectUserCurrentAuctCount(Long userId) {
+	public int selectUserCurrentAuctCount(Long userId, Long topicItemId) {
 		if(null == userId){
 			return 0;
 		}
@@ -219,6 +219,7 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
 		try {
 			AuctionRecordDO arDO = new AuctionRecordDO();
 			arDO.setUserId(userId);
+			arDO.setTopicItemId(topicItemId);
 			arDO.setPageSize(1);
 			arDO.setStartPage(1);
 			List<AuctionRecordDO> list = auctionRecordDAO.selectDynamicPageQuery(arDO);

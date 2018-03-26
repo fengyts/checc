@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checc.ao.StrategyAO;
@@ -46,7 +47,7 @@ public class StrategyController {
 	 * @param pwd1
 	 * @return
 	 */
-	@RequestMapping("/modifyVmAccountPwd")
+	@RequestMapping(value = "/modifyVmAccountPwd", method = {RequestMethod.POST})
 	@ResponseBody
 	public ResultMessage updateVmAccountPwd(Long userId, String pwd, String pwd1) {
 		if(StringUtils.isBlank(pwd) || StringUtils.isBlank(pwd1) || !pwd.equals(pwd1)){

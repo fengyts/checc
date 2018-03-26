@@ -255,6 +255,10 @@ function doLogin(){
 	_params.password = Crypto.encryptAES(_password);
 	_params.returnUrl = $("#returnUrl").val();
 	
+	console.log("pwd:");
+	console.log(Crypto.encryptAES(_password));
+	console.log(Crypto.decryptAES(Crypto.encryptAES(_password)));
+	
 	$.ajax({
 		url: 'doLogin',
 		type: 'POST',

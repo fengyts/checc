@@ -14,7 +14,9 @@ import java.util.Date;
 public class LeadEdgeDTO implements Serializable {
 
 	private static final long serialVersionUID = -5859030801808393645L;
-
+	
+	/** 当前领先者领先的出价记录id */
+	private Long id;
 	private Long userId;
 	private String mobile;
 	/** 领先者当前出价总次数 */
@@ -23,6 +25,15 @@ public class LeadEdgeDTO implements Serializable {
 	private Double currentAuctPrice;
 	/** 当前出价时间 */
 	private Date currentAuctTime;
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Long getUserId() {
 		return userId;

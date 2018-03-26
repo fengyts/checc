@@ -37,7 +37,7 @@ $(function() {
 
 		$.ajax({
 			url : "updateVmAccount",
-			post : 'POST',
+			type : 'POST',
 			dataType : "json",
 			data : $("#vmAccountEditForm").serialize(),
 			success : function(data) {

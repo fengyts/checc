@@ -139,7 +139,7 @@ public class AuctionActionServiceImpl implements AuctionActionService {
 				int currentAuctCount = dto.getAuctionTimes();
 				if (null != latest) {
 					currentAuctPrice += latest.getCurrentAuctPrice();
-					currentAuctCount += auctionRecordService.selectUserCurrentAuctCount(userId);
+					currentAuctCount += auctionRecordService.selectUserCurrentAuctCount(userId, tpId);
 				} else { // 不是最新出价，即第一个人出价，需要加上底价
 					currentAuctPrice += topicItemDO.getFloorPrice();
 				}

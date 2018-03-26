@@ -238,7 +238,7 @@ public class AuctionAO {
 
 		// 获取领先者
 //		AuctionRecordDO ard = auctionRecordService.selectLatestAuction(tpId); 
-//		LeadEdgeDTO leadEdgeDto = auctionRecordService.selectLeadEdge(tpId);
+		LeadEdgeDTO leadEdgeDto = auctionRecordService.selectLeadEdge(tpId);
 		List<ListTableVO> tableList = new ArrayList<ListTableVO>();
 		for (AuctionRecordDO aucr : listDb) {
 			ListTableVO tvo = vo.new ListTableVO();
@@ -248,7 +248,7 @@ public class AuctionAO {
 			tvo.setCurrenctAuctPrice(aucr.getCurrentAuctPrice().doubleValue());
 			tvo.setTotalCurrency(aucr.getTotalCurrency());
 
-//			tvo.setIsAhead(aucr.getId().longValue() == ard.getId().longValue()); // 是否领先者
+			tvo.setIsAhead(aucr.getId().longValue() == leadEdgeDto.getId().longValue()); // 是否领先者
 			tvo.setCurrentAuctCount(aucr.getCurrentAuctCount());
 			tableList.add(tvo);
 		}

@@ -64,7 +64,7 @@
 					<tbody>
 					  	<#if auctlVO.auctionList?default([])?size!=0>
 					  		<#list auctlVO.auctionList as auct>
-					  			<tr>
+					  			<tr <#if auct.isAhead == 'true'>style="color:red;"</#if>>
 					  				<td>${auct.bidTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 					  				<td>${auct.bidder}</td>
 					  				<td>${auct.bidNum}</td>

@@ -64,11 +64,11 @@
 					<#if detailVO.currentBidder??>
 						<#if detailVO.status?? && detailVO.status=='03'>
 							<#if (detailVO.currentAuctionPrice!0) &lt; (detailVO.floorPrice!0)>
-								该商品已经流拍，没有人拍得该商品
+								本辆车已经流拍，没有人拍得本辆车
 							<#else>
 								恭喜<font style="color: #0099ff;">${detailVO.currentBidder}</font>以
 								<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
-								拍得本件商品
+								拍得本辆车
 							</#if>
 						<#else>
 							<#if (detailVO.currentAuctionPrice!0) &lt; (detailVO.floorPrice!0)>
@@ -77,14 +77,14 @@
 								若接下来无人出价，
 								<span style="color:#0099cc;">${detailVO.currentBidder}</span>
 								将以<span class="eninfo_price">￥${detailVO.currentAuctionPrice?string('#0.00')}</span>
-								拍得本件商品
+								拍得本辆车
 							</#if>
 						</#if>
 					<#else>
 						<#if detailVO.status?? && detailVO.status=='03'>
-							该商品已经流拍，没有人拍得该商品
+							本辆车已经流拍，没有人拍得本辆车
 						<#else>
-							(若一直无人出价，本商品将流拍)
+							(若一直无人出价，本辆车将流拍)
 						</#if>
 					</#if>
 				</p>

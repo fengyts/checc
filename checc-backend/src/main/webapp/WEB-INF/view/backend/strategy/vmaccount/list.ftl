@@ -32,7 +32,7 @@ css=[
 				//$("#mfVmAccountPwdForm").submit();
 				$.ajax({
 					url: domain + "/strategy/modifyVmAccountPwd",
-					post: 'POST',
+					type: 'POST',
 					dataType: "json",
 					data: {"pwd": _pwd, "pwd1": _pwd1},
 					success: function(data){
