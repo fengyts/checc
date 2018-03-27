@@ -26,5 +26,6 @@
 		<mapper resource="sqlmap/purchaseApply-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/checcUserInfo-mybatis-sqlmap.xml" />
 		<mapper resource="sqlmap/exchangeOrderStatus-mybatis-sqlmap.xml" />
+		<mapper resource="sqlmap/checcConstant-mybatis-sqlmap.xml" />
 	</mappers>
 </configuration>

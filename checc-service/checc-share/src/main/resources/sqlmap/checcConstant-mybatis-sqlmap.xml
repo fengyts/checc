@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checc.domain.CheccConstantMapper">
+
+	<resultMap type="com.checc.domain.CheccConstantDO" id="CheccConstantDOResultMap">
+		<id column="key" property="key" />
+        <result column="value" property="value"/>
+        <result column="type" property="type"/>
+        <result column="desc" property="desc"/>
+	</resultMap>
+
+	<sql id="MybatisCheccConstantDAO_all_column_fields">
+	      key,value,type,desc
+ 	</sql>
+	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisCheccConstantDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="value != null  and value != '' "> AND value=#{value} </if>
+			<if test="type != null  and type != '' "> AND type=#{type} </if>
+			<if test="desc != null  and desc != '' "> AND desc=#{desc} </if>
+		</where>
+ 	</sql>
+	
+	<select id="MybatisCheccConstantDAO_selectById" parameterType="long" resultMap="CheccConstantDOResultMap">
+		SELECT
+			<include refid="MybatisCheccConstantDAO_all_column_fields" />
+		FROM
+			checc_constant
+		WHERE
+			 key = #{key}
+	</select>
+	
+	<select id="MybatisCheccConstantDAO_selectByPrimaryKey" parameterType="string" resultMap="CheccConstantDOResultMap">
+		SELECT
+			<include refid="MybatisCheccConstantDAO_all_column_fields" />
+		FROM
+			checc_constant
+		WHERE
+			 key = #{key}
+	</select>
+	
+	
+    <insert id="MybatisCheccConstantDAO_insert" parameterType="com.checc.domain.CheccConstantDO" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="key" order="AFTER">
+            SELECT LAST_INSERT_ID() AS key
+        </selectKey>
+        INSERT INTO checc_constant(
+				key,
+				value,
+				type,
+				desc
+		)values(
+				#{key},
+				#{value},
+				#{type},
+				#{desc}
+		)
+    </insert>
+	
+	<update id="MybatisCheccConstantDAO_updateByPrimaryKey" parameterType="com.checc.domain.CheccConstantDO">
+		UPDATE checc_constant
+		SET
+					value = #{value},
+					type = #{type},
+					desc = #{desc}
+		WHERE
+			key = #{key}
+	</update>
+
+	<delete id="MybatisCheccConstantDAO_deleteByPrimaryKey" parameterType="string">
+		DELETE FROM checc_constant WHERE key = #{key}
+	</delete>
+
+	<update id="MybatisCheccConstantDAO_updateById" parameterType="com.checc.domain.CheccConstantDO">
+		UPDATE checc_constant
+		SET
+					value = #{value},
+					type = #{type},
+					desc = #{desc}
+		WHERE
+			key = #{key}
+	</update>
+
+	<delete id="MybatisCheccConstantDAO_deleteById" parameterType="long">
+		DELETE FROM checc_constant WHERE key = #{key}
+	</delete>
+	
+	
+	<update id="MybatisCheccConstantDAO_update_dynamic" parameterType="com.checc.domain.CheccConstantDO">
+		UPDATE checc_constant
+		<set>
+					<if test="value != null  and value != '' ">value=#{value},</if>
+					<if test="type != null  and type != '' ">type=#{type},</if>
+					<if test="desc != null  and desc != '' ">desc=#{desc},</if>
+		</set>
+		WHERE key = #{key}
+	</update>
+
+ 	<select id="MybatisCheccConstantDAO_select_dynamic" resultMap="CheccConstantDOResultMap" parameterType="com.checc.domain.CheccConstantDO">
+	     SELECT
+	     	<include refid="MybatisCheccConstantDAO_all_column_fields" />
+		 FROM
+		 	checc_constant
+			<include refid="MybatisCheccConstantDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccConstantDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.CheccConstantDO">
+	     SELECT
+	     	count(1)
+		 FROM
+		 	checc_constant
+	 	<include refid="MybatisCheccConstantDAO_dynamic_where_fields" />
+ 	</select>
+
+ 	<select id="MybatisCheccConstantDAO_select_dynamic_page_query" resultMap="CheccConstantDOResultMap" parameterType="com.checc.domain.CheccConstantDO">
+	     SELECT
+	     	<include refid="MybatisCheccConstantDAO_all_column_fields" />
+		 FROM
+		 	checc_constant
+	 	<include refid="MybatisCheccConstantDAO_dynamic_where_fields" />
+	 	ORDER BY checc_constant.id DESC
+	 	Limit #{start},#{pageSize}
+ 	</select>
+
+</mapper>

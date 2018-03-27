@@ -12,7 +12,7 @@
 <#assign images=static + "/images">
 
 <#-- 图片服务器访问路径 -->
-<#assign imgbase=requestContextPath.contextPath>
+<#assign imgbase=domain>
 <#-- 版本号 -->
 <#--<#assign version="version=" + .now?string("yyyyMMddHHmmss")>-->
 <#assign version="version=201801081818">
