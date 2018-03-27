@@ -99,7 +99,7 @@ $(function() {
 		var _this=$(this);
 		var _eoId = _this.attr('param');
 		var _estatus = _this.attr("estatus");
-		layer.confirm("确认发货？", function(){
+		layer.confirm("确认？", function(){
 			$.post('saveShipmentsInfo.htm', {
 				"type" : "02",
 				"exchangeOrderId" : _eoId,
