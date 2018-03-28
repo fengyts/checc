@@ -3,7 +3,7 @@
 <@backend title="商品新增spu" 
 js=[
 '/statics/common/common-js/jquery-1.9.1.min.js',
-'/statics/plugins/editor/kindeditor-min.js',
+'/statics/plugins/editor/kindeditor-all-min.js',
 '/statics/common/common-js/editorUtil.js'
 ]
 css=[

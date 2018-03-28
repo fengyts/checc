@@ -1,0 +1,1224 @@
+@charset "utf-8"; 
+
+body, input, select, textarea {
+	font-family: "Microsoft YaHei", "Lucida Grande", "Lucida Sans Unicode",
+		Helvetica, Arial, Verdana, sans-serif
+}
+
+.ui-slider, a {
+	-webkit-touch-callout: none
+}
+
+a, body {
+	color: #999
+}
+
+.input_text, .input_text:focus, .ui_gotop, a {
+	-webkit-tap-highlight-color: transparent
+}
+
+html {
+	font-size: 62.5%
+}
+
+abbr, address, article, aside, audio, b, blockquote, body, canvas,
+	caption, cite, code, dd, del, details, dfn, div, dl, dt, em, fieldset,
+	figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header,
+	hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu,
+	nav, object, ol, p, pre, q, samp, section, small, span, strong, sub,
+	summary, sup, table, tbody, td, tfoot, th, thead, time, tr, ul, var,
+	video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: 0 0
+}
+
+body {
+	font-size: 1.2rem;
+	background-color: #fff
+}
+
+@media screen and (min-width:350px) {
+	footer {
+		font-size: 1.5rem
+	}
+}
+
+em, h1, h2, h3, h4, h5, h6, i, p {
+	font-weight: 400;
+	font-style: normal
+}
+
+article, aside, canvas, details, figcaption, figure, footer, header,
+	hgroup, img, menu, nav, section, summary {
+	display: block
+}
+
+blockquote, q {
+	quotes: none
+}
+
+blockquote:after, blockquote:before, q:after, q:before {
+	content: '';
+	content: none
+}
+
+ins {
+	text-decoration: none
+}
+
+del {
+	text-decoration: line-through
+}
+
+.footer_link, .ui-slider-item>a, a, a:visited {
+	text-decoration: none
+}
+
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: 700
+}
+
+.input_text, a, a:visited {
+	outline: 0;
+	padding: 0;
+	margin: 0;
+	background: 0 0
+}
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted #000;
+	cursor: help
+}
+
+table {
+	border-spacing: 0
+}
+
+tbody, tfoot, thead {
+	vertical-align: middle
+}
+
+input, select, textarea {
+	vertical-align: middle;
+	-webkit-tap-highlight: transparent
+}
+
+dd, dl, dt, li, menu, ol, ul {
+	list-style: none
+}
+
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word
+}
+
+a {
+	-webkit-user-select: none
+}
+
+wbr:after {
+	content: "鈥�"
+}
+
+.clearfix:after {
+	content: '.';
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+.clear {
+	clear: both
+}
+
+.hide {
+	display: none
+}
+
+.show {
+	display: block
+}
+
+.f_left {
+	float: left
+}
+
+.f_right {
+	float: right
+}
+
+.t_center {
+	text-align: center
+}
+
+.t_right {
+	text-align: right
+}
+
+.input_text {
+	width: 100%;
+	text-indent: .3rem;
+	border: 0
+}
+
+.input_text:focus {
+	-webkit-user-modify: read-write-plaintext-only
+}
+
+header {
+	width: 100%;
+	height: 44px;
+	color: #333;
+	box-shadow: 0 0 3px #000;
+	position: relative;
+	z-index: 2;
+	background: #00bcd4;
+	opacity: .85
+}
+
+header .title {
+	position: absolute;
+	width: 40%;
+	left: 50%;
+	margin-left: -20%;
+	text-align: center;
+	font-size: 2rem;
+	line-height: 44px;
+	color: #fff;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
+
+header .back, header .close {
+	float: left;
+	margin-top: 12px;
+	color: #fff;
+	font-size: 1.6rem;
+	margin-left: 5px
+}
+
+header .customer_service, header .home, header .setting, header .share {
+	margin-top: 12px;
+	font-size: 1.4rem;
+	width: 35px;
+	margin-right: 5px;
+	float: right;
+	color: #fff
+}
+
+header .back span {
+	display: inline-block;
+	height: 20px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/back_67dd1df.png)
+		left center no-repeat;
+	background-size: 10px;
+	color: #fff;
+	white-space: nowrap;
+	text-indent: 15px;
+	line-height: 20px
+}
+
+header .back span:after {
+	content: '杩斿洖'
+}
+
+.zycsstest {
+	display: none
+}
+
+header .share span {
+	display: inline-block;
+	width: 35px;
+	height: 20px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/share_47965d5.png)
+		center bottom no-repeat;
+	background-size: 17px
+}
+
+header .customer_service {
+	display: none
+}
+
+header .cancel_order span, header .customer_service span, header .home span,
+	header .setting span {
+	display: inline-block;
+	height: 20px
+}
+
+header .customer_service span {
+	width: 35px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/customer_service_211e268.png)
+		center bottom no-repeat;
+	background-size: 18px
+}
+
+header .home span {
+	width: 35px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_home_white_c539cfe.png)
+		center bottom no-repeat;
+	background-size: 18px
+}
+
+header .setting span {
+	width: 35px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/setting_4434a70.png)
+		center bottom no-repeat;
+	background-size: 60%
+}
+
+header .cancel_order {
+	float: right;
+	min-width: 35px;
+	margin-top: 9px;
+	margin-right: 5px;
+	font-size: 1.5rem
+}
+
+header .cancel_order span {
+	padding-left: 20px;
+	line-height: 24px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/cancel_4fcf1cd.png)
+		left bottom no-repeat;
+	background-size: 17px;
+	color: #fff
+}
+
+header.insurance_header {
+	background: #fc9627;
+	box-shadow: none;
+	opacity: 1;
+	z-index: 4
+}
+
+#goBack {
+	background:
+		url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAATCAYAAACp65zuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUZCOURCNEM5OTZCMTFFNUE4NjNGRDZGRUVBOTQ2MkQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUZCOURCNEI5OTZCMTFFNUE4NjNGRDZGRUVBOTQ2MkQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmRpZDo0QUREMjhBN0E4OThFNTExQjE3MkQxOTU4MTcyNkExNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0QUREMjhBN0E4OThFNTExQjE3MkQxOTU4MTcyNkExNSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Ptk7A4kAAAC9SURBVHjahNFNCoJAGIDhMaJNpHYA112mVcugJs/VqkVHiKC9mRfoCm06gEFk78AnDMP8CA848jKOn9kwDCpxVdhliXCBC96xsMQVP6yVCT1KNGjlXvmiJe7okI/P3aiQ4GFHbphL1MquyhcWsksznskXVrjJucrAxykzniefP8cKfWhWE5wxwyb6f2TrLT7QoVfbCx2L3Qcm6lGnQuPgi0P/upZYp0L7GHuznkYGcjJDwRHf2I726F5/AQYAWO+wjcb97loAAAAASUVORK5CYII=)no-repeat center center;background-size:1rem;display:block;float:left;width:2rem;height:44px')
+}
+
+#cancel_order {
+	display: block;
+	float: right;
+	font-size: 15px;
+	color: #fff;
+	background:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAaCAYAAABLlle3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZNJREFUeNrMVuFxhSAMlt77X0Zwg+cGpRvYDRzBbuAIjmA3sBPUERjhdQM6AU2u0eaQIO/56jV3ORBIPj4SA6q4Qrz3FTQGVAdTDnRSStkMH1lAGrQDvfhtudBanQJVG4A1NAPoIxv+BLWkKCUonsCZrfkC7YB5fxVTmBwYA0ffZWJ9SSwdsxtC1iJoADilwIRwcHvLgaOgtNtlp8WNArZNzM8KFLPzHoACgVoCnVgW6uIOwn0uoBR4F7BshERxkRhp5tgIdgtbDupZiywNOeoEY0tgmvpeAg3YDjPoEPnBZxkTyWEDwCZxxC3zvWLgE6leZVQkialha4oHqBoY4Ldg3TvWWJhzbGxPYtmtnfSJYzJMZ2nZmE4UjIXpCQeBEQb6hfqjVOawnkamGrplUNooq5/avMhp7khgTBD0KTJ+zghBxS6LX9DMuDyz7w9qXxk76T6tqZ32VppkxiaLwwGg6zK4A3Qun+Wugh9J8y0WevfVFhiNh13ibLL/q+fK/3qYBcfVHvYEFR7bFbG7+bH9LcAA0g+hV8GhoxoAAAAASUVORK5CYII=)
+		left center no-repeat;
+	text-indent: 18px;
+	background-size: 16px;
+	height: 44px;
+	line-height: 44px;
+	width: 7rem
+}
+
+footer img {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none
+}
+
+.footer_link, .pic_box.over .new_box_status, .round span {
+	display: block
+}
+
+footer {
+	width: 100%;
+	height: 56px;
+	background-size: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index: 121;
+	overflow: hidden;
+	background-color: #fff;
+	border-top: 1px solid #dcdcdc
+}
+
+.footer_link {
+	width: 20%;
+	float: left;
+	text-align: center;
+	position: relative;
+	padding-top: 1rem;
+	font-size: 1rem
+}
+
+.footer_link:before {
+	margin: 0 auto;
+	width: 27px;
+	display: block;
+	content: "";
+	min-height: 25px
+}
+
+.footer_home:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_home_default_701eed1.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_spike:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_spike_default_2e69e0e.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_shopcar:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_car_default_0140b32.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_my:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_my_default_3e21dbc.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.round {
+	position: absolute;
+	top: 0;
+	left: 0
+}
+
+.round div {
+	opacity: .45;
+	width: 100px;
+	height: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	-ms-border-radius: 100px;
+	-o-border-radius: 100px;
+	border-radius: 100px;
+	background-color: #373737
+}
+
+.round span {
+	font-size: 2rem;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	margin-top: -10px;
+	position: absolute;
+	top: 50%;
+	z-index: 2
+}
+
+.footer_home_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_home_active_abd0b40.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_spike_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_spike_active_2c9d30b.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_my_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_my_active_3b300de.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_shopcar_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_car_active_8d63970.png?__sprite)
+		no-repeat;
+	background-size: 100%
+}
+
+.footer_class_active, .footer_home_active, .footer_ht_active,
+	.footer_my_active, .footer_shopcar_active, .footer_spike_active {
+	color: #00bcd6;
+	font-size: 10px
+}
+
+.footer_class:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_ht_default_fa93ce3.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_class_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_ht_active_c83d341.png?__sprite)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_ht:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_circles_c80ae4f.png)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.footer_ht_active:before {
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_circles_active_5e5efe8.png)
+		no-repeat;
+	background-size: 100% 100%
+}
+
+.ui_gotop {
+	position: fixed;
+	width: 40px;
+	height: 40px;
+	bottom: 120px;
+	right: 10px;
+	z-index: 999;
+	border-radius: 20px;
+	background:
+		url(//static.meituncdn.com/resources/images/type_gotop_9aa01a2.png)
+		center center no-repeat;
+	background-size: 100%
+}
+
+.countdown, .new_box, .new_box_status {
+	position: absolute;
+	z-index: 10
+}
+
+.countdown {
+	right: 0;
+	top: 0;
+	background-color: #000;
+	padding: 2px 7px 3px;
+	color: #fff;
+	opacity: .5;
+	font-size: 1.2rem
+}
+
+.new_box {
+	width: 30px;
+	height: 30px;
+	top: 2px;
+	left: 2px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_new_e16b5e5.png)
+		no-repeat;
+	background-size: 100%
+}
+
+.new_box_status {
+	width: 100px;
+	height: 100px;
+	left: 50%;
+	top: 50%;
+	margin-left: -50px;
+	margin-top: -50px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon_status_58dcc17.png)
+		no-repeat;
+	background-size: 100%;
+	display: none
+}
+
+.one_checkbox>input[type=checkbox], .one_radio-button>input[type=radio]
+	{
+	right: 0;
+	bottom: 0;
+	padding: 0;
+	z-index: 1;
+	outline: 0;
+	margin: 0;
+	overflow: hidden
+}
+
+.one_checkbox, .one_checkbox>.one_checkbox__checkmark {
+	display: inline-block;
+	vertical-align: top;
+	cursor: default
+}
+
+.one_checkbox {
+	position: relative;
+	user-select: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 25px
+}
+
+.one_checkbox>input[type=checkbox] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 0;
+	opacity: .001;
+	vertical-align: top;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 0;
+	width: 0
+}
+
+.one_checkbox>input[type=checkbox]:checked {
+	background: #2eb6aa
+}
+
+.one_checkbox>input[type=checkbox]:checked+.one_checkbox__checkmark:before
+	{
+	background: #f90;
+	border: 2px solid #f90
+}
+
+.one_checkbox>input[type=checkbox]:checked+.one_checkbox__checkmark:after
+	{
+	opacity: 1
+}
+
+.one_checkbox>.one_checkbox__checkmark:before {
+	content: '';
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	width: 24px;
+	height: 24px;
+	background: 0 0;
+	border: 2px solid #e4e4e4;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	left: 0
+}
+
+.one_checkbox>.one_checkbox__checkmark {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: relative;
+	overflow: hidden;
+	width: 24px;
+	height: 24px
+}
+
+.one_radio-button, .one_radio-button>.one_radio-button__checkmark {
+	display: inline-block;
+	vertical-align: top;
+	-webkit-user-select: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	cursor: default
+}
+
+.one_checkbox>.one_checkbox__checkmark:after {
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 12px;
+	height: 6px;
+	background: 0 0;
+	border: 3px solid #fff;
+	border-width: 2px;
+	border-top: 0;
+	border-right: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	opacity: 0
+}
+
+.one_checkbox>input[type=checkbox]:focus+.one_checkbox__checkmark:before
+	{
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
+
+.one_checkbox>input[type=checkbox]:disabled+.one_checkbox__checkmark {
+	opacity: .3;
+	cursor: default;
+	pointer-events: none
+}
+
+.one_checkbox>input[type=checkbox]:disabled:active+.one_checkbox__checkmark:before
+	{
+	background: 0 0;
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
+
+.one_radio-button {
+	position: relative;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	line-height: 25px
+}
+
+.one_radio-button>input[type=radio] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 0;
+	opacity: .001;
+	vertical-align: top;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 0;
+	width: 0
+}
+
+.one_radio-button>input[type=radio]:checked {
+	background: #49b9c3
+}
+
+.one_radio-button>input[type=radio]:checked+.one_radio-button__checkmark:before
+	{
+	background: #49b9c3;
+	border: 1px solid #49b9c3
+}
+
+.one_radio-button>input[type=radio]:checked+.one_radio-button__checkmark:after
+	{
+	opacity: 1
+}
+
+.one_radio-button>.one_radio-button__checkmark:before {
+	content: '';
+	position: absolute;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	width: 24px;
+	height: 24px;
+	background: 0 0;
+	border: 2px solid #e4e4e4;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	left: 0
+}
+
+.one_radio-button>.one_radio-button__checkmark {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position: relative;
+	overflow: hidden;
+	width: 24px;
+	height: 24px
+}
+
+.one_radio-button>.one_radio-button__checkmark:after {
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 12px;
+	height: 6px;
+	background: 0 0;
+	border: 3px solid #fff;
+	border-width: 2px;
+	border-top: 0;
+	border-right: 0;
+	border-radius: 0;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	opacity: 0
+}
+
+#cpic_ui_box, #cpic_ui_mask {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-transform: translateZ(0);
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	position: fixed
+}
+
+.one_radio-button>input[type=radio]:focus+.one_radio-button__checkmark:before
+	{
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
+
+.one_radio-button>input[type=radio]:disabled+.one_radio-button__checkmark
+	{
+	opacity: .3;
+	cursor: default;
+	pointer-events: none
+}
+
+.one_radio-button>input[type=radio]:disabled:active+.one_radio-button__checkmark:before
+	{
+	background: 0 0;
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
+
+.line8 {
+	width: 100%;
+	height: 8px;
+	box-shadow: 0 1px 3px #e4e4e4;
+	background-color: #f8f8f8
+}
+
+.floor_bottom {
+	height: 52px
+}
+
+.ready_receiving {
+	color: #19b4ad
+}
+
+.shipped {
+	color: #cd7f32
+}
+
+.ready_pay {
+	color: #ed5565
+}
+
+.completed {
+	color: #096
+}
+
+.cancelled {
+	color: #ccc
+}
+
+.aftermarket {
+	color: #f90
+}
+
+.closed {
+	color: #999
+}
+
+.audit {
+	color: #ed5565
+}
+
+.border_item {
+	margin-top: 8px;
+	border: 1px solid #ebebeb
+}
+
+.ui-imglazyload {
+	width: 100%;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon-default_4bc9357.png)
+		center center no-repeat;
+	background-size: 100%;
+	border: 0
+}
+
+.one_toast {
+	width: 60%;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 5px;
+	color: #fff;
+	background-color: #6c6c6c;
+	text-align: center;
+	font-size: .8em;
+	opacity: 0;
+	top: 75%;
+	left: 20%;
+	position: fixed
+}
+
+.toast_bottom {
+	width: 30%;
+	height: 30px;
+	line-height: 30px;
+	top: initial;
+	bottom: 60px;
+	left: 35%
+}
+
+#cpic_ui_mask {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	opacity: .2;
+	top: 0;
+	left: 0;
+	z-index: 5000
+}
+
+#cpic_ui_box {
+	width: 100px;
+	height: 90px;
+	top: 20%;
+	z-index: 6000
+}
+
+#cpic_ui_box .cpic_ui_loading_img {
+	float: left;
+	width: 100px;
+	height: 90px;
+	vertical-align: middle;
+	background:
+		url(//static.meituncdn.com/resources/images/loading_5afef41.gif)
+		no-repeat;
+	background-size: 100px 90px
+}
+
+.share_list {
+	width: 50%;
+	background-color: #FFF;
+	border-left: 1px solid #ebebeb;
+	border-right: 1px solid #ebebeb;
+	box-shadow: 2px 2px 3px #ebebeb;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	position: absolute;
+	top: 44px;
+	right: 8px;
+	z-index: 1010
+}
+
+.share_list ul li {
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.4rem;
+	color: #000;
+	padding-left: 10px;
+	border-top: 1px solid #ebebeb
+}
+
+.share_list ul li a {
+	margin-top: 12px;
+	text-indent: 15px;
+	font-size: 1.4rem;
+	color: #000
+}
+
+.pull-up-detail {
+	text-align: center;
+	border-bottom: 1px solid #bcbcbc;
+	height: 20px;
+	margin-bottom: 20px
+}
+
+.pull-up-detail span {
+	background-color: #f3f3f3;
+	display: block;
+	padding: 10px;
+	margin: 0 auto;
+	width: 135px;
+	color: #727272
+}
+
+.ui-dialog, .ui-mask {
+	position: absolute;
+	display: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-webkit-transform: translateZ(0);
+	left: 0
+}
+
+.ht-round {
+	position: absolute;
+	background: red;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	top: 5px;
+	right: 15px
+}
+
+.ui-mask {
+	top: 0;
+	background: #000;
+	opacity: .6;
+	z-index: 1001
+}
+
+.ui-dialog {
+	overflow: hidden;
+	margin: 0 auto;
+	z-index: 1002;
+	top: -10000px;
+	background: #fff;
+	-webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, .6);
+	-webkit-border-radius: 8px
+}
+
+.ui-dialog .ui-dialog-title {
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	text-align: center;
+	font-weight: 700;
+	-webkit-border-radius: 3px 3px 0 0
+}
+
+.ui-dialog .ui-dialog-close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	border-width: 0;
+	display: inline-block;
+	padding: 7px 9px;
+	margin: 2px;
+	line-height: 1;
+	-webkit-border-radius: 3px
+}
+
+.ui-dialog-container, .ui-slider, .ui-slider-group, .ui-slider-item {
+	position: relative
+}
+
+.ui-dialog .ui-dialog-title * {
+	color: #333
+}
+
+.ui-dialog .ui-dialog-close-hover {
+	background-color: rgba(255, 255, 255, .4)
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 10px;
+	position: relative;
+	color: #333;
+	text-align: center
+}
+
+.ui-dialog-btns {
+	margin: 10px;
+	width: 93%;
+	height: 44px
+}
+
+.ui-dialog-btns .ui-btn {
+	padding: 0;
+	font-size: 18px;
+	width: 100%;
+	display: table-cell;
+	float: none;
+	text-align: center;
+	height: 44px;
+	line-height: 44px;
+	color: #FFF;
+	border: 1px solid #FDFDFD;
+	background-color: #fff;
+	border-bottom: 0 none;
+	border-radius: 5px
+}
+
+.ui-dialog-btns .ui-btn-1 {
+	background-color: #49b9c3;
+	border-radius: 5px;
+	width: 48%;
+	float: left
+}
+
+.ui-dialog-btns .ui-btn:last-child {
+	width: 100%
+}
+
+.ui-dialog-btns .ui-btn-1+.ui-btn-2 {
+	background-color: #d7587e;
+	width: 48%;
+	float: right
+}
+
+.ui-dialog-btns .ui-btn.ui-state-hover {
+	background-color: #e2e2e2
+}
+
+.ui-slider {
+	width: 100%;
+	overflow: hidden;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent
+}
+
+.ui-slider-group {
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-transform: translateZ(0)
+}
+
+.ui-slider-item {
+	background-color: #e3e3e3;
+	text-align: center;
+	float: left;
+	overflow: hidden;
+	-webkit-box-sizing: border-box
+}
+
+.ui-slider-item>a {
+	display: block;
+	width: 100%;
+	overflow: hidden
+}
+
+.ui-slider-dots {
+	width: 100%;
+	position: absolute;
+	bottom: 8px;
+	left: 0;
+	text-align: center
+}
+
+.ui-slider-dots>b {
+	display: inline-block;
+	margin: 0 3px;
+	width: 7px;
+	height: 7px;
+	border-radius: 5px;
+	background-color: #dadcdd
+}
+
+.ui-slider-dots .ui-state-active {
+	background-color: #fff
+}
+
+.ui-refresh-down {
+	background: #fff;
+	padding: 1em 10px;
+	border-bottom: 1px solid #ccc;
+	font-size: 14px;
+	color: #888;
+	text-align: center
+}
+
+.ui-refresh-down .ui-refresh-label {
+	display: inline-block;
+	vertical-align: middle;
+	color: #2E435D
+}
+
+.ui-refresh-down .ui-loading {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	-webkit-background-size: 25px 25px;
+	vertical-align: middle
+}
+
+.ui-loading {
+	width: 40px;
+	height: 40px;
+	text-indent: -10000px;
+	background:
+		url(//static.meituncdn.com/resources/images/icon/icon-ui-loading_8de7983.png)
+		no-repeat;
+	-webkit-background-size: 40px 40px;
+	-webkit-animation-name: ui-loading-anim;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: step-start
+}
+
+@
+-webkit-keyframes ui-loading-anim { 8.32%,
+	from {-webkit-transform: rotate(0)
+}
+
+16
+.65 %, 8.33 %{
+	-webkit-transform: rotate(30deg)
+}
+
+16
+.66 %, 24.99 %{
+	-webkit-transform: rotate(60deg)
+}
+
+25%,33
+.32 %{
+	-webkit-transform: rotate(90deg)
+}
+
+33
+.33 %, 41.65 %{
+	-webkit-transform: rotate(120deg)
+}
+
+41
+.66 %, 49.99 %{
+	-webkit-transform: rotate(150deg)
+}
+
+50%,58
+.32 %{
+	-webkit-transform: rotate(180deg)
+}
+
+58
+.33 %, 66.65 %{
+	-webkit-transform: rotate(210deg)
+}
+
+66
+.66 %, 74.99 %{
+	-webkit-transform: rotate(240deg)
+}
+
+75%,83
+.32 %{
+	-webkit-transform: rotate(270deg)
+}
+
+83
+.33 %, 91.65 %{
+	-webkit-transform: rotate(300deg)
+}
+
+91
+.66 %, 99.99 %{
+	-webkit-transform: rotate(330deg)
+}
+
+to {
+	-webkit-transform: rotate(360deg)
+}
+}
