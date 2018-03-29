@@ -50,12 +50,16 @@ css=[]
 			<div class="box span10 oh">
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList" style="table-layout:fixed;">
 			    	<tr>
-			    		<th style="width:3%">ID</th>
-			    		<th style="width:200px">商品名称</th>
-			    		<th style="width:160px">兑换周期</th>
+			    		<th style="width:75px;">专题商品ID</th>
+			    		<th style="width:200px;">商品名称</th>
+			    		<#--
+			    		<th style="width:160px;">兑换周期</th>
+			    		-->
 			    		<th>兑换人</th>
 			    		<th>兑换时间</th>
 			    		<th>发货状态</th>
+			    		<th>运单号</th>
+			    		<th>快递公司</th>
 			    		<th>备注</th>
 			    		<th>操作</th>
 			    	</tr>
@@ -63,23 +67,27 @@ css=[]
 			    	<#list page.list as obj>
 			    		<tr class="tr">
 			    			<td class="td_center">${obj.tiId}</td>
-			    			<td class="td_center">${obj.itemTitle}</td>
-			    			<td class="td_center">${obj.startTime?string('yyyy-MM-dd HH:mm:ss')}~</br>${obj.endTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-			    			<td class="td_center">${obj.mobile}</td>
+			    			<td class="td_left">${obj.itemTitle}</td>
+			    			<#--
+			    			<td class="td_left">${obj.startTime?string('yyyy-MM-dd HH:mm:ss')}~</br>${obj.endTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+			    			-->
+			    			<td>${obj.mobile}</td>
 			    			<td class="td_center">${(obj.auctTime)?string('yyyy-MM-dd HH:mm:ss')}</td>
 			    			<td>
 			    				<#list shipmentsOrderStatus as sost>
 			    					<#if sost.code == obj.shipmentsStatus>${sost.desc}</#if>
 			    				</#list>
 			    			</td>
+			    			<td class="td_center">${obj.waybillNo}</td>
+			    			<td class="td_center">${obj.companyName}</td>
 			    			<td title="${obj.remark}" style="text-overflow:ellipsis;-moz-text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
 								${obj.remark}
 							</td>
 			    			<td class="td_center">
 			    				<#if obj.shipmentsStatus == '01'>
-				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='02'>[发货]</a>
+				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='02'>[确认发货]</a>
 				    			<#elseif obj.shipmentsStatus == '02'>
-				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='03'>[已签收]</a>
+				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='03'>[确认签收]</a>
 			    				</#if>
 			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.exchangeOrderId}" type="02">[修改备注]</a>
 			    			</td>

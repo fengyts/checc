@@ -182,9 +182,9 @@ line-height: 1;
 .form_table td{
 	padding: 5px 5px;
 }
-.td_center{text-align: center;}
-.td_left{text-align: left;}
-.td_right{text-align: right;}
+.td_center{text-align: center !important;}
+.td_left{text-align: left !important;}
+.td_right{text-align: right !important;}
 .td_right, .td_center, .td_left{
 	width: 120px;
     line-height: 21px;
