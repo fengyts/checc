@@ -134,7 +134,9 @@ public class ExchangeOrderStatusServiceImpl  implements ExchangeOrderStatusServi
 		if(null == recordId){
 			return null;
 		}
-		return exchangeOrderStatusDAO.selectExchangeOrderDetails(recordId);
+		ExchangeOrderStatusVO vo = exchangeOrderStatusDAO.selectExchangeOrderDetails(recordId);
+		vo.setRecordId(recordId);
+		return vo;
 	}
 
 	@Override

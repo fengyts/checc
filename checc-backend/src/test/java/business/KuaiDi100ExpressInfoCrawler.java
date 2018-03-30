@@ -114,7 +114,7 @@ public class KuaiDi100ExpressInfoCrawler {
 			String us = "https://www.kuaidi100.com/query?type=huitongkuaidi&postid=71262523919018";
 			URL url = new URL(us);
 			Document document = Jsoup.parse(url, 3000);
-			System.out.println(document.html());
+			System.out.println(document.text());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

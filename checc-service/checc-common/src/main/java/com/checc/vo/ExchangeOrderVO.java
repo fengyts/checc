@@ -43,7 +43,14 @@ public class ExchangeOrderVO extends BaseVO {
 	private Date shipmentsTime;
 	/** 发货备注 */
 	private String remark;
-
+	/** 运单号 */
+	private String waybillNo;
+	/** 物流公司id */
+	private Long expressId;
+	/** 物流公司名称 */
+	private String companyName;
+	
+	
 	public Long getRecordId() {
 		return recordId;
 	}
@@ -178,6 +185,30 @@ public class ExchangeOrderVO extends BaseVO {
 
 	public void setShipmentsTime(Date shipmentsTime) {
 		this.shipmentsTime = shipmentsTime;
+	}
+
+	public String getWaybillNo() {
+		return waybillNo;
+	}
+
+	public void setWaybillNo(String waybillNo) {
+		this.waybillNo = waybillNo;
+	}
+
+	public Long getExpressId() {
+		return expressId;
+	}
+
+	public void setExpressId(Long expressId) {
+		this.expressId = expressId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 }

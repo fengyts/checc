@@ -165,6 +165,7 @@ height: 37px;
 background: url('../../images/box_top.png') 0px 0px repeat-x;
 line-height: 37px;
 border-left: 1px solid #d3dbde;
+text-align: center !important;
 }
 
 .list_table_no_lh th{

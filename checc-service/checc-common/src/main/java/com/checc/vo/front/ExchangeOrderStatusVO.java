@@ -7,7 +7,10 @@ import com.checc.vo.BaseVO;
 public class ExchangeOrderStatusVO extends BaseVO {
 
 	private static final long serialVersionUID = -2585923078551129142L;
-
+	
+	/** 发货状态单id */
+	private Long exchangeOrderId;
+	
 	/** 兑换记录id */
 	private Long recordId;
 
@@ -34,8 +37,18 @@ public class ExchangeOrderStatusVO extends BaseVO {
 	private Integer auctNum;
 	/** 兑换时间  */
 	private Date auctTime;
+	/** 兑换人 */
+	private String mobile;
 	/** 发货状态 */
 	private String shipmentsStatus;
+
+	public Long getExchangeOrderId() {
+		return exchangeOrderId;
+	}
+
+	public void setExchangeOrderId(Long exchangeOrderId) {
+		this.exchangeOrderId = exchangeOrderId;
+	}
 
 	public Long getRecordId() {
 		return recordId;
@@ -131,6 +144,14 @@ public class ExchangeOrderStatusVO extends BaseVO {
 
 	public void setAuctTime(Date auctTime) {
 		this.auctTime = auctTime;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public String getShipmentsStatus() {

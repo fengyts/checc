@@ -7,12 +7,12 @@ import java.util.Date;
 /**
  * 兑换商品发货状态
  * 
- * @author fengyts Sun Jan 28 13:52:42 CST 2018
+ * @author fengyts Fri Mar 30 16:21:55 CST 2018
  */
 
 public class ExchangeOrderStatusDO extends BaseDO {
 
-	private static final long serialVersionUID = -7717083148511230887L;
+	private static final long serialVersionUID = 750292460381984462L;
 
 	/** 主键 */
 	private Long id;
@@ -25,6 +25,12 @@ public class ExchangeOrderStatusDO extends BaseDO {
 
 	/** 发货时间 */
 	private Date shipmentsTime;
+
+	/** 运单号 */
+	private String waybillNo;
+
+	/** 快递公司id，对应express_info表主键id */
+	private Long expressId;
 
 	/** 备注 */
 	private String remark;
@@ -66,6 +72,24 @@ public class ExchangeOrderStatusDO extends BaseDO {
 	 */
 	public void setShipmentsTime(Date shipmentsTime) {
 		this.shipmentsTime = shipmentsTime;
+	}
+
+	/**
+	 * 设置 运单号
+	 * 
+	 * @param waybillNo
+	 */
+	public void setWaybillNo(String waybillNo) {
+		this.waybillNo = waybillNo;
+	}
+
+	/**
+	 * 设置 快递公司id，对应express_info表主键id
+	 * 
+	 * @param expressId
+	 */
+	public void setExpressId(Long expressId) {
+		this.expressId = expressId;
 	}
 
 	/**
@@ -120,6 +144,24 @@ public class ExchangeOrderStatusDO extends BaseDO {
 	 */
 	public Date getShipmentsTime() {
 		return shipmentsTime;
+	}
+
+	/**
+	 * 获取 运单号
+	 * 
+	 * @return waybillNo
+	 */
+	public String getWaybillNo() {
+		return waybillNo;
+	}
+
+	/**
+	 * 获取 快递公司id，对应express_info表主键id
+	 * 
+	 * @return expressId
+	 */
+	public Long getExpressId() {
+		return expressId;
 	}
 
 	/**

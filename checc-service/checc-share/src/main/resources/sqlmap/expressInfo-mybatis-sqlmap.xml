@@ -37,8 +37,6 @@
 			 id = #{id}
 	</select>
 	
-	
-	
     <insert id="MybatisExpressInfoDAO_insert" parameterType="com.checc.domain.ExpressInfoDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
@@ -104,12 +102,16 @@
 			<include refid="MybatisExpressInfoDAO_dynamic_where_fields" />
  	</select>
 
+
+	<!-- 特别注意：本文件查询 where语句有自定义模糊查询 -->
+ 	<!-- 以下为自定义 -->
+ 	
  	<select id="MybatisExpressInfoDAO_select_dynamic_count" resultType="long" parameterType="com.checc.domain.ExpressInfoDO">
 	     SELECT
 	     	count(1)
 		 FROM
 		 	express_info
-	 	<include refid="MybatisExpressInfoDAO_dynamic_where_fields" />
+	 	<include refid="MybatisExpressInfoDAO_dynamic_blear_where_fields" />
  	</select>
 
  	<select id="MybatisExpressInfoDAO_select_dynamic_page_query" resultMap="ExpressInfoDOResultMap" parameterType="com.checc.domain.ExpressInfoDO">
@@ -117,9 +119,21 @@
 	     	<include refid="MybatisExpressInfoDAO_all_column_fields" />
 		 FROM
 		 	express_info
-	 	<include refid="MybatisExpressInfoDAO_dynamic_where_fields" />
-	 	ORDER BY express_info.id DESC
+	 	<include refid="MybatisExpressInfoDAO_dynamic_blear_where_fields" />
+	 	ORDER BY express_info.is_commonly_used DESC, express_info.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+ 	
+ 	<!-- 模糊查询条件 -->
+ 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
+	<sql id="MybatisExpressInfoDAO_dynamic_blear_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
+		<where>
+			<if test="name != null  and name != '' "> AND name LIKE CONCAT('%', #{name}, '%') </if>
+			<if test="briefCode != null  and briefCode != '' "> AND brief_code LIKE CONCAT('%', #{briefCode} ,'%') </if>
+			<if test="companyCode != null  and companyCode != '' "> AND company_code LIKE CONCAT('%', #{companyCode} ,'%') </if>
+			<if test="initial != null  and initial != '' "> AND initial=#{initial} </if>
+			<if test="isCommonlyUsed != null "> AND is_commonly_used=#{isCommonlyUsed} </if>
+		</where>
+ 	</sql>
 
 </mapper>

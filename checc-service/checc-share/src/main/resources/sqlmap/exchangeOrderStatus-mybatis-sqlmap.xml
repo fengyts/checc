@@ -8,32 +8,38 @@
         <result column="record_id" property="recordId"/>
         <result column="shipments_status" property="shipmentsStatus"/>
         <result column="shipments_time" property="shipmentsTime"/>
+        <result column="waybill_no" property="waybillNo"/>
+        <result column="express_id" property="expressId"/>
         <result column="remark" property="remark"/>
         <result column="modify_user_id" property="modifyUserId"/>
 	</resultMap>
 
 	<sql id="MybatisExchangeOrderStatusDAO_all_column_fields">
-	      id,record_id,shipments_status,shipments_time,remark,modify_user_id
+	      id,record_id,shipments_status,shipments_time,waybill_no,express_id,remark,modify_user_id
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisExchangeOrderStatusDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="recordId != null "> AND record_id=#{recordId} </if>
 			<if test="shipmentsStatus != null  and shipmentsStatus != '' "> AND shipments_status=#{shipmentsStatus} </if>
+			<if test="waybillNo != null  and waybillNo != '' "> AND waybill_no=#{waybillNo} </if>
+			<if test="expressId != null "> AND express_id=#{expressId} </if>
 			<if test="remark != null  and remark != '' "> AND remark=#{remark} </if>
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
  	</sql>
-
+	
 	<select id="MybatisExchangeOrderStatusDAO_selectById" parameterType="long" resultMap="ExchangeOrderStatusDOResultMap">
-	SELECT
-		<include refid="MybatisExchangeOrderStatusDAO_all_column_fields" />
-	FROM
-		exchange_order_status
-	WHERE
-		 id = #{id}
+		SELECT
+			<include refid="MybatisExchangeOrderStatusDAO_all_column_fields" />
+		FROM
+			exchange_order_status
+		WHERE
+			 id = #{id}
 	</select>
-
+	
+	
+	
     <insert id="MybatisExchangeOrderStatusDAO_insert" parameterType="com.checc.domain.ExchangeOrderStatusDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
@@ -43,6 +49,8 @@
 				record_id,
 				shipments_status,
 				shipments_time,
+				waybill_no,
+				express_id,
 				remark,
 				modify_user_id
 		)values(
@@ -50,10 +58,13 @@
 				#{recordId},
 				#{shipmentsStatus},
 				#{shipmentsTime},
+				#{waybillNo},
+				#{expressId},
 				#{remark},
 				#{modifyUserId}
 		)
     </insert>
+	
 
 	<update id="MybatisExchangeOrderStatusDAO_updateById" parameterType="com.checc.domain.ExchangeOrderStatusDO">
 		UPDATE exchange_order_status
@@ -61,6 +72,8 @@
 					record_id = #{recordId},
 					shipments_status = #{shipmentsStatus},
 					shipments_time = #{shipmentsTime},
+					waybill_no = #{waybillNo},
+					express_id = #{expressId},
 					remark = #{remark},
 					modify_user_id = #{modifyUserId}
 		WHERE
@@ -70,13 +83,16 @@
 	<delete id="MybatisExchangeOrderStatusDAO_deleteById" parameterType="long">
 		DELETE FROM exchange_order_status WHERE id = #{id}
 	</delete>
-
+	
+	
 	<update id="MybatisExchangeOrderStatusDAO_update_dynamic" parameterType="com.checc.domain.ExchangeOrderStatusDO">
 		UPDATE exchange_order_status
 		<set>
 					<if test="recordId != null ">record_id=#{recordId},</if>
 					<if test="shipmentsStatus != null  and shipmentsStatus != '' ">shipments_status=#{shipmentsStatus},</if>
 					<if test="shipmentsTime != null ">shipments_time=#{shipmentsTime},</if>
+					<if test="waybillNo != null  and waybillNo != '' ">waybill_no=#{waybillNo},</if>
+					<if test="expressId != null ">express_id=#{expressId},</if>
 					<if test="remark != null  and remark != '' ">remark=#{remark},</if>
 					<if test="modifyUserId != null ">modify_user_id=#{modifyUserId},</if>
 		</set>
@@ -108,13 +124,14 @@
 	 	ORDER BY exchange_order_status.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
  	
  	<select id="MybatisExchangeOrderStatusDAO_select_order_status_detail" parameterType="long" resultType="com.checc.vo.front.ExchangeOrderStatusVO">
  		SELECT 
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.exchange_amount exchangeAmount,
-			ar.exchange_count exchangeCount, ar.create_time auctTime,
-			eos.shipments_status shipmentsStatus, eos.shipments_time shipmentsTime
+			ar.exchange_count exchangeCount, ar.create_time auctTime, ar.mobile,
+			eos.id exchangeOrderId, eos.shipments_status shipmentsStatus, eos.shipments_time shipmentsTime
 		FROM auction_record ar
 		INNER JOIN exchange_order_status eos ON eos.record_id = ar.id
 		LEFT JOIN topic_item ti ON ti.id = ar.topic_item_id
@@ -140,11 +157,13 @@
 			tp.id topicId, tp.topic_type topicType, tp.start_time startTime, tp.end_time endTime,
 			ti.id tiId, ti.item_title itemTitle, ti.market_price marketPrice, ti.exchange_amount exchangeAmount,
 			ar.mobile, ar.id recordId, ar.create_time auctTime, ar.exchange_count auctNum,
-			eos.id exchangeOrderId, eos.shipments_status shipmentsStatus, eos.shipments_time shipmentsTime, eos.remark
+			eos.id exchangeOrderId, eos.shipments_status shipmentsStatus, eos.shipments_time shipmentsTime, eos.remark,
+			eos.waybill_no waybillNo, eos.express_id expressId,ei.name companyName
 		FROM exchange_order_status eos
 		INNER JOIN auction_record ar ON ar.id = eos.record_id
 		LEFT JOIN topic_item ti ON ti.id = ar.topic_item_id
 		LEFT JOIN topic tp ON tp.id = ti.topic_id
+		LEFT JOIN express_info ei ON ei.id = eos.express_id
 		<where>
 			<if test="mobile !=null and mobile != '' ">AND ar.mobile = #{mobile}</if>
 			<if test="itemTitle !=null and itemTitle != '' ">AND ti.item_title LIKE CONCAT('%', #{itemTitle}, '%')</if>

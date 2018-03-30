@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import com.checc.domain.ExchangeOrderStatusDO;
 import com.checc.domain.PurchaseApplyDO;
 import com.checc.dto.PurchaseExchangeStatusDTO;
+import com.checc.enums.ShipmentsStatusEnum;
 import com.checc.service.ExchangeOrderStatusService;
 import com.checc.service.PurchaseApplyService;
 import com.checc.util.ResultMessage;
 import com.checc.util.UserHandler;
 import com.checc.vo.ExchangeOrderVO;
 import com.checc.vo.PurchaseApplyVO;
+import com.checc.vo.front.ExchangeOrderStatusVO;
 
 import ng.bayue.common.Page;
 import ng.bayue.util.StringUtils;
@@ -60,8 +62,14 @@ public class AuctionManagerAO {
 		return pageResult;
 	}
 
-	public ResultMessage saveShipmentsInfo(String type, Long exchangeOrderId, String remark, String shipmentsStatus) {
+	public ResultMessage saveShipmentsInfo(String type, ExchangeOrderStatusDO eosDO) {
+		Long id = eosDO.getId();
+		if(null == id || id.longValue() < 1){
+			return ResultMessage.serverInnerError();
+		}
 		// type: 操作类型：01-修改备注；02-修改发货状态
+		String remark = eosDO.getRemark();
+		String shipmentsStatus = eosDO.getShipmentsStatus();
 		if ("01".equals(type)) {
 			if (StringUtils.isBlank(remark)) {
 				return ResultMessage.validParameterNull("备注信息不能为空");
@@ -72,16 +80,19 @@ public class AuctionManagerAO {
 			}
 		}
 		
-		ExchangeOrderStatusDO eosDO = new ExchangeOrderStatusDO();
-		eosDO.setId(exchangeOrderId);
-		eosDO.setRemark(remark);
-		eosDO.setShipmentsStatus(shipmentsStatus);
-		eosDO.setShipmentsTime(new Date());
+		if(!ShipmentsStatusEnum.HAS_SIGNFOR.code.equals(type)){
+			eosDO.setShipmentsTime(new Date());
+		}
 		eosDO.setModifyUserId(UserHandler.getUser().getId());
 		
 		exchangeOrderStatusService.update(eosDO, false);
 
 		return ResultMessage.success();
+	}
+	
+	public ExchangeOrderStatusVO selectExchangeOrderDetails(Long recordId) {
+		ExchangeOrderStatusVO vo = exchangeOrderStatusService.selectExchangeOrderDetails(recordId);
+		return null != vo ? vo : new ExchangeOrderStatusVO();
 	}
 
 }

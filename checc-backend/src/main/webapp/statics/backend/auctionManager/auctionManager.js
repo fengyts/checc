@@ -46,7 +46,7 @@ $(function() {
 		} else { // 兑换保存备注
 			_url = "saveShipmentsInfo.htm";
 			var _eoId = $("#exchangeOrderId").val();
-			_param.exchangeOrderId = _eoId;
+			_param.id = _eoId;
 			_param.type = '01'; // 此处type表示编辑备注而不是发货车状态,为固定值,用于后台操作区分
 			_param.remark = _remark;
 		}
@@ -72,7 +72,7 @@ $(function() {
 		var _this=$(this);
 		var _pcId = _this.attr('param');
 		var _pstatus = _this.attr('pstatus');
-		layer.confirm("确认？", function (){
+		layer.confirm("确认购车？", function (){
 			$.post('savePurchaseInfo.htm', {
 				"type" : "02",
 				"purchaseId" : _pcId,
@@ -94,15 +94,22 @@ $(function() {
 		});
 	});
 	
-	// 编辑发货状态
+	// 确认发货
 	$(".shipments").on('click', function (){
+		var _this=$(this);
+		var _erId = _this.attr('rId');
+		addTab("confirm_shipments_" + _erId,"发货确认","/auctionManager/confirmShipments.htm?recordId=" + _erId + "&iframeName=" + window.name);
+	});
+	
+	// 确认签收
+	$(".consignee").on('click', function (){
 		var _this=$(this);
 		var _eoId = _this.attr('param');
 		var _estatus = _this.attr("estatus");
-		layer.confirm("确认？", function(){
+		layer.confirm("确认已签收？", function(){
 			$.post('saveShipmentsInfo.htm', {
 				"type" : "02",
-				"exchangeOrderId" : _eoId,
+				"id" : _eoId,
 				"shipmentsStatus" : _estatus
 			}, function(res) {
 				if (res.result == 1) {
@@ -120,5 +127,89 @@ $(function() {
 			}, 'json');
 		});
 	});
+	
+	/**
+	 * 取消按钮 关闭当前tab页
+	 */
+	$("#btnCancel").on('click',function(){
+		var _param = $(this).attr("param");
+		parent.window.closeTab("confirm_shipments_" + _param);
+	});
+	
+	/**
+	 * 选择快递公司按钮
+	 */
+	$("#selectExpress").on('click', function (){
+		pageii = layer.open({
+			type : 2,
+			title : "物流公司列表",
+			area : [ '850px', '650px' ],
+			content : domain + '/expressInfo/list'
+		});
+	});
+	
+	/**
+	 * 确认发货
+	 */
+	$("#saveShipmentsStatus").on('click', function() {
+		var _id = $("#exchangeOrderId").val(),
+			_expressId = $("#expressId").val(),
+			_name = $("#name").val(),
+			_waybillNo = $("#waybillNo").val()
+			_remark = $("#remark").val();
+		if(undefined == _id || null == _id || '' == _id){
+			layer.alert("服务器异常", {icon : 0});
+			return;
+		}
+		if (undefined == _expressId || null == _expressId
+				|| '' == _expressId || undefined == _name
+				|| null == _name || '' == _name) {
+			layer.alert("必须选择一个公司", {icon : 0});
+			return;
+		}
+		if(undefined == _waybillNo || null == _waybillNo || '' == _waybillNo){
+			layer.alert("必须输入快递单号", {icon : 0});
+			return;
+		}
+		var _params = {};
+		_params.shipmentsStatus = '02'; // 置为已发货状态
+		_params.id = _id;
+		_params.name = _name;
+		_params.expressId = _expressId;
+		_params.waybillNo = _waybillNo;
+		_params.remark = _remark;
+		
+		layer.confirm("确认发货？", function(){
+			$.post('saveShipmentsInfo.htm', _params, function(res) {
+				if (res.result == 1) {
+					layer.msg(res.message, {
+						time : 1000
+					}, function() {
+						var listIframeName = $("#listIframeName").val();
+						parent.window.frames[listIframeName].location.reload();
+						$("#btnCancel").trigger('click');
+					});
+				} else {
+					layer.msg(res.message, {
+						time : 1000
+					});
+				}
+			}, 'json');
+		});
+		
+	});
+	
+	
+	/**
+	 * 查看物流信息
+	 */
+	$(".expressage a").on('click', function() {
+		var _this = $(this), _a = _this.find("a");
+		var _eoId = _a.attr("eoId"); _waybillNo = _a.text();
+		
+		var _that = _this;
+		layer.tips("亲，功能尚未上线", _that, {tips: 1, time: 1500});
+	});
+	
 
 });

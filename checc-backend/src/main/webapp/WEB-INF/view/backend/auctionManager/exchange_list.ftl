@@ -58,7 +58,7 @@ css=[]
 			    		<th>兑换人</th>
 			    		<th>兑换时间</th>
 			    		<th>发货状态</th>
-			    		<th>运单号</th>
+			    		<th>运单号(点击可查看物流)</th>
 			    		<th>快递公司</th>
 			    		<th>备注</th>
 			    		<th>操作</th>
@@ -78,16 +78,18 @@ css=[]
 			    					<#if sost.code == obj.shipmentsStatus>${sost.desc}</#if>
 			    				</#list>
 			    			</td>
-			    			<td class="td_center">${obj.waybillNo}</td>
+			    			<td class="td_center expressage" title="点击查看物流">
+								<a href="#" style="color:#6666ff" eoId=${obj.exchangeOrderId}>${obj.waybillNo}</a>
+							</td>
 			    			<td class="td_center">${obj.companyName}</td>
 			    			<td title="${obj.remark}" style="text-overflow:ellipsis;-moz-text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
 								${obj.remark}
 							</td>
 			    			<td class="td_center">
 			    				<#if obj.shipmentsStatus == '01'>
-				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='02'>[确认发货]</a>
+				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='02' rId="${obj.recordId}">[确认发货]</a>
 				    			<#elseif obj.shipmentsStatus == '02'>
-				    				<a href="javascript:void(0);" style="color:blue;" class="shipments" param="${obj.exchangeOrderId}" estatus='03'>[确认签收]</a>
+				    				<a href="javascript:void(0);" style="color:blue;" class="consignee" param="${obj.exchangeOrderId}" estatus='03'>[确认签收]</a>
 			    				</#if>
 			    				<a href="javascript:void(0);" style="color:blue;" class="viewremark" param="${obj.exchangeOrderId}" type="02">[修改备注]</a>
 			    			</td>
