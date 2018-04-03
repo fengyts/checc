@@ -47,6 +47,16 @@ public interface TopicService extends GeneralService<TopicDO, TopicDO> {
 	
 	/**
 	 * <pre>
+	 * 获取当前最新一期的专题
+	 * </pre>
+	 *
+	 * @param topicType
+	 * @return
+	 */
+	TopicDO selectLatest(String topicType);
+	
+	/**
+	 * <pre>
 	 * 获取往期竞拍商品
 	 * </pre>
 	 *

@@ -6,6 +6,7 @@
 	<resultMap type="com.checc.domain.TopicDO" id="TopicDOResultMap">
 		<id column="id" property="id" />
         <result column="topic_type" property="topicType"/>
+        <result column="period_no" property="periodNo"/>
         <result column="start_time" property="startTime"/>
         <result column="end_time" property="endTime"/>
         <result column="status" property="status"/>
@@ -20,12 +21,13 @@
 	</resultMap>
 
 	<sql id="MybatisTopicDAO_all_column_fields">
-	      id,topic_type,start_time,end_time,status,refund_currency_status,sort,description,remark,create_user_id,create_time,modify_user_id,modify_time
+	      id,topic_type,period_no,start_time,end_time,status,refund_currency_status,sort,description,remark,create_user_id,create_time,modify_user_id,modify_time
  	</sql>
 	<!-- 只有varchar char text类型 做 !='' 判断，生成代码时,其他类型时只做!=null 决断 0或fasle与空''是相同的，在mybatis中的动态语句中 -->
 	<sql id="MybatisTopicDAO_dynamic_where_fields"><!-- xml转义字符需要 <![CDATA[   ]]> 标签-->
 		<where>
 			<if test="topicType != null  and topicType != '' "> AND topic_type=#{topicType} </if>
+			<if test="periodNo != null  and periodNo != '' "> AND period_no=#{periodNo} </if>
 			<if test="status != null  and status != '' "> AND status=#{status} </if>
 			<if test="refundCurrencyStatus != null "> AND refund_currency_status=#{refundCurrencyStatus} </if>
 			<if test="sort != null "> AND sort=#{sort} </if>
@@ -35,16 +37,18 @@
 			<if test="modifyUserId != null "> AND modify_user_id=#{modifyUserId} </if>
 		</where>
  	</sql>
-
+	
 	<select id="MybatisTopicDAO_selectById" parameterType="long" resultMap="TopicDOResultMap">
-	SELECT
-		<include refid="MybatisTopicDAO_all_column_fields" />
-	FROM
-		topic
-	WHERE
-		 id = #{id}
+		SELECT
+			<include refid="MybatisTopicDAO_all_column_fields" />
+		FROM
+			topic
+		WHERE
+			 id = #{id}
 	</select>
-
+	
+	
+	
     <insert id="MybatisTopicDAO_insert" parameterType="com.checc.domain.TopicDO" useGeneratedKeys="true">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID() AS id
@@ -52,6 +56,7 @@
         INSERT INTO topic(
 				id,
 				topic_type,
+				period_no,
 				start_time,
 				end_time,
 				status,
@@ -66,6 +71,7 @@
 		)values(
 				#{id},
 				#{topicType},
+				#{periodNo},
 				#{startTime},
 				#{endTime},
 				#{status},
@@ -79,11 +85,13 @@
 				#{modifyTime}
 		)
     </insert>
+	
 
 	<update id="MybatisTopicDAO_updateById" parameterType="com.checc.domain.TopicDO">
 		UPDATE topic
 		SET
 					topic_type = #{topicType},
+					period_no = #{periodNo},
 					start_time = #{startTime},
 					end_time = #{endTime},
 					status = #{status},
@@ -101,11 +109,13 @@
 	<delete id="MybatisTopicDAO_deleteById" parameterType="long">
 		DELETE FROM topic WHERE id = #{id}
 	</delete>
-
+	
+	
 	<update id="MybatisTopicDAO_update_dynamic" parameterType="com.checc.domain.TopicDO">
 		UPDATE topic
 		<set>
 					<if test="topicType != null  and topicType != '' ">topic_type=#{topicType},</if>
+					<if test="periodNo != null  and periodNo != '' ">period_no=#{periodNo},</if>
 					<if test="startTime != null ">start_time=#{startTime},</if>
 					<if test="endTime != null ">end_time=#{endTime},</if>
 					<if test="status != null  and status != '' ">status=#{status},</if>
@@ -145,6 +155,7 @@
 	 	ORDER BY topic.id DESC
 	 	Limit #{start},#{pageSize}
  	</select>
+
 
  	
  	<select id="MybatisTopicDAO_select_all_byStatus" resultMap="TopicDOResultMap" parameterType="map">
@@ -219,6 +230,17 @@
  		LIMIT 1
  	</select>
  	
+ 	<select id="MybatisTopicDAO_selectLatest"  resultMap="TopicDOResultMap" parameterType="string">
+ 		SELECT
+ 			<include refid="MybatisTopicDAO_all_column_fields" />
+ 		FROM 
+ 			topic
+ 		WHERE
+ 			topic_type = #{_parameter}
+ 		ORDER BY id DESC
+ 		LIMIT 1
+ 	</select>
+ 	
  	<select id="MybatisTopicDAO_countPreviousAuctions" resultType="long">
  		SELECT 
  			COUNT(1)
@@ -277,5 +299,7 @@
 		WHERE tp.topic_type = '01' AND tp.end_time &lt; NOW() AND art.current_auct_price &gt;= ti.floor_price
  		
  	</select>
+ 	
+ 	
 
 </mapper>

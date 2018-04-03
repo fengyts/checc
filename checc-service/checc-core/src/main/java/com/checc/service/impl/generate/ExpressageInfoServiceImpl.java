@@ -74,6 +74,9 @@ public class ExpressageInfoServiceImpl implements ExpressageInfoService {
 
 	@Override
 	public ExpressageInfoDTO parseExpressInfo(String companyCode, String waybillNo) {
+		if (StringUtils.isBlank(companyCode) || StringUtils.isBlank(waybillNo)) {
+			return null;
+		}
 		String expressInfoJson = getExpressageInfo(companyCode, waybillNo);
 		ExpressageInfoDTO dto = parseJsonExpressInfo(expressInfoJson);
 		return dto;

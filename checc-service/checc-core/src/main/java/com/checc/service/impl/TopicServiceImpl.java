@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.checc.dao.TopicDAO;
 import com.checc.domain.TopicDO;
 import com.checc.enums.TopicStatusEnum;
+import com.checc.enums.TopicTypeEnum;
 import com.checc.service.TopicService;
 import com.checc.vo.front.TopicItemVO;
 
@@ -23,6 +24,7 @@ import ng.bayue.common.BaseDO;
 import ng.bayue.common.Page;
 import ng.bayue.exception.CommonDAOException;
 import ng.bayue.exception.CommonServiceException;
+import ng.bayue.util.DateUtils;
 
 @Service(value = "topicService")
 public class TopicServiceImpl implements TopicService {
@@ -33,8 +35,13 @@ public class TopicServiceImpl implements TopicService {
 	private TopicDAO topicDAO;
 
 	@Override
-	public Long insert(TopicDO topicDO) throws CommonServiceException {
+	public synchronized Long insert(TopicDO topicDO) throws CommonServiceException {
 		try {
+			String topicType = topicDO.getTopicType();
+			TopicDO previousTopic = this.selectLatest(topicType);
+			String previousPeriodNo = null == previousTopic ? "" : previousTopic.getPeriodNo();
+			String periodNo = generatePeriodNo(previousPeriodNo, topicType);
+			topicDO.setPeriodNo(periodNo);
 			return topicDAO.insert(topicDO);
 		} catch (CommonDAOException e) {
 			logger.error(e);
@@ -199,6 +206,14 @@ public class TopicServiceImpl implements TopicService {
 		}
 		return topicDAO.selectPreviousOne(topicType);
 	}
+	
+	@Override
+	public TopicDO selectLatest(String topicType) {
+		if(StringUtils.isBlank(topicType)){
+			return null;
+		}
+		return topicDAO.selectLatest(topicType);
+	}
 
 	@Override
 	public Page<TopicItemVO> queryPreviousAuctions(Integer pageNo, Integer pageSize) {
@@ -227,6 +242,44 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public Long totalPreviousNum() {
 		return topicDAO.totalPreviousNum();
+	}
+	
+	private static String generatePeriodNo(String previousPeriodNo, String topicType) {
+		String prefixLetter = "";
+		if (TopicTypeEnum.TOPIC_AUCTION.getCode().equals(topicType)) {
+			prefixLetter = "A";
+		} else {
+			prefixLetter = "E";
+		}
+		StringBuilder periodNo = new StringBuilder(prefixLetter);
+		periodNo.append(DateUtils.formatDate(new Date(), "yyMMdd"));
+		if (StringUtils.isBlank(previousPeriodNo)) {
+			periodNo.append("01");
+		} else {
+			Calendar calendar = Calendar.getInstance();
+			int year = calendar.get(Calendar.YEAR) % 100;
+			String currentTotalPeriod = "01";
+			if (year == Integer.parseInt(previousPeriodNo.substring(1, 3))) {
+				int tem = Integer.parseInt(previousPeriodNo.substring(7)) + 1;
+				if(tem < 10){ // 不足2位，补0
+					currentTotalPeriod = "0" + tem;
+				} else {
+					currentTotalPeriod = String.valueOf(tem);
+				}
+			}
+			periodNo.append(currentTotalPeriod);
+		}
+
+		return periodNo.toString();
+	}
+	
+	
+	public static void main(String[] args) {
+		String previousPeriodNo = "A18040310";
+//		System.out.println(previousPeriodNo.substring(1, 3));
+		String topicType = "02";
+		String periodNo = generatePeriodNo(previousPeriodNo, topicType);
+		System.out.println(periodNo);
 	}
 	
 	

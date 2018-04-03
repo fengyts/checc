@@ -98,6 +98,11 @@ public class MybatisTopicDAO extends MybatisBaseDAO implements TopicDAO {
 	public Long totalPreviousNum() {
 		return getSqlSession().selectOne(getStatement("totalPreviousNum"));
 	}
+
+	@Override
+	public TopicDO selectLatest(String topicType) {
+		return getSqlSession().selectOne(getStatement("selectLatest"));
+	}
 	
 	
 

@@ -43,6 +43,7 @@ css=[]
 				    	<input class="ml10 btn btn82 btn_search" onclick="$('#topicForm').submit();" type="button" value="查询" name="button" />
 				    </a>
 				    <input class="btn btn82 btn_add" type ="button" value="新增" id="addTopic" />
+				    <span><font color='#66a3ff'>(注：专题期号由系统自动生成，规则：专题类型（竞拍-A,兑换-E）+年份后2位+专题创建月份+期数创建日期（天）+当前年总期数 )</font></span>
 				</div>
 			</div>
 		</div>
@@ -53,6 +54,7 @@ css=[]
 			    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table" id="dataList">
 			    	<tr>
 			    		<th width="5%">ID</th>
+			    		<th width="100px">专题期号</th>
 			    		<th>专题类型</th>
 			    		<th>专题状态</th>
 			    		<th style="width:160px;">开始时间</th>
@@ -64,6 +66,7 @@ css=[]
 			    	<#list page.list as obj>
 			    		<tr class="tr">
 			    			<td class="td_center">${obj.id}</td>
+			    			<td>${obj.periodNo}</td>
 			    			<td class="td_center">
 			    				<#list topicTypes as type>
 			    					<#if type.code == obj.topicType>

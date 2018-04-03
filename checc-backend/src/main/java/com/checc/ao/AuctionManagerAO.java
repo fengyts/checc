@@ -135,17 +135,10 @@ public class AuctionManagerAO {
 	 * @return
 	 */
 	public ExpressageInfoDTO getShipmentsInfo(Long exchangeOrderId, String waybillNo) {
-//		if (null == exchangeOrderId || StringUtils.isBlank(waybillNo)) {
-//			return ResultMessage.failure(Messages.ServerInnerError);
-//		}
+		if (null == exchangeOrderId || StringUtils.isBlank(waybillNo)) {
+			return null;
+		}
 		ExchangeOrderStatusDO eosDO = exchangeOrderStatusService.selectById(exchangeOrderId);
-//		if (null == eosDO) {
-//			return ResultMessage.failure("对不起, 您尚未发货");
-//		}
-//		if (ShipmentsStatusEnum.NOT_SHIPMENTS.code.equals(eosDO.getShipmentsStatus())
-//				|| StringUtils.isBlank(eosDO.getWaybillNo())) {
-//			return ResultMessage.failure("对不起, 您尚未发货");
-//		}
 
 		ExpressInfoDO expressInfo = expressInfoService.selectById(eosDO.getExpressId());
 
@@ -155,8 +148,6 @@ public class AuctionManagerAO {
 		dto.setCompanyCode(expressInfo.getCompanyCode());
 		dto.setWaybillNo(waybillNo);
 		
-//		ResultMessage msg = new ResultMessage(dto);
-//		return msg;
 		return dto;
 
 	}

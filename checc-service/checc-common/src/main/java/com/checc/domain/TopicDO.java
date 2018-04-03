@@ -7,18 +7,21 @@ import java.util.Date;
 /**
  * 专题
  * 
- * @author fengyts Wed Jan 03 13:46:19 CST 2018
+ * @author fengyts Tue Apr 03 13:25:15 CST 2018
  */
 
 public class TopicDO extends BaseDO {
 
-	private static final long serialVersionUID = 2302286599035798274L;
+	private static final long serialVersionUID = -7860589911652792863L;
 
 	/** 主键 */
 	private Long id;
 
 	/** 专题类型：01-竞拍；02-兑换 */
 	private String topicType;
+
+	/** 专题期号，规则：专题类型（竞拍-A,兑换-E）+年份后2位+专题创建月份+期数创建日期（天）+当前年总期数 */
+	private String periodNo;
 
 	/** 专题开始时间 */
 	private Date startTime;
@@ -69,6 +72,15 @@ public class TopicDO extends BaseDO {
 	 */
 	public void setTopicType(String topicType) {
 		this.topicType = topicType;
+	}
+
+	/**
+	 * 设置 专题期号，规则：专题类型（竞拍-A；兑换-E）+年份后2位+本年总期数+当前期数月份+期数创建日期（天）
+	 * 
+	 * @param periodNo
+	 */
+	public void setPeriodNo(String periodNo) {
+		this.periodNo = periodNo;
 	}
 
 	/**
@@ -186,6 +198,15 @@ public class TopicDO extends BaseDO {
 	 */
 	public String getTopicType() {
 		return topicType;
+	}
+
+	/**
+	 * 获取 专题期号，规则：专题类型（竞拍-A；兑换-E）+年份后2位+本年总期数+当前期数月份+期数创建日期（天）
+	 * 
+	 * @return periodNo
+	 */
+	public String getPeriodNo() {
+		return periodNo;
 	}
 
 	/**

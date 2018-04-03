@@ -26,7 +26,7 @@ css=[
 			  	<caption>确认基本信息</caption>
 				<tbody>
 					<tr>
-						<td class="col-md-2">收货人：</td>
+						<td class="col-md-2">兑换人：</td>
 						<td class="td_left">${vo.mobile}</td>
 					</tr>
 					<tr>
