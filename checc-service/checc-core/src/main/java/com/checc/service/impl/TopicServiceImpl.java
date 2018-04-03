@@ -274,14 +274,5 @@ public class TopicServiceImpl implements TopicService {
 	}
 	
 	
-	public static void main(String[] args) {
-		String previousPeriodNo = "A18040310";
-//		System.out.println(previousPeriodNo.substring(1, 3));
-		String topicType = "02";
-		String periodNo = generatePeriodNo(previousPeriodNo, topicType);
-		System.out.println(periodNo);
-	}
-	
-	
 
 }
