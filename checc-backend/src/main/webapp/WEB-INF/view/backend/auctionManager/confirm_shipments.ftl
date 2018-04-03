@@ -12,6 +12,9 @@ css=[
 	td {
 		height: 35px;
 	}
+	tbody {
+		background: #f2f2f2;
+	}
 </style>
 <div class="panel-body box_border">
 <input type="hidden" id="listIframeName" value="${listIframeName}">

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.checc.ao.AuctionManagerAO;
 import com.checc.backend.constants.BackendConstant;
 import com.checc.domain.ExchangeOrderStatusDO;
+import com.checc.dto.ExpressageInfoDTO;
 import com.checc.dto.PurchaseExchangeStatusDTO;
 import com.checc.enums.PurchaseStatusEnum;
 import com.checc.enums.ShipmentsStatusEnum;
@@ -116,12 +117,57 @@ public class AuctionManagerController {
 		return auctionManagerAO.saveShipmentsInfo(type, eoDO);
 	}
 	
+	/**
+	 * <pre>
+	 * 发货确认信息详情
+	 * </pre>
+	 *
+	 * @param model
+	 * @param recordId
+	 * @param iframeName
+	 * @return
+	 */
 	@RequestMapping("/confirmShipments")
 	public String confirmShipmentsPage(Model model, Long recordId, String iframeName){
 		model.addAttribute("listIframeName", iframeName);
 		ExchangeOrderStatusVO vo = auctionManagerAO.selectExchangeOrderDetails(recordId);
 		model.addAttribute("vo", vo);
 		return BackendConstant.BACKEND_VIEW_PATH + "auctionManager/confirm_shipments";
+	}
+	
+	/**
+	 * <pre>
+	 * 校验是否发货
+	 * </pre>
+	 *
+	 * @param exchangeOrderId
+	 * @param waybillNo
+	 * @return
+	 */
+	@RequestMapping("/checkConsignment")
+	@ResponseBody
+	public ResultMessage checkConsignment(Long exchangeOrderId){
+		boolean hasConsign = auctionManagerAO.hasConsign(exchangeOrderId);
+		if(hasConsign){
+			return ResultMessage.success();
+		}
+		return ResultMessage.failure("对不起, 您尚未发货");
+	}
+	
+	/**
+	 * <pre>
+	 * 查看物流信息
+	 * </pre>
+	 *
+	 * @param exchangeOrderId
+	 * @param waybillNo
+	 * @return
+	 */
+	@RequestMapping("/shipmentsInfo")
+	public String getShipmentsInfo(Model model, Long exchangeOrderId, String waybillNo){
+		ExpressageInfoDTO dto = auctionManagerAO.getShipmentsInfo(exchangeOrderId, waybillNo);
+		model.addAttribute("expressage", dto);
+		return BackendConstant.BACKEND_VIEW_PATH + "auctionManager/expressage_info";
 	}
 
 }

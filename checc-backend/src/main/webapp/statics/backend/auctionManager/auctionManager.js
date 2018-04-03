@@ -144,7 +144,7 @@ $(function() {
 			type : 2,
 			title : "物流公司列表",
 			area : [ '850px', '650px' ],
-			content : domain + '/expressInfo/list'
+			content : [domain + '/expressInfo/list', 'no']
 		});
 	});
 	
@@ -203,12 +203,35 @@ $(function() {
 	/**
 	 * 查看物流信息
 	 */
-	$(".expressage a").on('click', function() {
-		var _this = $(this), _a = _this.find("a");
-		var _eoId = _a.attr("eoId"); _waybillNo = _a.text();
-		
-		var _that = _this;
-		layer.tips("亲，功能尚未上线", _that, {tips: 1, time: 1500});
+	$(".expressage a").on('click',function() {
+		var _this = $(this);
+		var _eoId = _this.attr("eoId"), _waybillNo = _this.text();
+		if (undefined == _eoId || null == _eoId || '' == _eoId
+				|| undefined == _waybillNo || null == _waybillNo
+				|| '' == _waybillNo) {
+			layer.msg("系统异常", {time : 1500});
+			return;
+		}
+
+		$.post('checkConsignment.htm', {"exchangeOrderId" : _eoId}, function(res) {
+			if (res.result == 1) {
+				layer.open({
+					type : 2,
+					title : '物流信息跟踪',
+					shade : 0.3,
+					maxmin : true,
+					fix : false,
+					scrollbar : false,
+					area : [ '900px', '550px' ],
+					content : 'shipmentsInfo.htm?exchangeOrderId=' + _eoId + '&waybillNo=' + _waybillNo,
+				});
+			} else {
+				layer.msg(res.message, {
+					time : 2000
+				});
+			}
+		}, 'json');
+
 	});
 	
 

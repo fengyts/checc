@@ -1,5 +1,7 @@
 package com.checc.service.generate;
 
+import com.checc.dto.ExpressageInfoDTO;
+
 /**
  * <pre>
  * 获取物流信息
@@ -20,5 +22,15 @@ public interface ExpressageInfoService {
 	 * @return
 	 */
 	String getExpressageInfo(String companyCode, String waybillNo);
+	
+	/**
+	 * <pre>
+	 * 解析物流信息
+	 * </pre>
+	 *
+	 * @param expressInfoJson
+	 * @return
+	 */
+	ExpressageInfoDTO parseExpressInfo(String companyCode, String waybillNo);
 	
 }
