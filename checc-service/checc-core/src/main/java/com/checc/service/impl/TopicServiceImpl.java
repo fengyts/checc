@@ -261,18 +261,18 @@ public class TopicServiceImpl implements TopicService {
 			String currentTotalPeriod = "01";
 			if (year == Integer.parseInt(previousPeriodNo.substring(1, 3))) {
 				int tem = Integer.parseInt(previousPeriodNo.substring(7)) + 1;
-				if(tem < 10){ // 不足2位，补0
-					currentTotalPeriod = "0" + tem;
-				} else {
-					currentTotalPeriod = String.valueOf(tem);
-				}
+//				if(tem < 10){ // 不足2位，补0
+//					currentTotalPeriod = "0" + tem;
+//				} else {
+//					currentTotalPeriod = String.valueOf(tem);
+//				}
+				currentTotalPeriod = String.format("%02d", tem);
 			}
 			periodNo.append(currentTotalPeriod);
 		}
 
 		return periodNo.toString();
 	}
-	
 	
 
 }
