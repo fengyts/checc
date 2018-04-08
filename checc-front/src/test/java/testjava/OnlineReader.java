@@ -109,24 +109,30 @@ public class OnlineReader {
 	
 	public static void read1 (){
 		try {
+			String url = "https://www.qu.la/book/236/187732.html";
 			URL sourceLink = new URL(url);
 			Document html = Jsoup.parse(sourceLink, 5000);
 //			System.out.println(html.toString());
 			Element h1 = html.getElementsByTag("h1").get(0);
 			String title = h1.text();
-			System.out.println(title);
+//			System.out.println(title);
 			Element contentDiv = html.getElementById("content");
 			String contentStr = contentDiv.html();
 //			System.out.println(contentStr);
-			contentStr = contentStr.replaceAll("<br>\n<br>&nbsp;&nbsp;&nbsp;&nbsp;", "");
+//			contentStr = contentStr.replaceAll("<br>\n<br>　　&nbsp;&nbsp;&nbsp;&nbsp;", "");
+			contentStr = contentStr.replaceAll("<br>　　\n<br>　　&nbsp;&nbsp;&nbsp;&nbsp;", "");
 			System.out.println(contentStr);
-			Elements js = html.getElementsByTag("script");//("var nextpage=");
-			Element e = js.last();
-			BufferedReader br = new BufferedReader(new StringReader(e.html()));
+			
 			String line = "";
+			
+			Elements js = html.getElementsByTag("script");//("var nextpage=");
+//			Element e = js.last();
+			Element e = js.get(js.size()-2);
+			BufferedReader br = new BufferedReader(new StringReader(e.html()));
 			while(null != (line = br.readLine())){
 				if(line.startsWith("var nextpage=")){
-					line = line.substring(21, line.lastIndexOf("."));
+//					line = line.substring(21, line.lastIndexOf("."));
+					line = line.substring(14, line.lastIndexOf("."));
 					break;
 				}
 			}

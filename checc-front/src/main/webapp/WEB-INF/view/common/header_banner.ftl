@@ -12,3 +12,19 @@
         </div>
     </div>
 </div>
+
+<#-- banner滚动置顶js控制 ,另见base_new.css样式 -->
+<#--
+<script type="text/javascript">
+	$(function(){
+		$(window).on('scroll', function(){
+			var _scrollTop = $(document).scrollTop();
+			if(_scrollTop > 110){
+				$(".hd_m").addClass("top");
+			} else {
+				$(".hd_m").removeClass("top");
+			}
+		});
+	});
+</script>
+-->
