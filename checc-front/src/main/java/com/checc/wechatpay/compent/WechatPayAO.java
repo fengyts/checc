@@ -273,9 +273,9 @@ public class WechatPayAO {
 		}
 
 		// 校验订单金额, 单位：分
-		int depositAmt = dpOrder.getDepositAmount() * 100; // 本系统存的是元,这里需要转成分
-		Integer wechatAmt = Integer.valueOf(total_fee);
-		if (depositAmt != wechatAmt.intValue()) {
+		double depositAmt = dpOrder.getDepositAmount() * dpOrder.getDiscount().doubleValue() * 100; // 本系统存的是元,这里需要转成分
+		double wechatAmt = Double.valueOf(total_fee);
+		if (depositAmt != wechatAmt) {
 			logger.info(
 					"wechat pay callback failure, order amount is invalid, wechat notify amount param: {}",
 					wechatAmt);

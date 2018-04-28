@@ -1,43 +1,27 @@
 package testjava;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.activation.MimeType;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.DecompressingEntity;
-import org.apache.http.client.entity.DeflateDecompressingEntity;
-import org.apache.http.client.entity.InputStreamFactory;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import ng.bayue.constants.CharsetConstant;
 import ng.bayue.util.StringUtils;
-import ng.bayue.util.net.RequestUtils;
 
 public class OnlineReader {
 	
@@ -45,7 +29,7 @@ public class OnlineReader {
 	private static final String CHARSET = CharsetConstant.UTF8;
 	
 //	public static final String url = "http://www.biqukan.com/1_1680/18577593.html";
-	public static final String url = "https://www.xxbiquge.com/0_347/8899935.html";
+	public static final String url = "https://www.xxbiquge.com/76_76060/120394.html";
 	
 	public static void read(){
 		try {
@@ -109,34 +93,56 @@ public class OnlineReader {
 	
 	public static void read1 (){
 		try {
-			String url = "https://www.qu.la/book/236/187732.html";
+//			String url = "https://www.qu.la/book/236/187807.html";
 			URL sourceLink = new URL(url);
 			Document html = Jsoup.parse(sourceLink, 5000);
 //			System.out.println(html.toString());
 			Element h1 = html.getElementsByTag("h1").get(0);
 			String title = h1.text();
-//			System.out.println(title);
+			System.out.println(title);
 			Element contentDiv = html.getElementById("content");
 			String contentStr = contentDiv.html();
 //			System.out.println(contentStr);
-//			contentStr = contentStr.replaceAll("<br>\n<br>　　&nbsp;&nbsp;&nbsp;&nbsp;", "");
-			contentStr = contentStr.replaceAll("<br>　　\n<br>　　&nbsp;&nbsp;&nbsp;&nbsp;", "");
-			System.out.println(contentStr);
+			contentStr = contentStr.replaceAll("<br>&nbsp;&nbsp;&nbsp;&nbsp;", "").replaceAll("\n<br>", "");
+//			contentStr = contentStr.replaceAll("<br>　　\n<br>　　&nbsp;&nbsp;&nbsp;&nbsp;", "");
+			BufferedReader br = new BufferedReader(new StringReader(contentStr));
+			String ctx = "";
+			StringBuilder sb = new StringBuilder();
+			while (null != (ctx = br.readLine())) {
+				int len = ctx.length();
+//				if (len > 100) {
+//					String t = ctx.substring(100);
+//					ctx = ctx.substring(0, 100) + "\n" + t;
+//				}
+				int l = len / 110;
+				if (len > 110) {
+					StringBuilder st = new StringBuilder(ctx);
+					for (int j = 1; j <= l; j++) {
+						st.insert(110 * j, "\n");
+					}
+					sb.append(st).append("\n");
+				} else {
+					sb.append(ctx).append("\n");
+				}
+				
+			}
+			System.out.println(sb.toString());
 			
 			String line = "";
 			
 			Elements js = html.getElementsByTag("script");//("var nextpage=");
-//			Element e = js.last();
-			Element e = js.get(js.size()-2);
-			BufferedReader br = new BufferedReader(new StringReader(e.html()));
+			Element e = js.last();
+//			Element e = js.get(js.size()-2);
+			br = new BufferedReader(new StringReader(e.html()));
 			while(null != (line = br.readLine())){
 				if(line.startsWith("var nextpage=")){
-//					line = line.substring(21, line.lastIndexOf("."));
-					line = line.substring(14, line.lastIndexOf("."));
+					line = line.substring(21, line.lastIndexOf("."));
+//					line = line.substring(14, line.lastIndexOf("."));
 					break;
 				}
 			}
 			System.out.println("nextPage:" + line);
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
