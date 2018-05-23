@@ -1,6 +1,6 @@
 /**
-  * Copyright 2018 bejson.com 
-  */
+ * Copyright 2018 bejson.com 
+ */
 package com.checc.myeleme.domain;
 
 import java.util.List;
@@ -11,8 +11,10 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Foods {
+public class Foods extends BaseDomain {
 
+	private static final long serialVersionUID = 852446523270458501L;
+	
 	private String name;
 	private Integer price;
 	private Double oldPrice;

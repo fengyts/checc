@@ -20,17 +20,17 @@ public class DataParse {
 	private static Logger logger = LoggerFactory.getLogger(DataParse.class);
 	
 	public static Seller getSeller() {
-		JsonRootBean data = parseData();
+		JsonRootBean data = parseAllData();
 		return data.getSeller();
 	}
 
 	public static List<Goods> getGoods() {
-		JsonRootBean data = parseData();
+		JsonRootBean data = parseAllData();
 		return data.getGoods();
 	}
 
 	public static List<Ratings> getRatings() {
-		JsonRootBean data = parseData();
+		JsonRootBean data = parseAllData();
 		return data.getRatings();
 	}
 	
@@ -38,7 +38,7 @@ public class DataParse {
 		return com.alibaba.fastjson.JSONObject.toJSONString(o);
 	}
 	
-	public static JsonRootBean parseData(){
+	public static JsonRootBean parseAllData(){
 		JsonRootBean json = null;
 		BufferedReader br = null;
 		try {
@@ -96,8 +96,6 @@ public class DataParse {
 //		parseData();
 //		String str = toString(getSeller());
 //		System.out.println(str);
-		String file = DataParse.class.getResource("/template/data.json").getPath();
-		System.out.println(file);
 	}
 
 }

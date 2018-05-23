@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.checc.myeleme.domain.ResultJson;
+
 import constants.CommonPathConstant;
 
 @Controller
@@ -12,26 +14,32 @@ public class ElemeApiController {
 
 	@RequestMapping(value = "seller")
 	@ResponseBody
-	public String seller() {
-		return DataParse.toString(DataParse.getSeller());
+	public ResultJson seller() {
+//		return DataParse.toString(DataParse.getSeller());
+		return ResultJson.success(DataParse.getSeller());
 	}
 
 	@RequestMapping(value = "goods")
 	@ResponseBody
 	public String goods() {
 		return DataParse.toString(DataParse.getGoods());
+//		ResultJson json = ResultJson.success(DataParse.getGoods());
+//		return json;
 	}
 
 	@RequestMapping(value = "ratings")
 	@ResponseBody
-	public String ratings() {
-		return DataParse.toString(DataParse.getRatings());
+	public ResultJson ratings() {
+//		return DataParse.toString(DataParse.getRatings());
+		return ResultJson.success(DataParse.getRatings());
 	}
 	
 	@RequestMapping(value = "allData")
 	@ResponseBody
-	public String allData() {
-		return DataParse.toString(DataParse.parseData());
+	public ResultJson allData() {
+//		return DataParse.toString(DataParse.parseData());
+		return ResultJson.success(DataParse.parseAllData());
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 /**
-  * Copyright 2018 bejson.com 
-  */
+ * Copyright 2018 bejson.com 
+ */
 package com.checc.myeleme.domain;
 
 /**
@@ -9,7 +9,9 @@ package com.checc.myeleme.domain;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Supports {
+public class Supports extends BaseDomain {
+
+	private static final long serialVersionUID = 1902550438129581554L;
 
 	private Integer type;
 	private String description;
