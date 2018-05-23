@@ -6,5 +6,8 @@ public class CommonPathConstant {
 	public static final String PATH_ERROR_500 = "/error/error";
 	/** 非法请求返回页面 */
 	public static final String PATH_ERROR_UNSAFE_REQ = "/error/error";
+	
+	/** vuejs仿饿了么前端api路径 */
+	public static final String PATH_API = "/api/";
 
 }
