@@ -14,32 +14,38 @@ public class ElemeApiController {
 
 	@RequestMapping(value = "seller")
 	@ResponseBody
-	public ResultJson seller() {
-//		return DataParse.toString(DataParse.getSeller());
-		return ResultJson.success(DataParse.getSeller());
+	public ResultJson seller() throws Exception {
+		try {
+			// return DataParse.toString(DataParse.getSeller());
+			
+			return ResultJson.success(DataParse.getSeller());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResultJson.failure(null);
 	}
 
 	@RequestMapping(value = "goods")
 	@ResponseBody
-	public String goods() {
-		return DataParse.toString(DataParse.getGoods());
-//		ResultJson json = ResultJson.success(DataParse.getGoods());
-//		return json;
+	public ResultJson goods() throws Exception {
+//		return DataParse.toString(DataParse.getGoods());
+		 ResultJson json = ResultJson.success(DataParse.getGoods());
+		 return json;
 	}
 
 	@RequestMapping(value = "ratings")
 	@ResponseBody
-	public ResultJson ratings() {
-//		return DataParse.toString(DataParse.getRatings());
+	public ResultJson ratings() throws Exception {
+		// return DataParse.toString(DataParse.getRatings());
 		return ResultJson.success(DataParse.getRatings());
 	}
-	
+
 	@RequestMapping(value = "allData")
 	@ResponseBody
-	public ResultJson allData() {
-//		return DataParse.toString(DataParse.parseData());
+	public ResultJson allData() throws Exception {
+		// return DataParse.toString(DataParse.parseData());
 		return ResultJson.success(DataParse.parseAllData());
-		
+
 	}
 
 }

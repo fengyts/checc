@@ -27,65 +27,65 @@ public class Seller extends BaseDomain {
 	private Integer ratingCount;
 	private Integer sellCount;
 	private String bulletin;
-	private List<Supports> supports;
+	private List<Support> supports;
 	private String avatar;
 	private List<String> pics;
 	private List<String> infos;
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDeliveryTime(int deliveryTime) {
-		this.deliveryTime = deliveryTime;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public int getDeliveryTime() {
+	public Integer getDeliveryTime() {
 		return deliveryTime;
 	}
 
-	public void setScore(double score) {
-		this.score = score;
+	public void setDeliveryTime(Integer deliveryTime) {
+		this.deliveryTime = deliveryTime;
 	}
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
-	public void setServiceScore(double serviceScore) {
-		this.serviceScore = serviceScore;
+	public void setScore(Double score) {
+		this.score = score;
 	}
 
-	public double getServiceScore() {
+	public Double getServiceScore() {
 		return serviceScore;
 	}
 
-	public void setFoodScore(double foodScore) {
-		this.foodScore = foodScore;
+	public void setServiceScore(Double serviceScore) {
+		this.serviceScore = serviceScore;
 	}
 
-	public double getFoodScore() {
+	public Double getFoodScore() {
 		return foodScore;
 	}
 
-	public void setRankRate(double rankRate) {
-		this.rankRate = rankRate;
+	public void setFoodScore(Double foodScore) {
+		this.foodScore = foodScore;
 	}
 
-	public double getRankRate() {
+	public Double getRankRate() {
 		return rankRate;
+	}
+
+	public void setRankRate(Double rankRate) {
+		this.rankRate = rankRate;
 	}
 
 	public Double getMinPrice() {
@@ -104,60 +104,60 @@ public class Seller extends BaseDomain {
 		this.deliveryPrice = deliveryPrice;
 	}
 
-	public void setRatingCount(int ratingCount) {
-		this.ratingCount = ratingCount;
-	}
-
-	public int getRatingCount() {
+	public Integer getRatingCount() {
 		return ratingCount;
 	}
 
-	public void setSellCount(int sellCount) {
-		this.sellCount = sellCount;
+	public void setRatingCount(Integer ratingCount) {
+		this.ratingCount = ratingCount;
 	}
 
-	public int getSellCount() {
+	public Integer getSellCount() {
 		return sellCount;
 	}
 
-	public void setBulletin(String bulletin) {
-		this.bulletin = bulletin;
+	public void setSellCount(Integer sellCount) {
+		this.sellCount = sellCount;
 	}
 
 	public String getBulletin() {
 		return bulletin;
 	}
 
-	public void setSupports(List<Supports> supports) {
-		this.supports = supports;
+	public void setBulletin(String bulletin) {
+		this.bulletin = bulletin;
 	}
 
-	public List<Supports> getSupports() {
+	public List<Support> getSupports() {
 		return supports;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setSupports(List<Support> supports) {
+		this.supports = supports;
 	}
 
 	public String getAvatar() {
 		return avatar;
 	}
 
-	public void setPics(List<String> pics) {
-		this.pics = pics;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public List<String> getPics() {
 		return pics;
 	}
 
-	public void setInfos(List<String> infos) {
-		this.infos = infos;
+	public void setPics(List<String> pics) {
+		this.pics = pics;
 	}
 
 	public List<String> getInfos() {
 		return infos;
+	}
+
+	public void setInfos(List<String> infos) {
+		this.infos = infos;
 	}
 
 }

@@ -11,36 +11,36 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Goods extends BaseDomain {
+public class Good extends BaseDomain {
 
 	private static final long serialVersionUID = -1877769273073172633L;
-	
+
 	private String name;
 	private Integer type;
-	private List<Foods> foods;
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private List<Food> foods;
 
 	public String getName() {
 		return name;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setFoods(List<Foods> foods) {
-		this.foods = foods;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
-	public List<Foods> getFoods() {
+	public List<Food> getFoods() {
 		return foods;
+	}
+
+	public void setFoods(List<Food> foods) {
+		this.foods = foods;
 	}
 
 }

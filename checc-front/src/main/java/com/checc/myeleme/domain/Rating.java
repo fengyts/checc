@@ -11,7 +11,7 @@ import java.util.List;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Ratings extends BaseDomain {
+public class Rating extends BaseDomain {
 
 	private static final long serialVersionUID = -4655406634256634710L;
 
@@ -24,28 +24,28 @@ public class Ratings extends BaseDomain {
 	private String avatar;
 	private List<String> recommend;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getUsername() {
 		return username;
 	}
 
-	public void setRateTime(long rateTime) {
-		this.rateTime = rateTime;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public long getRateTime() {
+	public Long getRateTime() {
 		return rateTime;
 	}
 
-	public void setDeliveryTime(int deliveryTime) {
-		this.deliveryTime = deliveryTime;
+	public void setRateTime(Long rateTime) {
+		this.rateTime = rateTime;
 	}
 
-	public int getDeliveryTime() {
+	public Integer getDeliveryTime() {
 		return deliveryTime;
+	}
+
+	public void setDeliveryTime(Integer deliveryTime) {
+		this.deliveryTime = deliveryTime;
 	}
 
 	public Double getScore() {
@@ -56,36 +56,36 @@ public class Ratings extends BaseDomain {
 		this.score = score;
 	}
 
-	public void setRateType(int rateType) {
-		this.rateType = rateType;
-	}
-
-	public int getRateType() {
+	public Integer getRateType() {
 		return rateType;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setRateType(Integer rateType) {
+		this.rateType = rateType;
 	}
 
 	public String getText() {
 		return text;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public String getAvatar() {
 		return avatar;
 	}
 
-	public void setRecommend(List<String> recommend) {
-		this.recommend = recommend;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public List<String> getRecommend() {
 		return recommend;
+	}
+
+	public void setRecommend(List<String> recommend) {
+		this.recommend = recommend;
 	}
 
 }

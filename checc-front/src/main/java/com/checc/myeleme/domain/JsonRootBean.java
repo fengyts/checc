@@ -16,8 +16,8 @@ public class JsonRootBean extends BaseDomain {
 	private static final long serialVersionUID = -8483007946042819483L;
 
 	private Seller seller;
-	private List<Goods> goods;
-	private List<Ratings> ratings;
+	private List<Good> goods;
+	private List<Rating> ratings;
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
@@ -27,19 +27,19 @@ public class JsonRootBean extends BaseDomain {
 		return seller;
 	}
 
-	public void setGoods(List<Goods> goods) {
+	public void setGoods(List<Good> goods) {
 		this.goods = goods;
 	}
 
-	public List<Goods> getGoods() {
+	public List<Good> getGoods() {
 		return goods;
 	}
 
-	public void setRatings(List<Ratings> ratings) {
+	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
 
-	public List<Ratings> getRatings() {
+	public List<Rating> getRatings() {
 		return ratings;
 	}
 

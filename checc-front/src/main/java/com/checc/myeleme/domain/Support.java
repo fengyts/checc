@@ -9,18 +9,18 @@ package com.checc.myeleme.domain;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Supports extends BaseDomain {
+public class Support extends BaseDomain {
 
 	private static final long serialVersionUID = 1902550438129581554L;
 
 	private Integer type;
 	private String description;
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
