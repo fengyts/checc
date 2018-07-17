@@ -1,11 +1,18 @@
 package test.epay;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+
+import ng.bayue.common.CommonResultMessage;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.checc.domain.DepositOrderDO;
 import com.checc.wechatpay.compent.WechatPayAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,8 +25,9 @@ public class WechatPayTest {
 	@Test
 	public void payOrderQueryTest(){
 		String out_trade_no = "877249130680001470";
-		wechatPayAO.queryOrderStatus(out_trade_no, 1l);
+		CommonResultMessage msg = wechatPayAO.queryOrderStatus(out_trade_no, 1l);
 		
+		System.out.println(msg.getMessage());
         String orderQueryResultXml = "<xml>"
         		+ "<return_code><![CDATA[SUCCESS]]></return_code>"
         		+ "<return_msg><![CDATA[OK]]></return_msg>"
@@ -78,6 +86,24 @@ public class WechatPayTest {
 		
 		wechatPayAO.callBack(paramsXmlStr);
 		
+	}
+	
+	@Test
+	public void testPayOrder(){
+		try {
+			DepositOrderDO dpOrder = new DepositOrderDO();
+			dpOrder.setId(100L);
+			dpOrder.setOrderNo("877249130680001470");
+			dpOrder.setUserId(1L);
+			dpOrder.setDepositAmount(1);
+			dpOrder.setDiscount(1.00);
+			
+			HttpServletRequest request = new MockHttpServletRequest();
+			String res = wechatPayAO.wechatPayPreOrder(request, dpOrder);
+			System.out.println(res);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
